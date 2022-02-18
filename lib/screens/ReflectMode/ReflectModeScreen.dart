@@ -291,7 +291,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
             txtfontsize: MyFontSize.size20,
             txtcolor: MyColors.whiteColor,
           ),
-          SizedBox(
+          /*SizedBox(
             height: Get.height * 0.05,
           ),
           MyText(
@@ -308,7 +308,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
             myFont: MyStrings.courier_prime_bold,
             txtfontsize: MyFontSize.size16,
             txtcolor: MyColors.whiteColor,
-          ),
+          ),*/
           // Container(
           //   color: MyColors.lightGreenColor,
           //   height: Get.height * 0.005,
@@ -321,7 +321,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
             return MyText(
               text_name: getSelectedProj(),
               myFont: MyStrings.courier_prime_italic,
-              txtfontsize: MyFontSize.size18,
+              txtfontsize: MyFontSize.size16,
               txtcolor: MyColors.whiteColor,
             );
           }),
