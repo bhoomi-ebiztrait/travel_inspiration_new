@@ -92,7 +92,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       text_name: "create_profile".tr,
                       txtcolor: MyColors.whiteColor,
                       txtfontsize: MyFontSize.size25,
-                      myFont: MyStrings.courier_prime_bold,
+                      myFont: MyStrings.bodoni72_Bold,
                     ),
                   ),
                   Align(
