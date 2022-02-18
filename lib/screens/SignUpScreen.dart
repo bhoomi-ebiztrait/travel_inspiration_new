@@ -99,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 text_name: "devenir_haudosseen_multiLine".tr,
                 txtcolor: MyColors.whiteColor,
                 txtfontsize:MyFontSize.size25,
-                myFont: MyStrings.courier_prime_bold,
+                myFont: MyStrings.bodoni72_Bold,
               ),
             ),
             SizedBox(

@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       text_name: "je_suis_haudosseen".tr,
                       txtcolor: MyColors.whiteColor,
                       txtfontsize:MyFontSize.size25,
-                      myFont: MyStrings.courier_prime_bold,
+                      myFont: MyStrings.bodoni72_Bold,
                     ),
                   ),
                   SizedBox(
