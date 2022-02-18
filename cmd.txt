@@ -1,0 +1,12 @@
+ flutter build apk --target-platform=android-arm
+
+ token : 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
+
+ git link : https://github.com/bhoomi-ebiztrait/travel_inspiration.git
+
+ https://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@github.com/bhoomi-ebiztrait/travel_inspiration.git
+
+
+ personal token : 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
+
+ https://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@github.com/bhoomi-ebiztrait/travel_inspiration.git

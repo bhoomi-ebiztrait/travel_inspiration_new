@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "747243804169",
+    "project_id": "travel-inspiration-dce19",
+    "storage_bucket": "travel-inspiration-dce19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747243804169:android:56f28118b0f20745300ad8",
+        "android_client_info": {
+          "package_name": "com.travel.inspiration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747243804169-itif4etcn1nc3kans8tgfh03gdkci3t0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGj0k6rp-q-1stfl0ORG8aNxMrYlULPkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747243804169-itif4etcn1nc3kans8tgfh03gdkci3t0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "747243804169-9udeot9lf52tabhu39kre0samfd87qgi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.travel.inspiration"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
