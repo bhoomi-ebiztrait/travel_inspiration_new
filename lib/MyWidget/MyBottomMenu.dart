@@ -24,11 +24,16 @@ class MyBottomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
         alignment: Alignment.bottomCenter,
-        child: Stack(
-          children: [
-            buildMenuOptions(),
-            buildHomeOption(),
-          ],
+        child: Container(
+          padding: EdgeInsets.all(28),
+          child: Stack(
+            children: [
+              buildMenuOptions(),
+              Center(
+                child: buildHomeOption(),
+              )
+            ],
+          ),
         ));
   }
 
@@ -36,51 +41,56 @@ class MyBottomMenu extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-          height: Get.height*.11,
-          width: Get.height*.11,
-          decoration: BoxDecoration(
-            color: MyColors.buttonBgColor,
-            borderRadius: BorderRadius.all(Radius.circular(60)),
-            // borderRadius: BorderRadius.only(topLeft: Radius.circular(60),topRight: Radius.circular(60)),
-
-            /*// border: Border.all(color:MyColors.textColor),
-                    boxShadow: [BoxShadow(
-                        // offset: Offset(0.0,3.0),
-                      color: MyColors.textColor,
-                      // spreadRadius: 2.0
-                      // blurRadius: 5.0
-                    ),]*/
-          ),
+        padding: EdgeInsets.only(top: 11),
+          height: Get.height * .11,
+          width: Get.height * .11,
+          // decoration: BoxDecoration(
+          //   borderRadius: BorderRadius.all(Radius.circular(60)),
+          //   // borderRadius: BorderRadius.only(topLeft: Radius.circular(60),topRight: Radius.circular(60)),
+          //   /*// border: Border.all(color:MyColors.textColor),
+          //           boxShadow: [BoxShadow(
+          //               // offset: Offset(0.0,3.0),
+          //             color: MyColors.textColor,
+          //             // spreadRadius: 2.0
+          //             // blurRadius: 5.0
+          //           ),]*/
+          // ),
           child: GestureDetector(
               onTap: homeMenuCallback,
               child: Obx(() => Visibility(
                   visible: myController.showHomeIcon.value,
-                  child: Image.asset(MyImageURL.home_icon,))))),
+                  child: Image.asset(
+                    MyImageURL.home_icon,
+                  ))))),
     );
   }
 
-  buildMenuOptions(){
+  buildMenuOptions() {
     return Positioned(
       bottom: 0,
       child: Container(
         decoration: BoxDecoration(
-            color: MyColors.buttonBgColor,
-            border: Border.all(color: MyColors.textColor),
+            color: MyColors.textColor.withOpacity(0.32),
+            border: Border.all(color: MyColors.textColor.withOpacity(0.32)),
+            borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                color: MyColors.textColor,
+                color: MyColors.textColor.withOpacity(0.32),
                 blurRadius: 1.0,
               ),
             ]),
-        width: Get.width,
-        height: Get.height * 0.08,
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            buildProfileGallery(),
-            buildGaiyaSetting(),
-          ],
+        width: Get.width * 0.85,
+        height: Get.height * 0.090,
+        padding: EdgeInsets.symmetric(horizontal: 25),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              buildProfileGallery(),
+              buildGaiyaSetting(),
+            ],
+          ),
         ),
       ),
     );
@@ -97,7 +107,7 @@ class MyBottomMenu extends StatelessWidget {
           children: [
             buildGaia(),
             SizedBox(
-              width: Get.width * 0.05,
+              width: Get.width * 0.07,
             ),
             buildSettings(),
           ],
@@ -117,7 +127,7 @@ class MyBottomMenu extends StatelessWidget {
           children: [
             buildProfile(),
             SizedBox(
-              width: Get.width * 0.05,
+              width: Get.width * 0.07,
             ),
             buildGallery(),
           ],
@@ -130,25 +140,26 @@ class MyBottomMenu extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         ScreenTransition.navigateToScreenLeft(screenName: MyProfileScreen());
-
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(MyImageURL.profile_icon,
-          height: Get.height*.04,
-          width: Get.height*.04,
-          fit: BoxFit.contain,),
-          SizedBox(
-            height: Get.height * 0.005,
+          Image.asset(
+            MyImageURL.profile_icon,
+            height: Get.height * .04,
+            width: Get.height * .04,
+            fit: BoxFit.contain,
           ),
-          MyText(
-            text_name: "profile".tr,
-            txtcolor: MyColors.whiteColor,
-            myFont: MyStrings.courier_prime_bold,
-            txtfontsize: MyFontSize.size8,
-          )
+          // SizedBox(
+          //   height: Get.height * 0.005,
+          // ),
+          // MyText(
+          //   text_name: "profile".tr,
+          //   txtcolor: MyColors.whiteColor,
+          //   myFont: MyStrings.courier_prime_bold,
+          //   txtfontsize: MyFontSize.size8,
+          // )
         ],
       ),
     );
@@ -158,16 +169,18 @@ class MyBottomMenu extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         ScreenTransition.navigateToScreenLeft(screenName: GalleryScreen());
-        },
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(MyImageURL.galerie,
-            height: Get.height*.04,
-            width: Get.height*.04,
-            fit: BoxFit.contain,),
-          SizedBox(
+          Image.asset(
+            MyImageURL.galerie,
+            height: Get.height * .04,
+            width: Get.height * .04,
+            fit: BoxFit.contain,
+          ),
+          /* SizedBox(
             height: Get.height * 0.005,
           ),
           MyText(
@@ -175,7 +188,7 @@ class MyBottomMenu extends StatelessWidget {
             txtcolor: MyColors.whiteColor,
             myFont: MyStrings.courier_prime_bold,
             txtfontsize: MyFontSize.size8,
-          )
+          )*/
         ],
       ),
     );
@@ -185,16 +198,18 @@ class MyBottomMenu extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         ScreenTransition.navigateToScreenLeft(screenName: TIGiaListScreen());
-        },
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(MyImageURL.world_icon,
-            height: Get.height*.04,
-            width: Get.height*.04,
-            fit: BoxFit.contain,),
-          SizedBox(
+          Image.asset(
+            MyImageURL.world_icon,
+            height: Get.height * .04,
+            width: Get.height * .04,
+            fit: BoxFit.contain,
+          ),
+          /*SizedBox(
             height: Get.height * 0.005,
           ),
           MyText(
@@ -202,7 +217,7 @@ class MyBottomMenu extends StatelessWidget {
             txtcolor: MyColors.whiteColor,
             myFont: MyStrings.courier_prime_bold,
             txtfontsize: MyFontSize.size8,
-          )
+          )*/
         ],
       ),
     );
@@ -211,27 +226,27 @@ class MyBottomMenu extends StatelessWidget {
   buildSettings() {
     return GestureDetector(
       onTap: () {
-
         ScreenTransition.navigateToScreenLeft(screenName: SettingScreen());
-
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(MyImageURL.setting_icon,
-            height: Get.height*.04,
-            width: Get.height*.04,
-            fit: BoxFit.contain,),
-          SizedBox(
-            height: Get.height * 0.005,
+          Image.asset(
+            MyImageURL.setting_icon,
+            height: Get.height * .04,
+            width: Get.height * .04,
+            fit: BoxFit.contain,
           ),
-          MyText(
-            text_name: "settings".tr.toUpperCase(),
-            txtcolor: MyColors.whiteColor,
-            myFont: MyStrings.courier_prime_bold,
-            txtfontsize: MyFontSize.size8,
-          )
+          // SizedBox(
+          //   height: Get.height * 0.005,
+          // ),
+          // MyText(
+          //   text_name: "settings".tr.toUpperCase(),
+          //   txtcolor: MyColors.whiteColor,
+          //   myFont: MyStrings.courier_prime_bold,
+          //   txtfontsize: MyFontSize.size8,
+          // )
         ],
       ),
     );

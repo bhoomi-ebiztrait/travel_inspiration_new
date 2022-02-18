@@ -16,8 +16,9 @@ class MyButton extends StatelessWidget {
   Color bgColor;
   FontWeight fontWeight;
   double opacity;
+  String myFont;
 
-  MyButton({this.onClick,@required this.btn_name,this.txtcolor,this.bgColor,this.txtfont,this.fontWeight,this.opacity});
+  MyButton({this.onClick,@required this.btn_name,this.txtcolor,this.bgColor,this.txtfont,this.fontWeight,this.opacity,this.myFont});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class MyButton extends StatelessWidget {
       //margin: EdgeInsets.all(20),
       child: MaterialButton(onPressed: onClick,
         minWidth: Get.width*0.50,
-        child: MyText(text_name: btn_name,txtcolor: txtcolor,txtfontsize:txtfont),
+        child: MyText(text_name: btn_name,txtcolor: txtcolor,txtfontsize:txtfont,myFont: myFont,),
         /*shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),*/
