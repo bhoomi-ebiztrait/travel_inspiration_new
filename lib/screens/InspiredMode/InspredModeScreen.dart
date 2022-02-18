@@ -319,15 +319,15 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
               myFont: MyStrings.courier_prime_italic,
                     );
           }),
-          SizedBox(
-            height: Get.height * 0.02,
-          ),
-          MyText(
-            text_name: MyStrings.lao_tseu,
-            myFont: MyStrings.courier_prime_bold,
-            txtfontsize: MyFontSize.size16,
-            txtcolor: MyColors.whiteColor,
-          ),
+          // SizedBox(
+          //   height: Get.height * 0.02,
+          // ),
+          // MyText(
+          //   text_name: MyStrings.lao_tseu,
+          //   myFont: MyStrings.courier_prime_bold,
+          //   txtfontsize: MyFontSize.size16,
+          //   txtcolor: MyColors.whiteColor,
+          // ),
           Spacer(),
           InkWell(
             onTap: () {
