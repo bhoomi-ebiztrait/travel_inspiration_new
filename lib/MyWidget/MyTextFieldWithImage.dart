@@ -55,7 +55,7 @@ class MyTextFieldWithImage extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
+              color: Colors.transparent,
               blurRadius: 3,
               offset: const Offset(0, 1),
             ),

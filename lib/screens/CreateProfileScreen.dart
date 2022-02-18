@@ -91,14 +91,14 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                     child: MyText(
                       text_name: "create_profile".tr,
                       txtcolor: MyColors.whiteColor,
-                      txtfontsize: MyFontSize.size18,
+                      txtfontsize: MyFontSize.size25,
                       myFont: MyStrings.courier_prime_bold,
                     ),
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                      margin: EdgeInsets.only(left: 35),
+                      margin: EdgeInsets.only(left: 20),
                       child: GestureDetector(
                         onTap: () {
                           showImageOptionDialog();
@@ -143,8 +143,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
               MyText(
                 text_name: "date_of_birth".tr,
                 txtcolor: MyColors.whiteColor,
-                txtfontsize: MyFontSize.size13,
-                myFont: MyFont.Courier_Prime_Bold,
+                txtfontsize: MyFontSize.size15,
+                myFont: MyFont.Courier_Prime,
               ),
               SizedBox(
                 height: Get.height * 0.03,
@@ -235,8 +235,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                           child: MyTextStart(
                             text_name: "create_later".tr,
                             txtcolor: MyColors.whiteColor,
-                            txtfontsize: MyFontSize.size16,
-                            myFont: MyStrings.courier_prime_bold,
+                            txtfontsize: MyFontSize.size15,
+                            myFont: MyStrings.courier_prime,
                           ),
                         ),
                       ],
@@ -777,7 +777,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   }
 
   void setPrefs() {
-    String countryy = dataController.selectedValue.value.countryname != null &&
+    String country = dataController.selectedValue.value.countryname != null &&
             dataController.selectedValue.value.countryname != ""
         ? dataController.selectedValue.value.countryname.toString()
         : dataController.countryList.value[0].countryname;
@@ -790,6 +790,6 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
         key: MyPreference.city, value: cityController.text);
     MyPreference.setPrefStringValue(
         key: MyPreference.pinCode, value: postalCodeController.text);
-    MyPreference.setPrefStringValue(key: MyPreference.country, value: countryy);
+    MyPreference.setPrefStringValue(key: MyPreference.country, value: country);
   }
 }
