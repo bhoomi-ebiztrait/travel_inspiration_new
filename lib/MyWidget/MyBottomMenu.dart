@@ -25,13 +25,11 @@ class MyBottomMenu extends StatelessWidget {
     return Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          padding: EdgeInsets.all(28),
+          padding: EdgeInsets.only(left: 28,right: 28),
           child: Stack(
             children: [
               buildMenuOptions(),
-              Center(
-                child: buildHomeOption(),
-              )
+              buildHomeOption()
             ],
           ),
         ));
@@ -41,8 +39,7 @@ class MyBottomMenu extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        padding: EdgeInsets.only(top: 11),
-          height: Get.height * .11,
+          height: Get.height * .17,
           width: Get.height * .11,
           // decoration: BoxDecoration(
           //   borderRadius: BorderRadius.all(Radius.circular(60)),
@@ -67,12 +64,12 @@ class MyBottomMenu extends StatelessWidget {
 
   buildMenuOptions() {
     return Positioned(
-      bottom: 0,
+      bottom: 20,
       child: Container(
         decoration: BoxDecoration(
             color: MyColors.textColor.withOpacity(0.32),
             border: Border.all(color: MyColors.textColor.withOpacity(0.32)),
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(50),
             boxShadow: [
               BoxShadow(
                 color: MyColors.textColor.withOpacity(0.32),
@@ -80,7 +77,7 @@ class MyBottomMenu extends StatelessWidget {
               ),
             ]),
         width: Get.width * 0.85,
-        height: Get.height * 0.090,
+        height: Get.height * 0.12,
         padding: EdgeInsets.symmetric(horizontal: 25),
         child: Padding(
           padding: const EdgeInsets.all(10),
