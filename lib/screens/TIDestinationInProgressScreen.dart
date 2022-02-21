@@ -75,7 +75,8 @@ class _TIDestinationInProgressScreenState
                 myController.showDestinationInProgressPopup.value = false;
               },
               child: Image.asset(
-                MyImageURL.cross_gray3x,
+                // MyImageURL.cross_gray3x,
+                MyImageURL.cross,
                 height: Get.height * .035,
                 width: Get.height * .035,
                 fit: BoxFit.contain,
@@ -113,7 +114,7 @@ class _TIDestinationInProgressScreenState
           fontSize: MyFontSize.size9,
           textColor: MyColors.txtWhiteColor,
           myFont: MyFont.Courier_Prime_Bold,
-          btnBgColor: MyColors.expantionTileBgColor,
+          btnBgColor: MyColors.buttonBgColor,
           buttonWidth: Get.width * .40,
           buttonHeight: Get.height * .040,
         ),
