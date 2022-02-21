@@ -98,8 +98,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: MyText(
                 text_name: "devenir_haudosseen_multiLine".tr,
                 txtcolor: MyColors.whiteColor,
-                txtfontsize:MyFontSize.size18,
-                myFont: MyStrings.courier_prime_bold,
+                txtfontsize:MyFontSize.size25,
+                myFont: MyStrings.bodoni72_Bold,
               ),
             ),
             SizedBox(
@@ -110,8 +110,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: MyTextStart(
                 text_name: "email".tr,
                 txtcolor: MyColors.whiteColor,
-                txtfontsize:MyFontSize.size18,
-                myFont: MyStrings.courier_prime_bold,
+                txtfontsize:MyFontSize.size15,
+                myFont: MyStrings.courier_prime,
               ),
             ),
             MyTextFieldWithImage(
@@ -134,8 +134,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   MyTextStart(
                     text_name: "password".tr,
                     txtcolor: MyColors.whiteColor,
-                    txtfontsize:MyFontSize.size18,
-                    myFont: MyStrings.courier_prime_bold,
+                    txtfontsize:MyFontSize.size15,
+                    myFont: MyStrings.courier_prime,
                   ),
                   SizedBox(width: 5,),
                   GestureDetector(
@@ -179,7 +179,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 bgColor: MyColors.buttonBgColor,
                 opacity: 1.0,
                 txtcolor: MyColors.whiteColor,
-                txtfont: MyFontSize.size13,
+                txtfont: MyFontSize.size15,
+                myFont: MyStrings.courier_prime,
                 onClick: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
@@ -306,7 +307,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           MyText(
             text_name: "accept_cgv".tr,
             txtcolor: MyColors.textColor,
-            txtfontsize: MyFontSize.size13,
+            txtfontsize: MyFontSize.size15,
+            myFont: MyStrings.courier_prime,
           ),
           GestureDetector(
               onTap: () {
@@ -317,8 +319,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: MyText(
                 text_name: "cgv".tr,
                 txtcolor: MyColors.textColor,
-                txtfontsize: MyFontSize.size13,
-                fontWeight: FontWeight.bold,
+                txtfontsize: MyFontSize.size15,
+                myFont: MyStrings.courier_prime_bold,
               )),
         ],
       ),
