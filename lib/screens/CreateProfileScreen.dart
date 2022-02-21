@@ -12,6 +12,7 @@ import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextFieldWithImage.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/TIController/MyValidatorController.dart';
+import 'package:travel_inspiration/screens/PopScreen/ShowAlertDialogCreateProfile.dart';
 import 'package:travel_inspiration/services/GeoLocationService/AskForPermission.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
 import 'package:travel_inspiration/utils/MyFont.dart';
@@ -57,7 +58,13 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
             child: Container(
-          color: MyColors.buttonBgColorHome.withOpacity(0.65),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      MyImageURL.bg,
+                    ),
+                    fit: BoxFit.fill),
+              ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -181,8 +188,10 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                         suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
-                                blurScreen = true;
-                                telephoneInfo();
+                                /*blurScreen = true;
+                                telephoneInfo();*/
+                                Get.to(() => AlertDialogCreateProfile(title: "telephone_info",myContent: "",));
+
                               });
                             },
                             child: Icon(

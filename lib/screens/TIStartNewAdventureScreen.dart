@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:travel_inspiration/MyWidget/MyCommonMethods.dart';
+import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/TIModel/TIChooseRouteModel.dart';
 import 'package:travel_inspiration/screens/InspiredMode/ChooseProjectNameScreen.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeCreateProjectScreen.dart';
@@ -14,6 +16,7 @@ import 'package:travel_inspiration/utils/MyPreference.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
+import 'PopScreen/ShowAlertDialogCircular.dart';
 import 'TICreateNewProjectInInspireModeScreen.dart';
 import 'TIInsireModeScreen.dart';
 
@@ -24,7 +27,8 @@ class TIStartNewAdventureScreen extends StatefulWidget {
 }
 
 class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
-  int currentPageValue = 0, infoItemFirstClicked = 2;
+  int currentPageValue = 0, infoItemFirstClicked = 2, index1 = 0;
+  PageController _sliderController = PageController(initialPage: 0);
   List<TIChoseRouteModel> pageViewList = [
     TIChoseRouteModel(MyImageURL.info_white3x, MyImageURL.bgchoose_your_circle1,
         "Repartiede".tr, true),
@@ -33,8 +37,13 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.black12, body: _buildBodyContent());
+    return Scaffold(body: _buildBodyContent());
   }
 
   _buildBodyContent() {
@@ -43,7 +52,7 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
         fit: StackFit.expand,
         children: [
           _buildPageView(),
-          _buildPopup(),
+          /*_buildPopup(),*/
         ],
       ),
     );
@@ -117,14 +126,29 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
   }
 
   Widget circleBar(bool isActive) {
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
-      margin: EdgeInsets.symmetric(horizontal: 8),
-      height: isActive ? 12 : 12,
-      width: isActive ? 12 : 12,
-      decoration: BoxDecoration(
-          color: isActive ? MyColors.buttonBgColor : Colors.grey[300],
-          borderRadius: BorderRadius.all(Radius.circular(12))),
+    return GestureDetector(
+      onTap: () {
+        print("pageVal : $currentPageValue");
+        MyPreference.setPrefIntValue(
+            key: MyPreference.pageVal, value: currentPageValue);
+
+        if (currentPageValue == 0) {
+          index1 = 1;
+          getChangedPageAndMoveBar(1);
+        } else {
+          index1 = 0;
+          getChangedPageAndMoveBar(0);
+        }
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 150),
+        margin: EdgeInsets.symmetric(horizontal: 4),
+        height: isActive ? 12 : 12,
+        width: isActive ? 12 : 12,
+        decoration: BoxDecoration(
+            color: isActive ? MyColors.whiteColor : Colors.grey,
+            borderRadius: BorderRadius.all(Radius.circular(12))),
+      ),
     );
   }
 
@@ -135,94 +159,142 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
       decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(MyImageURL.bgchoose_your_route),
-              fit: BoxFit.fill)),
+              fit: BoxFit.cover)),
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top:20.0,right: 20),
+            padding: const EdgeInsets.only(right: 10, bottom: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                    onTap:(){
+                  onTap: () {
+                    Get.back(result: true);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Image.asset(
+                      MyImageURL.back,
+                      width: 25,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                    onTap: () {
                       CommonMethod.getAppMode();
                     },
-                    child: Image.asset(MyImageURL.haudos_logo)),
+                    child: Image.asset(
+                      MyImageURL.home_icon,
+                      width: 60,
+                    )),
               ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 60),
+            height: 80,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  bottomLeft: Radius.circular(40)),
+              color: MyColors.buttonBgColor,
+            ),
+            //margin: EdgeInsets.all(20),
+            child: MyText(
+              text_name: "txtComencer".tr,
+              txtcolor: MyColors.whiteColor,
+              txtfontsize: MyFontSize.size25,
+              myFont: MyStrings.bodoni72_Bold,
             ),
           ),
           Stack(
             alignment: Alignment.center,
             children: [
-              Container(
-                width: Get.width,
-                height: Get.height * .30,
-                margin: EdgeInsets.only(top: Get.height * .001),
-                child: PageView.builder(
-                  onPageChanged: (int page) {
-                    getChangedPageAndMoveBar(page);
-                  },
-                  itemCount: pageViewList.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
+              Center(
+                child: Container(
+                  width: Get.width,
+                  height: Get.height * .39,
+                  margin: EdgeInsets.only(
+                      top: Get.height * .07, left: 6, bottom: 20),
+                  child: PageView.builder(
+                    controller: _sliderController,
+                    onPageChanged: (int page) {
+                      print("PageIndex: ${page}");
+                      getChangedPageAndMoveBar(page);
+                    },
+                    itemCount: pageViewList.length,
+                    itemBuilder: (context, index) {
+                      index1 = index;
+                      return Container(
+                        decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage(pageViewList[index].bgPath)),
-                          shape: BoxShape.circle),
-                    );
-                  },
+                              image: AssetImage(pageViewList[index1]
+                                  .bgPath)), /*shape: BoxShape.circle*/
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
-                        left: Get.width * .24,
-                        top: Get.width * .08,
-                        bottom: Get.height * .04
-                    ),
+                    padding: EdgeInsets.only(left: 50, top: 60, bottom: 10),
                     child: GestureDetector(
                         onTap: () {
                           setState(() {
                             currentPageValue == 0
                                 ? infoItemFirstClicked = 0
                                 : infoItemFirstClicked = 1;
-
-                            print("index clicked $currentPageValue");
+                            print("index clicked: $currentPageValue");
+                            if (currentPageValue == 0) {
+                              Get.to(() =>
+                                  AlertDialogCircular(title: "txtRademaree"));
+                            } else {
+                              Get.to(() =>
+                                  AlertDialogCircular(title: "txtReprendre"));
+                            }
                           });
                         },
-                        child: Image.asset(pageViewList[currentPageValue].iconPath)),
+                        child: Image.asset(
+                            pageViewList[currentPageValue].iconPath)),
                   ),
                   Container(
-                    width: Get.width * .42,
+                    width: Get.width * .43,
+                    margin: EdgeInsets.only(top: 10, bottom: 20),
                     child: Text(
                       pageViewList[currentPageValue].centerText,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: MyFontSize.size25,
+                          fontSize: MyFontSize.size23,
                           fontFamily: MyFont.Courier_Prime_Bold),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: Get.height * .010),
-                    child: GestureDetector(
-                      onTap: (){
-                        print("pageVal : $currentPageValue");
-                        MyPreference.setPrefIntValue(
-                            key: MyPreference.pageVal, value: currentPageValue);
-                        currentPageValue == 0
-                            ? ScreenTransition.navigateToScreenLeft(
-                            screenName: (MyPreference.getPrefIntValue(key: MyPreference.APPMODE)) == 0 ? TICreateNewProjectInInspireModeScreen():ReflectModeCreateProjectScreen())
-                            : ScreenTransition.navigateToScreenLeft(
-                            screenName: (MyPreference.getPrefIntValue(key: MyPreference.APPMODE)) == 0 ? TICreateNewProjectInInspireModeScreen():ReflectModeCreateProjectScreen() );
-
-                      },
-                      child: Image.asset(
-                        MyImageURL.arrow3x,
-                        fit: BoxFit.contain,
-                      ),
+                  GestureDetector(
+                    onTap: () {
+                      print("pageVal : $currentPageValue");
+                      MyPreference.setPrefIntValue(
+                          key: MyPreference.pageVal, value: currentPageValue);
+                      currentPageValue == 0
+                          ? ScreenTransition.navigateToScreenLeft(
+                              screenName: (MyPreference.getPrefIntValue(
+                                          key: MyPreference.APPMODE)) ==
+                                      0
+                                  ? TICreateNewProjectInInspireModeScreen()
+                                  : ReflectModeCreateProjectScreen())
+                          : ScreenTransition.navigateToScreenLeft(
+                              screenName: (MyPreference.getPrefIntValue(
+                                          key: MyPreference.APPMODE)) ==
+                                      0
+                                  ? TICreateNewProjectInInspireModeScreen()
+                                  : ReflectModeCreateProjectScreen());
+                    },
+                    child: Image.asset(
+                      MyImageURL.arrow3x,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ],
@@ -244,31 +316,31 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
           SizedBox(
             height: Get.height * .020,
           ),
-          ClipRect(
-            child: Container(
-              width: Get.width,
-              height: Get.height * .18,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      MyImageURL.bgchoose_your_curveshape,
-                    ),
-                    fit: BoxFit.fill),
+          /*ClipRect(
+              child: Container(
+                width: Get.width,
+                height: Get.height * .18,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        MyImageURL.bgchoose_your_curveshape,
+                      ),
+                      fit: BoxFit.fill),
+                ),
+                child: Center(
+                    child: Text(
+                  "txtComencer".tr,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: MyFontSize.size23,
+                      fontFamily: MyFont.Cagliostro_reguler),
+                )),
               ),
-              child: Center(
-                  child: Text(
-                "txtComencer".tr,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: MyFontSize.size23,
-                    fontFamily: MyFont.Cagliostro_reguler),
-              )),
             ),
-          ),
-          SizedBox(
-            height: Get.height * .060,
-          ),
+            SizedBox(
+              height: Get.height * .060,
+            ),*/
           Container(
             margin: EdgeInsets.only(
                 left: Get.width * .040, right: Get.width * .040),
@@ -282,8 +354,8 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
                 TextSpan(
                   text: "txtLeplus".tr,
                   style: TextStyle(
-                      color: MyColors.buttonBgColor,
-                      fontSize: MyFontSize.size14,
+                      color: MyColors.whiteColor,
+                      fontSize: MyFontSize.size16,
                       fontFamily: MyFont.Courier_Prime_Italic),
                 ),
                 WidgetSpan(
@@ -306,8 +378,8 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
               "txtLoick".tr,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: MyColors.buttonBgColor,
-                  fontSize: MyFontSize.size14,
+                  color: MyColors.whiteColor,
+                  fontSize: MyFontSize.size16,
                   fontFamily: MyFont.Courier_Prime_Bold),
             ),
           )),
@@ -318,11 +390,12 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
 
   void getChangedPageAndMoveBar(int page) {
     currentPageValue = page;
+    _sliderController.animateToPage(currentPageValue,
+        duration: Duration(milliseconds: 200), curve: Curves.easeIn);
     MyPreference.setPrefIntValue(
         key: MyPreference.pageVal, value: currentPageValue);
     print("currrrr::: $currentPageValue");
 
     setState(() {});
-
   }
 }
