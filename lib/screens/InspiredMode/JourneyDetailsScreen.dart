@@ -27,13 +27,12 @@ class JourneyDetailsScreen extends StatefulWidget {
 
 class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
   MyController myController = Get.put(MyController());
-  Timer timer;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 30), (timer) {
+    myController.timer = Timer.periodic(Duration(seconds: 30), (timer) {
       getEndLatLong();
     });
   }
@@ -126,7 +125,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
     return myController.allProjectList.value.length > 1
         ? Align(
       alignment: Alignment.bottomCenter,
-      child: Row(
+      child: Column(
         children: [
           Container(
             width: Get.width * 0.50,
@@ -139,6 +138,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
             //margin: EdgeInsets.all(20),
             child: MaterialButton(
               onPressed: () {
+                myController.stopTracking();
                 // if (myController.secondProject.value.projectMode == "0") {
                 MyPreference.setPrefIntValue(key: MyPreference.APPMODE,
                     value: int.parse(
@@ -195,6 +195,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
               onPressed: () {
                 // if (myController.thirddProject.value.projectMode ==
                 //     "0") {
+                myController.stopTracking();
                 MyPreference.setPrefIntValue(key: MyPreference.APPMODE,
                     value: int.parse(
                         myController.thirddProject.value.projectMode));
@@ -250,6 +251,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
       padding: const EdgeInsets.all(30.0),
       child: InkWell(
         onTap: () {
+          myController.stopTracking();
           Get.back();
         },
         child: Row(

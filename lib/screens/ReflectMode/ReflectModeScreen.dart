@@ -229,13 +229,13 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
                         });
                       },
                       child: Image.asset(MyImageURL.arrow_dropdown_up)),
-                  InkWell(
+                 /* InkWell(
                       onTap: () {
                         setState(() {
                           isVisible = false;
                         });
                       },
-                      child: Image.asset(MyImageURL.cross,width: 30,)),
+                      child: Image.asset(MyImageURL.cross,width: 30,)),*/
                 ],
               ),
               SizedBox(
@@ -264,8 +264,8 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
                     ),
                     MyTextStart(
                       text_name: "my_trvel_book".tr,
-                      txtcolor: MyColors.buttonBgColor,
-                      txtfontsize: MyFontSize.size8,
+                      txtcolor: MyColors.expantionTileBgColor,
+                      txtfontsize: MyFontSize.size10,
                       myFont: MyStrings.courier_prime_bold,
                     ),
                   ],

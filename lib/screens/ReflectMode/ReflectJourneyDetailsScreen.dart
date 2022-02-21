@@ -137,6 +137,7 @@ class _ReflectJourneyDetailsScreenState
             padding: EdgeInsets.symmetric(horizontal: 50.0),
             child: MyButton(
               onClick: () {
+                myController.stopTracking();
                 myController.showDestinationInProgressPopup.value = true;
               },
               btn_name: "current_destination".tr,
@@ -202,6 +203,7 @@ class _ReflectJourneyDetailsScreenState
                   //margin: EdgeInsets.all(20),
                   child: MaterialButton(
                     onPressed: () {
+                      myController.stopTracking();
                       // if (myController.secondProject.value.projectMode == "1") {
                       MyPreference.setPrefIntValue(key: MyPreference.APPMODE, value:int.parse(myController.secondProject.value.projectMode));
                         myController
@@ -256,6 +258,7 @@ class _ReflectJourneyDetailsScreenState
                           onPressed: () {
                            // if (myController.thirddProject.value.projectMode ==
                              //   "1") {
+                            myController.stopTracking();
                             MyPreference.setPrefIntValue(key: MyPreference.APPMODE, value:int.parse(myController.thirddProject.value.projectMode));
                               myController.setSelectedProj(
                                   myController.thirddProject.value);
