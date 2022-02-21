@@ -112,7 +112,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
                 child: Center(
                   child: BackdropFilter(
                     filter: myController.isFloatingMenuVisible.value
-                        ? ImageFilter.blur(sigmaX: 2, sigmaY: 2)
+                        ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
                         : ImageFilter.blur(sigmaX: 0, sigmaY: 0),
                     child: Container(
                       margin: EdgeInsets.only(bottom: Get.height * .020),
@@ -290,17 +290,23 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
           MyText(
             text_name: "inspire_mode".tr,
             myFont: MyStrings.courier_prime_bold,
-            txtfontsize: MyFontSize.size14,
+            txtfontsize: MyFontSize.size20,
             txtcolor: MyColors.whiteColor,
           ),
-          SizedBox(
-            height: Get.height * 0.005,
-          ),
-          Container(
+          // SizedBox(
+          //   height: Get.height * 0.05,
+          // ),
+          // MyText(
+          //   text_name: "journey_always_start".tr,
+          //   myFont: MyStrings.courier_prime_italic,
+          //   txtfontsize: MyFontSize.size16,
+          //   txtcolor: MyColors.whiteColor,
+          // ),
+          /*Container(
             color: MyColors.lineColor,
             height: Get.height * 0.005,
             width: Get.width * 0.32,
-          ),
+          ),*/
           SizedBox(
             height: Get.height * 0.04,
           ),
@@ -308,19 +314,20 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
           Obx((){
             return MyQuotedText(
               myText: getSelectedProj(),
-              txtFontSize: MyFontSize.size14,
+              txtFontSize: MyFontSize.size16,
               txtColor: MyColors.whiteColor,
+              myFont: MyStrings.courier_prime_italic,
                     );
           }),
-         /* SizedBox(
-            height: Get.height * 0.02,
-          ),
-          MyText(
-            text_name: MyStrings.lao_tseu,
-            myFont: MyStrings.courier_prime_bold,
-            txtfontsize: MyFontSize.size14,
-            txtcolor: MyColors.whiteColor,
-          ),*/
+          // SizedBox(
+          //   height: Get.height * 0.02,
+          // ),
+          // MyText(
+          //   text_name: MyStrings.lao_tseu,
+          //   myFont: MyStrings.courier_prime_bold,
+          //   txtfontsize: MyFontSize.size16,
+          //   txtcolor: MyColors.whiteColor,
+          // ),
           Spacer(),
           InkWell(
             onTap: () {
@@ -336,7 +343,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
             child: MyText(
               text_name: "see_my_journey".tr,
               myFont: MyStrings.cagliostro,
-              txtfontsize: MyFontSize.size23,
+              txtfontsize: MyFontSize.size25,
               txtcolor: MyColors.whiteColor,
             ),
           ),

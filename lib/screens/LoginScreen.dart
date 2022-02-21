@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 60),
-                    height: 80,
+                    height: 74,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(40),
@@ -133,8 +133,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: MyText(
                       text_name: "je_suis_haudosseen".tr,
                       txtcolor: MyColors.whiteColor,
-                      txtfontsize:MyFontSize.size18,
-                      myFont: MyStrings.courier_prime_bold,
+                      txtfontsize:MyFontSize.size25,
+                      myFont: MyStrings.bodoni72_Bold,
                     ),
                   ),
                   SizedBox(
@@ -145,7 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: MyTextStart(
                       text_name: "email".tr,
                       txtcolor: MyColors.whiteColor,
-                      txtfontsize:MyFontSize.size18,
+                      txtfontsize:MyFontSize.size15,
+                      myFont: MyStrings.courier_prime,
                     ),
                   ),
                   MyTextFieldWithImage(
@@ -168,7 +169,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         MyTextStart(
                           text_name: "password".tr,
                           txtcolor: MyColors.whiteColor,
-                          txtfontsize:MyFontSize.size18,
+                          txtfontsize:MyFontSize.size15,
+                          myFont: MyStrings.courier_prime,
                         ),
                         SizedBox(width: 5,),
                         GestureDetector(
@@ -226,8 +228,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 screenName: ForgotPasswordScreen());
           },
           txtcolor: MyColors.whiteColor,
-          txtfont: MyFontSize.size13,
-          myFont: MyStrings.courier_prime_bold,
+          txtfont: MyFontSize.size15,
+          myFont: MyStrings.courier_prime,
         ),
         SizedBox(
           height: Get.height * 0.02,
@@ -293,7 +295,8 @@ class _LoginScreenState extends State<LoginScreen> {
             bgColor: MyColors.buttonBgColor,
             opacity: 1.0,
             txtcolor: MyColors.whiteColor,
-            txtfont: MyFontSize.size13,
+            txtfont: MyFontSize.size15,
+            myFont: MyStrings.courier_prime,
             onClick: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();

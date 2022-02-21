@@ -107,7 +107,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
                     child: Center(
                       child: BackdropFilter(
                         filter: myController.isFloatingMenuVisible.value
-                            ? ImageFilter.blur(sigmaX: 2, sigmaY: 2)
+                            ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
                             : ImageFilter.blur(sigmaX: 0, sigmaY: 0),
                         child: Container(
                           margin: EdgeInsets.only(bottom: Get.height * .020),
@@ -288,17 +288,32 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
           MyText(
             text_name: "reflect_mode".tr,
             myFont: MyStrings.courier_prime_bold,
-            txtfontsize: MyFontSize.size14,
+            txtfontsize: MyFontSize.size20,
+            txtcolor: MyColors.whiteColor,
+          ),
+          /*SizedBox(
+            height: Get.height * 0.05,
+          ),
+          MyText(
+            text_name: "journey_always_start".tr,
+            myFont: MyStrings.courier_prime_italic,
+            txtfontsize: MyFontSize.size16,
             txtcolor: MyColors.whiteColor,
           ),
           SizedBox(
-            height: Get.height * 0.005,
+            height: Get.height * 0.02,
           ),
-          Container(
-            color: MyColors.lightGreenColor,
-            height: Get.height * 0.005,
-            width: Get.width * 0.32,
-          ),
+          MyText(
+            text_name: "lao_tseu".tr,
+            myFont: MyStrings.courier_prime_bold,
+            txtfontsize: MyFontSize.size16,
+            txtcolor: MyColors.whiteColor,
+          ),*/
+          // Container(
+          //   color: MyColors.lightGreenColor,
+          //   height: Get.height * 0.005,
+          //   width: Get.width * 0.32,
+          // ),
           SizedBox(
             height: Get.height * 0.06,
           ),
@@ -306,7 +321,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
             return MyText(
               text_name: getSelectedProj(),
               myFont: MyStrings.courier_prime_italic,
-              txtfontsize: MyFontSize.size18,
+              txtfontsize: MyFontSize.size16,
               txtcolor: MyColors.whiteColor,
             );
           }),
@@ -327,7 +342,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
             child: MyText(
               text_name: "see_my_journey".tr,
               myFont: MyStrings.cagliostro,
-              txtfontsize: MyFontSize.size23,
+              txtfontsize: MyFontSize.size25,
               txtcolor: MyColors.whiteColor,
             ),
           ),
