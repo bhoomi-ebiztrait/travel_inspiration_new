@@ -79,6 +79,7 @@ class MyImageURL {
   static const arrow_dropdown_up = root + "arrow_dropdown_up.png";
   static const arrow_dropdown_down = root + "arrow_dropdown_down.png";
   static const arrow_right = root + "arrow_right.png";
+  static const bg = root + "bg.png";
 
   static const top_wave = root + "top_wave.png";
   static const metro_steps = root + "metro_steps.png";

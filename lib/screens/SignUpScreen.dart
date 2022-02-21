@@ -8,6 +8,7 @@ import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextFieldWithImage.dart';
 import 'package:travel_inspiration/TIController/MyValidatorController.dart';
+import 'package:travel_inspiration/screens/PopScreen/ShowAlertSignIn.dart';
 import 'package:travel_inspiration/screens/SingupConfirmScreen.dart';
 import 'package:travel_inspiration/services/AuthenticationService.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
@@ -140,7 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(width: 5,),
                   GestureDetector(
                     onTap: (){
-                      passwordInfo();
+                      Get.to(() => AlertDialogSignIn(title: "password_rules",myContent: "",));
                     },
                       child: Icon(Icons.info_outline,size: 22,color: MyColors.whiteColor,))
                 ],
@@ -399,11 +400,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     await apiManager.getAuthInfo(ApiParameter.CGV_ID).then((response){
       Get.back();
       if(response != null) {
-        MyCommonMethods.showAlertDialog(
-            msgContent: response["details"], myFont: MyStrings.courier_prime);
+        Get.to(() => AlertDialogSignIn(title: "",myContent: response["details"],));
+        // MyCommonMethods.showAlertDialog(
+        //     msgContent: response["details"], myFont: MyStrings.courier_prime);
       }else{
-        MyCommonMethods.showInfoCenterDialog(
-            msgContent: "txtNoRecordFound".tr);
+        Get.to(() => AlertDialogSignIn(title: "txtNoRecordFound",myContent: "",));
+       /* MyCommonMethods.showInfoCenterDialog(
+            msgContent: "txtNoRecordFound".tr);*/
       }
     });
   }

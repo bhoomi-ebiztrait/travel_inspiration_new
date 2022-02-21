@@ -122,9 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     bgColor: MyColors.buttonBgColorHome,
                     opacity:1.0,txtcolor: MyColors.whiteColor,
                     txtfont: MyFontSize.size10,onClick: (){
-                    ScreenTransition.navigateToScreenLeft(
-                        screenName: SignUpScreen());
-                     // ScreenTransition.navigateToScreenLeft(screenName: CreateProfileScreen());
+                    // ScreenTransition.navigateToScreenLeft(
+                    //     screenName: SignUpScreen());
+                      ScreenTransition.navigateToScreenLeft(screenName: CreateProfileScreen());
                     },),
                 ),
               ]

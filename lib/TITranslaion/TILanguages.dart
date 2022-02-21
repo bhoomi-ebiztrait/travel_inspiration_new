@@ -110,7 +110,7 @@ class TILanguages extends Translations{
       "txtLeplus": "Le plus beau voyage c' est celui qu' on a pas encore fait.",
       "txtLoick": "Loïck Peyron Navigateur français",
       "txtRademaree": "Redémarre ton chemin de 0 kilomètre.",
-      "txtReprendre": "Reprendre ton chemin depuis tes kilomètres actuels.",
+      "txtReprendre": "Reprends ton chemin depuis tes kilomètres actuels.",
       "txtInspireModeCommencerle": "COMMENCER L'AVENTURE",
       "txtInspireMode": "MODE INSPIRÉ",
       "txtModeReflechi": "MODE RÉFLÉCHI",
