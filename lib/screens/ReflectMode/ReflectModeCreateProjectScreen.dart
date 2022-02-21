@@ -10,9 +10,12 @@ import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTopHeadewithTTextFeild.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
+import 'package:travel_inspiration/TIController/MyValidatorController.dart';
 import 'package:travel_inspiration/screens/InspiredMode/InspredModeScreen.dart';
+import 'package:travel_inspiration/screens/PopScreen/ShowAlertDialogCreateProfile.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeScreen.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
+import 'package:travel_inspiration/utils/MyColors.dart';
 import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyPreference.dart';
@@ -33,6 +36,7 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
   final _formKey = GlobalKey<FormState>();
   MyController dateController = Get.put(MyController());
   TextEditingController projNameController = TextEditingController();
+  MyValidatorController myValidatorController = Get.put(MyValidatorController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,26 +45,55 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                MyTopHeadewithTTextFeild(headerName: "name_of_project".tr.toUpperCase(),headerImgUrl: MyImageURL.rm_top,projNameController: projNameController,),
-                SizedBox(
-                  height: Get.height * 0.04,
-                ),
-                buildBoodyContent(),
+            child: Container(
+              width: Get.width,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.back(result: true);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Image.asset(
+                        MyImageURL.back,
+                        width: 25,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 60),
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          bottomLeft: Radius.circular(40)),
+                      color: MyColors.buttonBgColor,
+                    ),
+                    //margin: EdgeInsets.all(20),
+                    child:MyHeaderText(),
+                  ),
+                  // MyTopHeadewithTTextFeild(headerName: "name_of_project".tr.toUpperCase(),headerImgUrl: MyImageURL.rm_top,projNameController: projNameController,),
+                  SizedBox(
+                    height: Get.height * 0.04,
+                  ),
+                  buildBoodyContent(),
+                  SizedBox(height: Get.height*0.06,),
 
-                SizedBox(height: Get.height*0.06,),
-
-              ],
+                ],
+              ),
             ),
           ),
 
         ),
       ),
-      bottomNavigationBar: buildBottomImage(),
+      // bottomNavigationBar: buildBottomImage(),
     );
   }
 
@@ -73,19 +106,21 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                     ),
                     MyText(
                       text_name: "my_vacation_date".tr,
-                      txtfontsize: MyFontSize.size13,
+                      txtfontsize: MyFontSize.size15,
+                      txtcolor: MyColors.whiteColor,
                       myFont: MyStrings.courier_prime_bold,
                     ),
                     SizedBox(
                       height: Get.height * 0.04,
                     ),
-                    MyDOBPicker(minDate: DateTime.now(),maxDate: ApiParameter.END_DATE,),
+                    MyPickPicker(minDate: DateTime.now(),maxDate: ApiParameter.END_DATE,),
                     SizedBox(
                       height: Get.height * 0.06,
                     ),
                     MyText(
                       text_name: "deadline_deatination_date".tr,
-                      txtfontsize: MyFontSize.size13,
+                      txtfontsize: MyFontSize.size15,
+                      txtcolor: MyColors.whiteColor,
                       myFont: MyStrings.courier_prime_bold,
                     ),
                     SizedBox(
@@ -93,9 +128,12 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                     ),
                     MyDestinationPicker(maxDate: ApiParameter.END_DATE,msg: "dateofVacationStart".tr,),
                     SizedBox(
-                      height: Get.height * 0.05,
+                      height: Get.height * 0.08,
                     ),
-                    MyText(text_name: "number_of_person".tr,),
+                    MyText(text_name: "number_of_person".tr,
+                      txtfontsize: MyFontSize.size15,
+                      txtcolor: MyColors.whiteColor,
+                      myFont: MyStrings.courier_prime_bold,),
                     SizedBox(
                       height: Get.height * 0.01,
                     ),
@@ -126,7 +164,8 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                           },
                             child: Image.asset(MyImageURL.plus)),
                     ],),
-                    SizedBox(height: Get.height*0.09,),
+                    SizedBox(height: Get.height*0.06,),
+                    buildBottomImage(),
                   ],
                 );
   }
@@ -137,12 +176,12 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
       // height: Get.height * 0.10,
       height: 85,
       width: Get.width,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(MyImageURL.rm_bottom),
-          fit: BoxFit.fill,
-        ),
-      ),
+      // decoration: BoxDecoration(
+      //   image: DecorationImage(
+      //     image: AssetImage(MyImageURL.rm_bottom),
+      //     fit: BoxFit.fill,
+      //   ),
+      // ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -178,25 +217,19 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                     }else{
                       MyCommonMethods.showInfoCenterDialog(msgContent:"validPersonCount".tr, myFont :MyStrings.courier_prime_bold);
                     }
-
                   }
-
-
                 },
                 child: Image.asset(MyImageURL.fleche)),
           ],
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            InkWell(
-                onTap: (){
-                  MyCommonMethods.showInfoCenterDialog(msgContent:"show_mode_msg".tr, myFont:MyStrings.courier_prime_bold);
-                },
-                child: Image.asset(MyImageURL.info_big,height: 50,width: 50,))
-          ],
+        Padding(
+          padding: const EdgeInsets.only(right: 10,top: 30),
+          child: InkWell(
+              onTap: (){
+                Get.to(() => AlertDialogCreateProfile(title: "show_mode_msg",myContent: "",));
+                //MyCommonMethods.showInfoCenterDialog(msgContent:"show_mode_msg".tr, myFont:MyStrings.courier_prime_bold);
+              },
+              child: Image.asset(MyImageURL.info_big,height: 30,width: 30,)),
         ),
       ],
     ),);
@@ -225,5 +258,40 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
         ScreenTransition.navigateOffAll(screenName: ReflectModeScreen());
       } else {}
     });
+  }
+
+  MyHeaderText(){
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 60,vertical: 10),
+      child: TextFormField(
+        onTap: (){},
+        textAlign: TextAlign.center,
+        controller: projNameController,
+        style: TextStyle(color: MyColors.whiteColor, fontSize: MyFontSize.size23,fontFamily: MyStrings.bodoni72_Bold,decoration: TextDecoration.none,
+        ),
+        cursorColor: Colors.black45,
+        // keyboardType: edinputType,
+        decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: MyColors.lineColor),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: MyColors.lineColor),
+          ),
+          border: new UnderlineInputBorder(
+              borderSide: new BorderSide(
+                  color: MyColors.lineColor
+              )
+          ),
+          fillColor: Colors.transparent,
+          contentPadding: const EdgeInsets.only(left: 10, right:10),
+          hintText: "name_of_project".tr,
+          hintStyle: TextStyle(color: MyColors.whiteColor),
+          counterText: "",
+          filled: true,
+        ),
+        validator: myValidatorController.validateProjName,
+      ),
+    );
   }
 }
