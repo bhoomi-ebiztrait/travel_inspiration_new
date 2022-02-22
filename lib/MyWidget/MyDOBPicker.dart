@@ -72,7 +72,7 @@ class _MyDOBPickerState extends State<MyDOBPicker> {
           child: MyText(
             text_name: dateController.selectedDate.value != ""
                 ? dateController.selectedDate.value
-                : "choose_date".tr,
+                : "Date".tr,
             txtcolor: MyColors.textColor.withOpacity(1.0),
             txtfontsize: MyFontSize.size13,
           ),
