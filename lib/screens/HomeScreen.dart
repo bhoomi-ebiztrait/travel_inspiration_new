@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     txtfont: MyFontSize.size10,onClick: (){
                     ScreenTransition.navigateToScreenLeft(
                         screenName: SignUpScreen());
-                     // ScreenTransition.navigateToScreenLeft(screenName: CreateProfileScreen());
+                      //ScreenTransition.navigateToScreenLeft(screenName: CreateProfileScreen());
                     },),
                 ),
               ]

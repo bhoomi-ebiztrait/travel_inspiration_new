@@ -14,6 +14,7 @@ import 'package:travel_inspiration/TIController/MyValidatorController.dart';
 import 'package:travel_inspiration/screens/CreateProfileScreen.dart';
 import 'package:travel_inspiration/screens/DashboardScreen.dart';
 import 'package:travel_inspiration/screens/ForgotPasswordScreen.dart';
+import 'package:travel_inspiration/screens/PopScreen/ShowAlertSignIn.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeScreen.dart';
 import 'package:travel_inspiration/services/AuthenticationService.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
@@ -122,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 60),
-                    height: 74,
+                    height: 80,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(40),
@@ -175,7 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(width: 5,),
                         GestureDetector(
                             onTap: (){
-                              passwordInfo();
+                              // passwordInfo();
+                              Get.to(() => AlertDialogSignIn(title: "password_rules",myContent: "",));
                             },child: Icon(Icons.info_outline,size: 22,color: MyColors.whiteColor,))
                       ],
                     ),
