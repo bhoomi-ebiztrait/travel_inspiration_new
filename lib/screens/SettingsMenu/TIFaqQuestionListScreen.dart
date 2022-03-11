@@ -19,6 +19,8 @@ import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:travel_inspiration/utils/TIPrint.dart';
 
+import '../../MyWidget/MyTitlebar.dart';
+
 class TIFaqQuestionListScreen extends StatefulWidget {
   String title;
   int title_id;
@@ -48,13 +50,97 @@ class _TIFaqQuestionListScreenState extends State<TIFaqQuestionListScreen> {
   @override
   Widget build(BuildContext context) {
     TIPrint(tag: "Title_id", value: widget.title_id.toString());
-    return Scaffold(body: _buildBodyContent());
+    return Scaffold(body: _buildBodyContent(),backgroundColor: MyColors.settingBgColor,);
   }
 
   _buildBodyContent() {
     return Obx(
       () => SafeArea(
-          child: Stack(
+          child: Container(
+            width: Get.width,
+            height: Get.height,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(MyImageURL.login), fit: BoxFit.fill),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  height: Get.height * 0.40,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(MyImageURL.faq_topbg), fit: BoxFit.fill),
+                  ),
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          MyTopHeader(),
+                          MyTitlebar(title: "    ${"txtFAQASKISTYA".tr}",),
+                          buildText(),
+                          SizedBox(
+                            height: Get.height * .020,
+                          ),
+                          _searchBar(),
+                          SizedBox(
+                            height: Get.height * .030,
+                          ),
+                          _text(),
+                          SizedBox(
+                            height: Get.height * .010,
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        top: Get.height * 0.05,
+                        left: Get.width * 0.05,
+                        child: Container(
+                          height: 140,
+                          width: 140,
+                          child: Image.asset(
+                            MyImageURL.profile_Image,
+                            fit: BoxFit.fill,
+                          ),
+                        ),),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    //height: Get.height*0.60,
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(MyImageURL.faq_bottombg),
+                          fit: BoxFit.fill),
+                    ),
+                    child: _faqQuestionList(),
+//             color: MyColors.settingBgColor,
+                  ),
+                ),
+                _buildQuestionPopup(),
+                /* Stack(children: [
+            _topImageWithText(),
+            _buildProfileWithText(),
+          ]),
+          SizedBox(
+            height: Get.height * .010,
+          ),
+          _searchBar(),
+          SizedBox(
+            height: Get.height * .020,
+          ),
+          _text(),
+          SizedBox(
+            height: Get.height * .020,
+          ),
+          Expanded(child:_faqMenuList()),*/
+              ],
+            ),
+          ),
+
+          /*Stack(
         children: [
           Container(
             width: Get.width,
@@ -79,8 +165,8 @@ class _TIFaqQuestionListScreenState extends State<TIFaqQuestionListScreen> {
           ),
           _buildQuestionPopup(),
         ],
-      )),
-    );
+      )),*/
+    ));
   }
 
   _searchBar() {
@@ -318,4 +404,30 @@ class _TIFaqQuestionListScreenState extends State<TIFaqQuestionListScreen> {
       });
     });
   }
+  buildText() {
+    return Padding(
+      padding: const EdgeInsets.only(top:20.0,right: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          MyText(
+            text_name: "txtTu".tr,
+            myFont: MyFont.Cagliostro_reguler,
+            txtcolor: MyColors.textColor,
+            txtfontsize: MyFontSize.size10,
+          ),
+        ],
+      ),
+    );
+  }
+  _text() {
+    return MyText(
+      text_name: "txtSelectionneuntheme".tr,
+      myFont: MyFont.Cagliostro_reguler,
+      txtAlign: TextAlign.center,
+      txtcolor: MyColors.textColor,
+      txtfontsize: MyFontSize.size14,
+    );
+  }
+
 }

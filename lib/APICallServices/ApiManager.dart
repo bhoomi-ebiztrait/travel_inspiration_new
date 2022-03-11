@@ -1026,8 +1026,13 @@ if(mLang == null){
     List<FaqListTitleModel> faqTitleList = [];
 
     if (await isConnected()) {
+      String mLang = MyPreference.getPrefStringValue(key: MyPreference.language_code);
+      if(mLang == null){
+        mLang = "en";
+      }
+
       MyResponse response =
-          await ApiCall().CallGetAPI(url: ApiParameter.GETFAQTITLELIST);
+          await ApiCall().CallGetAPI(url: "${ApiParameter.GETFAQTITLELIST}?language=$mLang");
 
       if (response.isSuccess()) {
         List result = response.getDATAJSONArray1()[ApiParameter.data];

@@ -68,6 +68,8 @@ class MyImageURL {
   static const gallery_selected=root+"gallery_selected.png";
 
   static const minus = root + "minus.png";
+  static const minus_blue = root + "minus_blue.png";
+  static const plus_blue = root + "plus_blue.png";
   static const plus = root + "plus.png";
   static const rm_bottom = root + "rm_bottom.png";
   static const rm_top = root + "rm_top.png";
@@ -164,6 +166,8 @@ class MyImageURL {
   static const red_heart=root+"red_heart.png";
   static const glob_icoc=root+"glob_icon.png";
   static const projet_icon=root+"projet_icon.png";
+  static const faq_topbg=root+"faq_topbg.png";
+  static const faq_bottombg=root+"faq_bottombg.png";
   static const bg_cannens=root+"bg_cannes.png";
   static const bg_monaco=root+"bg_monaco.png";
   static const bg_montpellier=root+"bg_montpellier.png";

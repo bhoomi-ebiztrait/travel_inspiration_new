@@ -95,20 +95,16 @@ class _VacationProjectFileScreenState extends State<VacationProjectFileScreen> {
                   children: [
                     MyTopHeaderTheme(
                       headerName:"${myController.allProjectList[widget.projIndex].title.toUpperCase()}\n${myController.allProjectList[widget.projIndex].pinDestination.toUpperCase()}",
-                      headerImgUrl: MyImageURL.travel_book_top,
+                      headerImgUrl: MyImageURL.setting_top,
                       networkImgUrl: myController.allProjectList[widget.projIndex].project_image,
                       // networkImgUrl: widget.themeURL,
                       croppedImg: croppedImg,
-                      logoImgUrl: MyImageURL.haudos_logo,
-                      logoCallback: (){
-                        CommonMethod.getAppMode();
-                      },
                       backArrowCallback: (){
                         _updateInfoDialog();
                       },
                     ),
                     Positioned(
-                      bottom: 40,
+                      bottom: 10,
                         right: 30,
                         child: GestureDetector(
                             onTap: () async{
@@ -179,9 +175,7 @@ class _VacationProjectFileScreenState extends State<VacationProjectFileScreen> {
               ],
             ),
           ),
-          bottomSheet: MyBottomLayout(
-            imgUrl: MyImageURL.travel_book_bottom,
-          ),
+
         ),
       ),
     );
@@ -219,7 +213,7 @@ class _VacationProjectFileScreenState extends State<VacationProjectFileScreen> {
                 }
               });
             },
-            child: Image.asset(MyImageURL.minus)),
+            child: Image.asset(MyImageURL.minus_blue,height: 50,width: 50,)),
         SizedBox(
           width: Get.width * 0.02,
         ),
@@ -235,7 +229,7 @@ class _VacationProjectFileScreenState extends State<VacationProjectFileScreen> {
                 personCounter++;
               });
             },
-            child: Image.asset(MyImageURL.plus)),
+            child: Image.asset(MyImageURL.plus_blue,height: 50,width: 50,),),
       ],
     );
   }
@@ -278,12 +272,13 @@ class _VacationProjectFileScreenState extends State<VacationProjectFileScreen> {
 
         ),
         child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               popupItemList[index].iconPath,
-              height: Get.height * .05,
-              width: Get.height * .05,
-              fit: BoxFit.contain,
+              height: Get.height * .04,
+              width: Get.height * .04,
+              fit: BoxFit.fill,
               //color: selectedIndex == index ? selectedMode == ApiParameter.REFLECT_MODE?MyColors.lightGreenColor:MyColors.lineColor:MyColors.buttonBgColor,
             ),
             SizedBox(

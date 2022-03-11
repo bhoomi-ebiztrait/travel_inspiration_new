@@ -105,6 +105,7 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             MySettingTop(title: "txtmyCompte".tr,),
 

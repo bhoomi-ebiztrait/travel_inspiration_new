@@ -18,8 +18,9 @@ class TISearchBar extends StatelessWidget {
         width: Get.width*.85,
         decoration: BoxDecoration(
             border: Border.all(
-              color: MyColors.searchBorderColor,
+              color: MyColors.buttonBgColor,
             ),
+            color: MyColors.whiteColor,
             borderRadius:BorderRadius.all(Radius.circular(Get.width*.060))
         ),
         child:Align(

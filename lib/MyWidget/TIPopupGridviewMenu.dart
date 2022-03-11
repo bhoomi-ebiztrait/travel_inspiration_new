@@ -127,10 +127,10 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
       children: [
         Image.asset(
           popupItemList[index].iconPath,
-          height: Get.height * .05,
-          width: Get.height * .05,
+          height: Get.height * .04,
+          width: Get.height * .04,
           fit: BoxFit.contain,
-          color: selectedIndex == index ? MyColors.lineColor:MyColors.buttonBgColor,
+         // color: selectedIndex == index ? MyColors.lineColor:MyColors.buttonBgColor,
         ),
         SizedBox(
           height: Get.height * .020,
