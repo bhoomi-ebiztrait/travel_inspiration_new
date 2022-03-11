@@ -99,6 +99,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         buildCloseButton(),
         SizedBox(height: Get.height * 0.2,),
@@ -114,7 +115,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
           padding: const EdgeInsets.all(30.0),
           child: MyText(text_name: "Plus que 3 jours pour recevoir tes destinations !",txtcolor: MyColors.whiteColor,myFont: MyStrings.courier_prime_bold,txtfontsize: MyFontSize.size18,),
         ),*/
-        SizedBox(height: Get.height * 0.06,),
+        SizedBox(height: Get.height * 0.08,),
         buildButtonInfo(),
 
 
@@ -128,11 +129,9 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
       child: Column(
         children: [
           Container(
-            width: Get.width * 0.50,
+            width: Get.width * 0.60,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(30),
-                  bottomRight: Radius.circular(30)),
+              borderRadius: BorderRadius.all(Radius.circular(30)),
               color: MyColors.whiteColor,
             ),
             //margin: EdgeInsets.all(20),
@@ -150,44 +149,46 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
                 // }
               },
               minWidth: Get.width * 0.50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MyText(
-                    text_name: myController.secondProject.value != ""
-                        ? myController.secondProject.value.title
-                        : "",
-                    txtcolor:
-                    myController.secondProject.value.projectMode ==
-                        "1"
-                        ? MyColors.lightGreenColor
-                        : MyColors.lineColor,
-                    txtfontsize: MyFontSize.size10,
-                    myFont: MyStrings.courier_prime_bold,
-                  ),
-                  MyText(
-                    text_name: myController.secondProject.value != ""
-                        ? "${myController.secondProject.value.totalKm} KM"
-                        : "0 KM",
-                    txtcolor:
-                    myController.secondProject.value.projectMode ==
-                        "1"
-                        ? MyColors.lightGreenColor
-                        : MyColors.lineColor,
-                    txtfontsize: MyFontSize.size10,
-                    myFont: MyStrings.courier_prime_bold,
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MyText(
+                      text_name: myController.secondProject.value != ""
+                          ? myController.secondProject.value.title
+                          : "",
+                      txtcolor:
+                      myController.secondProject.value.projectMode ==
+                          "1"
+                          ? MyColors.lightGreenColor
+                          : MyColors.lineColor,
+                      txtfontsize: MyFontSize.size10,
+                      myFont: MyStrings.courier_prime_bold,
+                    ),
+                    MyText(
+                      text_name: myController.secondProject.value != ""
+                          ? "${myController.secondProject.value.totalKm} KM"
+                          : "0 KM",
+                      txtcolor:
+                      myController.secondProject.value.projectMode ==
+                          "1"
+                          ? MyColors.lightGreenColor
+                          : MyColors.lineColor,
+                      txtfontsize: MyFontSize.size10,
+                      myFont: MyStrings.courier_prime_bold,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
+          SizedBox(height: Get.height*0.03,),
           myController.allProjectList.value.length > 2
               ? Container(
-            width: Get.width * 0.50,
+            width: Get.width * 0.60,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  bottomLeft: Radius.circular(30)),
+              borderRadius: BorderRadius.all(Radius.circular(30)),
               color: MyColors.whiteColor,
             ),
             //margin: EdgeInsets.all(20),
@@ -206,36 +207,39 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
                 // }
               },
               minWidth: Get.width * 0.50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MyText(
-                    text_name:
-                    myController.thirddProject.value != ""
-                        ? myController.thirddProject.value.title
-                        : "",
-                    txtcolor: myController
-                        .thirddProject.value.projectMode ==
-                        "1"
-                        ? MyColors.lightGreenColor
-                        : MyColors.lineColor,
-                    txtfontsize: MyFontSize.size10,
-                    myFont: MyStrings.courier_prime_bold,
-                  ),
-                  MyText(
-                    text_name: myController.thirddProject.value !=
-                        ""
-                        ? "${myController.thirddProject.value.totalKm} KM"
-                        : "0 KM",
-                    txtcolor: myController
-                        .thirddProject.value.projectMode ==
-                        "1"
-                        ? MyColors.lightGreenColor
-                        : MyColors.lineColor,
-                    txtfontsize: MyFontSize.size10,
-                    myFont: MyStrings.courier_prime_bold,
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MyText(
+                      text_name:
+                      myController.thirddProject.value != ""
+                          ? myController.thirddProject.value.title
+                          : "",
+                      txtcolor: myController
+                          .thirddProject.value.projectMode ==
+                          "1"
+                          ? MyColors.lightGreenColor
+                          : MyColors.lineColor,
+                      txtfontsize: MyFontSize.size10,
+                      myFont: MyStrings.courier_prime_bold,
+                    ),
+                    MyText(
+                      text_name: myController.thirddProject.value !=
+                          ""
+                          ? "${myController.thirddProject.value.totalKm} KM"
+                          : "0 KM",
+                      txtcolor: myController
+                          .thirddProject.value.projectMode ==
+                          "1"
+                          ? MyColors.lightGreenColor
+                          : MyColors.lineColor,
+                      txtfontsize: MyFontSize.size10,
+                      myFont: MyStrings.courier_prime_bold,
+                    ),
+                  ],
+                ),
               ),
             ),
           )
@@ -257,7 +261,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Image.asset(MyImageURL.cross,width: 30, color: MyColors.whiteColor,),
+            Image.asset(MyImageURL.cross,width: 40, color: MyColors.whiteColor,),
           ],
         ),
       ),

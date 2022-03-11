@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/TIBioMatric/TILocalAuthApi.dart';
+import 'package:travel_inspiration/screens/Gallery/GalleryScreen.dart';
 import 'package:travel_inspiration/screens/HomeScreen.dart';
 import 'package:travel_inspiration/screens/LoginScreen.dart';
 import 'package:travel_inspiration/screens/MyProfileScreen.dart';
 import 'package:travel_inspiration/screens/NotificationScreen.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeScreen.dart';
 import 'package:travel_inspiration/screens/SignUpScreen.dart';
+import 'package:travel_inspiration/screens/SingupConfirmScreen.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyPreference.dart';
@@ -16,6 +18,7 @@ import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 import 'CreateProfileScreen.dart';
 import 'InspiredMode/InspredModeScreen.dart';
 import 'ReflectMode/ReflectModeCreateProjectScreen.dart';
+import 'SettingsMenu/ChangePwConfirmScreen.dart';
 import 'TIChoseRouteModeScreen.dart';
 import 'TIInsireModeScreen.dart';
 import 'TravelBook/TraveloguePopupScreen.dart';
@@ -86,6 +89,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   void _CallFirstmathod(){
+   // ScreenTransition.navigateOff(screenName: HomeScreen());
     String userId = MyPreference.getPrefStringValue(
         key: MyPreference.userId);
     if (userId != null) {
@@ -93,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         int mode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
         mode == 1
             ? ScreenTransition.navigateOffAll(
-          // screenName: VacationProjectFileScreen())
+          // screenName: CreateProfileScreen())
             screenName: ReflectModeScreen())
             : ScreenTransition.navigateOffAll(
             screenName: InspredModeScreen());

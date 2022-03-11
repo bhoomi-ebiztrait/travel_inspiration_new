@@ -87,6 +87,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
   String passenger = "";
   Future<String> wayPoints ;
   Timer timer;
+  bool isDialog = false;
 
   //===========Gaia list=============//
   var showPopup = false.obs;
@@ -475,7 +476,13 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
         if (allProjectList.value[i].isSelected) {
           selectedProject = AllProjectModel().obs;
           selectedProject.value = allProjectList.value[i];
-          tempProjList.removeAt(i);
+          if(tempProjList != null && tempProjList.length > 0 ) {
+            for(int j=0;j<tempProjList.length;j++) {
+              if(allProjectList.value[i].id == tempProjList[j].id) {
+                tempProjList.removeAt(j);
+              }
+            }
+          }
         }
       }
       if (tempProjList.length > 0)

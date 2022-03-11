@@ -21,46 +21,69 @@ class SignupConfirmScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: MyColors.buttonBgColor,
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child:
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(height: Get.height*0.15,),
-                  Image.asset(MyImageURL.check_circle_confirm,),
-                  SizedBox(height: Get.height*0.09,),
-                  MyText(text_name: "genial_tu_es".tr,txtcolor: MyColors.whiteColor,myFont: MyStrings.courier_prime_bold,txtfontsize: MyFontSize.size19,),
-                  SizedBox(height: Get.height*0.05,),
-                  MyText(text_name: "actives_ton_compte".tr,txtcolor: MyColors.whiteColor,txtfontsize: MyFontSize.size18,),
+        body: Container(
+          width: Get.width,
+          height: Get.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(MyImageURL.confirm_bg), fit: BoxFit.fill)),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child:
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: Get.height*0.05,),
 
-                  Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: MyColors.whiteColor.withOpacity(0.86),
+                          borderRadius: BorderRadius.all(Radius.circular(40)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 25),
+                          child: Column(
+                            children: [
+                              MyText(text_name: "genial_tu_es".tr,txtcolor: MyColors.confirmTextColor,myFont: MyStrings.courier_prime_bold,txtfontsize: MyFontSize.size19,),
+                              SizedBox(height: Get.height*0.02,),
+                              MyText(text_name: "actives_ton_compte".tr,txtcolor: MyColors.confirmTextColor,txtfontsize: MyFontSize.size18,),
 
-                  Column(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    // mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Center(child: MyText(text_name: "commerce_aventure".tr,txtcolor: MyColors.whiteColor,txtfontsize: MyFontSize.size23,myFont: MyStrings.cagliostro,)),
-                      SizedBox(height: Get.height*0.02,),
-                      GestureDetector(
-                        onTap: (){
-                          callConfirmUserAPI();
-                        /*  ScreenTransition.navigateToScreenLeft(
-                              screenName:CreateProfileScreen());                          */
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
 
-                        },
-                          child: Image.asset(MyImageURL.fleche)),
-                    ],
-                  ),
-                ],
-              ),
+                    Spacer(),
+
+                    Column(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      // mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Center(child: MyText(text_name: "commerce_aventure".tr,txtcolor: MyColors.whiteColor,txtfontsize: MyFontSize.size33,myFont: MyStrings.bodoni72_Bold,)),
+                        SizedBox(height: Get.height*0.04,),
+                        GestureDetector(
+                          onTap: (){
+                            callConfirmUserAPI();
+                          /*  ScreenTransition.navigateToScreenLeft(
+                                screenName:CreateProfileScreen());                          */
+
+                          },
+                            child: Image.asset(MyImageURL.fleche)),
+                        SizedBox(height: Get.height*0.01,),
+                      ],
+                    ),
+                  ],
+                ),
 
 
 
+          ),
         ),
       ),
     );

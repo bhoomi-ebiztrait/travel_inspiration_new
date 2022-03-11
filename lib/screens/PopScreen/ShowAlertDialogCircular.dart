@@ -22,43 +22,47 @@ class AlertDialogCircular extends StatelessWidget {
               fit: BoxFit.cover),
         ),
         child: Center(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(350.0),
-            child: Container(
-              width: Get.width * .61,
-              height: Get.height * .37,
-              padding: EdgeInsets.only(left: 15,right: 15),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(500),
-                  color: MyColors.whiteColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Image.asset(
-                        MyImageURL.cross,
-                        width: 40,
-                      ),
+          child: Container(
+            width: Get.width ,
+            height: Get.height * .37,
+            // padding: EdgeInsets.only(left: 15,right: 15),
+            margin: EdgeInsets.only(
+                top: Get.height * .10, left: 6, bottom: 20),
+            decoration: BoxDecoration(
+                // borderRadius: BorderRadius.circular(500),
+                shape: BoxShape.circle,
+                color: MyColors.whiteColor),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Image.asset(
+                      MyImageURL.cross,
+                      width: 40,
                     ),
                   ),
-                  SizedBox(
-                    height: Get.height * 0.04,
-                  ),
-                  MyText(
+                ),
+                SizedBox(
+                  height: Get.height * 0.03,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 50,right: 50),
+                  height: 100,
+                  child: MyText(
                     text_name: title.tr,
                     txtcolor: MyColors.textColor,
                     txtfontsize: MyFontSize.size13,
-                    txtAlign: TextAlign.center,
+                   // txtAlign: TextAlign.center,
                     myFont: MyFont.Courier_Prime,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

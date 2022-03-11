@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
@@ -10,6 +12,7 @@ import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
+import '../TIController/MyController.dart';
 import 'MyButton.dart';
 import 'MyText.dart';
 import 'MyTextButton.dart';
@@ -30,17 +33,51 @@ class MyCustomDialog extends StatefulWidget {
 class _MyCustomDialogState extends State<MyCustomDialog> {
   bool isSelectedMonthly = false;
   bool isSelectedAnnual = false;
+  MyController myController = Get.put(MyController());
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return SafeArea(
+      child: Container(
+        height: Get.height,
+        width: Get.width,
+        color: Colors.white,
+        child:Stack(
+          children: [
+            Container(
+                alignment: Alignment.topCenter,
+                child: Image.asset(MyImageURL.gallery_top,fit: BoxFit.fill,)),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+              child: Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                child: contentBox(context),
+              ),
+            ),
+          ],
+        ),
+        // ),
+        /* child: MyCustomDialog(
+                      popupName: "premium".tr,
+                      popupInfo: "premium_info".tr,
+                      popupDesc: "premium_desc".tr,
+                      popupCondition: "see_sales_condition".tr,
+                      popupLogo: MyImageURL.diamant_popup,
+                    ),*/
+      ),
+    );
+   /* return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,
       child: contentBox(context),
-    );
+    );*/
   }
 
   contentBox(context) {
@@ -48,7 +85,7 @@ class _MyCustomDialogState extends State<MyCustomDialog> {
       children: <Widget>[
 
         Container(
-    padding: EdgeInsets.only(left: 20,top: (10.0), right: 20,bottom: 20
+    padding: EdgeInsets.only(left: 20,top: (20.0), right: 20,bottom: 20
     ),
           margin: EdgeInsets.only(top: 90),
           decoration: BoxDecoration(
@@ -69,12 +106,14 @@ class _MyCustomDialogState extends State<MyCustomDialog> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 InkWell(
-                    onTap: (){Get.back();
+                    onTap: (){
+
+                      Get.back(result: true);
                     print("clicked");
                     },
                     child: Container(
                         alignment: Alignment.bottomRight,
-                        child: Image.asset(MyImageURL.cross,width: 30,))),
+                        child: Image.asset(MyImageURL.cross,width: 40,))),
                 SizedBox(
                   height: Get.height * 0.02,
                 ),
@@ -84,7 +123,7 @@ class _MyCustomDialogState extends State<MyCustomDialog> {
                     text_name: widget.popupInfo,
                     txtcolor: MyColors.textColor,
                     txtfontsize: MyFontSize.size13,
-                    myFont: MyStrings.courier_prime_bold,
+                    myFont: MyStrings.courier_prime,
                   ),
                 ),
                 SizedBox(
@@ -125,7 +164,7 @@ class _MyCustomDialogState extends State<MyCustomDialog> {
                       Get.back();
                     },
                     txtfont: MyFontSize.size18,
-                    bgColor: MyColors.buttonBgColor,
+                    bgColor: MyColors.buttonBgColorHome.withOpacity(1),
                     txtcolor: MyColors.whiteColor,
                     fontWeight: FontWeight.bold,
                   ),
@@ -141,6 +180,7 @@ class _MyCustomDialogState extends State<MyCustomDialog> {
         Positioned(
           right: 40,
           left: 30,
+
           child: Container(
             height: 160,
             width: 160,
@@ -184,7 +224,7 @@ class _MyCustomDialogState extends State<MyCustomDialog> {
           child: Container(
             // width: Get.width*0.3,
             // padding: EdgeInsets.all(14),
-            height: 60,
+            height: 100,
             decoration: BoxDecoration(
               color: isSelectedAnnual ? MyColors.lightGreenColor : MyColors.whiteColor,
               borderRadius: BorderRadius.all(Radius.circular(14)),
@@ -201,12 +241,12 @@ class _MyCustomDialogState extends State<MyCustomDialog> {
               children: [
                 MyText(
                   text_name: "premium_annual".tr,
-                  txtfontsize: MyFontSize.size8,
-                  txtcolor: MyColors.textColor,
+                  txtfontsize: MyFontSize.size10,
+                  txtcolor: isSelectedAnnual ? MyColors.whiteColor:MyColors.textColor,
                 ),
                 MyText(
                   text_name: "£49,99",
-                  txtfontsize: MyFontSize.size10,
+                  txtfontsize: MyFontSize.size15,
                   txtcolor: isSelectedAnnual ? MyColors.whiteColor:MyColors.lightGreenColor,
                   myFont: MyStrings.cagliostro,
                 ),
@@ -228,7 +268,7 @@ SizedBox(width: Get.width*0.03,),
           child: Container(
             // padding: EdgeInsets.all(14),
             // width: Get.width*0.3,
-            height: 60,
+            height: 100,
             decoration: BoxDecoration(
               color: isSelectedMonthly ? MyColors.lightGreenColor : MyColors.whiteColor,
               borderRadius: BorderRadius.all(Radius.circular(14)),
@@ -245,12 +285,12 @@ SizedBox(width: Get.width*0.03,),
               children: [
                 MyText(
                   text_name: "premium_monthly".tr,
-                  txtfontsize: MyFontSize.size8,
-                  txtcolor: MyColors.textColor,
+                  txtfontsize: MyFontSize.size10,
+                  txtcolor: isSelectedMonthly ? MyColors.whiteColor:MyColors.textColor,
                 ),
                 MyText(
                   text_name: "£4,99",
-                  txtfontsize: MyFontSize.size10,
+                  txtfontsize: MyFontSize.size15,
                   txtcolor: isSelectedMonthly?MyColors.whiteColor:MyColors.lightGreenColor,
                   myFont: MyStrings.cagliostro,
                 ),

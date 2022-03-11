@@ -114,6 +114,10 @@ flutter:
       fonts:
         - asset: assets/fonts/courier_prime/Courier Prime Italic.ttf
           weight: 700
+    - family: Bodoni_Bold
+      fonts:
+        - asset: assets/fonts/bodoni.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

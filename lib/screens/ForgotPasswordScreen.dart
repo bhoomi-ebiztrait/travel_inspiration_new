@@ -6,6 +6,7 @@ import 'package:travel_inspiration/MyWidget/MyButton.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextFieldWithImage.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/TIController/MyValidatorController.dart';
 import 'package:travel_inspiration/screens/HomeScreen.dart';
 import 'package:travel_inspiration/screens/LoginScreen.dart';
@@ -64,28 +65,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                     SizedBox(
                         height: Get.height * 0.06
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 60),
-                      height: 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(40),
-                            bottomLeft: Radius.circular(40)),
-                        color: MyColors.buttonBgColor,
-                      ),
-                      //margin: EdgeInsets.all(20),
-                      child: MyText(
-                        text_name: "je_suis_haudosseen".tr,
-                        txtcolor: MyColors.whiteColor,
-                        txtfontsize:MyFontSize.size25,
-                        myFont: MyStrings.bodoni72_Bold,
-                      ),
-                    ),
+                    MyTitlebar(title: "${"je_suis_haudosseen_multiline".tr}".toUpperCase()),
+
                     SizedBox(
                       height: Get.height * 0.06,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 50,bottom: 10),
+                    Container(
+                      margin: EdgeInsets.only(left: 70,bottom: 10),
                       child: MyTextStart(
                         text_name: "email".tr,
                         txtcolor: MyColors.whiteColor,

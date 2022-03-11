@@ -192,7 +192,7 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
           ),
           Container(
             margin: EdgeInsets.only(left: 60),
-            height: 80,
+            height: 100,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40),
@@ -203,7 +203,7 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
             child: MyText(
               text_name: "txtComencer".tr,
               txtcolor: MyColors.whiteColor,
-              txtfontsize: MyFontSize.size25,
+              txtfontsize: MyFontSize.size23,
               myFont: MyStrings.bodoni72_Bold,
             ),
           ),
@@ -213,9 +213,9 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
               Center(
                 child: Container(
                   width: Get.width,
-                  height: Get.height * .39,
+                  height: Get.height * .37,
                   margin: EdgeInsets.only(
-                      top: Get.height * .07, left: 6, bottom: 20),
+                      top: Get.height * .10, left: 6, bottom: 20),
                   child: PageView.builder(
                     controller: _sliderController,
                     onPageChanged: (int page) {
@@ -229,7 +229,7 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(pageViewList[index1]
-                                  .bgPath)), /*shape: BoxShape.circle*/
+                                  .bgPath),fit: BoxFit.contain), shape: BoxShape.circle,
                         ),
                       );
                     },

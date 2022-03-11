@@ -52,13 +52,20 @@ class MyImageURL {
   static const premiuminfoBg=root+"completePremiumBg.png";
   static const triangle_premium=root+"triangle_premium.png";
   static const gia_topBg=root+"gia_curveImage.png";
-  static const gia_moicircle=root+"gia_moi_circle.png";
-  static const gia_mecircle=root+"gia_me_circle.png";
+  static const gia_moicircle=root+"gia_moicircle.png";
+  static const gia_mecircle=root+"gia_mecircle.png";
   static const faq_top=root+"faq_top.png";
   static const arrow_route=root+"arrow_route.png";
   static const arrow_route_down=root+"arrow_route_down.png";
   static const arrow_route_up=root+"arrow_route_up.png";
   static const circle3x=root+"circle@3x.png";
+  static const premium=root+"premium.png";
+  static const profile_selected=root+"profile_selected.png";
+  static const button_bg_img=root+"button_bg_img.png";
+  static const profile_bg=root+"profile_bg.png";
+  static const home_menu=root+"home_menu.png";
+  static const confirm_bg=root+"confirm_bg.png";
+  static const gallery_selected=root+"gallery_selected.png";
 
   static const minus = root + "minus.png";
   static const plus = root + "plus.png";
@@ -69,6 +76,7 @@ class MyImageURL {
   static const home_icon = root + "home_icon.png";
   static const profile_icon = root + "profile_icon.png";
   static const setting_icon = root + "setting_icon.png";
+  static const setting_selected = root + "setting_selected.png";
   static const world_icon = root + "world_icon.png";
   static const gaia = root + "gaia.png";
   static const inspred_bg = root + "inspred_bg.png";
@@ -80,6 +88,11 @@ class MyImageURL {
   static const arrow_dropdown_down = root + "arrow_dropdown_down.png";
   static const arrow_right = root + "arrow_right.png";
   static const bg = root + "bg.png";
+  static const botom_bg = root + "botom_bg.png";
+  static const gaia_bg = root + "gaia_bg.png";
+  static const world_selected = root + "world_selected.png";
+  static const setting_button_bg = root + "setting_button_bg.png";
+  static const green_check = root + "green_check.png";
 
   static const top_wave = root + "top_wave.png";
   static const metro_steps = root + "metro_steps.png";
@@ -109,6 +122,9 @@ class MyImageURL {
   static const valise=root+"valise.png";
   static const carte=root+"carte.png";
   static const diamant_big=root+"diamant@3x.png";
+  static const change_pw_bottom=root+"change_pw_bottom.png";
+  static const giai_blue_fr=root+"giai_blue_fr.png";
+  static const giai_blue_en=root+"giai_blue_en.png";
 
   static const diamant_popup=root+"diamant_popup.png";
   static const document_popup=root+"document_popup.png";
@@ -116,7 +132,7 @@ class MyImageURL {
   static const valise_popup=root+"valise_popup.png";
   static const carte_popup=root+"carte_popup.png";
   static const facebook=root+"facebook.png";
-  static const info_blue=root+"Info_blue.png";
+  static const info_blue=root+"info_blue.png";
   static const instagram=root+"instagram.png";
   static const price_tag=root+"price_tag.png";
   static const sign=root+"sign.png";

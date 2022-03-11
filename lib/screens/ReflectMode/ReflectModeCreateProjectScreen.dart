@@ -41,19 +41,20 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Container(
-              width: Get.width,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+      body: Form(
+        key: _formKey,
+        child: SafeArea(
+          child: Container(
+            width: Get.width,
+            height: Get.height,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -67,9 +68,12 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: Get.height * 0.04,
+                  ),
                   Container(
                     margin: EdgeInsets.only(left: 60),
-                    height: 80,
+                    height: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(40),
@@ -90,8 +94,8 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
               ),
             ),
           ),
-
         ),
+
       ),
       // bottomNavigationBar: buildBottomImage(),
     );
@@ -262,10 +266,10 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
 
   MyHeaderText(){
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 60,vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
       child: TextFormField(
         onTap: (){},
-        textAlign: TextAlign.center,
+        // textAlign: TextAlign.center,
         controller: projNameController,
         style: TextStyle(color: MyColors.whiteColor, fontSize: MyFontSize.size23,fontFamily: MyStrings.bodoni72_Bold,decoration: TextDecoration.none,
         ),
@@ -284,8 +288,9 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
               )
           ),
           fillColor: Colors.transparent,
-          contentPadding: const EdgeInsets.only(left: 10, right:10),
+          contentPadding: const EdgeInsets.only(left: 0, right:0),
           hintText: "name_of_project".tr,
+          // hintText: "NOM DU PROJET",
           hintStyle: TextStyle(color: MyColors.whiteColor),
           counterText: "",
           filled: true,

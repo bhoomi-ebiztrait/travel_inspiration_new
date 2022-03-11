@@ -52,10 +52,10 @@ class _MyDOBPickerState extends State<MyDOBPicker> {
         getDateDialog(context,widget.minDate,widget.maxDate);
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+        padding: const EdgeInsets.symmetric(horizontal: 48.0),
         child: Container(
           width: Get.width,
-          height: 50,
+          height: 60,
           // width: Get.width*0.2,
 
           decoration: BoxDecoration(

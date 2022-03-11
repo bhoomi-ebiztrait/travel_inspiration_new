@@ -367,7 +367,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
       if (value == true) {
         //change reflective mode  to inspire mode
         // MyPreference.setPrefIntValue(key: MyPreference.APPMODE, value: 0);
-        ScreenTransition.navigateToScreenLeft(screenName: InspredModeScreen());
+        ScreenTransition.navigateOffAll(screenName: InspredModeScreen());
       }
     });
   }

@@ -6,9 +6,11 @@ class MyColors{
   static Color  buttonBgColor =Color(0xFF57C0D3);
   static Color  buttonBgColorHome =Color(0xF3BEAFA9);
   static Color  expantionTileBgColor =Color(0xFFBEAFA9);
+  static Color  settingBgColor =Color(0xFFf7f5f4);
 
   static Color  lightGreenColor =Color(0xFFc1d44a);
   static Color  tileColor=Color(0xffC1D44A);
+  static Color  confirmTextColor=Color(0xff57C0C5);
 
   static Color  textColor =Color(0xFF707070);
   static Color  lineColor =Color(0xFFB5E2EC);

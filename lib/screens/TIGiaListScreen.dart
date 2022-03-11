@@ -6,6 +6,7 @@ import 'package:travel_inspiration/APICallServices/ApiManager.dart';
 import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyQuotedText.dart';
+import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/TICommonPopup.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/screens/InspiredMode/InspredModeScreen.dart';
@@ -20,6 +21,9 @@ import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyPreference.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:flutter_html/flutter_html.dart';
+
+import '../MyWidget/MyGradientBottomMenu.dart';
+import '../MyWidget/MyTitlebar.dart';
 
 
 class TIGiaListScreen extends StatefulWidget {
@@ -56,8 +60,20 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
-          body: SafeArea(child: _buildBodyContent()),
-        ));
+      bottomNavigationBar: myController.showPopup.value == true ? Container(width: Get.width * 0.85,
+        height: Get.height * 0.11,):MyGradientBottomMenu(
+        iconList: [
+          MyImageURL.profile_icon,
+          MyImageURL.galerie,
+          MyImageURL.home_menu,
+          MyImageURL.world_selected,
+          MyImageURL.setting_icon
+        ],
+        bgImg: MyImageURL.botom_bg,
+      ),
+
+      body: SafeArea(child: _buildBodyContent()),
+    ));
   }
 
   _buildBodyContent() {
@@ -66,40 +82,27 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
         children: [
           Stack(
             children: [
-              MyTopHeader(
-                headerImgUrl: MyImageURL.gia_topBg,
-                headerName: "txtGaia".tr,
-                logoImgUrl: MyImageURL.logo_icon,
-                logoCallback: () {
-                  CommonMethod.getAppMode();
-                },
-              ),
+              MyHeader(),
+
               Padding(
-                padding: EdgeInsets.only(top: Get.height * .26),
+                padding: EdgeInsets.only(top: Get.height * .23),
                 child: Align(
-                    alignment: Alignment.bottomRight,
+                    alignment: Alignment.bottomCenter,
                     child:GestureDetector(
                         onTap: () {
                           //myController.showPopup.value = true;
                           _callGaiaInfoApi();
-;
+                          ;
                         },
-                        child:Image.asset(MyPreference.getPrefStringValue(key: MyPreference.language_code) == "fr" ?MyImageURL.gia_moicircle :MyImageURL.gia_mecircle))),
+                        child:Image.asset(MyPreference.getPrefStringValue(key: MyPreference.language_code) == "fr" ?MyImageURL.gia_moicircle :MyImageURL.gia_mecircle,height: 120,width: 120,))),
               ),
             ],
           ),
-          Container(
-            margin:
-                EdgeInsets.only(left: Get.width * .32, right: Get.width * .32),
-            child: Text(
-              "txtVoyagede".tr,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: MyColors.buttonBgColor,
-                fontSize: MyFontSize.size16,
-                fontFamily: MyFont.Courier_Prime_Bold,
-              ),
-            ),
+          MyText(
+            text_name: "txtVoyagede".tr,
+            txtcolor: MyColors.buttonBgColorHome.withOpacity(1),
+            txtfontsize: MyFontSize.size16,
+            myFont: MyFont.Cagliostro_reguler,
           ),
           SizedBox(
             height: Get.height * .030,
@@ -157,10 +160,10 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
               ),
               Padding(
                 padding: EdgeInsets.only(
-                  top: Get.height * .12,
+                  top: Get.height * .09,
                 ),
-                child: Image.asset(MyImageURL.gia_moicircle),
-              )
+                child: Image.asset(MyPreference.getPrefStringValue(key: MyPreference.language_code) == "fr" ?MyImageURL.giai_blue_fr :MyImageURL.giai_blue_en,height: 120,width: 120,),
+              ),
             ]),
           ))
     ]);
@@ -170,83 +173,86 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
     return GetX(
         init: ApiManager(),
         builder: (controller) {
-          return  ListView.builder(
-                  itemCount: apiManager.articleListObs.value.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                        //margin: EdgeInsets.all(Get.width * .020),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Get.width * .060))),
-                        elevation: Get.width * .020,
-                        child: Container(
-                          padding: EdgeInsets.all(Get.width * .030),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: Get.width * .60,
-                                padding:
-                                    EdgeInsets.only(left: Get.width * .010),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      child:Text(apiManager.articleListObs.value[index].title != null ?
-                                        apiManager.articleListObs.value[index].title
-                                            :"",
-                                        maxLines: 2,
-                                        textAlign:TextAlign.left,
-                                        style:TextStyle(
-                                            fontFamily: MyFont.Cagliostro_reguler,
-                                            fontSize: MyFontSize.size15,
-                                            color: MyColors.lightGreenColor),
-                                      ),
-                                      margin: EdgeInsets.only(left:Get.width*.015),
+          return  Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: ListView.builder(
+                itemCount: apiManager.articleListObs.value.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Card(
+                      //margin: EdgeInsets.all(Get.width * .020),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(Get.width * .060))),
+                      elevation: Get.width * .020,
+                      child: Container(
+                        padding: EdgeInsets.all(Get.width * .030),
+                        child: Row(
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: Get.width*0.5,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    child:Text(apiManager.articleListObs.value[index].title != null ?
+                                    apiManager.articleListObs.value[index].title
+                                        :"",
+                                      maxLines: 2,
+                                      textAlign:TextAlign.left,
+                                      style:TextStyle(
+                                          fontFamily: MyFont.Cagliostro_reguler,
+                                          fontSize: MyFontSize.size15,
+                                          color: MyColors.lightGreenColor),
                                     ),
-                                    Html(
-                                        data:apiManager.articleListObs.
-                                        value[index].detail != null ?apiManager.articleListObs.
-                                        value[index].detail:"",
-                                        style: {
-                                          '#': Style(
-                                            fontSize: FontSize(15),
-                                            maxLines:2,
-                                          ),
-                                        },
+                                    margin: EdgeInsets.only(left:Get.width*.015),
+                                  ),
+                                  Html(
+                                    data:apiManager.articleListObs.
+                                    value[index].detail != null ?apiManager.articleListObs.
+                                    value[index].detail:"",
+                                    style: {
+                                      '#': Style(
+                                        fontSize: FontSize(15),
+                                        maxLines:2,
                                       ),
-                                    GestureDetector(
-                                      onTap: (){
-                                        Get.to(() => TIGAIAArticleScreen(articalListModel:
-                                        apiManager.articleListObs.value[index],));
-                                      },
-                                      child:Container(
-                                        child:Text(
-                                          "read_more".tr,
-                                          style:TextStyle(
-                                            fontFamily: MyFont.Courier_Prime_Bold,
-                                            fontSize: MyFontSize.size12,
-                                          ),
+                                    },
+                                  ),
+                                  GestureDetector(
+                                    onTap: (){
+                                      Get.to(() => TIGAIAArticleScreen(articalListModel:
+                                      apiManager.articleListObs.value[index],));
+                                    },
+                                    child:Container(
+                                      child:Text(
+                                        "read_more".tr,
+                                        style:TextStyle(
+                                          fontFamily: MyFont.Courier_Prime_Bold,
+                                          fontSize: MyFontSize.size12,
                                         ),
-                                        margin: EdgeInsets.only(left:Get.width*.022),
                                       ),
-                                    )
+                                      margin: EdgeInsets.only(left:Get.width*.022),
+                                    ),
+                                  )
 
 
-                                  ],
-                                ),
+                                ],
                               ),
-                              SizedBox(
-                                width: Get.width * .030,
-                              ),
-                              Container(
-                                height: Get.height * .13,
-                                width: Get.height * .13,
+                            ),
+                            /*SizedBox(
+                              width: Get.width * .010,
+                            ),*/
+                            Container(
+                                height: 100,
+                                width: 100,
+
                                 child:ClipRRect(
                                   borderRadius:BorderRadius.all(
-                                        Radius.circular(Get.width * .060)),
+                                      Radius.circular(25)),
                                   child:FadeInImage.assetNetwork(
                                     fit:BoxFit.fill,
                                     placeholder:MyImageURL.loading,
@@ -254,25 +260,48 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
                                     value[index].image,
                                   ),
                                 )
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         ),
-                      );
-                  });
+                      ),
+                    ),
+                  );
+                }),
+          );
         });
   }
 
   _callGaiaInfoApi(){
     Get.dialog(Loading(),
-    barrierDismissible:false);
+        barrierDismissible:false);
     apiManager.getGaiaInfo().then((response){
-        Get.back();
-        if(response.isSuccess()){
-          apiManager.gaiaInfo.value=response.getDATAJSONArray1()
-          [ApiParameter.data]["gaiaInfo"];
-          myController.showPopup.value=true;
-        }
+      Get.back();
+      if(response.isSuccess()){
+        apiManager.gaiaInfo.value=response.getDATAJSONArray1()
+        [ApiParameter.data]["gaiaInfo"];
+        myController.showPopup.value=true;
+      }
     });
+  }
+
+  MyHeader() {
+    return Container(
+      height: Get.height * 0.30,
+      width: Get.width,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            MyImageURL.gaia_bg,
+          ),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: Center(
+        child: myController.showPopup.value
+            ? Container():MyTitlebar(
+          title: "txtGaia".tr.toUpperCase(),
+        ),
+      ),
+    );
   }
 }

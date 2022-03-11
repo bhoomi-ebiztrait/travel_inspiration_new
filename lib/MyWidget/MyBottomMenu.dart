@@ -77,7 +77,7 @@ class MyBottomMenu extends StatelessWidget {
               ),
             ]),
         width: Get.width * 0.85,
-        height: Get.height * 0.12,
+        height: Get.height * 0.11,
         padding: EdgeInsets.symmetric(horizontal: 25),
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -102,11 +102,15 @@ class MyBottomMenu extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
             buildGaia(),
             SizedBox(
-              width: Get.width * 0.07,
+              width: Get.width * 0.04,
             ),
             buildSettings(),
+
           ],
         ),
       ],
@@ -124,9 +128,12 @@ class MyBottomMenu extends StatelessWidget {
           children: [
             buildProfile(),
             SizedBox(
-              width: Get.width * 0.07,
+              width: Get.width * 0.05,
             ),
             buildGallery(),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
           ],
         ),
       ],

@@ -159,11 +159,11 @@ class _ReflectJourneyDetailsScreenState
           SizedBox(
             height: Get.height * 0.02,
           ),
-          Image.asset(
+        /*  Image.asset(
             MyImageURL.metro_steps,
             height: 60,
             width: 70,
-          ),
+          ),*/
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: MyText(
@@ -190,14 +190,12 @@ class _ReflectJourneyDetailsScreenState
     return myController.allProjectList.value.length > 1
         ? Align(
             alignment: Alignment.bottomCenter,
-            child: Row(
+            child: Column(
               children: [
                 Container(
-                  width: Get.width * 0.50,
+                  width: Get.width * 0.60,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(30),
-                        bottomRight: Radius.circular(30)),
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
                     color: MyColors.whiteColor,
                   ),
                   //margin: EdgeInsets.all(20),
@@ -244,13 +242,12 @@ class _ReflectJourneyDetailsScreenState
                     ),
                   ),
                 ),
+                SizedBox(height: Get.height*0.03,),
                 myController.allProjectList.value.length > 2
                     ? Container(
-                        width: Get.width * 0.50,
+                        width: Get.width * 0.60,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              bottomLeft: Radius.circular(30)),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
                           color: MyColors.whiteColor,
                         ),
                         //margin: EdgeInsets.all(20),
@@ -318,7 +315,7 @@ class _ReflectJourneyDetailsScreenState
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Image.asset(
-              MyImageURL.cross,width: 30,
+              MyImageURL.cross,width: 40,
               color: MyColors.whiteColor,
             ),
           ],

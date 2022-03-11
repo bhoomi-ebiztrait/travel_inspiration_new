@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/MyWidget/MyCustomDialog.dart';
+import 'package:travel_inspiration/MyWidget/MyGradientBottomMenu.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
 import 'package:travel_inspiration/utils/MyFontSize.dart';
@@ -30,125 +32,152 @@ class GalleryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar:  MyGradientBottomMenu(iconList: [MyImageURL.profile_icon,MyImageURL.gallery_selected,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_icon],bgImg: MyImageURL.botom_bg,),
       body: SafeArea(
-        child: Stack(
-          children: [
-            // SingleChildScrollView(
-            //   child:
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                MyTopHeader(
-                  headerName: "gallery".tr.toUpperCase(),
-                  headerImgUrl: MyImageURL.gallery_top,
-                  logoImgUrl: MyImageURL.logo_icon,
-                  logoCallback: (){
-                    CommonMethod.getAppMode();
-                  },
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                height: Get.height * 0.30,
+                width: Get.width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      MyImageURL.gallery_top,
+                    ),
+                    fit: BoxFit.fill,
+                  ),
                 ),
-                SizedBox(
-                  height: Get.height * 0.02,
+                child: Column(
+                  children: [
+                    MyTopHeader(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: MyTitlebar(
+                        title: "gallery".tr.toUpperCase(),
+                      ),
+                    ),
+                  ],
                 ),
-                GridView.builder(
+              ),
+              SizedBox(
+                height: Get.height * 0.06,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 20),
+                child: GridView.builder(
                     physics: ScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     itemCount: titleList.length,
                     shrinkWrap: true,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      childAspectRatio: Get.height / 700,
-                      mainAxisSpacing: 10.0,
+                      childAspectRatio: Get.height / 800,
+                      mainAxisSpacing: 20.0,
                     ),
                     itemBuilder: (BuildContext context, int index) {
-                      return buildGridItem(index,context);
+                      return buildGridItem(index, context);
                     }),
-              ],
-            ),
+              ),
 
-            // ),
-            buildBottomImage(),
-          ],
+            ],
+          ),
+
+          //  buildBottomImage(),
         ),
       ),
     );
   }
 
-  buildGridItem(index,context) {
+  buildGridItem(index, context) {
     return GestureDetector(
-      onTap: (){
-
-
-        showDialog(context: context, builder: (BuildContext context){
-
-          if(index == 0) {
-            return MyCustomDialog(
-              popupName: "premium".tr,
-              popupInfo: "premium_info".tr,
-              popupDesc: "premium_desc".tr,
-              popupCondition: "see_sales_condition".tr,
-              popupLogo: MyImageURL.diamant_popup,);
-          }
-          if(index == 1) {
-            return MyCustomDialog(
-              popupName: "my_documents".tr,
-              popupInfo: "document_info".tr,
-              popupDesc: "document_desc".tr,
-              popupCondition: "see_sales_condition".tr,
-              popupLogo: MyImageURL.document_popup,);
-          }
-          if(index == 2) {
-            return MyCustomDialog(
-              popupName: "my_documents".tr,
-              popupInfo: "budget_info".tr,
-              popupDesc: "document_desc".tr,
-              popupCondition: "see_sales_condition".tr,
-              popupLogo: MyImageURL.budget_popup,);
-          }
-          if(index == 3) {
-            return MyCustomDialog(
-              popupName: "my_suitcase".tr,
-              popupInfo: "valise_info".tr,
-              popupDesc: "document_desc".tr,
-              popupCondition: "see_sales_condition".tr,
-              popupLogo: MyImageURL.valise_popup,);
-          }
-          if(index == 4) {
-            return MyCustomDialog(
-              popupName: "my_documents".tr,
-              popupInfo: "carte_info".tr,
-              popupDesc: "document_desc".tr,
-              popupCondition: "see_sales_condition".tr,
-              popupLogo: MyImageURL.carte_popup,);
-          }
-          if(index == 5) {
-            return MyCustomDialog(
-              popupName: "my_documents".tr,
-              popupInfo: "mon_haudos_info".tr,
-              popupDesc: "document_desc".tr,
-              popupCondition: "see_sales_condition".tr,
-              popupLogo: MyImageURL.clock,);
-          }
-        });
-
-
+      onTap: () {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              if (index == 0) {
+                return  MyCustomDialog(
+                  popupName: "premium".tr,
+                  popupInfo: "premium_info".tr,
+                  popupDesc: "premium_desc".tr,
+                  popupCondition: "see_sales_condition".tr,
+                  popupLogo: MyImageURL.diamant_popup,
+                );
+              }
+              if (index == 1) {
+                return MyCustomDialog(
+                  popupName: "my_documents".tr,
+                  popupInfo: "document_info".tr,
+                  popupDesc: "document_desc".tr,
+                  popupCondition: "see_sales_condition".tr,
+                  popupLogo: MyImageURL.document_popup,
+                );
+              }
+              if (index == 2) {
+                return MyCustomDialog(
+                  popupName: "my_documents".tr,
+                  popupInfo: "budget_info".tr,
+                  popupDesc: "document_desc".tr,
+                  popupCondition: "see_sales_condition".tr,
+                  popupLogo: MyImageURL.budget_popup,
+                );
+              }
+              if (index == 3) {
+                return MyCustomDialog(
+                  popupName: "my_suitcase".tr,
+                  popupInfo: "valise_info".tr,
+                  popupDesc: "document_desc".tr,
+                  popupCondition: "see_sales_condition".tr,
+                  popupLogo: MyImageURL.valise_popup,
+                );
+              }
+              if (index == 4) {
+                return MyCustomDialog(
+                  popupName: "my_documents".tr,
+                  popupInfo: "carte_info".tr,
+                  popupDesc: "document_desc".tr,
+                  popupCondition: "see_sales_condition".tr,
+                  popupLogo: MyImageURL.carte_popup,
+                );
+              }
+              if (index == 5) {
+                return MyCustomDialog(
+                  popupName: "my_documents".tr,
+                  popupInfo: "mon_haudos_info".tr,
+                  popupDesc: "document_desc".tr,
+                  popupCondition: "see_sales_condition".tr,
+                  popupLogo: MyImageURL.clock,
+                );
+              }
+            });
       },
-      
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(height: 90, width: 90,
+          Container(
+              height: 70,
+              width: 70,
               decoration: BoxDecoration(
                 image: DecorationImage(image: AssetImage(imgList[index])),
+
               ),
-              child: MyText(text_name: index ==0 ? "" :"future".tr,myFont: MyStrings.courier_prime_bold,txtfontsize: MyFontSize.size13,txtcolor: MyColors.textColor,)),
+              child: MyText(
+                text_name: index == 0 ? "" : "future".tr,
+                myFont: MyStrings.courier_prime_bold,
+                txtfontsize: MyFontSize.size11,
+                txtcolor: MyColors.textColor,
+              )),
           SizedBox(
             height: Get.height * 0.01,
           ),
           MyText(
             text_name: titleList[index],
-            txtcolor: MyColors.buttonBgColor,
-            txtfontsize: MyFontSize.size8,
+            txtcolor: index == 0
+                ? MyColors.buttonBgColor
+                : MyColors.buttonBgColorHome,
+            txtfontsize: MyFontSize.size10,
             myFont: MyStrings.courier_prime_bold,
           ),
         ],
