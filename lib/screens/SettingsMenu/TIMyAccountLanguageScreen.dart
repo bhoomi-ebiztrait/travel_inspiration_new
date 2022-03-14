@@ -102,41 +102,39 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
 
   _buildBodyContent(){
     return  SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            MySettingTop(title: "txtmyCompte".tr,),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          MySettingTop(title: "txtmyCompte".tr,),
 
-            SizedBox(
-              height: Get.height * .040,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: Get.height * .030),
-              child: Row(
-                children: [
-                  Text(
-                    "txtLangue".tr,
-                    style: TextStyle(
-                        color: MyColors.textColor,
-                        fontFamily: MyFont.Courier_Prime_Bold,
-                        fontSize: MyFontSize.size15),
-                  ),
-                  _buildRotateArrowWidget(),
+          SizedBox(
+            height: Get.height * .040,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: Get.height * .030),
+            child: Row(
+              children: [
+                Text(
+                  "txtLangue".tr,
+                  style: TextStyle(
+                      color: MyColors.textColor,
+                      fontFamily: MyFont.Courier_Prime_Bold,
+                      fontSize: MyFontSize.size15),
+                ),
+                _buildRotateArrowWidget(),
 
-                ],
-              ),
+              ],
             ),
-            SizedBox(
-              height: Get.height * .030,
-            ),
-            _languages(),
+          ),
+          SizedBox(
+            height: Get.height * .030,
+          ),
+          _languages(),
 
-            /*Expanded(child: loader?
-            Container():_langaugeList()),*/
-          ],
-        ),
+          /*Expanded(child: loader?
+          Container():_langaugeList()),*/
+        ],
       ),
     );
   }

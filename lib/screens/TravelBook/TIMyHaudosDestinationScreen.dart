@@ -8,6 +8,7 @@ import 'package:travel_inspiration/MyWidget/MyFlyMenu.dart';
 import 'package:travel_inspiration/MyWidget/MyFlyMenus.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TICommonPopup.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
 import 'package:travel_inspiration/MyWidget/TIPopupGridviewMenu.dart';
@@ -103,30 +104,31 @@ class _TIMyHaudosDestinationScreenState extends State<TIMyHaudosDestinationScree
       child: Scaffold(
         body: Stack(
           children: [
-            Column(
-              children: [
-                MyTopHeader(
-                  headerName: widget.travelLougeTitle.toUpperCase(),
-                  headerImgUrl: MyImageURL.travel_book_top,
-                  logoImgUrl: MyImageURL.haudos_logo,
-                  logoCallback: () {
-                    CommonMethod.getAppMode();
-                  },
-                ),
-                SizedBox(
-                  height: Get.height * .020,
-                ),
-                NotificationListener(
-                    onNotification: onNotification,
-                    child: Expanded(child: _travelLougeList())),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: MyBottomLayout(
-                imgUrl: MyImageURL.travel_book_bottom,
+            Container(
+              height: Get.height,
+              width: Get.width,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage(MyImageURL.login),fit: BoxFit.fill)
+              ),
+              child: Column(
+                children: [
+                  MyTopHeader(
+                    logoImgUrl: MyImageURL.haudos_logo,
+                    logoCallback: () {
+                      CommonMethod.getAppMode();
+                    },
+                  ),
+                  MyTitlebar(title: widget.travelLougeTitle.toUpperCase(),),
+                  SizedBox(
+                    height: Get.height * .020,
+                  ),
+                  NotificationListener(
+                      onNotification: onNotification,
+                      child: Expanded(child: _travelLougeList())),
+                ],
               ),
             ),
+
             Obx(() => Visibility(
                 visible: myController.showPrepareProjectPopup.value,
                 child: BackdropFilter(
