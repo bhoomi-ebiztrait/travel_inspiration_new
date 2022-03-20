@@ -1,6 +1,7 @@
 class ApiParameter {
   static const BASE_URL = "https://solutiontrackers.com/TravelApp/api/";
-  static const GOOGLE_API_KEY = "AIzaSyBRNil_iYmWUTUysdN_CU7KgDmv-ramMcM";
+  // static const GOOGLE_API_KEY = "AIzaSyBRNil_iYmWUTUysdN_CU7KgDmv-ramMcM";
+  static const GOOGLE_API_KEY = "AIzaSyChyfRRNXGlEzpZ3TjywKJKppBtJdU5180";
 
   static DateTime DOB_START = DateTime(1953, 01, 01);
   static DateTime DOB_END = DateTime(2003, 12, 31);

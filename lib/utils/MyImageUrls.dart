@@ -183,7 +183,8 @@ class MyImageURL {
   static const pin_brown=root+"pin_brown.png";
   static const favor2x_icon=root+"favor2x.png";
   static const fav_red=root+"fav_red.png";
-  static const favor_grey_icon=root+"favor_grey.png";
+  static const favor_grey=root+"favor_grey.png";
+  static const favor_white=root+"favor_white.png";
   static const cross2x_icon=root+"supprimer2x.png";
   static const cross_grey_icon=root+"supprimer_grey.png";
   static const activites3x_icon=root+"activites3x.png";

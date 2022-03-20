@@ -611,6 +611,7 @@ if(mLang == null){
               TIDestinationInProgressModel obj = TIDestinationInProgressModel();
               obj.name = response['data'][i]['title'];
               obj.id = response['data'][i]['pinId'];
+              obj.place_id = response['data'][i]['placeId'];
               obj.description = response['data'][i]['description'];
               obj.rating = double.parse(response['data'][i]['rating']);
 

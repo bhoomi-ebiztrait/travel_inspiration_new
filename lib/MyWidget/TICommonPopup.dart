@@ -10,9 +10,9 @@ class TICommonPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: Get.height * .74,
+        height: Get.height * .70,
         width: Get.width * .80,
-        margin:EdgeInsets.only(top: Get.height * .15),
+        // margin:EdgeInsets.only(top: Get.height * .15),
         child: Card(
           elevation: 5,
           shape: RoundedRectangleBorder(

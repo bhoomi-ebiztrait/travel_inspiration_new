@@ -59,13 +59,13 @@ _buildBodyContent(double updatedKm) {
         ),
         MyTitlebar(title: "txtCARNETDEVOYAGE".tr,),
         SizedBox(
-          height: Get.height * .06,
+          height: Get.height * .08,
         ),
 
         Container(
           color: Colors.white.withOpacity(0.75),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40.0),
+            padding: const EdgeInsets.symmetric(vertical: 60.0),
             child: Column(
               children: [
                 _buildMyDestination(updatedKm),

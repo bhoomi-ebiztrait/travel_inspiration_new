@@ -61,7 +61,8 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar:  MyGradientBottomMenu(iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.setting_button_bg,),
+      bottomNavigationBar:  MyGradientBottomMenu(
+        iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.setting_button_bg,),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(

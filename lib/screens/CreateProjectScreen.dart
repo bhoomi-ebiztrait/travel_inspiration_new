@@ -9,6 +9,7 @@ import 'package:travel_inspiration/MyWidget/MyDatePickerWidget.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextFieldWithImage.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/TIController/MyValidatorController.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
@@ -41,7 +42,8 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: buildBottomImage(),
+      // bottomNavigationBar: buildBottomImage(),
+      backgroundColor: MyColors.buttonBgColorHome,
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -50,72 +52,103 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: [
-                MyTopHeader(
-                  headerName: "create_new_project".tr.toUpperCase(),
-                  headerImgUrl: MyImageURL.travel_book_top,
-                  logoImgUrl: MyImageURL.logo_icon,
-                  logoCallback: () {
-                    CommonMethod.getAppMode();
-                  },
+                Container(
+                  height: Get.height*0.30,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      MyTopHeader(),
+                      MyTitlebar(title:"create_new_project".tr.toUpperCase(),),
+                    ],
+                  ),
                 ),
-                SizedBox(
+
+                /*SizedBox(
                   height: Get.height * 0.02,
-                ),
-                buildProjectName(),
-                SizedBox(
-                  height: Get.height * 0.04,
-                ),
-                MyText(
-                  text_name: "vacation_date".tr,
-                  txtfontsize: MyFontSize.size13,
-                  myFont: MyStrings.courier_prime_bold,
-                ),
-                SizedBox(
-                  height: Get.height * 0.03,
-                ),
-                MyDOBPicker(
-                  minDate: DateTime.now(),
-                  maxDate: ApiParameter.END_DATE,
-                ),
-                SizedBox(
-                  height: Get.height * 0.05,
-                ),
-                MyText(
-                  text_name: "number_of_person".tr,
-                  myFont: MyStrings.courier_prime_bold,
-                ),
-                SizedBox(
-                  height: Get.height * 0.01,
-                ),
-                buildPersonCount(),
-                SizedBox(
-                  height: Get.height * 0.04,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      //Get.off(TIPinDestinationToProjectScreen(travelLougeTitle: MyStrings.txtMesprojets,));
+                ),*/
+                Card(
+                  elevation: 10,
+                  shadowColor: MyColors.buttonBgColorHome,
+                  color: MyColors.whiteColor.withOpacity(0.75),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
 
-                      if (_formKey.currentState.validate()) {
-                        _formKey.currentState.save();
-                        MyUtility().focusOut(context);
+                        MyText(
+                          text_name: "${"name_of_project".tr} :",
+                          txtfontsize: MyFontSize.size13,
+                          myFont: MyStrings.courier_prime_bold,
+                          txtcolor: MyColors.textColor,
+                        ),
+                        buildProjectName(),
+                        SizedBox(
+                          height: Get.height * 0.04,
+                        ),
+                        MyText(
+                          text_name: "vacation_date".tr,
+                          txtfontsize: MyFontSize.size13,
+                          myFont: MyStrings.courier_prime_bold,
+                          txtcolor: MyColors.textColor,
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.02,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0, ),
+                          child: MyDOBPicker(
+                            minDate: DateTime.now(),
+                            maxDate: ApiParameter.END_DATE,
+                          ),
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.05,
+                        ),
+                        MyText(
+                          text_name: "number_of_person".tr,
+                          txtfontsize: MyFontSize.size13,
+                          myFont: MyStrings.courier_prime_bold,
+                          txtcolor: MyColors.textColor,
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.01,
+                        ),
+                        buildPersonCount(),
+                        SizedBox(
+                          height: Get.height * 0.04,
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              //Get.off(TIPinDestinationToProjectScreen(travelLougeTitle: MyStrings.txtMesprojets,));
 
-                        if (personCounter > 0) {
-                          callCreateSubProjectAPI();
-                        } else {
-                          MyCommonMethods.showInfoCenterDialog(
-                              msgContent: "validPersonCount".tr,
-                              myFont: MyStrings.courier_prime_bold);
-                        }
-                      }
-                    },
-                    child: Image.asset(
-                      MyImageURL.check_circle,
-                      height: 50,
-                      width: 50,
-                    )),
+                              if (_formKey.currentState.validate()) {
+                                _formKey.currentState.save();
+                                MyUtility().focusOut(context);
+
+                                if (personCounter > 0) {
+                                  callCreateSubProjectAPI();
+                                } else {
+                                  MyCommonMethods.showInfoCenterDialog(
+                                      msgContent: "validPersonCount".tr,
+                                      myFont: MyStrings.courier_prime_bold);
+                                }
+                              }
+                            },
+                            child: Image.asset(
+                              MyImageURL.green_check,
+                              height: 50,
+                              width: 50,
+                            )),
+
+                      ],
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: Get.height * 0.09,
                 ),
+
               ],
             ),
           ),
@@ -168,7 +201,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
 
   buildProjectName() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20),
+      padding: const EdgeInsets.only(left: 90.0,right: 90, bottom: 10),
       child: TextFormField(
         textAlign: TextAlign.center,
         controller: projNameController,
@@ -178,24 +211,24 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: MyColors.lineColor),
+            borderSide: BorderSide(color: MyColors.buttonBgColor),
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: MyColors.lineColor),
+            borderSide: BorderSide(color: MyColors.buttonBgColor),
           ),
           border: new UnderlineInputBorder(
-              borderSide: new BorderSide(color: MyColors.lineColor)),
-          fillColor: MyColors.whiteColor,
+              borderSide: new BorderSide(color: MyColors.buttonBgColor)),
+        //  fillColor: MyColors.whiteColor,
           contentPadding: const EdgeInsets.only(left: 10, right: 10),
-          hintText: "${"name_of_project".tr} :",
-          hintStyle: TextStyle(
-            color: MyColors.textColor,
-          ),
+          //hintText: "${"name_of_project".tr} :",
+          // hintStyle: TextStyle(
+          //   color: MyColors.textColor,
+          // ),
           // labelText: "${MyStrings.name_of_project} :",
           // labelStyle: TextStyle(color: MyColors.textColor,),
           alignLabelWithHint: true,
           counterText: "",
-          filled: true,
+        //  filled: true,
         ),
         validator: myValidatorController.validateProjName,
       ),

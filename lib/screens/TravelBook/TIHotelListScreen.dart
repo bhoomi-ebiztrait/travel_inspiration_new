@@ -9,6 +9,7 @@ import 'package:travel_inspiration/MyWidget/MyCustomListWithStar.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyRatingBar.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TICirculerBox.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
 import 'package:travel_inspiration/MyWidget/TISearchBar.dart';
@@ -75,11 +76,10 @@ class _TIHotelListScreenState extends State<TIHotelListScreen> {
     return SafeArea(
       child: Scaffold(
         extendBody: true,
+        backgroundColor: MyColors.settingBgColor,
         resizeToAvoidBottomInset: false,
         body:_buildBodyContent(),
-        bottomSheet: MyBottomLayout(
-      imgUrl: MyImageURL.travel_book_bottom,
-        ),
+
       ),
     );
   }
@@ -93,62 +93,75 @@ class _TIHotelListScreenState extends State<TIHotelListScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                MyTopHeader(
-                  headerName:widget.travelLougeListTitle,
-                  headerImgUrl: MyImageURL.travel_book_top,
-                  logoImgUrl: MyImageURL.haudos_logo,
-                  logoCallback: (){
-                    CommonMethod.getAppMode();
-                  },
-                ),
-                SizedBox(
-                  height: Get.height * .020,
-                ),
-                MyText(
-                  text_name: "txtRechercherunhotel".tr+"  :",
-                  myFont: MyFont.Courier_Prime_Bold,
-                  txtfontsize: MyFontSize.size13,
-                  txtcolor: MyColors.textColor,
-                  txtAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: Get.height * .020,
-                ),
-                TISearchBar(
-                  textFormField: TextFormField(
-                    style: TextStyle(
-                        fontSize: MyFontSize.size10,
-                        fontFamily: MyFont.Courier_Prime),
-                    //cursorHeight: Get.height * .030,
-                    cursorColor: MyColors.searchBorderColor,
-                    onChanged: onSearchTextChanged,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                    ),
+                Container(
+                  height: Get.height*0.42,
+                  width: Get.width,
+                  color: MyColors.buttonBgColorHome.withOpacity(0.7),
+                  child: Column(
+                    children: [
+                      MyTopHeader(
+                        logoImgUrl: MyImageURL.haudos_logo,
+                        logoCallback: (){
+                          CommonMethod.getAppMode();
+                        },
+                      ),
+                      MyTitlebar(title:widget.travelLougeListTitle ,),
+                      SizedBox(
+                        height: Get.height * .020,
+                      ),
+                      MyText(
+                        text_name: "txtRechercherunhotel".tr+"  :",
+                        myFont: MyFont.Courier_Prime_Bold,
+                        txtfontsize: MyFontSize.size13,
+                        txtcolor: MyColors.textColor,
+                        txtAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: Get.height * .020,
+                      ),
+                      TISearchBar(
+                        textFormField: TextFormField(
+                          style: TextStyle(
+                              fontSize: MyFontSize.size10,
+                              fontFamily: MyFont.Courier_Prime),
+                          //cursorHeight: Get.height * .030,
+                          cursorColor: MyColors.searchBorderColor,
+                          onChanged: onSearchTextChanged,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: Get.height * .024,
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          goToPinListScreen();
+                        },
+                        child: TICirculerBox(
+                          imageIcon: MyImageURL.hotel_icon,
+                          title: "txtHOTELSEPINGLES".tr,
+
+                        ),
+                      ),
+                      SizedBox(
+                        height: Get.height * .010,
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: Get.height * .020,
-                ),
-                GestureDetector(
-                  onTap: (){
-                    goToPinListScreen();
-                  },
-                  child: TICirculerBox(
-                    imageIcon: MyImageURL.hotel_icon,
-                    title: "txtHOTELSEPINGLES".tr,
-                  ),
-                ),
-                SizedBox(
-                  height: Get.height * .020,
-                ),
+
+               /* SizedBox(
+                  height: Get.height * .030,
+                ),*/
+
                 //_hotelList(),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 40,),
-                  child: Container(
-                      height: Get.height,
-                      child:_hotelList()),
-                ),
+                Container(
+                    padding: const EdgeInsets.only(bottom: 40,top:40),
+                    height: Get.height,
+                    color: MyColors.buttonBgColorHome.withOpacity(0.30),
+                    child:_hotelList()),
                 SizedBox(
                   height: Get.height * .30,
                 ),
@@ -191,7 +204,7 @@ class _TIHotelListScreenState extends State<TIHotelListScreen> {
                         padding: EdgeInsets.only(bottom: 10),
                         height: Get.height*0.06,
                         // color: MyColors.lightGreenColor,
-                        color: MyColors.whiteColor,
+                        // color: MyColors.whiteColor,
                         child: Image.asset(MyImageURL.pin_brown,fit: BoxFit.fill,)),
                   ),
 
@@ -295,13 +308,14 @@ class _TIHotelListScreenState extends State<TIHotelListScreen> {
     return Visibility(
       visible: isPinned,
       child: Container(
-        color: MyColors.buttonBgColor.withOpacity(0.46),
+        //color: MyColors.buttonBgColorHome.withOpacity(0.46),
         height: Get.height,
         width: Get.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(height: Get.height *0.2,),
             GestureDetector(
                 onTap: (){
                   setState(() {
@@ -310,12 +324,12 @@ class _TIHotelListScreenState extends State<TIHotelListScreen> {
                   goToPinListScreen();
                 },
                 child: Image.asset(MyImageURL.check_pinned)),
-            SizedBox(height: Get.height *0.1,),
+            SizedBox(height: Get.height *0.07,),
             MyText(
               text_name: "pinned".tr,
               txtcolor: MyColors.whiteColor,
-              myFont: MyStrings.courier_prime_bold,
-              txtfontsize: MyFontSize.size20,
+              myFont: MyStrings.bodoni72_Bold,
+              txtfontsize: MyFontSize.size25,
             ),
           ],
         ),

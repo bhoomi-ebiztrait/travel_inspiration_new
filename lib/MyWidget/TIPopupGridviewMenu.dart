@@ -130,7 +130,7 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
           height: Get.height * .04,
           width: Get.height * .04,
           fit: BoxFit.contain,
-         // color: selectedIndex == index ? MyColors.lineColor:MyColors.buttonBgColor,
+         color: selectedIndex == index ? MyColors.buttonBgColor:MyColors.buttonBgColorHome ,
         ),
         SizedBox(
           height: Get.height * .020,
@@ -139,7 +139,7 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
           text_name: popupItemList[index].title,
           myFont: MyFont.Courier_Prime_Bold,
           txtfontsize: MyFontSize.size11,
-          txtcolor: selectedIndex == index ?MyColors.lineColor:MyColors.textColor,
+          txtcolor: selectedIndex == index ?MyColors.buttonBgColor:MyColors.textColor,
           txtAlign: TextAlign.center,
           height: 1,
         ),
