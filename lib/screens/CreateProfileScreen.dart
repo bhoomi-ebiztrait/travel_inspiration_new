@@ -58,6 +58,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
             child: Container(
+              height: Get.height,
+              width: Get.width,
               decoration: BoxDecoration(
                 color: MyColors.buttonBgColorHome.withOpacity(0.69)
                /* image: DecorationImage(
@@ -205,7 +207,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             )),
                       ),
                       validator: myController.validatePhoneNo,
-                      style: TextStyle(),
+                      style: TextStyle(color: MyColors.whiteColor),
                     ),),
               ),
               SizedBox(
@@ -247,7 +249,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             text_name: "create_later".tr,
                             txtcolor: MyColors.whiteColor,
                             txtfontsize: MyFontSize.size15,
-                            myFont: MyStrings.courier_prime,
+                            myFont: MyStrings.bodoni72_Book,
                           ),
                         ),
                       ],
@@ -591,7 +593,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
               child: MyTextFieldHintWithImage(
                 addHint: "phone_number".tr,
                 mycontroller: phoneNoController,
-                labelColor: MyColors.textColor,
+                labelColor: MyColors.whiteColor,
                 validator: myController.validatePhoneNo,
                 suffixImageUrl: MyImageURL.info,
                 suffixOnTap: () {

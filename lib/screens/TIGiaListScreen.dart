@@ -61,7 +61,7 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
       bottomNavigationBar: myController.showPopup.value == true ? Container(width: Get.width * 0.85,
-        height: Get.height * 0.11,):MyGradientBottomMenu(
+        height: Get.height * 0.11,):MyGradientBottomMenu(selString:MyStrings.gaia,
         iconList: [
           MyImageURL.profile_icon,
           MyImageURL.galerie,
@@ -99,7 +99,7 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
             ],
           ),
           MyText(
-            text_name: "txtVoyagede".tr,
+            text_name: "txtVoyagede".tr.toUpperCase(),
             txtcolor: MyColors.buttonBgColorHome.withOpacity(1),
             txtfontsize: MyFontSize.size16,
             myFont: MyFont.Cagliostro_reguler,
@@ -119,8 +119,8 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
                 ? ImageFilter.blur(sigmaX: 5, sigmaY: 5)
                 : ImageFilter.blur(sigmaX: 5, sigmaY: 5),
             child: Stack(alignment: Alignment.topCenter, children: [
-              Align(
-                alignment: Alignment.topCenter,
+              Container(
+                margin:EdgeInsets.only(top:  Get.height * .15),
                 child: TICommonPopup(
                   childWidget: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,6 +146,7 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
                         child: SingleChildScrollView(
                           child: Container(
                             padding: EdgeInsets.only(
+                                // top: Get.height * .020,
                                 left: Get.height * .020,
                                 right: Get.height * .020),
                             child:Html(

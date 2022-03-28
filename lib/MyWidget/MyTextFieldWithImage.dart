@@ -308,7 +308,7 @@ class MyTextFieldHintWithImage extends StatelessWidget {
   String addHint;
   String edError;
   Color color;
-  Color labelColor = MyColors.lightGreenColor;
+  Color labelColor = MyColors.textColor;
   String imageUrl;
   String suffixImageUrl;
   TextInputType edinputType;
@@ -332,7 +332,7 @@ class MyTextFieldHintWithImage extends StatelessWidget {
         this.imageUrl,
         this.suffixImageUrl,
         this.color,
-        this.labelColor,
+        this.labelColor ,
         this.edinputType,
         this.addHint,
         this.edError,
@@ -356,7 +356,7 @@ class MyTextFieldHintWithImage extends StatelessWidget {
         obscureText: obscureText,
         controller: mycontroller,
         maxLength: maxlimit,
-        style: TextStyle(color: MyColors.textColor, fontSize: MyFontSize.size13,fontFamily: myFont,
+        style: TextStyle(color: labelColor, fontSize: MyFontSize.size13,fontFamily: myFont,
         ),
         cursorColor: Colors.black45,
         keyboardType: edinputType,

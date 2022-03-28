@@ -61,7 +61,7 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar:  MyGradientBottomMenu(
+      bottomNavigationBar:  MyGradientBottomMenu(selString:MyStrings.settings,
         iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.setting_button_bg,),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -133,8 +133,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   setDivider(MyColors.dialog_shadowColor, 1),
                   buildDetails("change_my_number".tr,MyPreference.getPrefStringValue(key: MyPreference.address)!= "null" ? MyPreference.getPrefStringValue(key: MyPreference.address) : "",param.phone_no),
                   setDivider(MyColors.dialog_shadowColor, 1),
-                  buildDetails("address".tr,null,param.address),
-                  setDivider(MyColors.dialog_shadowColor, 1),
+                  // buildDetails("address".tr,null,param.address),
+                  // setDivider(MyColors.dialog_shadowColor, 1),
                   buildDetails("notification".tr,null,param.notification),
                   setDivider(MyColors.dialog_shadowColor, 1),
                   SizedBox(
@@ -158,7 +158,7 @@ class _SettingScreenState extends State<SettingScreen> {
           setDivider(MyColors.dialog_shadowColor, 1),
           buildDetails("privacy_policy".tr,null,param.privacy_policy),
           setDivider(MyColors.dialog_shadowColor, 1),
-          buildDetails("faq".tr,null,param.faq),
+          buildDetails("faq".tr.toUpperCase(),null,param.faq),
           setDivider(MyColors.dialog_shadowColor, 1),
           buildSignOut(),
 

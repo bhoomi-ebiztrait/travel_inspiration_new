@@ -67,25 +67,18 @@ class _TICreateNewProjectInInspireModeScreenState
                         height: Get.height * .20,
                         width: Get.height * .20,
                         decoration: BoxDecoration(
-                          border: Border.all(color: MyColors.whiteColor),
-                          borderRadius: BorderRadius.all(Radius.circular(170))
-                            ),
-
-                        child: Container(
-                          height: Get.height * .20,
-                          width: Get.height * .20,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      AssetImage(MyImageURL.createprojectcircle1))),
-                          child: Center(
-                            child: Text(
-                              "txtOUI".tr,
-                              style: TextStyle(
-                                  fontFamily: MyFont.Courier_Prime_Bold,
-                                  color: Colors.white,
-                                  fontSize: MyFontSize.size28),
-                            ),
+                            border: Border.all(color: MyColors.whiteColor,width: 1.0),
+                           shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image:
+                                    AssetImage(MyImageURL.createprojectcircle1))),
+                        child: Center(
+                          child: Text(
+                            "txtOUI".tr,
+                            style: TextStyle(
+                                fontFamily: MyFont.Courier_Prime_Bold,
+                                color: Colors.white,
+                                fontSize: MyFontSize.size28),
                           ),
                         ),
                       ),
@@ -102,25 +95,18 @@ class _TICreateNewProjectInInspireModeScreenState
                             height: Get.height * .20,
                             width: Get.height * .20,
                             decoration: BoxDecoration(
-                                border: Border.all(color: MyColors.whiteColor),
-                                borderRadius: BorderRadius.all(Radius.circular(170))
-                            ),
-
-                            child: Container(
-                              height: Get.height * .20,
-                              width: Get.height * .20,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image:
-                                          AssetImage(MyImageURL.createprojectcircle2))),
-                              child: Center(
-                                child: Text(
-                                  "txtNON".tr,
-                                  style: TextStyle(
-                                      fontFamily: MyFont.Courier_Prime_Bold,
-                                      color: Colors.white,
-                                      fontSize: MyFontSize.size28),
-                                ),
+                                border: Border.all(color: MyColors.whiteColor,width: 1.0),
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage(MyImageURL.createprojectcircle2))),
+                            child: Center(
+                              child: Text(
+                                "txtNON".tr,
+                                style: TextStyle(
+                                    fontFamily: MyFont.Courier_Prime_Bold,
+                                    color: Colors.white,
+                                    fontSize: MyFontSize.size28),
                               ),
                             ),
                           ),
@@ -231,6 +217,7 @@ class _TICreateNewProjectInInspireModeScreenState
                   },
                   child: Image.asset(
                     MyImageURL.cross3x,
+                    height: 40,width: 40,
                   )),
               SizedBox(
                 height: Get.height * .020,

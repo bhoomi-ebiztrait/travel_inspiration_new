@@ -101,10 +101,10 @@ class _ChangePwConfirmScreenState extends State<ChangePwConfirmScreen> {
         padding: EdgeInsets.symmetric(horizontal: Get.width*0.14),
         child: MyButton(
           btn_name: "back_to_settings".tr,
-          txtcolor: MyColors.buttonBgColor,
+          txtcolor: isSettingSelected == true ? MyColors.whiteColor:MyColors.buttonBgColor,
           myFont: MyStrings.courier_prime_bold,
           txtfont: MyFontSize.size13,
-            bgColor: MyColors.whiteColor,
+            bgColor: isSettingSelected == true ?MyColors.buttonBgColor:MyColors.whiteColor,
           opacity: 1,
           onClick: (){
             setState(() {
@@ -141,17 +141,17 @@ class _ChangePwConfirmScreenState extends State<ChangePwConfirmScreen> {
         padding: EdgeInsets.symmetric(horizontal: Get.width*0.14),
         child: MyButton(
           btn_name: "back_to_menu".tr,
-          txtcolor: MyColors.buttonBgColor,
+          txtcolor: isMenuSelected == true ? MyColors.whiteColor:MyColors.buttonBgColor,
           myFont: MyStrings.courier_prime_bold,
           txtfont: MyFontSize.size13,
-          bgColor: MyColors.whiteColor,
+          bgColor: isMenuSelected == true ? MyColors.buttonBgColor:MyColors.whiteColor,
           opacity: 1,
           onClick: (){
             setState(() {
               isMenuSelected = true;
             });
 
-            CommonMethod.getAppMode();
+           CommonMethod.getAppMode();
           },
         ),
       ),

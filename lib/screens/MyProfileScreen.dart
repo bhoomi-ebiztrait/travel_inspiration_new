@@ -37,11 +37,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   File croppedImg;
   MyController profileController = Get.put(MyController());
 
-  UserInfo userInfo;
+  //UserInfo userInfo;
 
   @override
   void initState() {
-    userInfo = profileController.userInfo.value;
+    //userInfo = profileController.userInfo.value;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       profileController.getProfile();
     });
@@ -70,7 +70,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           ),
         ),
       ),
-     bottomNavigationBar:  MyGradientBottomMenu(iconList: [MyImageURL.profile_selected,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_icon],bgImg: MyImageURL.button_bg_img,),
+     bottomNavigationBar:  MyGradientBottomMenu(selString :MyStrings.profile,iconList: [MyImageURL.profile_selected,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_icon],bgImg: MyImageURL.button_bg_img,),
     );
   }
 
@@ -98,6 +98,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             ),
           ),
           buildProfileImage(),
+
 
         ],
       ),
@@ -158,7 +159,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     width: "80%",
                     widget: Container(
                       child: MyText(
-                        text_name: userInfo != null
+                        text_name: profileController.userInfo.value != null
                             ? getProjectRatio()
                             : "",
                         txtcolor: ((MyPreference.getPrefIntValue(
@@ -186,14 +187,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           dataSource: <_PieData>[
                             _PieData(
                                 "inspire".tr,
-                                userInfo != null
-                                    ? userInfo.noOfCreateProjInsp
+                                profileController.userInfo.value != null
+                                    ? profileController.userInfo.value.noOfCreateProjInsp
                                     : 0,
                                 ""),
                             _PieData(
                                 "reflect".tr,
-                                userInfo != null
-                                    ? userInfo.noOfCreatedProjReflect
+                                profileController.userInfo.value != null
+                                    ? profileController.userInfo.value.noOfCreatedProjReflect
                                     : 0,
                                 ""),
                           ],
@@ -383,30 +384,52 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   */
   buildProjectCounter() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-SizedBox(
-  height: (userInfo.isPremium != null && userInfo.isPremium) ?Get.height *0.03 :0.0,
-),
-        Padding(
-          padding: const EdgeInsets.only(top:12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Get.to(() => TIPinDestinationToProjectScreen(
-                        travelLougeTitle: "txtMesprojets".tr,
-                      ));
-                },
-                child: Column(
+    return Obx((){
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: (profileController.userInfo.value.isPremium != null && profileController.userInfo.value.isPremium) ?Get.height *0.03 :0.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top:12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => TIPinDestinationToProjectScreen(
+                      travelLougeTitle: "txtMesprojets".tr,
+                    ));
+                  },
+                  child: Column(
+                    children: [
+                      MyText(
+                        text_name: profileController.userInfo.value.totalNoOfCreatedProject != null
+                            ? profileController.userInfo.value.totalNoOfCreatedProject.toString()
+                            : "0",
+                        txtfontsize: MyFontSize.size28,
+                        txtcolor: MyColors.whiteColor,
+                        myFont: MyStrings.courier_prime_bold,
+                      ),
+                      SizedBox(
+                        height: Get.height * 0.01,
+                      ),
+                      MyText(
+                        text_name: "projects".tr,
+                        txtfontsize: MyFontSize.size10,
+                        txtcolor: MyColors.whiteColor,
+                        myFont: MyStrings.courier_prime_bold,
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
                   children: [
                     MyText(
-                      text_name: userInfo.totalNoOfCreatedProject != null
-                          ? userInfo.totalNoOfCreatedProject.toString()
-                          : "0",
-                      txtfontsize: MyFontSize.size28,
+                      text_name:
+                      profileController.userInfo.value.totalKm != null ? "${profileController.userInfo.value.totalKm}KM" : "0.02",
+                      txtfontsize: MyFontSize.size23,
                       txtcolor: MyColors.whiteColor,
                       myFont: MyStrings.courier_prime_bold,
                     ),
@@ -414,44 +437,24 @@ SizedBox(
                       height: Get.height * 0.01,
                     ),
                     MyText(
-                      text_name: "projects".tr,
+                      text_name: "total_km".tr,
                       txtfontsize: MyFontSize.size10,
-                      txtcolor: MyColors.buttonBgColor,
+                      txtcolor: MyColors.whiteColor,
                       myFont: MyStrings.courier_prime_bold,
                     ),
                   ],
                 ),
-              ),
-              Column(
-                children: [
-                  MyText(
-                    text_name:
-                        userInfo.totalKm != null ? "${userInfo.totalKm}KM" : "0.02",
-                    txtfontsize: MyFontSize.size23,
-                    txtcolor: MyColors.whiteColor,
-                    myFont: MyStrings.courier_prime_bold,
-                  ),
-                  SizedBox(
-                    height: Get.height * 0.01,
-                  ),
-                  MyText(
-                    text_name: "total_km".tr,
-                    txtfontsize: MyFontSize.size10,
-                    txtcolor: MyColors.whiteColor,
-                    myFont: MyStrings.courier_prime_bold,
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-       // SizedBox(height: Get.height*0.07,),
-      ],
-    );
+          // SizedBox(height: Get.height*0.07,),
+        ],
+      );
+    });
   }
 
   buildPremiumAccount() {
-     if (userInfo.isPremium != null && userInfo.isPremium) {
+     if (profileController.userInfo.value.isPremium != null && profileController.userInfo.value.isPremium) {
       return  GestureDetector(
        onTap: () {
          Get.to(TIPremiumInfoScreen());
@@ -488,28 +491,30 @@ SizedBox(
   }
 
   buildProfileSubTitle() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        MyText(
-          text_name: userInfo.country != null ? userInfo.country : "",
-          txtfontsize: MyFontSize.size13,
-          txtcolor: MyColors.textColor,
-        ),
-        buildVerticalLine(),
-        MyText(
-          text_name: userInfo.userName != null ? userInfo.userName : "",
-          txtfontsize: MyFontSize.size13,
-          txtcolor: MyColors.textColor,
-        ),
-        buildVerticalLine(),
-        MyText(
-          text_name: userInfo.age != null ? "${userInfo.age} ans" : "",
-          txtfontsize: MyFontSize.size13,
-          txtcolor: MyColors.textColor,
-        ),
-      ],
-    );
+    return Obx((){
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          MyText(
+            text_name: profileController.userInfo.value.country != null ? profileController.userInfo.value.country : "",
+            txtfontsize: MyFontSize.size13,
+            txtcolor: MyColors.textColor,
+          ),
+          buildVerticalLine(),
+          MyText(
+            text_name: profileController.userInfo.value.userName != null ? profileController.userInfo.value.userName : "",
+            txtfontsize: MyFontSize.size13,
+            txtcolor: MyColors.textColor,
+          ),
+          buildVerticalLine(),
+          MyText(
+            text_name: profileController.userInfo.value.age != null ? "${profileController.userInfo.value.age} ans" : "",
+            txtfontsize: MyFontSize.size13,
+            txtcolor: MyColors.textColor,
+          ),
+        ],
+      );
+    });
   }
 
   buildVerticalLine() {
@@ -537,8 +542,8 @@ SizedBox(
     //print("avtar: ${croppedImg}");
 
     return Obx((){
-      userInfo = profileController.userInfo.value;
-      if(userInfo != null) {
+      // userInfo = profileController.userInfo.value;
+      if(profileController.userInfo.value != null) {
         return Positioned(
           top: Get.height * 0.07,
           left: Get.width * 0.05,
@@ -552,10 +557,10 @@ SizedBox(
                 height: 130,
                 width: 130,
                 child: croppedImg == null
-                    ? (userInfo != null && userInfo.avatar != null &&
-                    userInfo.avatar != "")
+                    ? (profileController.userInfo.value != null && profileController.userInfo.value.avatar != null &&
+                    profileController.userInfo.value.avatar != "")
                     ? Image.network(
-                  userInfo.avatar,
+                  profileController.userInfo.value.avatar,
                   fit: BoxFit.fill,
                 )
                     : Image.asset(
@@ -655,18 +660,18 @@ SizedBox(
   getProjectRatio() {
     int appMode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
 
-    if (userInfo.noOfCreatedProjReflect != null &&
-        userInfo.noOfCreateProjInsp != null) {
+    if (profileController.userInfo.value.noOfCreatedProjReflect != null &&
+        profileController.userInfo.value.noOfCreateProjInsp != null) {
       if (appMode == ApiParameter.REFLECT_MODE) {
-        var ratio = (((userInfo.noOfCreatedProjReflect) +
-                (userInfo.noOfCreateProjInsp)) /
-            (userInfo.noOfCreatedProjReflect));
+        var ratio = (((profileController.userInfo.value.noOfCreatedProjReflect) +
+                (profileController.userInfo.value.noOfCreateProjInsp)) /
+            (profileController.userInfo.value.noOfCreatedProjReflect));
         print("mRat: $ratio");
         return "${ratio.toStringAsFixed(2)}%";
       } else {
-        var ratio = (((userInfo.noOfCreateProjInsp) +
-                (userInfo.noOfCreatedProjReflect)) /
-            (userInfo.noOfCreateProjInsp));
+        var ratio = (((profileController.userInfo.value.noOfCreateProjInsp) +
+                (profileController.userInfo.value.noOfCreatedProjReflect)) /
+            (profileController.userInfo.value.noOfCreateProjInsp));
         print("mRat: $ratio");
         return "${ratio.toStringAsFixed(2)}%";
       }

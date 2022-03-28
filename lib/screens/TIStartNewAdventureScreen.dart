@@ -158,7 +158,7 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
       width: Get.width,
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(MyImageURL.bgchoose_your_route),
+              image: AssetImage(MyImageURL.login),
               fit: BoxFit.cover)),
       child: Column(
         children: [
@@ -201,7 +201,7 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
             ),
             //margin: EdgeInsets.all(20),
             child: MyText(
-              text_name: "txtComencer".tr,
+              text_name: "txtComencer".tr.toUpperCase(),
               txtcolor: MyColors.whiteColor,
               txtfontsize: MyFontSize.size23,
               myFont: MyStrings.bodoni72_Bold,
@@ -227,9 +227,15 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
                       index1 = index;
                       return Container(
                         decoration: BoxDecoration(
+                          // borderRadius: BorderRadius.all( Radius.circular(50.0)),
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 4.0,
+                          ),
                           image: DecorationImage(
                               image: AssetImage(pageViewList[index1]
-                                  .bgPath),fit: BoxFit.contain), shape: BoxShape.circle,
+                                  .bgPath),fit: BoxFit.contain),
+                          shape: BoxShape.circle,
                         ),
                       );
                     },

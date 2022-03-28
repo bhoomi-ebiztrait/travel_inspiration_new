@@ -28,17 +28,20 @@ class TIDestinationInProgressScreen extends StatefulWidget {
 
 class _TIDestinationInProgressScreenState
     extends State<TIDestinationInProgressScreen> {
-  MyController myController = Get.find();
+  MyController myController = Get.put(MyController());
   bool isStopped = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    double radious =
-        (double.parse(myController.selectedProject.value.totalKm)) * 1000;
+    double radious = 0.0;
+    if(myController.selectedProject != null && myController.selectedProject.value != null && myController.selectedProject.value.totalKm != null) {
+       radious=
+          (double.parse(myController.selectedProject.value.totalKm)) * 1000;
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      myController.getCities(50000);
+      myController.getCities(radious);
       // myController.getCities(radious);
     });
   }

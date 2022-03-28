@@ -100,11 +100,13 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           // screenName: CreateProfileScreen())
             screenName: ReflectModeScreen())
             : ScreenTransition.navigateOffAll(
+            // screenName: ChangePwConfirmScreen());
             screenName: InspredModeScreen());
         MyPreference.setPrefIntValue(
             key: MyPreference.APPMODE, value: mode);
 
     } else {
+      // ScreenTransition.navigateOff(screenName: CreateProfileScreen());
       ScreenTransition.navigateOff(screenName: HomeScreen());
     }
   }

@@ -13,6 +13,7 @@ class MyStrings {
   static const String cagliostro = "Cagliostro";
   static const String bodoni72 = "Bodoni 72";
   static const String bodoni72_Bold = "Bodoni_Bold";
+  static const String bodoni72_Book = "Bodoni_Book";
   static const String courier_prime = "Courier Prime";
   static const String courier_prime_italic = "Courier_Prime_Italic";
   static const String courier_prime_bold = "Courier_Prime_Bold";

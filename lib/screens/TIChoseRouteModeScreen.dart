@@ -84,7 +84,11 @@ class _TIChoseRouteModeScreenState extends State<TIChoseRouteModeScreen> {
                   itemCount: pageViewList.length,
                   itemBuilder: (context, index) {
                     return Container(
+
                       decoration: BoxDecoration(
+                        border: Border.all(
+                        color: Colors.white,
+                        width: 4.0,),
                           image: DecorationImage(
                               image: AssetImage(pageViewList[index].bgPath)),
                           shape: BoxShape.circle),

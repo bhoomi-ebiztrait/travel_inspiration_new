@@ -117,7 +117,8 @@ class _TIMyAccountNotificationScreenState
     return Scaffold(
       body: SafeArea(child: _buildBodyContent()),
       backgroundColor: MyColors.settingBgColor,
-      bottomSheet:  MyGradientBottomMenu(iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.change_pw_bottom,bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),),
+      bottomSheet:  MyGradientBottomMenu(selString:MyStrings.settings,
+        iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.change_pw_bottom,bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),),
     );
   }
 

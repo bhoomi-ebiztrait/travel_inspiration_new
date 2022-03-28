@@ -25,6 +25,7 @@ class _BecomePremiumScreenState extends State<BecomePremiumScreen> {
     return Scaffold(
       backgroundColor: MyColors.settingBgColor,
       bottomNavigationBar: MyGradientBottomMenu(
+        selString:MyStrings.settings,
         iconList: [
           MyImageURL.profile_icon,
           MyImageURL.galerie,

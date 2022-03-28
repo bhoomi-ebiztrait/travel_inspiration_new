@@ -17,8 +17,9 @@ import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 class MyBottomMenu extends StatelessWidget {
   VoidCallback homeMenuCallback;
   MyController myController = Get.put(MyController());
+  String bgImg;
 
-  MyBottomMenu({Key key, this.homeMenuCallback}) : super(key: key);
+  MyBottomMenu({Key key, this.homeMenuCallback,this.bgImg}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,10 @@ class MyBottomMenu extends StatelessWidget {
       bottom: 20,
       child: Container(
         decoration: BoxDecoration(
-            color: MyColors.textColor.withOpacity(0.32),
+          image: DecorationImage(
+            image: AssetImage(this.bgImg),
+          )
+            /*color: MyColors.whiteColor.withOpacity(0.32),
             border: Border.all(color: MyColors.textColor.withOpacity(0.32)),
             borderRadius: BorderRadius.circular(50),
             boxShadow: [
@@ -75,7 +79,8 @@ class MyBottomMenu extends StatelessWidget {
                 color: MyColors.textColor.withOpacity(0.32),
                 blurRadius: 1.0,
               ),
-            ]),
+            ]*/
+        ),
         width: Get.width * 0.85,
         height: Get.height * 0.11,
         padding: EdgeInsets.symmetric(horizontal: 25),

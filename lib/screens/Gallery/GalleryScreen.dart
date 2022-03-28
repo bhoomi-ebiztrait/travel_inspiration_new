@@ -32,7 +32,7 @@ class GalleryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar:  MyGradientBottomMenu(iconList: [MyImageURL.profile_icon,MyImageURL.gallery_selected,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_icon],bgImg: MyImageURL.botom_bg,),
+      bottomNavigationBar:  MyGradientBottomMenu(selString:MyStrings.gallery,iconList: [MyImageURL.profile_icon,MyImageURL.gallery_selected,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_icon],bgImg: MyImageURL.botom_bg,),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

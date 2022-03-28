@@ -76,6 +76,8 @@ class MyPopupBottomMenu extends StatelessWidget {
           child: Image.asset(
            // MyImageURL.profile_selected,
             iconList[0],
+            height: Get.height * .04,
+            width: Get.height * .04,
             // height: Get.height * 0.03,
             // width: Get.height * 0.08,
             fit: BoxFit.contain,
@@ -88,6 +90,8 @@ class MyPopupBottomMenu extends StatelessWidget {
           child: Image.asset(
             // MyImageURL.galerie,
             iconList[1],
+            height: Get.height * .04,
+            width: Get.height * .04,
             // height: Get.height * .03,
             // width: Get.height * .03,
             fit: BoxFit.contain,
@@ -116,8 +120,8 @@ class MyPopupBottomMenu extends StatelessWidget {
           child: Image.asset(
             // MyImageURL.world_icon,
             iconList[3],
-            // height: Get.height * .04,
-            // width: Get.height * .04,
+            height: Get.height * .04,
+            width: Get.height * .04,
             fit: BoxFit.contain,
           ),
         ),
@@ -128,8 +132,8 @@ class MyPopupBottomMenu extends StatelessWidget {
       child:  Image.asset(
           // MyImageURL.setting_icon,
         iconList[4],
-          // height: Get.height * .04,
-          // width: Get.height * .04,
+          height: Get.height * .04,
+          width: Get.height * .04,
           fit: BoxFit.contain,
         ),),
       ],

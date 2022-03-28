@@ -48,6 +48,7 @@ class MyImageURL {
   static const choose_your_leftquote=root+"quotation_mark_left@3x.png";
   static const choose_your_rightquote=root+"quotation_mark_right@3x.png";
   static const cross3x=root+"cross@3x.png";
+  static const bottom_bg=root+"bottom_bg.png";
   static const arrow3x=root+"arrow3x.png";
   static const premiuminfoBg=root+"completePremiumBg.png";
   static const triangle_premium=root+"triangle_premium.png";
@@ -83,6 +84,7 @@ class MyImageURL {
   static const gaia = root + "gaia.png";
   static const inspred_bg = root + "inspred_bg.png";
   static const metro_question = root + "metro_question.png";
+  static const add_blue = root + "add_blue.png";
   static const switch_icon = root + "switch.png";
   static const switch_one = root + "switch_one.png";
   static const arrow_down_white = root + "arrow_down_white.png";

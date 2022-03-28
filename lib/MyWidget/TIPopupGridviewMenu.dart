@@ -66,6 +66,7 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
         // itemCount: ((widget.endIndex) - (widget.startIndex)),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
+          mainAxisSpacing: 10
         ),
         itemBuilder: (context, index) {
           if(index < widget.startIndex || index > widget.endIndex)
@@ -127,8 +128,8 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
       children: [
         Image.asset(
           popupItemList[index].iconPath,
-          height: Get.height * .04,
-          width: Get.height * .04,
+          height: Get.height * .05,
+          width: Get.height * .05,
           fit: BoxFit.contain,
          color: selectedIndex == index ? MyColors.buttonBgColor:MyColors.buttonBgColorHome ,
         ),

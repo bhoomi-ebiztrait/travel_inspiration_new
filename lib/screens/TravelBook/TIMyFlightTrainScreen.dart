@@ -6,6 +6,7 @@ import 'package:travel_inspiration/MyWidget/MyCommonMethods.dart';
 import 'package:travel_inspiration/MyWidget/MyCountryDropdown.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/MyTravelClassDropdown.dart';
 import 'package:travel_inspiration/MyWidget/TIMyCustomRoundedCornerButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
@@ -67,58 +68,77 @@ class TiMyFlightTrainScreenState extends State<TiMyFlightTrainScreen> {
     return SingleChildScrollView(
       child: Obx(() => Column(
             children: [
-              MyTopHeader(
-                headerName: widget.travelLougeListTitle,
-                headerImgUrl: MyImageURL.travel_book_top,
-                logoImgUrl: MyImageURL.haudos_logo,
+
+              Container(
+                height: Get.height*0.30,
+                width: Get.width,
+                color: MyColors.buttonBgColorHome.withOpacity(0.7),
+                child: Column(children: [
+                  MyTopHeader(
+                    headerImgUrl: MyImageURL.travel_book_top,
+                    logoImgUrl: MyImageURL.haudos_logo,
+                  ),
+                  MyTitlebar(title: widget.travelLougeListTitle,),
+                ],),
               ),
-              SizedBox(
-                height: Get.height * .020,
-              ),
-              MyText(
-                text_name: "txtRechercherunvol".tr + "  :",
-                myFont: MyFont.Courier_Prime_Bold,
-                txtfontsize: MyFontSize.size13,
-                txtcolor: MyColors.textColor,
-                txtAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: Get.height * .020,
-              ),
-              _buildGotoWidget(),
-              SizedBox(
-                height: Get.height * .020,
-              ),
-              _buildReturWidget(),
-              GestureDetector(
-                onTap: () {
-                  callFlightApi();
-                  /*if(checkValidation()) {
+
+              Container(
+                //padding: const EdgeInsets.only(bottom: 40,top:40),
+                height: Get.height,
+                color: MyColors.buttonBgColorHome.withOpacity(0.30),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: Get.height * .030,
+                    ),
+                    MyText(
+                      text_name: "txtRechercherunvol".tr + "  :",
+                      myFont: MyFont.Courier_Prime_Bold,
+                      txtfontsize: MyFontSize.size13,
+                      txtcolor: MyColors.textColor,
+                      txtAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: Get.height * .030,
+                    ),
+                    _buildGotoWidget(),
+                    SizedBox(
+                      height: Get.height * .030,
+                    ),
+                    _buildReturWidget(),
+                    GestureDetector(
+                      onTap: () {
+                        callFlightApi();
+                        /*if(checkValidation()) {
                     callFlightApi();
                     // ScreenTransition.navigateToScreenLeft(
                     //     screenName: TIAvailableFlightScreen());
                   }*/
-                },
-                child: Container(
-                  width: Get.width * .48,
-                  height: Get.height * .050,
-                  decoration: BoxDecoration(
-                    color: MyColors.expantionTileBgColor,
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(Get.width * .050)),
-                  ),
-                  child: MyText(
-                    text_name: "txtRechercher".tr,
-                    myFont: MyFont.Courier_Prime_Bold,
-                    txtfontsize: MyFontSize.size18,
-                    txtcolor: Colors.white,
-                    txtAlign: TextAlign.center,
-                  ),
+                      },
+                      child: Container(
+                        width: Get.width * .48,
+                        height: Get.height * .050,
+                        decoration: BoxDecoration(
+                          color: MyColors.buttonBgColor,
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(Get.width * .050)),
+                        ),
+                        child: MyText(
+                          text_name: "txtRechercher".tr,
+                          myFont: MyFont.Courier_Prime_Bold,
+                          txtfontsize: MyFontSize.size18,
+                          txtcolor: Colors.white,
+                          txtAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: Get.height * .020,
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: Get.height * .020,
-              ),
+
             ],
           )),
     );
@@ -138,7 +158,7 @@ class TiMyFlightTrainScreenState extends State<TiMyFlightTrainScreen> {
       width: Get.width * .38,
       height: Get.height * .050,
       decoration: BoxDecoration(
-        color: MyColors.expantionTileBgColor,
+        color: MyColors.buttonBgColor,
         borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
       ),
       child: MyText(
@@ -155,19 +175,19 @@ class TiMyFlightTrainScreenState extends State<TiMyFlightTrainScreen> {
     return Container(
       width: Get.width * .38,
       height: Get.height * .050,
-      decoration: BoxDecoration(
+     /* decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(color: MyColors.expantionTileBgColor, blurRadius: 2.0)
         ],
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
-      ),
+      ),*/
       child: MyText(
         text_name: centerText,
         myFont: MyFont.Courier_Prime_Bold,
         txtfontsize: MyFontSize.size13,
-        txtcolor: Colors.black,
+        txtcolor: MyColors.textColor,
         txtAlign: TextAlign.center,
       ),
     );
@@ -199,14 +219,14 @@ class TiMyFlightTrainScreenState extends State<TiMyFlightTrainScreen> {
                         MyTextStart(
                           text_name: myFlightDetailList[index].title,
                           txtcolor:
-                          MyColors.expantionTileBgColor.withOpacity(1.0),
+                          MyColors.textColor.withOpacity(0.3),
                           myFont: MyFont.Courier_Prime,
                           txtfontsize: MyFontSize.size15,
                         ),
                         MyTextStart(
                           text_name: myFlightDetailList[index].subTitle,
                           txtcolor:
-                          MyColors.expantionTileBgColor.withOpacity(1.0),
+                          MyColors.textColor.withOpacity(1.0),
                           myFont: MyFont.Courier_Prime,
                           txtfontsize: MyFontSize.size12,
                         ),
@@ -319,7 +339,7 @@ class TiMyFlightTrainScreenState extends State<TiMyFlightTrainScreen> {
                               break;
                           }
                         },
-                        child: Image.asset(MyImageURL.plus)),
+                        child: Image.asset(MyImageURL.add_blue,height: 40,width: 40,)),
                   ),
                 ],
               ),
@@ -327,9 +347,9 @@ class TiMyFlightTrainScreenState extends State<TiMyFlightTrainScreen> {
                 padding: EdgeInsets.only(
                     right: Get.width * .02, bottom: Get.height * .03),
                 child: Divider(
-                  height: 0.2,
-                  thickness: 2,
-                  color: MyColors.lineColor,
+                  height: 0.1,
+                  thickness: 1,
+                  color: MyColors.buttonBgColorHome.withOpacity(0.75),
                 ),
               ),
 

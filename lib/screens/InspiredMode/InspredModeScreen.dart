@@ -102,6 +102,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
               buildMenu(),
               openMenu(),
               MyBottomMenu(
+                bgImg: MyImageURL.button_bg_img,
                 homeMenuCallback:(){
                   myController.showHomeIcon.value=false;
                   myController.isFloatingMenuVisible.value = true;
@@ -211,7 +212,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
         child: Container(
           width: Get.width,
           height: Get.height * 0.4,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(MyImageURL.top_wave), fit: BoxFit.fill),
@@ -230,7 +231,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
                         isVisible = false;
                       });
                     },
-                      child: Image.asset(MyImageURL.arrow_dropdown_up)),
+                      child: Image.asset(MyImageURL.arrow_dropdown_up,color: MyColors.buttonBgColor,)),
                   /*InkWell(
                       onTap: () {
                         setState(() {
@@ -260,7 +261,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
                           // ScreenTransition.navigateToScreenLeft(screenName: TITravelougeScreen());
 
                         },
-                        child: Image.asset(MyImageURL.gaia)),
+                        child: Image.asset(MyImageURL.gaia,height: 60,width: 60,)),
                     SizedBox(
                       height: Get.height * 0.01,
                     ),
@@ -288,7 +289,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
         mainAxisSize: MainAxisSize.max,
         children: [
           MyText(
-            text_name: "inspire_mode".tr,
+            text_name: "inspire_mode".toUpperCase(),
             myFont: MyStrings.courier_prime_bold,
             txtfontsize: MyFontSize.size20,
             txtcolor: MyColors.whiteColor,
@@ -341,7 +342,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
               }*/
               },
             child: MyText(
-              text_name: "see_my_journey".tr,
+              text_name: "see_my_journey".tr.toUpperCase(),
               myFont: MyStrings.cagliostro,
               txtfontsize: MyFontSize.size25,
               txtcolor: MyColors.whiteColor,

@@ -21,7 +21,7 @@ class DeleteAcSecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.settingBgColor,
-      bottomNavigationBar: MyGradientBottomMenu(
+      bottomNavigationBar: MyGradientBottomMenu(selString:MyStrings.settings,
         iconList: [
           MyImageURL.profile_icon,
           MyImageURL.galerie,

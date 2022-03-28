@@ -64,7 +64,8 @@ class _TIPinDestinationToProjectScreenState
       body: SafeArea(
         child:_buildBodyContent()
       ),
-      bottomNavigationBar:  MyGradientBottomMenu(iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_icon],bgImg: MyImageURL.change_pw_bottom,bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),),
+      bottomNavigationBar:  MyGradientBottomMenu(
+        iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_icon],bgImg: MyImageURL.change_pw_bottom,bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),),
       /*bottomSheet: MyBottomLayout(
         imgUrl: MyImageURL.travel_book_bottom,
       ),*/

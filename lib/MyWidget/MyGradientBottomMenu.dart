@@ -20,9 +20,10 @@ class MyGradientBottomMenu extends StatelessWidget {
 
   List<String> iconList = [];
   String bgImg;
+  String selString;
   Color bgColor;
 
-  MyGradientBottomMenu({this.iconList,this.bgImg,this.bgColor = Colors.transparent}) ;
+  MyGradientBottomMenu({this.iconList,this.bgImg,this.bgColor = Colors.transparent,this.selString = "abc"}) ;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +81,8 @@ class MyGradientBottomMenu extends StatelessWidget {
           child: Image.asset(
            // MyImageURL.profile_selected,
             iconList[0],
+            height: selString == MyStrings.profile ? Get.height * .09:Get.height * .04,
+            width: selString == MyStrings.profile ? Get.height * .09:Get.height * .04,
             // height: Get.height * 0.03,
             // width: Get.height * 0.08,
             fit: BoxFit.contain,
@@ -92,6 +95,8 @@ class MyGradientBottomMenu extends StatelessWidget {
           child: Image.asset(
             // MyImageURL.galerie,
             iconList[1],
+            height: selString == MyStrings.gallery ? Get.height * .09:Get.height * .04,
+            width: selString == MyStrings.gallery ? Get.height * .09:Get.height * .04,
             // height: Get.height * .03,
             // width: Get.height * .03,
             fit: BoxFit.contain,
@@ -104,8 +109,8 @@ class MyGradientBottomMenu extends StatelessWidget {
           child: Image.asset(
             // MyImageURL.home_menu,
             iconList[2],
-            height: Get.height * .04,
-            width: Get.height * .04,
+           height: Get.height * .05,
+            width: Get.height * .05,
             fit: BoxFit.contain,
           ),
         ),
@@ -116,8 +121,8 @@ class MyGradientBottomMenu extends StatelessWidget {
           child: Image.asset(
             // MyImageURL.world_icon,
             iconList[3],
-            // height: Get.height * .04,
-            // width: Get.height * .04,
+            height: selString == MyStrings.gaia ? Get.height * .09:Get.height * .04,
+            width: selString == MyStrings.gaia ? Get.height * .09:Get.height * .04,
             fit: BoxFit.contain,
           ),
         ),
@@ -128,8 +133,8 @@ class MyGradientBottomMenu extends StatelessWidget {
       child:  Image.asset(
           // MyImageURL.setting_icon,
         iconList[4],
-          // height: Get.height * .04,
-          // width: Get.height * .04,
+          height: selString == MyStrings.settings ? Get.height * .09:Get.height * .04,
+          width: selString == MyStrings.settings ? Get.height * .09:Get.height * .04,
           fit: BoxFit.contain,
         ),),
       ],

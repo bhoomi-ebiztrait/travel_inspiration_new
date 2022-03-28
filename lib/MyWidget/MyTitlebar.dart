@@ -14,6 +14,7 @@ class MyTitlebar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 60),
+      padding: EdgeInsets.all(2),
       height: 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(

@@ -91,8 +91,9 @@ class _PinListScreenState extends State<PinListScreen> {
                     height: Get.height * .040,
                   ),
                   TICirculerBox(
-                    imageIcon: MyImageURL.hotel_icon,
-                    title: "txtHOTELSEPINGLES".tr,
+                    imageIcon: widget.imgIcon,
+                    // title: "txtHOTELSEPINGLES".tr,
+                    title: widget.title,
 
                   ),
                   SizedBox(

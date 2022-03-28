@@ -113,7 +113,7 @@ class _MyCustomDialogState extends State<MyCustomDialog> {
                     },
                     child: Container(
                         alignment: Alignment.bottomRight,
-                        child: Image.asset(MyImageURL.cross,width: 40,))),
+                        child: Image.asset(MyImageURL.cross3x,width: 40,))),
                 SizedBox(
                   height: Get.height * 0.02,
                 ),

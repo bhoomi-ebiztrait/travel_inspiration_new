@@ -127,7 +127,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                           itemCount: 5,
                           onRateUpdate: null,
                           initialRating: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null)
-                              ? myController.mPlaceDetails.value.result.rating
+                              ? myController.mPlaceDetails.value.result.rating != null ? myController.mPlaceDetails.value.result.rating :0.0
                               : 0.0,
                         ),
                         SizedBox(
@@ -303,7 +303,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
       padding: EdgeInsets.only(left: 5, top: 20, bottom: 10),
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null) ? (myController.mPlaceDetails.value.result.reviews.length > 2 ?2 : myController.mPlaceDetails.value.result.reviews.length):0,
+          itemCount: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null && myController.mPlaceDetails.value.result.reviews != null) ? (myController.mPlaceDetails.value.result.reviews.length > 2 ?2 : myController.mPlaceDetails.value.result.reviews.length):0,
           itemBuilder: (context, index) {
             return getReviewItem(myController.mPlaceDetails.value.result.reviews[index]);
           }),
@@ -441,7 +441,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
         ),
         MyRatingBar(
           itemCount: 5,
-          initialRating: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null)
+          initialRating: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null && myController.mPlaceDetails.value.result.rating != null)
               ? myController.mPlaceDetails.value.result.rating
               : 0.0,
           onRateUpdate: null,

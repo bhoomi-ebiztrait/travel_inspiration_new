@@ -6,6 +6,7 @@ import 'package:travel_inspiration/MyWidget/MyButton.dart';
 import 'package:travel_inspiration/MyWidget/MyCommonMethods.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
 import 'package:travel_inspiration/screens/TravelBook/MyRouteListScreen.dart';
 import 'package:travel_inspiration/screens/TravelBook/MyRouteScreen.dart';
@@ -44,36 +45,34 @@ class _TIFlightTrainCarCommonScreenState extends State<TIFlightTrainCarCommonScr
       body: Container(
         height: Get.height,
         width: Get.width,
-        child: SingleChildScrollView(child:
-          _commonWidgetForPlain_Train_Car()),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(MyImageURL.login),fit: BoxFit.fill,
+          ),
+        ),
+        child: _commonWidgetForPlain_Train_Car(),
       ),
-      bottomSheet: MyBottomLayout(
-        imgUrl: MyImageURL.travel_book_bottom,
-      ),
+
     ));
   }
 
   _commonWidgetForPlain_Train_Car() {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
         MyTopHeader(
-          headerName: widget.travelLougeListTitle,
           headerImgUrl: MyImageURL.travel_book_top,
           logoImgUrl: MyImageURL.haudos_logo,
         ),
         SizedBox(
           height: Get.height * .020,
         ),
-        MyText(
-          text_name: _commonTextWidget() + "  :",
-          myFont: MyFont.Courier_Prime_Bold,
-          txtfontsize: MyFontSize.size13,
-          txtcolor: MyColors.textColor,
-          txtAlign: TextAlign.center,
-        ),
+        MyTitlebar(title: widget.travelLougeListTitle,),
+
         SizedBox(
-          height: Get.height * .08,
+          height: Get.height * .020,
         ),
+
         GestureDetector(
             onTap: () {
               switch (widget.Tag) {
@@ -96,11 +95,58 @@ class _TIFlightTrainCarCommonScreenState extends State<TIFlightTrainCarCommonScr
                   break;
               }
             },
-            child: Image.asset(_centerImage())),
+            child: Container(
+                margin: EdgeInsets.only(left: Get.width*0.17,right: Get.width*0.17,top: Get.height*0.06),
+                child: Image.asset(_centerImage()))),
         SizedBox(
-          height: Get.height * .04,
+          height: Get.height * .02,
         ),
-        MyButtonRight(
+        MyText(
+          text_name: _commonTextWidget() + "  :",
+          myFont: MyStrings.bodoni72_Bold,
+          txtfontsize: MyFontSize.size20,
+          txtcolor: MyColors.whiteColor,
+          txtAlign: TextAlign.center,
+        ),
+        /*SizedBox(
+          height: Get.height * .1,
+        ),*/
+        Spacer(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 120.0,vertical: 40),
+          child: MyButton(
+            onClick: () {
+              switch (widget.Tag) {
+                case TITag.TAGPLAIN:
+                  ScreenTransition.navigateToScreenLeft(
+                      screenName: TIFlightAndTrainManualAddScreen(
+                        travelLougeListTitle: widget.travelLougeListTitle,
+                        Tag: TITag.TAGPLAIN,
+                      ));
+                  break;
+                case TITag.TAGTRAIN:
+                  ScreenTransition.navigateToScreenLeft(
+                      screenName: TIFlightAndTrainManualAddScreen(
+                        travelLougeListTitle: widget.travelLougeListTitle,
+                        Tag: TITag.TAGTRAIN,
+                      ));
+                  break;
+                case TITag.TAGCAR:
+                //getCurrLatLng();
+                  ScreenTransition.navigateToScreenLeft(
+                      screenName: MyRouteListScreen());
+                  break;
+              }
+            },
+            btn_name: _buttonRightText(),
+            txtcolor: MyColors.buttonBgColor,
+            bgColor: MyColors.whiteColor,
+            opacity: 1,
+            myFont: MyStrings.courier_prime_bold,
+            txtfont: MyFontSize.size13,
+          ),
+        ),
+        /*MyButtonRight(
           onClick: () {
             switch (widget.Tag) {
               case TITag.TAGPLAIN:
@@ -129,7 +175,7 @@ class _TIFlightTrainCarCommonScreenState extends State<TIFlightTrainCarCommonScr
           txtfont: MyFontSize.size13,
           txtcolor: MyColors.textColor,
           imgeUrl: _buttonImage(),
-        )
+        )*/
       ],
     );
   }
