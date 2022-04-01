@@ -15,6 +15,8 @@ import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 
+import '../../MyWidget/MyCommonMethods.dart';
+
 
 
 class TIFlightSearchScreen extends StatefulWidget {
@@ -38,6 +40,8 @@ class TIFlightSearchScreenState extends State<TIFlightSearchScreen> {
   ];
   var _scrollController = ScrollController();
   var _currentLocationSelected = false.obs;
+
+  int selectedIndex = -1;
 
 
 
@@ -139,34 +143,42 @@ class TIFlightSearchScreenState extends State<TIFlightSearchScreen> {
                      controller: _scrollController,
                      itemCount: controller.airportlist.length,
                      itemBuilder: (context, index) {
-                       return ListTile(
-                         title: Row(
-                           children: [
-                             Expanded(
-                               child: Column(
-                                 children: <Widget>[
-                                   MyText(
-                                       txtcolor: MyColors.textColor,
-                                       myFont: MyStrings.courier_prime,
-                                       txtfontsize: MyFontSize.size13,
-                                       text_name:controller.airportlist[index].name),
-                                   Divider(
-                                     height: 0.1,
-                                     thickness: 1,
-                                     color: MyColors.buttonBgColorHome.withOpacity(0.75),
-                                   ),
-                                 ],
+                       return Container(
+                         color: selectedIndex == index ? MyColors.buttonBgColorHome.withOpacity(0.32):Colors.transparent,
+                         child: ListTile(
+                           // selectedTileColor: selectedIndex >= 0 ? MyColors.buttonBgColorHome.withOpacity(0.32):Colors.transparent,
+                           title: Row(
+                             // mainAxisAlignment: MainAxisAlignment.start,
+                             children: [
+                               Expanded(
+                                 child: Column(
+                                   children: <Widget>[
+                                     MyText(
+                                         txtcolor: MyColors.textColor,
+                                         myFont: MyStrings.courier_prime,
+                                         txtfontsize: MyFontSize.size13,
+                                         text_name:controller.airportlist[index].name),
+                                     MyCommonMethods.myDivider(),
+                                   ],
+                                 ),
                                ),
-                             ),
-                           ],
+                             ],
+                           ),
+                           onTap: () async {
+                             print(controller.airportlist[index].name);
+                             setState(() {
+                               selectedIndex = index;
+                             });
+
+                             /*if (controller.airportlist[selectedIndex].place_id != null) {
+
+                               // Navigator.of(context).pop(controller.airportlist[index]);
+                               Navigator.of(context).pop(controller.airportlist[selectedIndex]);
+                               controller.airportlist.clear();
+                               // controller.airportlist.clear();
+                             }*/
+                           },
                          ),
-                         onTap: () async {
-                           print(controller.airportlist[index].name);
-                           if (controller.airportlist[index].place_id != null) {
-                             Navigator.of(context).pop(controller.airportlist[index]);
-                             controller.airportlist.clear();
-                           }
-                         },
                        );
                      },
                    ),
@@ -178,7 +190,11 @@ class TIFlightSearchScreenState extends State<TIFlightSearchScreen> {
              ),
              TIMyCustomRoundedCornerButton(
                onClickCallback: () {
-                 Get.back();
+                 // Get.back();
+                 if (controller.airportlist[selectedIndex].place_id != null) {
+                   Navigator.of(context).pop(controller.airportlist[selectedIndex]);
+                   controller.airportlist.clear();
+                 }
                },
                buttonWidth: Get.width * .48,
                buttonHeight: Get.height * .050,

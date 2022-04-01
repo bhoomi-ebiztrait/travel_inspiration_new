@@ -14,9 +14,12 @@ import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:travel_inspiration/utils/TIPrint.dart';
 
+import '../../MyWidget/MyTitlebar.dart';
+
 
 class TIFilterSortFlightScreen extends StatefulWidget {
-
+  String travelogueTitle;
+  TIFilterSortFlightScreen(this.travelogueTitle);
 
   @override
   _TIFilterSortFlightScreenState createState() => _TIFilterSortFlightScreenState();
@@ -51,50 +54,62 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        MyTopHeader(
-          headerName: "",
-          headerImgUrl: MyImageURL.travel_book_top,
-          logoImgUrl: MyImageURL.haudos_logo,
-          imgHeight: Get.height*.12,
+        Container(
+          height: Get.height*0.30,
+          width: Get.width,
+          color: MyColors.buttonBgColorHome.withOpacity(0.7),
+          child: Column(
+            children: [
+              MyTopHeader(
+                logoImgUrl: MyImageURL.haudos_logo,
+              ),
+              MyTitlebar(title: widget.travelogueTitle,),
+            ],
+          ),
         ),
-        SizedBox(
-          height: Get.height * .020,
-        ),
+        Container(
+          height: Get.height,
+          width: Get.width,
+          color: MyColors.buttonBgColorHome.withOpacity(0.3),
+          child: Column(
+            children: [
+              SizedBox(
+                height: Get.height * .020,
+              ),
+              _bodyFilterScreen(),
+              SizedBox(
+                height: 30,
+              ),
+              TIMyCustomRoundedCornerButton(
+                onClickCallback:(){
+                  //  Get.back();
+                  TIPrint(tag: "Start Price", value: _myController.isStartPrice_FS.value);
+                  TIPrint(tag: "End Price", value: _myController.isEndPrice_FS.value);
+                  TIPrint(tag: "Stop", value: _myController.isStopover_FS.value.toString());
+                  TIPrint(tag: "Short Price", value: _myController.isShort_price_FS.value.toString());
+                  TIPrint(tag: "Short Duration", value: _myController.isShortDuration_FS.value.toString());
+                  Map<String,String> param =
+                  {
+                    "source":_myController.mSource.value,
+                    "destination":_myController.mDestination.value,
+                    "journeyDate":_myController.selectedStartDate.value,
+                    "returnDate":_myController.selectedEndDate.value,
+                    "tripType":_myController.toGoReturnSwitch.value ? "1" : "2",
+                    "flightType":_myController.selectedFlightType.value.value.toString(),
+                    "adults":_myController.noOfAdults.value.toString(),
+                    "children":_myController.noOfChildrens.value.toString(),
+                    "infants":_myController.noOfBabes.value.toString(),
+                    "travelClass":_myController.selectedTravelClass.value.classCode,
+                    "userType":"5",
+                    "returnDate":_myController.selectedEndDate.value,
+                    "startPrice":_myController.isStartPrice_FS.value,
+                    "endPrice":_myController.isEndPrice_FS.value,
+                    "shortPrice":_myController.isShort_price_FS.value.toString(),
+                    "shortDuration":_myController.isShortDuration_FS.value.toString(),
+                    "stop":_myController.isStopover_FS.value.toString()
 
-        _bodyFilterScreen(),
-        SizedBox(
-          height: 20,
-        ),
-        TIMyCustomRoundedCornerButton(
-          onClickCallback:(){
-          //  Get.back();
-           TIPrint(tag: "Start Price", value: _myController.isStartPrice_FS.value);
-           TIPrint(tag: "End Price", value: _myController.isEndPrice_FS.value);
-           TIPrint(tag: "Stop", value: _myController.isStopover_FS.value.toString());
-           TIPrint(tag: "Short Price", value: _myController.isShort_price_FS.value.toString());
-           TIPrint(tag: "Short Duration", value: _myController.isShortDuration_FS.value.toString());
-           Map<String,String> param =
-           {
-              "source":_myController.mSource.value,
-              "destination":_myController.mDestination.value,
-             "journeyDate":_myController.selectedStartDate.value,
-             "returnDate":_myController.selectedEndDate.value,
-             "tripType":_myController.toGoReturnSwitch.value ? "1" : "2",
-             "flightType":_myController.selectedFlightType.value.value.toString(),
-             "adults":_myController.noOfAdults.value.toString(),
-             "children":_myController.noOfChildrens.value.toString(),
-             "infants":_myController.noOfBabes.value.toString(),
-             "travelClass":_myController.selectedTravelClass.value.classCode,
-             "userType":"5",
-             "returnDate":_myController.selectedEndDate.value,
-             "startPrice":_myController.isStartPrice_FS.value,
-             "endPrice":_myController.isEndPrice_FS.value,
-             "shortPrice":_myController.isShort_price_FS.value.toString(),
-             "shortDuration":_myController.isShortDuration_FS.value.toString(),
-             "stop":_myController.isStopover_FS.value.toString()
 
-
-             /*"source":"HYD",
+                    /*"source":"HYD",
             "destination":"DXB",
             "journeyDate":"18-01-2022",
             "tripType":"1",
@@ -110,18 +125,23 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
            "shortPrice":_myController.isShort_price_FS.value.toString(),
              "shortDuration":_myController.isShortDuration_FS.value.toString(),
              "stop":_myController.isStopover_FS.value.toString()*/
-           };
+                  };
 
-           _myController.getFlightSearch(param,true);
-          },
-          buttonWidth: Get.width*.6,
-          buttonHeight: Get.height*.055,
-          btnBgColor: MyColors.expantionTileBgColor,
-          textColor:Colors.white,
-          btnText:"Appliquer".tr,
-          fontSize: MyFontSize.size18,
-          myFont: MyFont.Courier_Prime_Bold,
-        )
+                  _myController.getFlightSearch(param,true,"");
+                },
+                buttonWidth: Get.width*.6,
+                buttonHeight: Get.height*.055,
+                btnBgColor: MyColors.buttonBgColor,
+                textColor:Colors.white,
+                btnText:"Appliquer".tr,
+                fontSize: MyFontSize.size18,
+                myFont: MyFont.Courier_Prime_Bold,
+              )
+
+            ],
+          ),
+        ),
+
 
       ],
       ),
@@ -141,7 +161,10 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
              Image.asset(MyImageURL.sign,scale: 1,)
             ],
           ),
-          Row(
+          SizedBox(
+            height: Get.height*0.02,
+          ),
+          /*Row(
             children: [
               Image.asset(MyImageURL.price_tag,scale: 1.5,),
               SizedBox(
@@ -155,7 +178,7 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
               ),),
 
             ],
-          ),
+          ),*/
           Stack(
             children: [
               Positioned(
@@ -171,7 +194,7 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
                   max: 5000000,
                   values: srangeValues,
 
-                  activeColor: MyColors.buttonBgColor,
+                  activeColor: MyColors.buttonBgColorHome,
             /*      endThumbIcon: TIthumbIcon(),
                   startThumbIcon:TIthumbIcon(),*/
                   // enableTooltip: true,
@@ -205,16 +228,16 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(_myController.isStartPrice_FS.value,style: TextStyle(color: MyColors.lineColor,fontFamily: MyFont.Courier_Prime_Bold_Italic),),
-                Text(_myController.isEndPrice_FS.value,style: TextStyle(color: MyColors.lineColor,fontFamily: MyFont.Courier_Prime_Bold_Italic)),
+                Text(_myController.isStartPrice_FS.value,style: TextStyle(color: MyColors.buttonBgColor,fontFamily: MyFont.Courier_Prime,fontSize: MyFontSize.size12),),
+                Text(_myController.isEndPrice_FS.value,style: TextStyle(color: MyColors.buttonBgColor,fontFamily: MyFont.Courier_Prime,fontSize: MyFontSize.size12)),
               ],
             ),
           ),
-          SizedBox(height: 15,),
+          SizedBox(height: 25,),
           _stopRadio(),
           SizedBox(height: 25,),
           Divider(
-            color:  MyColors.lineColor,
+            color:  MyColors.buttonBgColor,
             thickness: 2,
           ),
           SizedBox(height: 30,),
@@ -252,7 +275,7 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-          color: MyColors.lineColor,
+          color: MyColors.buttonBgColor,
           shape: BoxShape.circle
       ),
 
@@ -287,11 +310,11 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
+            Flexible(
               flex:4,
              child: _tiRadioUI(label: "Prix_croissant".tr,isbool: !_myController.isShort_price_FS.value),
             ),
-            Expanded(
+            Flexible(
               flex:4,
             child: _tiRadioUI(label: "Prix_décroissant".tr,isbool: _myController.isShort_price_FS.value),)
 
@@ -325,11 +348,13 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
+          height: 15,
+          width: 15,
           padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
-              color: isbool?MyColors.lineColor:Colors.white,
-              border: Border.all(width: 2,color: isbool?MyColors.lineColor:MyColors.buttonBgColor),
-              shape: BoxShape.circle
+              color: isbool?MyColors.textColor.withOpacity(0.55):Colors.white,
+              border: Border.all(width: 1,color: MyColors.buttonBgColorHome),
+              shape: BoxShape.circle,
           ),
 
         ),

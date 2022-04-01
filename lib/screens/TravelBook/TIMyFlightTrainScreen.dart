@@ -296,7 +296,7 @@ class TiMyFlightTrainScreenState extends State<TiMyFlightTrainScreen> {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(
                                   builder: (context) =>
-                                      TIFlightChoiceOfDateScreen(
+                                      TIFlightChoiceOfDateScreen(widget.travelLougeListTitle
                                       )))
                                   .then((value) {
                                 print("returned: ${value}");
@@ -480,7 +480,7 @@ class TiMyFlightTrainScreenState extends State<TiMyFlightTrainScreen> {
     };
 
     print("param : ${param.toString()}");
-    myController.getFlightSearch(param,false);
+    myController.getFlightSearch(param,false,widget.travelLougeListTitle);
     // ScreenTransition.navigateToScreenLeft(
     //     screenName: TIAvailableFlightScreen());
    /*  WidgetsBinding.instance.addPostFrameCallback((_) {

@@ -3,6 +3,7 @@ import 'package:geolocator_platform_interface/src/models/position.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
 import 'package:travel_inspiration/MyWidget/MyButton.dart';
+import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextButton.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
@@ -36,67 +37,72 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-
-    child:  SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            buildHeader(),
-            Container(
-              width: Get.width,
-              height: 2,
-              color: MyColors.lineColor,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            buildDetails(),
-            SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 60.0, vertical: 20),
-              child: MyButton(
-                btn_name: "addRoute".tr,
-                onClick: () {
-                  callAddRouteAPI();
-                },
-                bgColor: MyColors.buttonBgColor,
-                txtcolor: MyColors.whiteColor,
-                fontWeight: FontWeight.bold,
-                opacity: 1,
-                txtfont: MyFontSize.size16,
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                // height: Get.height,
+                width: Get.width,
+                color: MyColors.buttonBgColorHome.withOpacity(0.7),
+                child: Column(
+                  children: [
+                    MyTopHeader(
+                      logoImgUrl: MyImageURL.haudos_logo,
+                    ),
+                    buildHeader(),
+                  ],
+                ),
               ),
-            ),
-          ],
+
+
+              Container(
+                height: Get.height,
+                width: Get.width,
+                color: MyColors.buttonBgColorHome.withOpacity(0.3),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 50,
+                    ),
+                    buildDetails(),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 60.0, vertical: 20),
+                      child: MyButton(
+                        btn_name: "addRoute".tr,
+                        onClick: () {
+                          callAddRouteAPI();
+                        },
+                        bgColor: MyColors.buttonBgColor,
+                        txtcolor: MyColors.whiteColor,
+                        fontWeight: FontWeight.bold,
+                        opacity: 1,
+                        txtfont: MyFontSize.size16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+            ],
+          ),
         ),
       ),
-      ),
-      bottomSheet: MyBottomLayout(
-        imgUrl: MyImageURL.travel_book_bottom,
-      ),
+
     );
   }
 
   buildHeader() {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.only(top:5.0,bottom: 40,right: 20,left: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-          Expanded(flex:1,
-         child: GestureDetector( onTap: ()
-             {
-               Get.back();
-             },
-             child: Image.asset(MyImageURL.back,
-               width: 25,)),),
-          /*SizedBox(
-            width: 10,
-          ),*/
           Expanded(
             flex: 8,
             child: Column(
@@ -105,12 +111,21 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 buildInfo("ruleOne".tr),
-                SizedBox(height: 2,),
+                SizedBox(
+                  height: 2,
+                ),
                 buildInfo("ruleTwo".tr),
-                SizedBox(height: 2,),
+                SizedBox(
+                  height: 2,
+                ),
                 buildInfo("ruleThree".tr),
-                SizedBox(height: 2,),
+                SizedBox(
+                  height: 2,
+                ),
                 buildInfo("ruleFour".tr),
+                SizedBox(
+                  height: 2,
+                ),
               ],
             ),
           ),
@@ -119,7 +134,7 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
     );
   }
 
- /* buildInfo(rule) {
+  /* buildInfo(rule) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5.0, right: 40),
       // child: Row(
@@ -131,9 +146,9 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
               children: [
                 Expanded(flex:1,child:   Image.asset(MyImageURL.back),),
 
-              *//*  SizedBox(
+              */ /*  SizedBox(
                   width: 10,
-                ),*//*
+                ),*/ /*
                 Expanded(flex:8,child:  Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -152,38 +167,34 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
   }*/
 
   buildInfo(rule) {
-    return
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 1,
-            //margin: EdgeInsets.all(40.0),
-
-            child:Container(
-              height: 8,
-            width: 8,
-              decoration: BoxDecoration(
-                color: MyColors.buttonBgColor,
-                shape: BoxShape.circle,
-              ),
-      )
-
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 40,
+        ),
+        Container(
+          height: 5,
+          width: 5,
+          decoration: BoxDecoration(
+            color: MyColors.whiteColor,
+            shape: BoxShape.circle,
           ),
-          /*SizedBox(
+        ),
+        SizedBox(
             width: 8,
-          ),*/
-      Expanded(
-        flex: 5,
-            child: MyTextStart(
-              text_name: rule,
-              txtcolor: MyColors.textColor,
-              txtfontsize: MyFontSize.size8,
-            ),
-      )
-        ],
-
+          ),
+        Expanded(
+          // flex: 5,
+          child: MyTextStart(
+            text_name: rule,
+            txtcolor: MyColors.textColor,
+            myFont: MyStrings.courier_prime,
+            txtfontsize: MyFontSize.size8,
+          ),
+        )
+      ],
     );
   }
 
@@ -192,8 +203,12 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
       name = myController.selectedPlace.value.name;
       desc = myController.selectedPlace.value.description;
     } else {
-      int endIndex = widget.currAddress.indexOf(",");
-      name = "${widget.currAddress.substring(0, endIndex)}";
+      if (widget.currAddress.contains(",")) {
+        int endIndex = widget.currAddress.indexOf(",");
+        name = "${widget.currAddress.substring(0, endIndex)}";
+      } else {
+        name = widget.currAddress;
+      }
       startAddress = name;
       desc = widget.currAddress;
     }
@@ -210,7 +225,7 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
                 flex: 7,
                 child: Row(
                   children: [
-                    Expanded(flex:1,child: Image.asset(MyImageURL.circle3x)),
+                    Expanded(flex: 1, child: Image.asset(MyImageURL.circle3x)),
                     /*SizedBox(
                       width: 10,
                     ),*/
@@ -226,59 +241,78 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
                   ],
                 ),
               ),
-               Expanded(
+              Expanded(
                   flex: 1,
-                   child:GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isVisible = !isVisible;
-                    });
-                  },
-
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isVisible = !isVisible;
+                      });
+                    },
                     child: Image.asset(isVisible == true
                         ? MyImageURL.arrow_route_up
-                        : MyImageURL.arrow_route_down),
+                        : MyImageURL.arrow_route_down,color: MyColors.buttonBgColor,),
                   )),
             ],
           ),
-          isVisible ?  Container(
-
-            child: index == 0
-                ? Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Expanded(
-                        flex: 7,
-                        child: Row(
+          isVisible
+              ? Container(
+                  child: index == 0
+                      ? Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Expanded(
-                              flex:1,
-                                child: Container(
-                                  height: 80,width: 80,
-                                    child: Image.asset(MyImageURL.arrow_route,height: 80,width: 80,))),
-                           /* SizedBox(
+                              flex: 7,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                          height: 80,
+                                          width: 80,
+                                          child: Image.asset(
+                                            MyImageURL.arrow_route,
+                                            height: 80,
+                                            width: 80,
+                                          ))),
+                                  /* SizedBox(
                               width: 10,
                             ),*/
-                            Expanded(
-                              flex: 6,
-                              child: MyTextStart(
-                                text_name: "$desc",
-                                txtfontsize: MyFontSize.size14,
-                                txtcolor: MyColors.textColor,
-                                myFont: MyStrings.courier_prime,
+                                  Expanded(
+                                    flex: 6,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        MyTextStart(
+                                          text_name: "$desc",
+                                          txtfontsize: MyFontSize.size14,
+                                          txtcolor: MyColors.textColor,
+                                          myFont: MyStrings.courier_prime,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                          child: MyTextStart(
+                                            text_name: "${myController.distance.value}",
+                                            txtfontsize: MyFontSize.size14,
+                                            txtcolor: MyColors.textColor,
+                                            myFont: MyStrings.courier_prime_bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
-                        ),
-                      ),
-                    ],
-                  )
-                : Container(),
-          ):Container(),
+                        )
+                      : Container(),
+                )
+              : Container(),
         ],
       ),
     );
@@ -293,7 +327,7 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
         });
   }
 
-  callAddRouteAPI() async{
+  callAddRouteAPI() async {
     ApiManager apiManager = ApiManager();
     Map<String, dynamic> param = {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
@@ -305,8 +339,8 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
       "endAddress": myController.selectedPlace.value.name,
       "selectedPlace": myController.selectedPlace.value.name
     };
-    await apiManager.addRouteAPI(param).then((value){
-      if(value == true){
+    await apiManager.addRouteAPI(param).then((value) {
+      if (value == true) {
         ScreenTransition.navigateToScreenLeft(screenName: MyRouteListScreen());
       }
     });

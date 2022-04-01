@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
+import 'package:travel_inspiration/MyWidget/MyCommonMethods.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
@@ -23,7 +24,7 @@ class TIReturnFlightRowWIthImage extends StatelessWidget {
         Container(
           height: Get.height*0.08,
           width: Get.width,
-          color:myController.myIntReturnList1.value[index][0].outwardSelect == true ? MyColors.lightGreenColor.withOpacity(0.32):MyColors.expantionTileBgColor.withOpacity(0.32),
+          color:myController.myIntReturnList1.value[index][0].outwardSelect == true ? MyColors.lightGreenColor.withOpacity(0.32):Colors.transparent,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -84,11 +85,7 @@ class TIReturnFlightRowWIthImage extends StatelessWidget {
             ],
           ),
         ),
-        Divider(
-          height: 1,
-          thickness:2,
-          color:MyColors.expantionTileBgColor.withOpacity(0.32)
-        ),
+        MyCommonMethods.myDivider(),
 
       ],
     );

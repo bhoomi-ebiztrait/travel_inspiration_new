@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TIMyCustomRoundedCornerButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
@@ -16,6 +17,8 @@ import 'package:intl/intl.dart';
 
 class TIFlightChoiceOfDateScreen extends StatefulWidget {
 
+  String travelLougeListTitle;
+  TIFlightChoiceOfDateScreen(this.travelLougeListTitle);
   @override
   _TIFlightChoiceOfDateScreenState createState() => _TIFlightChoiceOfDateScreenState();
 }
@@ -40,56 +43,79 @@ class _TIFlightChoiceOfDateScreenState extends State<TIFlightChoiceOfDateScreen>
   }
 
   _buildBodyContent(){
-    return  Column(
-      children: [
-        MyTopHeader(
-          headerName: "",
-          headerImgUrl: MyImageURL.travel_book_top,
-          logoImgUrl: MyImageURL.haudos_logo,
-          imgHeight: Get.height*.12,
-        ),
-        SizedBox(
-          height: Get.height * .020,
-        ),
-        MyText(
-          text_name: "txtChoixdesdates".tr + "  :",
-          myFont: MyFont.Courier_Prime_Bold,
-          txtfontsize: MyFontSize.size13,
-          txtcolor: MyColors.textColor,
-          txtAlign: TextAlign.center,
-        ),
-        SizedBox(height: Get.height * .020,),
-        _buildGotoReturnWidget(),
-        SizedBox(
-          height: Get.height * .020,
-        ),
-        _calenderWidget(),
+    return  SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: Get.height*0.30,
+            width: Get.width,
+            color: MyColors.buttonBgColorHome.withOpacity(0.7),
+            child: Column(
+              children: [
+                MyTopHeader(
+                  logoImgUrl: MyImageURL.haudos_logo,
+                ),
+                MyTitlebar(title: widget.travelLougeListTitle,),
+Spacer(),
+                MyText(
+                  text_name: "txtChoixdesdates".tr + ":",
+                  myFont: MyFont.Courier_Prime_Bold,
+                  txtfontsize: MyFontSize.size15,
+                  txtcolor: MyColors.textColor,
+                  txtAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: Get.height * .020,
+                ),
 
-        SizedBox(
-          height: Get.height * .10,
-        ),
-        TIMyCustomRoundedCornerButton(
-          onClickCallback:(){
+              ],
+            ),
+          ),
+          Container(
+            height: Get.height,
+            width: Get.width,
+            color: MyColors.buttonBgColorHome.withOpacity(0.30),
+            child: Column(
+              children: [
+                _buildGotoReturnWidget(),
+                SizedBox(
+                  height: Get.height * .020,
+                ),
+                _calenderWidget(),
 
-            Get.back(result: _range != "" ? _range : _selectedDate );
-          },
-          buttonWidth: Get.width*.48,
-          buttonHeight: Get.height*.050,
-          btnBgColor: MyColors.expantionTileBgColor,
-          textColor:Colors.white,
-          btnText:"txtValider".tr,
-          fontSize: MyFontSize.size18,
-          myFont: MyFont.Courier_Prime_Bold,
-        )
+                SizedBox(
+                  height: Get.height * .10,
+                ),
+                TIMyCustomRoundedCornerButton(
+                  onClickCallback:(){
 
-      ],
+                    Get.back(result: _range != "" ? _range : _selectedDate );
+                  },
+                  buttonWidth: Get.width*.48,
+                  buttonHeight: Get.height*.050,
+                  btnBgColor: MyColors.buttonBgColor,
+                  textColor:Colors.white,
+                  btnText:"txtValider".tr,
+                  fontSize: MyFontSize.size18,
+                  myFont: MyFont.Courier_Prime_Bold,
+                )
+              ],
+            ),
+          ),
+
+
+
+
+
+        ],
+      ),
     );
   }
 
   _buildGotoReturnWidget(){
     return Container(
-      height: Get.height*.06,
-      color: MyColors.expantionTileBgColor.withOpacity(0.32),
+      height: Get.height*.07,
+      color: MyColors.buttonBgColorHome.withOpacity(0.32),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children:[
@@ -127,14 +153,13 @@ class _TIFlightChoiceOfDateScreenState extends State<TIFlightChoiceOfDateScreen>
           firstDayOfWeek: 1,
         ),
         //selectionRadius: 20,
-       endRangeSelectionColor: MyColors.lineColor,
-        startRangeSelectionColor:MyColors.lineColor,
-        rangeSelectionColor: MyColors.lineColor.withOpacity(0.3),
-        selectionTextStyle: TextStyle(
-            color: MyColors.textColor
-        ),
+       endRangeSelectionColor: MyColors.buttonBgColor,
+        startRangeSelectionColor:MyColors.buttonBgColor,
+        rangeSelectionColor: MyColors.buttonBgColor.withOpacity(0.3),
+        selectionTextStyle: TextStyle(color: MyColors.textColor,fontWeight: FontWeight.bold),
+        selectionColor: MyColors.buttonBgColor,
         //view: DateRangePickerView.year,
-        selectionShape:DateRangePickerSelectionShape.rectangle
+        selectionShape:DateRangePickerSelectionShape.circle
     );
   }
 

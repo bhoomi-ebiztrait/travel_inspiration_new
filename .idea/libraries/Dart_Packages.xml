@@ -26,7 +26,7 @@
         <entry key="camera">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/camera-0.9.4+12/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/camera-0.9.4+17/lib" />
             </list>
           </value>
         </entry>
@@ -61,7 +61,7 @@
         <entry key="chewie">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/chewie-1.1.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/chewie-1.3.1/lib" />
             </list>
           </value>
         </entry>
@@ -131,42 +131,42 @@
         <entry key="firebase_auth">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.3.7/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.3.11/lib" />
             </list>
           </value>
         </entry>
         <entry key="firebase_auth_platform_interface">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-6.1.11/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-6.2.1/lib" />
             </list>
           </value>
         </entry>
         <entry key="firebase_auth_web">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-3.3.7/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-3.3.9/lib" />
             </list>
           </value>
         </entry>
         <entry key="firebase_core">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.12.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.13.1/lib" />
             </list>
           </value>
         </entry>
         <entry key="firebase_core_platform_interface">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.2.4/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.2.5/lib" />
             </list>
           </value>
         </entry>
         <entry key="firebase_core_web">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.5.4/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.6.1/lib" />
             </list>
           </value>
         </entry>
@@ -180,14 +180,14 @@
         <entry key="firebase_messaging_platform_interface">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_platform_interface-3.1.6/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_platform_interface-3.2.1/lib" />
             </list>
           </value>
         </entry>
         <entry key="firebase_messaging_web">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_web-2.2.7/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_web-2.2.9/lib" />
             </list>
           </value>
         </entry>
@@ -208,7 +208,7 @@
         <entry key="flutter_layout_grid">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_layout_grid-1.0.3/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_layout_grid-1.0.6/lib" />
             </list>
           </value>
         </entry>
@@ -250,7 +250,7 @@
         <entry key="flutter_screenutil">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-5.2.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-5.3.1/lib" />
             </list>
           </value>
         </entry>
@@ -285,7 +285,7 @@
         <entry key="fluttertoast">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.8/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.9/lib" />
             </list>
           </value>
         </entry>
@@ -341,7 +341,7 @@
         <entry key="google_maps_flutter">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.1/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.3/lib" />
             </list>
           </value>
         </entry>
@@ -383,28 +383,28 @@
         <entry key="image_cropper">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_cropper-1.4.1/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_cropper-1.5.0/lib" />
             </list>
           </value>
         </entry>
         <entry key="image_picker">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+8/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+11/lib" />
             </list>
           </value>
         </entry>
         <entry key="image_picker_for_web">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.5/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.6/lib" />
             </list>
           </value>
         </entry>
         <entry key="image_picker_platform_interface">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker_platform_interface-2.4.3/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker_platform_interface-2.4.4/lib" />
             </list>
           </value>
         </entry>
@@ -460,7 +460,7 @@
         <entry key="local_auth">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/local_auth-1.1.10/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/local_auth-1.1.11/lib" />
             </list>
           </value>
         </entry>
@@ -530,14 +530,14 @@
         <entry key="path_provider_android">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.11/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.12/lib" />
             </list>
           </value>
         </entry>
         <entry key="path_provider_ios">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.7/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.8/lib" />
             </list>
           </value>
         </entry>
@@ -566,13 +566,6 @@
           <value>
             <list>
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.5/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="pedantic">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/lib" />
             </list>
           </value>
         </entry>
@@ -649,7 +642,7 @@
         <entry key="shared_preferences_ios">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.0.10/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.1.0/lib" />
             </list>
           </value>
         </entry>
@@ -733,28 +726,28 @@
         <entry key="syncfusion_flutter_charts">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_charts-19.4.52/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_charts-19.4.56/lib" />
             </list>
           </value>
         </entry>
         <entry key="syncfusion_flutter_core">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-19.4.52/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-19.4.56/lib" />
             </list>
           </value>
         </entry>
         <entry key="syncfusion_flutter_datepicker">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_datepicker-19.4.52/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_datepicker-19.4.56/lib" />
             </list>
           </value>
         </entry>
         <entry key="syncfusion_flutter_sliders">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_sliders-19.4.52/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_sliders-19.4.56/lib" />
             </list>
           </value>
         </entry>
@@ -831,7 +824,7 @@
         <entry key="url_launcher_web">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.6/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.9/lib" />
             </list>
           </value>
         </entry>
@@ -849,31 +842,38 @@
             </list>
           </value>
         </entry>
+        <entry key="very_good_analysis">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/very_good_analysis-2.4.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="video_player">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player-2.2.18/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player-2.3.0/lib" />
             </list>
           </value>
         </entry>
         <entry key="video_player_android">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_android-2.3.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_android-2.3.2/lib" />
             </list>
           </value>
         </entry>
         <entry key="video_player_avfoundation">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_avfoundation-2.3.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_avfoundation-2.3.1/lib" />
             </list>
           </value>
         </entry>
         <entry key="video_player_platform_interface">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_platform_interface-5.1.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_platform_interface-5.1.1/lib" />
             </list>
           </value>
         </entry>
@@ -887,7 +887,7 @@
         <entry key="wakelock">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/wakelock-0.6.1+2/lib" />
             </list>
           </value>
         </entry>
@@ -950,7 +950,7 @@
         <entry key="win32">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/win32-2.4.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/win32-2.5.0/lib" />
             </list>
           </value>
         </entry>
@@ -974,12 +974,12 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/android_intent-2.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/camera-0.9.4+12/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/camera-0.9.4+17/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/camera_platform_interface-2.1.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/camera_web-0.2.1+3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/characters-1.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/charcode-1.3.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/chewie-1.1.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/chewie-1.3.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/chewie_audio-1.3.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/clock-1.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0/lib" />
@@ -989,25 +989,25 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/ffi-1.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/file-6.1.2/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.3.7/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-6.1.11/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-3.3.7/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.12.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.2.4/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.5.4/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.3.11/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-6.2.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-3.3.9/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.13.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.2.5/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.6.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-10.0.9/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_platform_interface-3.1.6/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_web-2.2.7/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_platform_interface-3.2.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_web-2.2.9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_html-2.2.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_layout_grid-1.0.3/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_layout_grid-1.0.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_math_fork-0.5.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_polyline_points-1.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_rating_bar-4.0.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-5.2.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-5.3.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_slidable-1.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.23.0+1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.8/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/geocode-1.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/geolocator-7.7.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/geolocator_android-2.1.0/lib" />
@@ -1015,16 +1015,16 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/geolocator_platform_interface-2.3.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/geolocator_web-2.0.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/get-4.6.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter_platform_interface-2.1.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/google_place-0.4.7/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/html-0.15.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_cropper-1.4.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+8/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.5/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker_platform_interface-2.4.3/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_cropper-1.5.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+11/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.6/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/image_picker_platform_interface-2.4.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/in_app_purchase-1.0.9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/in_app_purchase_android-0.1.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/in_app_purchase_ios-0.1.4/lib" />
@@ -1032,7 +1032,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.4.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/local_auth-1.1.10/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/local_auth-1.1.11/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/material_color_utilities-0.1.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0/lib" />
@@ -1042,13 +1042,12 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_drawing-0.5.1+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_parsing-0.2.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.9/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.11/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.7/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.12/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_platform_interface-2.0.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.5/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.3.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/permission_handler_platform_interface-3.7.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/petitparser-4.4.0/lib" />
@@ -1059,7 +1058,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/quiver-3.0.1+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.13/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.11/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.0.10/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-2.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-2.0.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shared_preferences_platform_interface-2.0.0/lib" />
@@ -1070,10 +1069,10 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/stream_channel-2.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/stream_transform-2.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_charts-19.4.52/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-19.4.52/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_datepicker-19.4.52/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_sliders-19.4.52/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_charts-19.4.56/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-19.4.56/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_datepicker-19.4.56/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_sliders-19.4.56/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/tuple-2.0.0/lib" />
@@ -1084,15 +1083,16 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-3.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-3.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_platform_interface-2.0.5/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.6/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-3.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player-2.2.18/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_android-2.3.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_avfoundation-2.3.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_platform_interface-5.1.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/very_good_analysis-2.4.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player-2.3.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_android-2.3.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_avfoundation-2.3.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_platform_interface-5.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/video_player_web-2.0.7/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/wakelock-0.6.1+2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/wakelock_macos-0.4.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/wakelock_platform_interface-0.3.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/wakelock_web-0.4.0/lib" />
@@ -1101,7 +1101,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/webview_flutter_android-2.8.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/webview_flutter_platform_interface-1.8.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-2.7.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/win32-2.4.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/win32-2.5.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/xml-5.3.1/lib" />
       <root url="file://$USER_HOME$/Desktop/Bhoomi/flutter/bin/cache/pkg/sky_engine/lib" />

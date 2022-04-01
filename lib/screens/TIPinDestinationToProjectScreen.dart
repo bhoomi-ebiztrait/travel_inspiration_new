@@ -145,7 +145,8 @@ class _TIPinDestinationToProjectScreenState
                     // alignment: Alignment.topCenter,
                     height: Get.height,
                     width: Get.width * 0.28,
-                    color: MyColors.whiteColor,
+                    color: Colors.transparent,
+                    // color: Colors.white.withOpacity(0.32),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -249,7 +250,7 @@ class _TIPinDestinationToProjectScreenState
                       )
                     ],
                   ),
-                  tileColor: MyColors.expantionTileBgColor.withOpacity(0.32),
+                  tileColor: MyColors.buttonBgColorHome.withOpacity(0.32),
                   /*tileColor: myController.allProjectList[index].isSelected
                       ? MyColors.tileColor
                       : MyColors.expantionTileBgColor.withOpacity(0.32),*/

@@ -426,4 +426,11 @@ class MyCommonMethods {
       width: Get.width * 0.4,
     );
   }
+  static myDivider(){
+    return Divider(
+      height: 0.1,
+      thickness: 1,
+      color: MyColors.buttonBgColorHome.withOpacity(0.75),
+    );
+  }
 }

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TIMyCustomRoundedCornerButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/TIModel/TIAvailableFlightModel.dart';
@@ -16,7 +17,8 @@ import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
-
+  String travelogueTitle;
+  TIOneWayReturnFlightCompleteScreen(this.travelogueTitle);
   MyController myController = Get.put(MyController());
 
   @override
@@ -32,100 +34,122 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          MyTopHeader(
-            headerName: "",
-            headerImgUrl: MyImageURL.travel_book_top,
-            logoImgUrl: MyImageURL.haudos_logo,
-            imgHeight: Get.height * .12,
+          Container(
+            height: Get.height*0.30,
+            width: Get.width,
+            color: MyColors.buttonBgColorHome.withOpacity(0.7),
+            child: Column(
+              children: [
+                MyTopHeader(
+                  logoImgUrl: MyImageURL.haudos_logo,
+                ),
+                MyTitlebar(title: travelogueTitle,),
+              ],
+            ),
           ),
-          SizedBox(
-            height: Get.height * .03,
+          Container(
+            height: Get.height,
+            width: Get.width,
+            color: MyColors.buttonBgColorHome.withOpacity(0.3),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: Get.height * .03,
+                ),
+                Stack(
+                  alignment: Alignment.centerRight,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MyText(
+                          text_name: myController.onwardSelectedFlight[0].intDepartureAirportName,
+                          myFont: MyFont.Courier_Prime_Bold,
+                          txtfontsize: MyFontSize.size13,
+                          txtcolor: MyColors.textColor,
+                          txtAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          width: Get.width * .020,
+                        ),
+                        Container(
+                          color: MyColors.textColor,
+                          height: 2,
+                          width: 8,
+                        ),
+                        // Image.asset(MyImageURL.arrow_way3x),
+                        SizedBox(
+                          width: Get.width * .020,
+                        ),
+                        MyText(
+                          text_name: myController.onwardSelectedFlight[myController.onwardSelectedFlight.length-1].intArrivalAirportName,
+                          myFont: MyFont.Courier_Prime_Bold,
+                          txtfontsize: MyFontSize.size13,
+                          txtcolor: MyColors.textColor,
+                          txtAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: Get.width * .06),
+                      child:GestureDetector(
+                        onTap: (){
+                          Get.to(TIFilterSortFlightScreen(travelogueTitle));
+                        },
+                        child: Image.asset(MyImageURL.filter3x,height: 60,width: 60,),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: Get.height * .02,
+                ),
+                _selectedFlightOneWayRow(),
+                SizedBox(
+                  height: Get.height * .02,
+                ),
+                _togoFlightDetail(context),
+                SizedBox(
+                  height: Get.height * .010,
+                ),
+                _returnFlightDetail(context),
+                SizedBox(
+                  height: Get.height * .010,
+                ),
+                _bottomTextLayout(),
+                SizedBox(
+                  height: Get.height * .020,
+                ),
+                TIMyCustomRoundedCornerButton(
+                  onClickCallback: () async{
+                    //Get.back();
+                    https://www.skyscanner.co.in/transport/flights/amd/blr/220122/?adults=1&adultsv2=1&
+                    // cabinclass=economy&children=0&childrenv2=&destinationentityid=27539471
+                    // &inboundaltsenabled=false&infants=0&originentityid=27536554&
+                    // outboundaltsenabled=false&preferdirects=false&preferflexible=false&ref=home&rtn=0
+                    const url = 'https://www.skyscanner.co.in/';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  borderRadius: Get.width*.060,
+                  buttonWidth: Get.width * .60,
+                  buttonHeight: Get.height * .060,
+                  btnBgColor: MyColors.buttonBgColor,
+                  textColor: Colors.white,
+                  btnText: "txtReserversurle".tr,
+                  fontSize: MyFontSize.size13,
+                  myFont: MyFont.Courier_Prime_Bold,
+                ),
+                SizedBox(
+                  height: Get.height * .04,
+                ),
+              ],
+            ),
           ),
-          Stack(
-            alignment: Alignment.centerRight,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MyText(
-                    text_name: myController.onwardSelectedFlight[0].intDepartureAirportName,
-                    myFont: MyFont.Courier_Prime_Bold,
-                    txtfontsize: MyFontSize.size13,
-                    txtcolor: MyColors.textColor,
-                    txtAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    width: Get.width * .040,
-                  ),
-                  Image.asset(MyImageURL.arrow_way3x),
-                  SizedBox(
-                    width: Get.width * .040,
-                  ),
-                  MyText(
-                    text_name: myController.onwardSelectedFlight[myController.onwardSelectedFlight.length-1].intArrivalAirportName,
-                    myFont: MyFont.Courier_Prime_Bold,
-                    txtfontsize: MyFontSize.size13,
-                    txtcolor: MyColors.textColor,
-                    txtAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-       Padding(
-        padding: EdgeInsets.only(right: Get.width * .06),
-        child:GestureDetector(
-          onTap: (){
-            Get.to(TIFilterSortFlightScreen());
-          },
-          child: Image.asset(MyImageURL.filter3x),
-        ),
-       ),
-            ],
-          ),
-          SizedBox(
-            height: Get.height * .02,
-          ),
-          _selectedFlightOneWayRow(),
-          SizedBox(
-            height: Get.height * .02,
-          ),
-          _togoFlightDetail(context),
-          SizedBox(
-            height: Get.height * .010,
-          ),
-          _returnFlightDetail(context),
-          SizedBox(
-            height: Get.height * .010,
-          ),
-          _bottomTextLayout(),
-          SizedBox(
-            height: Get.height * .020,
-          ),
-          TIMyCustomRoundedCornerButton(
-            onClickCallback: () async{
-              //Get.back();
-              https://www.skyscanner.co.in/transport/flights/amd/blr/220122/?adults=1&adultsv2=1&
-              // cabinclass=economy&children=0&childrenv2=&destinationentityid=27539471
-              // &inboundaltsenabled=false&infants=0&originentityid=27536554&
-              // outboundaltsenabled=false&preferdirects=false&preferflexible=false&ref=home&rtn=0
-              const url = 'https://www.skyscanner.co.in/';
-              if (await canLaunch(url)) {
-              await launch(url);
-              } else {
-              throw 'Could not launch $url';
-              }
-            },
-            borderRadius: Get.width*.060,
-            buttonWidth: Get.width * .60,
-            buttonHeight: Get.height * .060,
-            btnBgColor: MyColors.expantionTileBgColor,
-            textColor: Colors.white,
-            btnText: "txtReserversurle".tr,
-            fontSize: MyFontSize.size13,
-            myFont: MyFont.Courier_Prime_Bold,
-          ),
-          SizedBox(
-            height: Get.height * .04,
-          ),
+
         ],
       ),
     );
@@ -152,7 +176,7 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
           SizedBox(
             width: myController.toGoReturnSwitch.value == false ? Get.width * .040:0,
           ),
-          myController.toGoReturnSwitch.value == false ? Image.asset(MyImageURL.arrow_way3x) :Container(),
+          myController.toGoReturnSwitch.value == false ? Image.asset(MyImageURL.arrow_way3x,height: 20,width: 30,) :Container(),
           SizedBox(
             width: myController.toGoReturnSwitch.value == false ? Get.width * .020 :0,
           ),
@@ -184,7 +208,8 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
         margin: EdgeInsets.only(left: Get.width * .05, right: Get.width * .05),
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: MyColors.expantionTileBgColor.withOpacity(0.32),
+          border: Border.all(color: MyColors.textColor),
+            color: MyColors.whiteColor.withOpacity(0.32),
             borderRadius: BorderRadius.all(Radius.circular(Get.width * .06))),
         child: Theme(
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
@@ -234,7 +259,7 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
                       MyTextStart(
                         text_name:myController.onwardSelectedFlight[0].flightNumber,
                         // text_name: myController.flightList.value[index].intOnward.flightSegments[0].flightNumber,
-                        myFont: MyFont.Courier_Prime_Bold,
+                        myFont: MyFont.Courier_Prime,
                         txtfontsize: MyFontSize.size10,
                         txtcolor: MyColors.textColor,
                       ),
@@ -301,7 +326,7 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
                           txtcolor: MyColors.textColor,
                         ),
                         SizedBox(
-                          height: Get.height * .05,
+                          height: Get.height * .02,
                         ),
                       ],
                     );
@@ -314,7 +339,7 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
                       : MyImageURL.arrow_dropdown_down,
                     height: Get.height*.025,
                     width: Get.height*.025,
-                    fit: BoxFit.contain,)),
+                    fit: BoxFit.contain,color: MyColors.buttonBgColor,)),
               onExpansionChanged: (bool isExpanding) {
                 myController.toGoExpanded.value = isExpanding;
               }),
@@ -488,7 +513,8 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
           margin: EdgeInsets.only(left: Get.width * .05, right: Get.width * .05),
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: MyColors.expantionTileBgColor.withOpacity(0.32),
+              border: Border.all(color: MyColors.textColor),
+              color: MyColors.whiteColor.withOpacity(0.32),
               borderRadius: BorderRadius.all(Radius.circular(Get.width * .06))),
           child: Theme(
             data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
@@ -543,7 +569,7 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
                         MyTextStart(
                           text_name:myController.returnSelectedFlight[0].flightNumber,
                           // text_name: myController.flightList.value[index].intOnward.flightSegments[0].flightNumber,
-                          myFont: MyFont.Courier_Prime_Bold,
+                          myFont: MyFont.Courier_Prime,
                           txtfontsize: MyFontSize.size10,
                           txtcolor: MyColors.textColor,
                         ),
@@ -610,7 +636,7 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
                                 txtcolor: MyColors.textColor,
                               ),
                               SizedBox(
-                                height: Get.height * .05,
+                                height: Get.height * .02,
                               ),
                             ],
                           ),
@@ -623,7 +649,7 @@ class TIOneWayReturnFlightCompleteScreen extends StatelessWidget {
                         : MyImageURL.arrow_dropdown_down,
                       height: Get.height*.025,
                       width: Get.height*.025,
-                      fit: BoxFit.contain,)),
+                      fit: BoxFit.contain,color: MyColors.buttonBgColor,)),
                 onExpansionChanged: (bool isExpanding) {
                   myController.toGoExpanded.value = isExpanding;
                 }),

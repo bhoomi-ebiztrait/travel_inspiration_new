@@ -178,16 +178,16 @@ print("${dateController.selectedDate.value}");
 
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 65.0),
+        padding: const EdgeInsets.symmetric(horizontal: 48.0),
         child: Container(
           width: Get.width,
-          height: 45,
+          height: 55,
           // width: Get.width*0.2,
 
           decoration: BoxDecoration(
               color: MyColors.whiteColor.withOpacity(1),
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+              borderRadius: BorderRadius.all(Radius.circular(25)),
               boxShadow: [
                 BoxShadow(
                   color: MyColors.dialog_shadowColor,

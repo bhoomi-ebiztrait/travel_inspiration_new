@@ -361,7 +361,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
   }
   /*============ getAvailable flight*/
 
-  void getFlightSearch(param,tofilter) async {
+  void getFlightSearch(param,tofilter,  travelLougeListTitle) async {
     try {
       Get.dialog(Loading());
       myIntOnwordsList1.value.clear();
@@ -388,7 +388,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
         }
         Get.back();
         ScreenTransition.navigateToScreenLeft(
-            screenName: TIAvailableFlightScreen());
+            screenName: TIAvailableFlightScreen(travelLougeListTitle));
 
       }else{
         Get.back();
@@ -726,7 +726,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
         isAddFlightMenual_FT_ManualAddS.value = false;
         selectedDate.value = "";
         selectedDestinationDate.value = "";
-
+        Get.back();
       }
     } else {
       MyCommonMethods.showInfoCenterDialog(

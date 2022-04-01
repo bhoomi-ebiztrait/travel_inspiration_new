@@ -125,10 +125,18 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
           // mainAxisAlignment: MainAxisAlignment.start,
           // mainAxisSize: MainAxisSize.min,
           children: [
-            buildAddress(),
-            SizedBox(height: 20,),
-            isClickedDetails==true ? buildDistanceUI() :buildButtons(),
-            SizedBox(height: 30,),
+            Container(
+              color: MyColors.buttonBgColorHome.withOpacity(0.7),
+              child: Column(
+                children: [
+                  buildAddress(),
+                  SizedBox(height: 20,),
+                  isClickedDetails==true ? buildDistanceUI() :buildButtons(),
+                  SizedBox(height: 30,),
+                ],
+              ),
+            ),
+
             buildMap(),
             // SizedBox(height: 20,),
 
@@ -162,6 +170,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
               onTap: (){
@@ -177,13 +186,21 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
                 width: 25,)),
           SizedBox(width: 10,),
           Flexible(
-            child: MyTextStart(text_name: "${myController.selectedPlace.value.description}",
-              txtcolor: MyColors.textColor,
-              txtfontsize: MyFontSize.size13,
-              myFont: MyStrings.courier_prime_bold,
-              // maxLine: 5,
+            child: Container(
+              width: Get.width*0.6,
+              child: MyTextStart(text_name: "${myController.selectedPlace.value.description}",
+                txtcolor: MyColors.textColor,
+                txtfontsize: MyFontSize.size13,
+                myFont: MyStrings.courier_prime_bold,
+                // maxLine: 5,
+              ),
             ),
           ),
+          GestureDetector(
+              onTap: (){
+                CommonMethod.getAppMode();
+              },
+              child: Image.asset(MyImageURL.home_icon,width: 50,)),
         ],
       ),
     );
@@ -204,6 +221,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
                   if(address == null){
                    getCurrentAddress();
                   }else {
+                    print("myAdd:: ${address.streetAddress}");
                     ScreenTransition.navigateToScreenLeft(
                         screenName: RouteDetailsScreen(currCity: address.city,
                           currAddress: address.streetAddress,currPos: widget.currentPosition));
@@ -225,14 +243,14 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
               text_name: title,
               txtfontsize: MyFontSize.size10,
               myFont: MyStrings.courier_prime_bold,
-              txtcolor: MyColors.buttonBgColor.withOpacity(1),
+              txtcolor: MyColors.whiteColor,
             ),
             SizedBox(height: 4,),
             MyTextStart(
               text_name: value,
               txtfontsize: MyFontSize.size14,
               myFont: MyStrings.courier_prime_bold,
-              txtcolor: MyColors.buttonBgColor.withOpacity(1),
+              txtcolor: MyColors.whiteColor,
             ),
           ],
         );
@@ -263,7 +281,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
         width: Get.width * .38,
         height: Get.height * .050,
         decoration: BoxDecoration(
-          color: MyColors.expantionTileBgColor,
+          color: MyColors.buttonBgColor,
           borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
         ),
         child: MyText(
@@ -286,7 +304,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
         width: Get.width * .38,
         height: Get.height * .050,
         decoration: BoxDecoration(
-          color: MyColors.expantionTileBgColor,
+          color: MyColors.buttonBgColor,
           borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
         ),
         child: MyText(

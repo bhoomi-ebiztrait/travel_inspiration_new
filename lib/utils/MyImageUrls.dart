@@ -17,6 +17,7 @@ class MyImageURL {
   static const google = root + "google.png";
   static const info = root + "info.png";
   static const info_big = root + "info_big.png";
+  static const add_btn_white = root + "add_btn_white.png";
   static const share_btn = root + "share_btn.png";
   static const fleche = root + "fleche.png";
   static const check_circle = root + "check_circle.png";

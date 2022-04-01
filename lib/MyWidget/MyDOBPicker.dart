@@ -55,7 +55,7 @@ class _MyDOBPickerState extends State<MyDOBPicker> {
         padding: const EdgeInsets.symmetric(horizontal: 48.0),
         child: Container(
           width: Get.width,
-          height: 60,
+          height: 55,
           // width: Get.width*0.2,
 
           decoration: BoxDecoration(
