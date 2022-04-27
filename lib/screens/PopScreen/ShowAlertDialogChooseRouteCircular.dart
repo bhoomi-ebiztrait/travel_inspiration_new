@@ -6,10 +6,11 @@ import 'package:travel_inspiration/utils/MyFont.dart';
 import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 
-class AlertDialogCircular extends StatelessWidget {
+class ShowAlertDialogChooseRouteCircular extends StatelessWidget {
   String title;
+  String details;
 
-  AlertDialogCircular({Key key, this.title}) : super(key: key);
+  ShowAlertDialogChooseRouteCircular({Key key, this.title,this.details}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +51,39 @@ class AlertDialogCircular extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: Get.height * 0.03,
+                  height: Get.height * 0.04,
                 ),
+
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: MyColors.textColor,
+                      fontSize: MyFontSize.size13,
+                      fontFamily: MyFont.Courier_Prime_Bold),
+                ),
+                SizedBox(
+                  height: Get.height * .008,
+                ),
+                Container(
+                  height: Get.height * .010,
+                  width: Get.height * 0.16,
+                  decoration: BoxDecoration(
+                      color: MyColors.lightGreenColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
+
+                SizedBox(
+                  height: Get.height * .01,
+                ),
+
                 Container(
                   margin: EdgeInsets.only(left: 50,right: 50),
                   height: 100,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 5.0,right: 5),
+                    padding: const EdgeInsets.only(left: 8.0,right: 8),
                     child: MyText(
-                      text_name: title,
+                      text_name: details,
                       txtcolor: MyColors.textColor,
                       txtfontsize: MyFontSize.size13,
                      // txtAlign: TextAlign.center,

@@ -244,11 +244,14 @@ class NotificationScreenState extends State<NotificationScreen> {
         : "txtArretermonparcours".tr;
     return Column(
       children: [
+        SizedBox(
+          height: Get.height * .040,
+        ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
           child: MyText(
             text_name: isStopped == true
-                ? "choose_destination_complete_vacation_plan".tr
+                ? "notify_title".tr
                 : "current_destination".tr,
             myFont: MyFont.Courier_Prime_Bold,
             txtfontsize: MyFontSize.size13,
@@ -261,13 +264,13 @@ class NotificationScreenState extends State<NotificationScreen> {
           height: Get.height * .030,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
           child: MyText(
             text_name: isStopped == true
-                ? "choose_destination_complete_vacation_plan".tr
+                ? "notify_subtitle".tr
                 : "current_destination".tr,
-            myFont: MyFont.Courier_Prime_Bold,
-            txtfontsize: MyFontSize.size13,
+            myFont: MyFont.Courier_Prime,
+            txtfontsize: MyFontSize.size11,
             txtcolor: MyColors.textColor,
             txtAlign: TextAlign.center,
             //height: 1,
@@ -290,12 +293,12 @@ class NotificationScreenState extends State<NotificationScreen> {
           fontSize: MyFontSize.size9,
           textColor: MyColors.txtWhiteColor,
           myFont: MyFont.Courier_Prime_Bold,
-          btnBgColor: MyColors.expantionTileBgColor,
+          btnBgColor: MyColors.buttonBgColor,
           buttonWidth: Get.width * .40,
           buttonHeight: Get.height * .040,
         ),
         SizedBox(
-          height: Get.height * 0.05,
+          height: Get.height * 0.02,
         ),
         Expanded(child: _desinationInProgressList()),
       ],

@@ -321,9 +321,14 @@ class TiMyFlightTrainScreenState extends State<TiMyFlightTrainScreen> {
                                 print("returned: ${value.length}");
                                 for (int i = 0; i < value.length; i++) {
                                   print(value[i]);
-                                  myFlightDetailList[index].subTitle =
-                                      myFlightDetailList[index].subTitle +
-                                          ", " + value[i];
+                                  if(i==0){
+                                    myFlightDetailList[index].subTitle = value[i];
+                                  }
+                                  else {
+                                    myFlightDetailList[index].subTitle =
+                                        myFlightDetailList[index].subTitle +
+                                            ", " + value[i];
+                                  }
 
                                 }
                                 myController.passenger = myFlightDetailList[index].subTitle;

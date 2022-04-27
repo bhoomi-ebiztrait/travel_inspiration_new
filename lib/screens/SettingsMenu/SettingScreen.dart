@@ -9,6 +9,7 @@ import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
+import 'package:travel_inspiration/screens/ModifyPhoneNumberScreen.dart';
 import 'package:travel_inspiration/screens/SettingsMenu/AutersInformationScreen.dart';
 import 'package:travel_inspiration/screens/SettingsMenu/BecomePremiumScreen.dart';
 import 'package:travel_inspiration/screens/SettingsMenu/ChangePasswordScreen.dart';
@@ -131,7 +132,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   setDivider(MyColors.dialog_shadowColor, 1),
                   buildDetails("become_premium".tr,null,param.become_premium),
                   setDivider(MyColors.dialog_shadowColor, 1),
-                  buildDetails("change_my_number".tr,MyPreference.getPrefStringValue(key: MyPreference.address)!= "null" ? MyPreference.getPrefStringValue(key: MyPreference.address) : "",param.phone_no),
+                  buildDetails("change_my_number".tr,MyPreference.getPrefStringValue(key: MyPreference.phoneNumber)!= "null" ? MyPreference.getPrefStringValue(key: MyPreference.phoneNumber) : "",param.phone_no),
                   setDivider(MyColors.dialog_shadowColor, 1),
                   // buildDetails("address".tr,null,param.address),
                   // setDivider(MyColors.dialog_shadowColor, 1),
@@ -267,7 +268,17 @@ class _SettingScreenState extends State<SettingScreen> {
           }
           // ScreenTransition.navigateToScreenLeft(screenName: ChangedAddressScreen());
 
-        }else if(param.language==enumVal){
+        }else if(param.phone_no == enumVal){
+
+          final result =  await Get.to(()=>ModifyPhoneNumberScreen());
+          if(result == true){
+            setState(() {
+            });
+          }
+          // ScreenTransition.navigateToScreenLeft(screenName: ChangedAddressScreen());
+
+        }
+        else if(param.language==enumVal){
          ScreenTransition.navigateToScreenLeft(screenName: TIMyAccountLanguageScreen());
 
         }else if(param.become_premium==enumVal){
@@ -343,6 +354,7 @@ class _SettingScreenState extends State<SettingScreen> {
          Get.back();
          if(response.isSuccess()){
            MyPreference.clearPref();
+           print("userId::: ${MyPreference.getPrefStringValue(key: MyPreference.userId)}");
            ScreenTransition.navigateOffAll(screenName: HomeScreen());
          }else{
            MyUtility.showErrorMsg(response.getMessage());

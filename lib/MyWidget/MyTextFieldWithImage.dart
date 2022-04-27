@@ -309,6 +309,7 @@ class MyTextFieldHintWithImage extends StatelessWidget {
   String edError;
   Color color;
   Color labelColor = MyColors.textColor;
+  Color hintColor = MyColors.textColor.withOpacity(0.35);
   String imageUrl;
   String suffixImageUrl;
   TextInputType edinputType;
@@ -333,6 +334,7 @@ class MyTextFieldHintWithImage extends StatelessWidget {
         this.suffixImageUrl,
         this.color,
         this.labelColor ,
+        this.hintColor ,
         this.edinputType,
         this.addHint,
         this.edError,
@@ -378,7 +380,7 @@ class MyTextFieldHintWithImage extends StatelessWidget {
 
           alignLabelWithHint: true,
           hintText: addHint,
-          hintStyle: TextStyle(color: MyColors.textColor.withOpacity(0.35)),
+          hintStyle: TextStyle(color: hintColor),
           counterText: "",
           filled: true,
           prefixIcon: imageUrl != null ?new Container(

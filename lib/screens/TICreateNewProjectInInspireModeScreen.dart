@@ -27,7 +27,7 @@ class _TICreateNewProjectInInspireModeScreenState
   Widget build(BuildContext context) {
     return SafeArea(
       child:
-          Scaffold(backgroundColor: Colors.black12,
+          Scaffold(
               body: _buildBodyContent()),
     );
   }

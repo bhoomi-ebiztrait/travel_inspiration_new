@@ -15,7 +15,9 @@ import 'package:travel_inspiration/utils/MyUtility.dart';
 import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
 class SignupConfirmScreen extends StatelessWidget {
-  const SignupConfirmScreen({Key key}) : super(key: key);
+
+  String userId;
+  SignupConfirmScreen(this.userId);
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +94,7 @@ class SignupConfirmScreen extends StatelessWidget {
    callConfirmUserAPI() async{
     ApiManager apiManager = ApiManager();
     Get.dialog(Loading());
-    await apiManager.confirmUserAPI().then((response){
+    await apiManager.confirmUserAPI(userId).then((response){
       Get.back();
       if(response == null)
         MyUtility.showErrorMsg("Email not varified");
@@ -100,6 +102,7 @@ class SignupConfirmScreen extends StatelessWidget {
         if (response.isSuccess()) {
           var result = response.getDATAJSONArray1()[ApiParameter.userInfo];
 
+          print("insiddddddd");
           //saved user id and email in pref
           MyPreference.setPrefStringValue(
               key: MyPreference.userId,

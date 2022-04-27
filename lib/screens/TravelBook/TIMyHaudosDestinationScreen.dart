@@ -153,93 +153,98 @@ class _TIMyHaudosDestinationScreenState extends State<TIMyHaudosDestinationScree
                     // color: Colors.red,
                     child: Stack(
                       children: [
-                        TICommonPopup(
-                            childWidget: Column(
-                          children: [
-                            Stack(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: Get.height * .025,
-                                    right: Get.height*.02,
-                                  ),
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      width: Get.width * .55,
-                                      child: MyText(
-                                        text_name:
-                                            widget.popupTitle.toUpperCase() ?? "",
-                                        myFont: MyFont.Cagliostro_reguler,
-                                        txtfontsize: MyFontSize.size18,
-                                        txtcolor: MyColors.buttonBgColorHome,
-                                        txtAlign: TextAlign.center,
+                        Positioned(
+                          top: 75,
+                          left: 40,
+                          right: 40,
+                          child: TICommonPopup(
+                              childWidget: Column(
+                            children: [
+                              Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: Get.height * .025,
+                                      right: Get.height*.02,
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Container(
+                                        width: Get.width * .55,
+                                        child: MyText(
+                                          text_name:
+                                              widget.popupTitle.toUpperCase() ?? "",
+                                          myFont: MyFont.Cagliostro_reguler,
+                                          txtfontsize: MyFontSize.size18,
+                                          txtcolor: MyColors.buttonBgColorHome,
+                                          txtAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    myController.showPrepareProjectPopup
-                                        .value = false;
-                                    myController.isFavMenu.value = false;
-                                  },
-                                  child: Align(
-                                    alignment: Alignment.topRight,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: Get.height * .020,
-                                          right: Get.height * .020),
-                                      child: Image.asset(
-                                        MyImageURL.cross3x,
-                                        height: Get.height * .045,
-                                        width: Get.height * .045,
-                                        fit: BoxFit.contain,
+                                  GestureDetector(
+                                    onTap: () {
+                                      myController.showPrepareProjectPopup
+                                          .value = false;
+                                      myController.isFavMenu.value = false;
+                                    },
+                                    child: Align(
+                                      alignment: Alignment.topRight,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            top: Get.height * .020,
+                                            right: Get.height * .020),
+                                        child: Image.asset(
+                                          MyImageURL.cross3x,
+                                          height: Get.height * .045,
+                                          width: Get.height * .045,
+                                          fit: BoxFit.contain,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: Get.height * .025,
-                            ),
-                            MyText(
-                              text_name: MyPreference.getPrefIntValue(key: MyPreference.APPMODE) == ApiParameter.REFLECT_MODE ?"reflect_mode".tr:"inspire_mode".tr,
-                              myFont: MyFont.Courier_Prime_Bold,
-                              txtfontsize: MyFontSize.size18,
-                              txtcolor: MyColors.textColor,
-                              txtAlign: TextAlign.center,
-                              height: 0.8,
-                            ),
-                            MyText(
-                              text_name: "${myController.selectedPlace.value.km != null ?myController.selectedPlace.value.km.toStringAsFixed(2): "0"} KM",
-                              myFont: MyFont.Courier_Prime_Bold,
-                              txtfontsize: MyFontSize.size18,
-                              txtcolor: MyColors.textColor,
-                              txtAlign: TextAlign.center,
-                              height: 1,
-                            ),
-                            SizedBox(
-                              height: Get.height * .05,
-                            ),
-                            Container(
-                              height: Get.height * .010,
-                              width: Get.width * .60,
-                              decoration: BoxDecoration(
-                                  color: MyColors.buttonBgColor,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(Get.width * .020))),
-                            ),
-                            SizedBox(
-                              height: Get.height * .05,
-                            ),
-                            Container(
-                              height: Get.height * .25,
-                              child: TIPopupGridviewMenu(popupTitle: widget.popupTitle,startIndex: 0,endIndex: 5,),
-                            )
-                          ],
-                        )),
+                                ],
+                              ),
+                              SizedBox(
+                                height: Get.height * .025,
+                              ),
+                              MyText(
+                                text_name: MyPreference.getPrefIntValue(key: MyPreference.APPMODE) == ApiParameter.REFLECT_MODE ?"reflect_mode".tr:"inspire_mode".tr,
+                                myFont: MyFont.Courier_Prime_Bold,
+                                txtfontsize: MyFontSize.size18,
+                                txtcolor: MyColors.textColor,
+                                txtAlign: TextAlign.center,
+                                height: 0.8,
+                              ),
+                              MyText(
+                                text_name: "${myController.selectedPlace.value.km != null ?myController.selectedPlace.value.km.toStringAsFixed(2): "0"} KM",
+                                myFont: MyFont.Courier_Prime_Bold,
+                                txtfontsize: MyFontSize.size18,
+                                txtcolor: MyColors.textColor,
+                                txtAlign: TextAlign.center,
+                                height: 1,
+                              ),
+                              SizedBox(
+                                height: Get.height * .05,
+                              ),
+                              Container(
+                                height: Get.height * .010,
+                                width: Get.width * .60,
+                                decoration: BoxDecoration(
+                                    color: MyColors.buttonBgColor,
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(Get.width * .020))),
+                              ),
+                              SizedBox(
+                                height: Get.height * .05,
+                              ),
+                              Container(
+                                height: Get.height * .25,
+                                child: TIPopupGridviewMenu(popupTitle: widget.popupTitle,startIndex: 0,endIndex: 5,),
+                              )
+                            ],
+                          )),
+                        ),
 
                       ],
                     )))),

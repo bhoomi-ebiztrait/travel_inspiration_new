@@ -317,6 +317,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
               myText: getSelectedProj(),
               txtFontSize: MyFontSize.size16,
               txtColor: MyColors.whiteColor,
+              quoteColor: MyColors.whiteColor,
               myFont: MyStrings.courier_prime_italic,
                     );
           }),

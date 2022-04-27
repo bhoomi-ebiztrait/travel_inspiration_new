@@ -246,7 +246,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
     ApiManager apiManager = ApiManager();
     Map<String, dynamic> param = {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
-      "project_id": myController.selectedProject.value.id.toString(),
+      "project_id": myController.selectedProject.value.id.toString() != null ? myController.selectedProject.value.id.toString(): "-1",
       "name": projNameController.text,
       "start_vacation_date": start_date,
       "no_person": personCounter.toString(),

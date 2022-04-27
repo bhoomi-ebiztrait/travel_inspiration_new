@@ -23,8 +23,8 @@ class MyUtility{
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor:MyColors.lightGreenColor,
-      textColor:MyColors.textColor,
+      backgroundColor:MyColors.buttonBgColor,
+      textColor:MyColors.whiteColor,
       fontSize: 16.0,
     );
     // Get.snackbar("Success", msg, backgroundColor: MyColors.btngradianttop,

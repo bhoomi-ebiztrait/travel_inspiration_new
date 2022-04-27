@@ -100,7 +100,7 @@ _buildMyDestination(double updatedKm){
     child: Container(
       margin: EdgeInsets.only(left: Get.width * .07),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Image.asset(MyImageURL.glob_icoc),
+        Image.asset(MyImageURL.glob_icoc,color: MyColors.buttonBgColor,),
         SizedBox(
           width: Get.width * .040,
         ),
@@ -127,7 +127,7 @@ _buildMyCities() {
     child: Container(
       margin: EdgeInsets.only(left: Get.width * .07),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Image.asset(MyImageURL.red_heart),
+        Image.asset(MyImageURL.red_heart,height: 35,width: 35,),
         SizedBox(
           width: Get.width * .040,
         ),
@@ -154,7 +154,7 @@ _buildMyProject() {
     child: Container(
       margin: EdgeInsets.only(left: Get.width * .07),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Image.asset(MyImageURL.projet_icon),
+        Image.asset(MyImageURL.projet_icon,height: 35,width: 35),
         SizedBox(
           width: Get.width * .040,
         ),

@@ -12,6 +12,7 @@ class MyPreference{
   static String dob = "dob";
   static String country = "country";
   static String address = "address";
+  static String phoneNumber = "phoneNumber";
   static String city = "city";
   static String pinCode = "pinCode";
   static String startLat = "startLat";
@@ -55,8 +56,10 @@ class MyPreference{
   static  Future clearPref() async {
     TIPrint(tag:"Pref",value: "Clear()");
     sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.clear();
-    // sharedPreferences.remove(APPMODE);
-    // sharedPreferences.remove(accessToken);
+    await sharedPreferences.clear();
+    //await sharedPreferences.remove(APPMODE);
+    // await sharedPreferences.remove(accessToken);
+
+
   }
 }

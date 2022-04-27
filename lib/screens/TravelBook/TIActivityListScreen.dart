@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -77,6 +79,20 @@ class _TIActivityListScreenState extends State<TIActivityListScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    if(isPinned){
+      Timer(
+          Duration(seconds: 5),
+              () {
+            setState(() {
+              isPinned = false;
+              goToPinListScreen();
+            });
+
+          });
+
+    }
+
     return SafeArea(
         child: Scaffold(
           extendBody: true,

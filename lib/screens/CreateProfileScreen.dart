@@ -101,7 +101,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(top:5,left: 48.0),
                       child: MyText(
-                        text_name: "${"create_profile".tr}",
+                        text_name: "${"create_profile".tr.toUpperCase()}",
                         txtcolor: MyColors.whiteColor,
                         txtfontsize: MyFontSize.size25,
                         myFont: MyStrings.bodoni72_Bold,
@@ -157,7 +157,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                 text_name: "date_of_birth".tr,
                 txtcolor: MyColors.whiteColor,
                 txtfontsize: MyFontSize.size15,
-                myFont: MyFont.Courier_Prime,
+                myFont: MyFont.Courier_Prime_Bold,
               ),
               SizedBox(
                 height: Get.height * 0.02,
@@ -189,7 +189,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             borderSide: BorderSide(color: MyColors.whiteColor)),
                         hintText: "phone_number".tr,
                         hintStyle: TextStyle(
-                          color: MyColors.textColor.withOpacity(0.40),
+                          color: MyColors.whiteColor,
                         ),
                         suffixIcon: GestureDetector(
                             onTap: () {
@@ -594,6 +594,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                 addHint: "phone_number".tr,
                 mycontroller: phoneNoController,
                 labelColor: MyColors.whiteColor,
+                hintColor: MyColors.whiteColor,
                 validator: myController.validatePhoneNo,
                 suffixImageUrl: MyImageURL.info,
                 suffixOnTap: () {
@@ -820,6 +821,9 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     MyPreference.setPrefStringValue(
         key: MyPreference.dob,
         value: dataController.selectedDate.value.toString());
+    MyPreference.setPrefStringValue(
+        key: MyPreference.phoneNumber,
+        value: phoneNoController.text);
     /*MyPreference.setPrefStringValue(
         key: MyPreference.address, value: addressController.text);
     MyPreference.setPrefStringValue(

@@ -576,7 +576,8 @@ if(mLang == null){
             url: ApiParameter.sendNotificationToUserURL, param: param);
         var data = result.getDATAJSONArray1();
         var response = getResponsecode(data);
-        MyUtility.showErrorMsg(response.getMessage().toString());
+        MyUtility.showSuccessMsg(data['message']);
+        // MyUtility.showErrorMsg(response.getMessage().toString());
         /*if (response != null) {
           MyUtility.showErrorMsg(response.getMessage());
         //  return true;
@@ -818,12 +819,12 @@ if(mLang == null){
   }
 
   /*=================  confirm user api ==============================*/
-  confirmUserAPI() async {
+  confirmUserAPI(userId) async {
     Get.dialog(Loading());
-    String userId = MyPreference.getPrefStringValue(key:MyPreference.userId);
+    //String userId = MyPreference.getPrefStringValue(key:MyPreference.userId);
     if (await isConnected()) {
       try {
-        final response = await ApiCall().CallGetWithTokenAPI("${ApiParameter.verify_user}?userId=$userId");
+        final response = await ApiCall().CallGetAPI(url: "${ApiParameter.verify_user}?userId=$userId");
        // var result = response.getDATAJSONArray1();
         if(response != null) {
           if (response.isSuccess()) {
@@ -987,6 +988,24 @@ if(mLang == null){
     if (await isConnected()) {
       MyResponse response = await ApiCall().CallPostWithParamTokenAPI(
           url: ApiParameter.CHANGEPASSWORD, param: param);
+
+      if (response.isSuccess()) {
+        return response;
+      } else {
+        return response;
+      }
+    } else {
+      MyCommonMethods.showInfoCenterDialog(
+          msgContent: "txtNoInternetConnection".tr);
+    }
+  }
+
+
+  ///======chang phone number api call=======
+  Future<MyResponse> changePhoneNumberApiCall({param}) async {
+    if (await isConnected()) {
+      MyResponse response = await ApiCall().CallPostWithParamTokenAPI(
+          url: ApiParameter.CHANGEPHONENUMBER, param: param);
 
       if (response.isSuccess()) {
         return response;

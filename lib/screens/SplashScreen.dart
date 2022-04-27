@@ -8,8 +8,10 @@ import 'package:travel_inspiration/screens/LoginScreen.dart';
 import 'package:travel_inspiration/screens/MyProfileScreen.dart';
 import 'package:travel_inspiration/screens/NotificationScreen.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeScreen.dart';
+import 'package:travel_inspiration/screens/SettingsMenu/DeleteAcConfirmScreen.dart';
 import 'package:travel_inspiration/screens/SignUpScreen.dart';
 import 'package:travel_inspiration/screens/SingupConfirmScreen.dart';
+import 'package:travel_inspiration/screens/TIStartNewAdventureScreen.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyPreference.dart';
@@ -97,16 +99,16 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         int mode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
         mode == 1
             ? ScreenTransition.navigateOffAll(
-          // screenName: CreateProfileScreen())
+          // screenName: NotificationScreen())
             screenName: ReflectModeScreen())
             : ScreenTransition.navigateOffAll(
-            // screenName: ChangePwConfirmScreen());
+            // screenName: DeleteAcConfirmScreen());
             screenName: InspredModeScreen());
         MyPreference.setPrefIntValue(
             key: MyPreference.APPMODE, value: mode);
 
     } else {
-      // ScreenTransition.navigateOff(screenName: CreateProfileScreen());
+      // ScreenTransition.navigateOff(screenName: DeleteAcConfirmScreen());
       ScreenTransition.navigateOff(screenName: HomeScreen());
     }
   }

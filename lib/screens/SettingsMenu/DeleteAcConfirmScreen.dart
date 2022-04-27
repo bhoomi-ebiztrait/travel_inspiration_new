@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
+import 'package:travel_inspiration/MyWidget/MyGradientBottomMenu.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
+import 'package:travel_inspiration/MyWidget/MySettingTop.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/screens/HomeScreen.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
@@ -30,7 +32,7 @@ class _DeleteAcConfirmScreenState extends State<DeleteAcConfirmScreen> with Sing
   void initState() {
     // TODO: implement initState
 
-    _callDeleteAccountApi();
+   _callDeleteAccountApi();
 
     super.initState();
   }
@@ -64,23 +66,21 @@ class _DeleteAcConfirmScreenState extends State<DeleteAcConfirmScreen> with Sing
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
+      backgroundColor: MyColors.settingBgColor,
+      bottomNavigationBar:  MyGradientBottomMenu(selString:MyStrings.settings,iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.change_pw_bottom,bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              MySettingTop(title: "auters_info".tr,),
+
+              Column(
                 children: [
-                  MyTopHeader(
-                    headerName: "auters_info".tr,
-                    headerImgUrl: MyImageURL.setting_top,
-                    logoImgUrl: MyImageURL.haudos_logo,
-                  ),
                   SizedBox(
                     height: Get.height * 0.09,
                   ),
-
                   RotationTransition(
                       turns: Tween(begin: 0.0,end: 1.0).animate(animationController),
                       child: Image.asset(MyImageURL.arrow3x,height: 50,)),
@@ -107,13 +107,14 @@ class _DeleteAcConfirmScreenState extends State<DeleteAcConfirmScreen> with Sing
                     height: Get.height * 0.07,
                   ),
                   buildwithSocialNetwork(),
-
                 ],
               ),
-            ),
+
+
+
+            ],
           ),
-          buildBottomImage(),
-        ],
+        ),
       ),
     );
   }

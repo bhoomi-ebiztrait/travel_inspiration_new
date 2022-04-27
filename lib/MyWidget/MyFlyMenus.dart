@@ -90,7 +90,7 @@ class _MyFlyMenusState extends State<MyFlyMenus> {
                           height:widget.itemHeight,
                           padding:EdgeInsets.all(0.0),
                           child: Image.asset(
-                            selectedIndex == index ? flyMenusSelectedList[index] : ((widget.fromWhere == MyStrings.fromFavCity) && index == 0) ?MyImageURL.fav_red :widget.flyMenusList[index],
+                            selectedIndex == index ? flyMenusSelectedList[index] : ((widget.fromWhere == MyStrings.fromFavCity) && index == 0) ?MyImageURL.favor_white :widget.flyMenusList[index],
                             // selectedIndex == index ? MyImageURL.cross_gray2x: widget.flyMenusList[index],
                             // color: selectedIndex == index ? MyColors.buttonBgColor : MyColors.lineColor,
                             fit: BoxFit.contain,)),

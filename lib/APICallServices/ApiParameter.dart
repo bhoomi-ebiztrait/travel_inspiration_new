@@ -60,6 +60,7 @@ class ApiParameter {
   static const createReflectProjectURL = BASE_URL + "createReflectProject";
   static const createInspireProjectURL = BASE_URL + "createInspireProject";
   static const CHANGEPASSWORD=BASE_URL+"changePassword";
+  static const CHANGEPHONENUMBER=BASE_URL+"modifyNumber";
   static const GETFAQTITLELIST=BASE_URL+"getFaqTitleList";
   static const GETFAQLIST=BASE_URL+"getFaqList";
   static const GETARTICALLIST=BASE_URL+"getArticalList";

@@ -118,7 +118,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(left: 30,right: 30,top: 60),
+          margin: EdgeInsets.only(left: 30,right: 30,top: 70),
           width: Get.width,
           height: Get.height*0.3,
           decoration: BoxDecoration(
@@ -454,7 +454,35 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   buildPremiumAccount() {
-     if (profileController.userInfo.value.isPremium != null && profileController.userInfo.value.isPremium) {
+    return  GestureDetector(
+      onTap: () {
+        Get.to(TIPremiumInfoScreen());
+      },
+      child: Container(
+        width: Get.width,
+        height: Get.height * 0.3,
+        // color: Colors.red,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            /*SizedBox(
+              height: Get.height * 0.02,
+            ),*/
+            Image.asset(MyImageURL.premium, height: 120, width: 120,),
+            /*SizedBox(
+              height: Get.height * 0.01,
+            ),*/
+            MyText(
+              text_name: "premium_account".tr,
+              txtfontsize: MyFontSize.size13,
+              txtcolor: MyColors.whiteColor,
+              myFont: MyStrings.courier_prime_bold,
+            ),
+          ],
+        ),
+      ),
+    );
+     /*if (profileController.userInfo.value.isPremium != null && profileController.userInfo.value.isPremium) {
       return  GestureDetector(
        onTap: () {
          Get.to(TIPremiumInfoScreen());
@@ -466,13 +494,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
          child: Column(
            mainAxisAlignment: MainAxisAlignment.start,
            children: [
-             /*SizedBox(
+             *//*SizedBox(
               height: Get.height * 0.02,
-            ),*/
+            ),*//*
              Image.asset(MyImageURL.premium, height: 120, width: 120,),
-             /*SizedBox(
+             *//*SizedBox(
               height: Get.height * 0.01,
-            ),*/
+            ),*//*
              MyText(
                text_name: "premium_account".tr,
                txtfontsize: MyFontSize.size13,
@@ -486,7 +514,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     }
     else {
       return Container();
-    }
+    }*/
 
   }
 
@@ -496,7 +524,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           MyText(
-            text_name: profileController.userInfo.value.country != null ? profileController.userInfo.value.country : "",
+            text_name: "United Kingdom",
+            // text_name: profileController.userInfo.value.country != null ? profileController.userInfo.value.country : "",
             txtfontsize: MyFontSize.size13,
             txtcolor: MyColors.textColor,
           ),

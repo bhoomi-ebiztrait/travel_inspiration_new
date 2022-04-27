@@ -24,7 +24,7 @@ class MyTitlebar extends StatelessWidget {
       ),
       //margin: EdgeInsets.all(20),
       child: MyText(
-        text_name: title,
+        text_name: title.toUpperCase(),
         txtcolor: MyColors.whiteColor,
         txtfontsize: MyFontSize.size23,
         myFont: MyStrings.bodoni72_Bold,

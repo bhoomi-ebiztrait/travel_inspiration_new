@@ -31,9 +31,9 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
   PageController _sliderController = PageController(initialPage: 0);
   List<TIChoseRouteModel> pageViewList = [
     TIChoseRouteModel(MyImageURL.info_white3x, MyImageURL.bgchoose_your_circle1,
-        "Repartiede".tr, true),
+        "Repartiede".tr.toUpperCase(), true),
     TIChoseRouteModel(MyImageURL.info_white3x, MyImageURL.bgchoose_your_circle2,
-        "Comulermes".tr, true)
+        "Comulermes".tr.toUpperCase(), true)
   ];
 
   @override
@@ -160,236 +160,238 @@ class _TIStartNewAdventureScreenState extends State<TIStartNewAdventureScreen> {
           image: DecorationImage(
               image: AssetImage(MyImageURL.login),
               fit: BoxFit.cover)),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10, bottom: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.back(result: true);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Image.asset(
-                      MyImageURL.back,
-                      width: 25,
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                    onTap: () {
-                      CommonMethod.getAppMode();
-                    },
-                    child: Image.asset(
-                      MyImageURL.home_icon,
-                      width: 60,
-                    )),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 60),
-            height: 100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  bottomLeft: Radius.circular(40)),
-              color: MyColors.buttonBgColor,
-            ),
-            //margin: EdgeInsets.all(20),
-            child: MyText(
-              text_name: "txtComencer".tr.toUpperCase(),
-              txtcolor: MyColors.whiteColor,
-              txtfontsize: MyFontSize.size23,
-              myFont: MyStrings.bodoni72_Bold,
-            ),
-          ),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Center(
-                child: Container(
-                  width: Get.width,
-                  height: Get.height * .37,
-                  margin: EdgeInsets.only(
-                      top: Get.height * .10, left: 6, bottom: 20),
-                  child: PageView.builder(
-                    controller: _sliderController,
-                    onPageChanged: (int page) {
-                      print("PageIndex: ${page}");
-                      getChangedPageAndMoveBar(page);
-                    },
-                    itemCount: pageViewList.length,
-                    itemBuilder: (context, index) {
-                      index1 = index;
-                      return Container(
-                        decoration: BoxDecoration(
-                          // borderRadius: BorderRadius.all( Radius.circular(50.0)),
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 4.0,
-                          ),
-                          image: DecorationImage(
-                              image: AssetImage(pageViewList[index1]
-                                  .bgPath),fit: BoxFit.contain),
-                          shape: BoxShape.circle,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10, bottom: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 50, top: 60, bottom: 10),
-                    child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            currentPageValue == 0
-                                ? infoItemFirstClicked = 0
-                                : infoItemFirstClicked = 1;
-                            print("index clicked: $currentPageValue");
-                            if (currentPageValue == 0) {
-                              Get.to(() =>
-                                  AlertDialogCircular(title: "txtRademaree"));
-                            } else {
-                              Get.to(() =>
-                                  AlertDialogCircular(title: "txtReprendre"));
-                            }
-                          });
-                        },
-                        child: Image.asset(
-                            pageViewList[currentPageValue].iconPath)),
-                  ),
-                  Container(
-                    width: Get.width * .43,
-                    margin: EdgeInsets.only(top: 10, bottom: 20),
-                    child: Text(
-                      pageViewList[currentPageValue].centerText,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MyFontSize.size23,
-                          fontFamily: MyFont.Courier_Prime_Bold),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back(result: true);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Image.asset(
+                        MyImageURL.back,
+                        width: 25,
+                      ),
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      print("pageVal : $currentPageValue");
-                      MyPreference.setPrefIntValue(
-                          key: MyPreference.pageVal, value: currentPageValue);
-                      currentPageValue == 0
-                          ? ScreenTransition.navigateToScreenLeft(
-                              screenName: (MyPreference.getPrefIntValue(
-                                          key: MyPreference.APPMODE)) ==
-                                      0
-                                  ? TICreateNewProjectInInspireModeScreen()
-                                  : ReflectModeCreateProjectScreen())
-                          : ScreenTransition.navigateToScreenLeft(
-                              screenName: (MyPreference.getPrefIntValue(
-                                          key: MyPreference.APPMODE)) ==
-                                      0
-                                  ? TICreateNewProjectInInspireModeScreen()
-                                  : ReflectModeCreateProjectScreen());
-                    },
-                    child: Image.asset(
-                      MyImageURL.arrow3x,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+                      onTap: () {
+                        CommonMethod.getAppMode();
+                      },
+                      child: Image.asset(
+                        MyImageURL.home_icon,
+                        width: 60,
+                      )),
                 ],
               ),
-            ],
-          ),
-          Container(
-            //margin: EdgeInsets.only(bottom: 35),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                for (int i = 0; i < pageViewList.length; i++)
-                  if (i == currentPageValue) ...[circleBar(true)] else
-                    circleBar(false),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 60),
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    bottomLeft: Radius.circular(40)),
+                color: MyColors.buttonBgColor,
+              ),
+              //margin: EdgeInsets.all(20),
+              child: MyText(
+                text_name: "txtComencer".tr.toUpperCase(),
+                txtcolor: MyColors.whiteColor,
+                txtfontsize: MyFontSize.size23,
+                myFont: MyStrings.bodoni72_Bold,
+              ),
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Center(
+                  child: Container(
+                    width: Get.width,
+                    height: Get.height * .37,
+                    margin: EdgeInsets.only(
+                        top: Get.height * .10, left: 6, bottom: 20),
+                    child: PageView.builder(
+                      controller: _sliderController,
+                      onPageChanged: (int page) {
+                        print("PageIndex: ${page}");
+                        getChangedPageAndMoveBar(page);
+                      },
+                      itemCount: pageViewList.length,
+                      itemBuilder: (context, index) {
+                        index1 = index;
+                        return Container(
+                          decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.all( Radius.circular(50.0)),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 4.0,
+                            ),
+                            image: DecorationImage(
+                                image: AssetImage(pageViewList[index1]
+                                    .bgPath),fit: BoxFit.contain),
+                            shape: BoxShape.circle,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 50, top: 60, bottom: 10),
+                      child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              currentPageValue == 0
+                                  ? infoItemFirstClicked = 0
+                                  : infoItemFirstClicked = 1;
+                              print("index clicked: $currentPageValue");
+                              if (currentPageValue == 0) {
+                                Get.to(() =>
+                                    AlertDialogCircular(title: "txtRademaree".tr));
+                              } else {
+                                Get.to(() =>
+                                    AlertDialogCircular(title: "txtReprendre".tr));
+                              }
+                            });
+                          },
+                          child: Image.asset(
+                              pageViewList[currentPageValue].iconPath)),
+                    ),
+                    Container(
+                      width: Get.width * .43,
+                      margin: EdgeInsets.only(top: 10, bottom: 20),
+                      child: Text(
+                        pageViewList[currentPageValue].centerText,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MyFontSize.size23,
+                            fontFamily: MyFont.Courier_Prime_Bold),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        print("pageVal : $currentPageValue");
+                        MyPreference.setPrefIntValue(
+                            key: MyPreference.pageVal, value: currentPageValue);
+                        currentPageValue == 0
+                            ? ScreenTransition.navigateToScreenLeft(
+                                screenName: (MyPreference.getPrefIntValue(
+                                            key: MyPreference.APPMODE)) ==
+                                        0
+                                    ? TICreateNewProjectInInspireModeScreen()
+                                    : ReflectModeCreateProjectScreen())
+                            : ScreenTransition.navigateToScreenLeft(
+                                screenName: (MyPreference.getPrefIntValue(
+                                            key: MyPreference.APPMODE)) ==
+                                        0
+                                    ? TICreateNewProjectInInspireModeScreen()
+                                    : ReflectModeCreateProjectScreen());
+                      },
+                      child: Image.asset(
+                        MyImageURL.arrow3x,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
-          ),
-          SizedBox(
-            height: Get.height * .020,
-          ),
-          /*ClipRect(
-              child: Container(
-                width: Get.width,
-                height: Get.height * .18,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        MyImageURL.bgchoose_your_curveshape,
-                      ),
-                      fit: BoxFit.fill),
-                ),
-                child: Center(
-                    child: Text(
-                  "txtComencer".tr,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MyFontSize.size23,
-                      fontFamily: MyFont.Cagliostro_reguler),
-                )),
+            Container(
+              //margin: EdgeInsets.only(bottom: 35),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  for (int i = 0; i < pageViewList.length; i++)
+                    if (i == currentPageValue) ...[circleBar(true)] else
+                      circleBar(false),
+                ],
               ),
             ),
             SizedBox(
-              height: Get.height * .060,
-            ),*/
-          Container(
-            margin: EdgeInsets.only(
-                left: Get.width * .040, right: Get.width * .040),
-            child: Text.rich(
-              TextSpan(children: [
-                WidgetSpan(
-                    child: Padding(
-                  padding: EdgeInsets.only(right: Get.width * .030),
-                  child: Image.asset(MyImageURL.choose_your_leftquote),
-                )),
-                TextSpan(
-                  text: "txtLeplus".tr,
-                  style: TextStyle(
-                      color: MyColors.whiteColor,
-                      fontSize: MyFontSize.size16,
-                      fontFamily: MyFont.Courier_Prime_Italic),
+              height: Get.height * .020,
+            ),
+            /*ClipRect(
+                child: Container(
+                  width: Get.width,
+                  height: Get.height * .18,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          MyImageURL.bgchoose_your_curveshape,
+                        ),
+                        fit: BoxFit.fill),
+                  ),
+                  child: Center(
+                      child: Text(
+                    "txtComencer".tr,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: MyFontSize.size23,
+                        fontFamily: MyFont.Cagliostro_reguler),
+                  )),
                 ),
-                WidgetSpan(
-                    child: Padding(
-                  padding: EdgeInsets.only(left: Get.width * .030),
-                  child: Image.asset(MyImageURL.choose_your_rightquote),
-                )),
-              ]),
-              textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: Get.height * .060,
+              ),*/
+            Container(
+              margin: EdgeInsets.only(
+                  left: Get.width * .040, right: Get.width * .040),
+              child: Text.rich(
+                TextSpan(children: [
+                  WidgetSpan(
+                      child: Padding(
+                    padding: EdgeInsets.only(right: Get.width * .030),
+                    child: Image.asset(MyImageURL.choose_your_leftquote),
+                  )),
+                  TextSpan(
+                    text: "txtLeplus".tr,
+                    style: TextStyle(
+                        color: MyColors.whiteColor,
+                        fontSize: MyFontSize.size16,
+                        fontFamily: MyFont.Courier_Prime_Italic),
+                  ),
+                  WidgetSpan(
+                      child: Padding(
+                    padding: EdgeInsets.only(left: Get.width * .030),
+                    child: Image.asset(MyImageURL.choose_your_rightquote),
+                  )),
+                ]),
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-          SizedBox(
-            height: Get.height * .050,
-          ),
-          Center(
-              child: Container(
-            margin: EdgeInsets.only(
-                left: Get.width * .040, right: Get.width * .040),
-            child: Text(
-              "txtLoick".tr,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: MyColors.whiteColor,
-                  fontSize: MyFontSize.size16,
-                  fontFamily: MyFont.Courier_Prime_Bold),
+            SizedBox(
+              height: Get.height * .050,
             ),
-          )),
-        ],
+            Center(
+                child: Container(
+              margin: EdgeInsets.only(
+                  left: Get.width * .040, right: Get.width * .040),
+              child: Text(
+                "txtLoick".tr,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: MyColors.whiteColor,
+                    fontSize: MyFontSize.size16,
+                    fontFamily: MyFont.Courier_Prime_Bold),
+              ),
+            )),
+          ],
+        ),
       ),
     );
   }

@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:travel_inspiration/MyWidget/MyFlyMenu.dart';
 import 'package:travel_inspiration/MyWidget/MyFlyMenus.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
+import 'package:travel_inspiration/MyWidget/MyPopupBottomMenu.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TICommonPopup.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
 import 'package:travel_inspiration/MyWidget/TIPopupGridviewMenu.dart';
@@ -52,6 +54,8 @@ class _TIMyFavoriteCitiesScreenState extends State<TIMyFavoriteCitiesScreen> {
     // TODO: implement initState
 
     super.initState();
+    myController.showPrepareProjectPopup.value = false;
+    myController.showPrepareProjectMenu.value = false;
     getFavCities();
 
   }
@@ -68,155 +72,175 @@ class _TIMyFavoriteCitiesScreenState extends State<TIMyFavoriteCitiesScreen> {
     return SafeArea(
       child: Scaffold(
         body: _buildBodyContent(),
+          // myController.showPrepareProjectPopup.value
       ),
     );
   }
 
   _buildBodyContent() {
-    return Stack(
-      children: [
-        Column(
-          children: [
-            MyTopHeader(
-              headerName: widget.travelLougeTitle.toUpperCase(),
-              headerImgUrl: MyImageURL.travel_book_top,
-              logoImgUrl: MyImageURL.haudos_logo,
-            ),
-            SizedBox(
-              height: Get.height * .020,
-            ),
-            Obx((){
-              return Expanded(child: _travelLougeList());
-            }),
+    return Container(
+      height: Get.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image:AssetImage(MyImageURL.login),fit: BoxFit.fill,
+        ),
+      ),
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              MyTopHeader(
+                logoImgUrl: MyImageURL.haudos_logo,
+              ),
+              SizedBox(
+                height: Get.height * .020,
+              ),
+              Obx((){
+                return myController.showPrepareProjectPopup.value == true ? Container():MyTitlebar(title: widget.travelLougeTitle.toUpperCase(),);
+              }),
 
-          ],
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: MyBottomLayout(
-            imgUrl: MyImageURL.travel_book_bottom,
+              SizedBox(
+                height: Get.height * .07,
+              ),
+              Obx((){
+                return myController.showPrepareProjectPopup.value == true ? Container():Expanded(child: _travelLougeList());
+              }),
+
+            ],
           ),
-        ),
-        _buildPopupWidget(),
-        _buildMenus(),
-      ],
+          Obx((){
+            return myController.showPrepareProjectPopup.value == true ? Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: MyPopupBottomMenu(iconList: [
+                  MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.fleche,MyImageURL.world_icon,MyImageURL.setting_icon],bgImg: MyImageURL.change_pw_bottom,),
+              ),
+            ) :Container();
+          }),
+          _buildPopupWidget(),
+          _buildMenus(),
+        ],
+      ),
     );
   }
 
   _buildPopupWidget() {
     return Obx(() => Visibility(
         visible: myController.showPrepareProjectPopup.value,
-        child: BackdropFilter(
-            filter: myController.showPrepareProjectPopup.value
-                ? ImageFilter.blur(sigmaY: 5, sigmaX: 5)
-                : ImageFilter.blur(sigmaY: 0, sigmaX: 0),
-            child: Container(
-                width: Get.width,
-                child: Stack(
-                  children: [
-                    TICommonPopup(
-                        childWidget: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: Get.height * .025,
-                              ),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  width: Get.width * .55,
-                                  child: MyText(
-                                    text_name: widget.popupTitle.toUpperCase() ?? "",
-                                    myFont: MyFont.Cagliostro_reguler,
-                                    txtfontsize: MyFontSize.size18,
-                                    txtcolor: MyColors.buttonBgColor,
-                                    txtAlign: TextAlign.center,
-                                  ),
+        child: Container(
+            width: Get.width,
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 75,
+                  left: 40,
+                  right: 40,
+                  child: TICommonPopup(
+                      childWidget: Column(
+                    children: [
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: Get.height * .025,
+                              right: Get.height*.02,
+                            ),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: Get.width * .55,
+                                child: MyText(
+                                  text_name: widget.popupTitle.toUpperCase() ?? "",
+                                  myFont: MyFont.Cagliostro_reguler,
+                                  txtfontsize: MyFontSize.size18,
+                                  txtcolor: MyColors.buttonBgColor,
+                                  txtAlign: TextAlign.center,
                                 ),
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                myController.showPrepareProjectPopup.value =
-                                    false;
-                              },
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      top: Get.height * .020,
-                                      right: Get.height * .020),
-                                  child: Image.asset(
-                                    MyImageURL.cross3x,
-                                    height: Get.height * .045,
-                                    width: Get.height * .045,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: Get.height * .025,
-                        ),
-                        MyText(
-                          text_name: "MODE INSPIRE",
-                          myFont: MyFont.Courier_Prime_Bold,
-                          txtfontsize: MyFontSize.size18,
-                          txtcolor: MyColors.textColor,
-                          txtAlign: TextAlign.center,
-                          height: 0.8,
-                        ),
-                        MyText(
-                          text_name: "532 KM",
-                          myFont: MyFont.Courier_Prime_Bold,
-                          txtfontsize: MyFontSize.size18,
-                          txtcolor: MyColors.textColor,
-                          txtAlign: TextAlign.center,
-                          height: 1,
-                        ),
-                        SizedBox(
-                          height: Get.height * .05,
-                        ),
-                        Container(
-                          height: Get.height * .010,
-                          width: Get.width * .60,
-                          decoration: BoxDecoration(
-                              color: MyColors.lineColor,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(Get.width * .020))),
-                        ),
-                        SizedBox(
-                          height: Get.height * .05,
-                        ),
-                        Container(
-                          height: Get.height * .25,
-                          child: TIPopupGridviewMenu(popupTitle: widget.popupTitle,startIndex: 0,endIndex: 5,),
-                        )
-                      ],
-                    )),
-                    Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: Get.height * .04),
-                          child: GestureDetector(
-                            onTap: () {
-                              myController.showPrepareProjectMenu.value = true;
-                              myController.isFavMenu.value=false;
-                            },
-                            child: Image.asset(
-                              MyImageURL.fleche,
-                              height: Get.height * .13,
-                              width: Get.height * .13,
-                              fit: BoxFit.contain,
                             ),
                           ),
-                        ))
-                  ],
-                )))));
+                          GestureDetector(
+                            onTap: () {
+                              myController.showPrepareProjectPopup.value =
+                                  false;
+                            },
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    top: Get.height * .020,
+                                    right: Get.height * .020),
+                                child: Image.asset(
+                                  MyImageURL.cross3x,
+                                  height: Get.height * .045,
+                                  width: Get.height * .045,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: Get.height * .025,
+                      ),
+                      MyText(
+                        text_name: "MODE INSPIRE",
+                        myFont: MyFont.Courier_Prime_Bold,
+                        txtfontsize: MyFontSize.size18,
+                        txtcolor: MyColors.textColor,
+                        txtAlign: TextAlign.center,
+                        height: 0.8,
+                      ),
+                      MyText(
+                        text_name: "532 KM",
+                        myFont: MyFont.Courier_Prime_Bold,
+                        txtfontsize: MyFontSize.size18,
+                        txtcolor: MyColors.textColor,
+                        txtAlign: TextAlign.center,
+                        height: 1,
+                      ),
+                      SizedBox(
+                        height: Get.height * .05,
+                      ),
+                      Container(
+                        height: Get.height * .010,
+                        width: Get.width * .60,
+                        decoration: BoxDecoration(
+                            color: MyColors.lineColor,
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(Get.width * .020))),
+                      ),
+                      SizedBox(
+                        height: Get.height * .05,
+                      ),
+                      Container(
+                        height: Get.height * .25,
+                        child: TIPopupGridviewMenu(popupTitle: widget.popupTitle,startIndex: 0,endIndex: 5,),
+                      )
+                    ],
+                  )),
+                ),
+                /*Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: Get.height * .04),
+                      child: GestureDetector(
+                        onTap: () {
+                          myController.showPrepareProjectMenu.value = true;
+                          myController.isFavMenu.value=false;
+                        },
+                        child: Image.asset(
+                          MyImageURL.fleche,
+                          height: Get.height * .13,
+                          width: Get.height * .13,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ))*/
+              ],
+            ))));
   }
 
   _buildMenus() {
@@ -224,28 +248,40 @@ class _TIMyFavoriteCitiesScreenState extends State<TIMyFavoriteCitiesScreen> {
           visible: myController.showPrepareProjectMenu.value,
           child: BackdropFilter(
             filter: myController.showPrepareProjectMenu.value
-                ? ImageFilter.blur(sigmaY: 3, sigmaX: 3)
+                ? ImageFilter.blur(sigmaY: 30, sigmaX: 30)
                 : ImageFilter.blur(sigmaY: 0, sigmaX: 0),
-            child: Stack(
-              children: [
-                Container(
-                  height: Get.height * .90,
-                  decoration: BoxDecoration(
-                      color: MyColors.whiteColor.withOpacity(0.97)),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: Get.height * .48),
-                    child: MyFlyMenus(
-                      flyMenusList: flyMenusList,
-                      itemWidth: Get.height * .12,
-                      itemHeight: Get.height * .12,
-                      fromWhere: MyStrings.fromFavCity,
+            child: Container(
+              height: Get.height,
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage(MyImageURL.login),fit: BoxFit.fill)
+              ),
+              child: Stack(
+                children: [
+                  Visibility(
+                    visible: myController.isFavMenu.value,
+                    child: Container(
+                      height: Get.height * .90,
+                      decoration: BoxDecoration(
+                          color: MyColors.buttonBgColor.withOpacity(0.46)),
                     ),
                   ),
-                ),
-              ],
+                  Container(
+                    color: myController.isFavMenu.value == true ?MyColors.buttonBgColorHome.withOpacity(0.46):Colors.transparent,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: Get.height * .48),
+                        child: MyFlyMenus(
+                          flyMenusList: flyMenusList,
+                          itemWidth: Get.height * .12,
+                          itemHeight: Get.height * .12,
+                          fromWhere: MyStrings.fromFavCity,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ));

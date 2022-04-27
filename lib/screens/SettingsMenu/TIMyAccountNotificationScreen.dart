@@ -52,14 +52,14 @@ class _TIMyAccountNotificationScreenState
   final modeReflechiList = [
     TIMyAccountNotificationModel(
 
-      title: MyStrings.txtDatelimite,
-      subTitle: MyStrings.txtRecevoir2,
+      title: "txtDatelimite".tr,
+      subTitle: "txtDatelimiteInfo".tr,
       imageUrl: MyImageURL.switch_off,
       isSwitched: 0,
     ),
     TIMyAccountNotificationModel(
-      title: MyStrings.txtKilometres,
-      subTitle: MyStrings.txtNotificationdu2,
+      title: "txtKilometres".tr,
+      subTitle: "txtNotificationdu".tr,
       imageUrl: MyImageURL.switch_off,
       isSwitched: 0,
     ),
@@ -173,9 +173,7 @@ class _TIMyAccountNotificationScreenState
         SizedBox(
           height: Get.height * .015,
         ),
-        Text(
-
-          MyStrings.txtModeReflechi2,
+        Text("txtModeReflechi".tr,
           style: TextStyle(
               fontFamily: MyFont.Courier_Prime_Bold,
               fontSize: MyFontSize.size13,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -73,6 +75,20 @@ class _TIHotelListScreenState extends State<TIHotelListScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    if(isPinned){
+      Timer(
+          Duration(seconds: 5),
+              () {
+            setState(() {
+              isPinned = false;
+              goToPinListScreen();
+            });
+
+          });
+
+    }
+
     return SafeArea(
       child: Scaffold(
         extendBody: true,
@@ -304,6 +320,10 @@ class _TIHotelListScreenState extends State<TIHotelListScreen> {
 
   }
 
+  Future<bool> _mockCheckForSession() async {
+    await Future.delayed(Duration(milliseconds: 2000), () {});
+    return true;
+  }
   buildPinMsg() {
     return Visibility(
       visible: isPinned,
@@ -317,10 +337,11 @@ class _TIHotelListScreenState extends State<TIHotelListScreen> {
           children: [
             SizedBox(height: Get.height *0.2,),
             GestureDetector(
-                onTap: (){
+                onTap: () async{
                   setState(() {
                     isPinned = false;
                   });
+                  // await Future.delayed(const Duration(seconds: 2),(){goToPinListScreen();});
                   goToPinListScreen();
                 },
                 child: Image.asset(MyImageURL.check_pinned)),

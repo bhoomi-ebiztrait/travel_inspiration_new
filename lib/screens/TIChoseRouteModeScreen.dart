@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
 import 'package:travel_inspiration/MyWidget/MyQuotedText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/TIModel/TIChooseRouteModel.dart';
+import 'package:travel_inspiration/screens/PopScreen/ShowAlertDialogChooseRouteCircular.dart';
+import 'package:travel_inspiration/screens/PopScreen/ShowAlertDialogCircular.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeCreateProjectScreen.dart';
 import 'package:travel_inspiration/screens/TICreateNewProjectInInspireModeScreen.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
@@ -27,9 +30,9 @@ class _TIChoseRouteModeScreenState extends State<TIChoseRouteModeScreen> {
   int currentPageValue = 0;
   List<TIChoseRouteModel> pageViewList = [
     TIChoseRouteModel(MyImageURL.info_white3x, MyImageURL.choseroutecircle1,
-        "txtInspireMode".tr, true),
+        "txtInspireMode".tr.toUpperCase(), true),
     TIChoseRouteModel(MyImageURL.info_white3x, MyImageURL.choseroutecircle2,
-        "txtModeReflechi".tr, true)
+        "txtModeReflechi".tr.toUpperCase(), true)
   ];
 
   int infoItemFirstClicked = 2;
@@ -47,17 +50,19 @@ class _TIChoseRouteModeScreenState extends State<TIChoseRouteModeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child:
-          Scaffold(backgroundColor: Colors.black12, body: _buildBodyContent()),
+          Scaffold(body: _buildBodyContent()),
     );
   }
 
   _buildBodyContent() {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        _buildPageView(),
-        _buildPopup(),
-      ],
+    return SafeArea(
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          _buildPageView(),
+         // _buildPopup(),
+        ],
+      ),
     );
   }
 
@@ -67,69 +72,86 @@ class _TIChoseRouteModeScreenState extends State<TIChoseRouteModeScreen> {
       width: Get.width,
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(MyImageURL.chooseroutebg), fit: BoxFit.fill)),
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: Get.width,
-                height: Get.height * .30,
-                margin: EdgeInsets.only(top: Get.height * .020),
-                child: PageView.builder(
-                  onPageChanged: (int page) {
-                    getChangedPageAndMoveBar(page);
-                  },
-                  itemCount: pageViewList.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                        color: Colors.white,
-                        width: 4.0,),
-                          image: DecorationImage(
-                              image: AssetImage(pageViewList[index].bgPath)),
-                          shape: BoxShape.circle),
-                    );
-                  },
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: Get.width * .24,
-                        top: Get.width * .08,
-                        bottom: Get.height * .04),
-                    child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            currentPageValue == 0
-                                ? infoItemFirstClicked = 0
-                                : infoItemFirstClicked = 1;
-                            print("index clicked $currentPageValue");
-                          });
-                        },
-                        child: Image.asset(
-                            pageViewList[currentPageValue].iconPath)),
-                  ),
-                  Container(
-                    width: Get.width * .42,
-                    child: Text(
-                      pageViewList[currentPageValue].centerText,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MyFontSize.size25,
-                          fontFamily: MyFont.Courier_Prime_Bold),
+              image: AssetImage(MyImageURL.login), fit: BoxFit.cover)),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: Get.height * .05,
+            ),
+            MyTitlebar(title: "txtChoisie".tr.toUpperCase(),),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Center(
+                  child: Container(
+                    width: Get.width,
+                    height: Get.height * .37,
+                    margin: EdgeInsets.only(
+                        top: Get.height * .10, left: 6, bottom: 20),
+                    child: PageView.builder(
+                      onPageChanged: (int page) {
+                        getChangedPageAndMoveBar(page);
+                      },
+                      itemCount: pageViewList.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.all( Radius.circular(50.0)),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 4.0,
+                            ),
+                            image: DecorationImage(
+                                image: AssetImage(pageViewList[index]
+                                    .bgPath),fit: BoxFit.contain),
+                            shape: BoxShape.circle,
+                          ),
+                        );
+                      },
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: Get.height * .035),
-                    child: GestureDetector(
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: Get.width * .24,
+                          top: Get.width * .08,
+                          bottom: Get.height * .04),
+                      child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              currentPageValue == 0
+                                  ? infoItemFirstClicked = 0
+                                  : infoItemFirstClicked = 1;
+                              print("index clicked $currentPageValue");
+                              if (currentPageValue == 0) {
+                                Get.to(() =>
+                                    ShowAlertDialogChooseRouteCircular(title:"txtInspireMode".tr,details: "txtLeModeInspire".tr));
+                              } else {
+                                Get.to(() =>
+                                    ShowAlertDialogChooseRouteCircular(title:"txtModeReflechi".tr,details: "txtLeModeReflechi".tr));
+                              }
+                            });
+                          },
+                          child: Image.asset(
+                              pageViewList[currentPageValue].iconPath)),
+                    ),
+                    Container(
+                      width: Get.width * .43,
+                      margin: EdgeInsets.only(top: 10, bottom: 20),
+                      child: Text(
+                        pageViewList[currentPageValue].centerText,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MyFontSize.size23,
+                            fontFamily: MyFont.Courier_Prime_Bold),
+                      ),
+                    ),
+                    GestureDetector(
                         onTap: () {
                           callSelectModeAPI();
                         },
@@ -137,71 +159,50 @@ class _TIChoseRouteModeScreenState extends State<TIChoseRouteModeScreen> {
                           MyImageURL.arrow3x,
                           fit: BoxFit.contain,
                         )),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Container(
-            //margin: EdgeInsets.only(bottom: 35),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                for (int i = 0; i < pageViewList.length; i++)
-                  if (i == currentPageValue) ...[circleBar(true)] else
-                    circleBar(false),
+                  ],
+                ),
               ],
             ),
-          ),
-          SizedBox(
-            height: Get.height * .020,
-          ),
-          Container(
-            width: Get.width,
-            height: Get.height * .18,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    MyImageURL.bgchoose_your_curveshape,
-                  ),
-                  fit: BoxFit.fill),
+            Container(
+              //margin: EdgeInsets.only(bottom: 35),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  for (int i = 0; i < pageViewList.length; i++)
+                    if (i == currentPageValue) ...[circleBar(true)] else
+                      circleBar(false),
+                ],
+              ),
             ),
-            child: Center(
-                child: Text(
-              "txtChoisie".tr,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: MyFontSize.size23,
-                  fontFamily: MyFont.Cagliostro_reguler),
+            SizedBox(
+              height: Get.height * .025,
+            ),
+            MyQuotedText(
+              myText: "txtLeplus".tr,
+              txtColor: MyColors.whiteColor,
+              quoteColor: MyColors.buttonBgColorHome,
+              txtFontSize: MyFontSize.size14,
+              myFont: MyFont.Courier_Prime_Italic,
+            ),
+            SizedBox(
+              height: Get.height * .050,
+            ),
+            Center(
+                child: Container(
+              margin: EdgeInsets.only(
+                  left: Get.width * .040, right: Get.width * .040),
+              child: Text(
+                "txtBouddha".tr,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: MyColors.whiteColor,
+                    fontSize: MyFontSize.size16,
+                    fontFamily: MyFont.Courier_Prime_Bold),
+              ),
             )),
-          ),
-          SizedBox(
-            height: Get.height * .060,
-          ),
-          MyQuotedText(
-            myText: "txtLeplus".tr,
-            txtColor: MyColors.buttonBgColor,
-            txtFontSize: MyFontSize.size14,
-          ),
-          SizedBox(
-            height: Get.height * .050,
-          ),
-          Center(
-              child: Container(
-            margin: EdgeInsets.only(
-                left: Get.width * .040, right: Get.width * .040),
-            child: Text(
-              "txtBouddha".tr,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: MyColors.buttonBgColor,
-                  fontSize: MyFontSize.size14,
-                  fontFamily: MyFont.Courier_Prime_Bold),
-            ),
-          )),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -304,7 +305,7 @@ class _TIChoseRouteModeScreenState extends State<TIChoseRouteModeScreen> {
       height: isActive ? 12 : 12,
       width: isActive ? 12 : 12,
       decoration: BoxDecoration(
-          color: isActive ? MyColors.buttonBgColor : Colors.grey[300],
+          color: isActive ? MyColors.whiteColor : MyColors.buttonBgColorHome,
           borderRadius: BorderRadius.all(Radius.circular(12))),
     );
   }

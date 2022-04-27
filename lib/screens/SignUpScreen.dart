@@ -309,21 +309,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
      Get.back();
      print(response.isSuccess());
      if(response.isSuccess()){
-       MyPreference.setPrefStringValue(
-           key: MyPreference.accessToken,value:response.getDATAJSONArray1()[ApiParameter.access_token]);
-       var result = response.getDATAJSONArray1()[ApiParameter.userInfo];
-       MyPreference.setPrefStringValue(
-           key: MyPreference.userId,value:result[ApiParameter.userId].toString());
-       /*var result = response.getDATAJSONArray1()[ApiParameter.userInfo];
-       //saved user id and email in pref
-       MyPreference.setPrefStringValue(
-           key: MyPreference.userId,value:result[ApiParameter.userId].toString());
-       MyPreference.setPrefStringValue(
-           key: MyPreference.emailId,value:result[ApiParameter.EMAIL]);
-       MyPreference.setPrefStringValue(
-           key: MyPreference.accessToken,value:response.getDATAJSONArray1()[ApiParameter.access_token]);*/
 
-       ScreenTransition.navigateOffAll(screenName:SignupConfirmScreen());
+       /*MyPreference.setPrefStringValue(
+           key: MyPreference.accessToken,value:response.getDATAJSONArray1()[ApiParameter.access_token]);*/
+       var result = response.getDATAJSONArray1()[ApiParameter.userInfo];
+       /*MyPreference.setPrefStringValue(
+           key: MyPreference.userId,value:result[ApiParameter.userId].toString());*/
+       String userId = result[ApiParameter.userId].toString();
+       // String token = response.getDATAJSONArray1()[ApiParameter.access_token];
+       ScreenTransition.navigateOffAll(screenName:SignupConfirmScreen(userId));
      }else{
        MyUtility.showErrorMsg(response.getMessage());
      }
