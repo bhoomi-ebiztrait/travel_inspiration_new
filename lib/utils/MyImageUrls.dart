@@ -179,6 +179,7 @@ class MyImageURL {
   static const plane_icon=root+"plane2x.png";
   static const train2x_icon=root+"train2x.png";
   static const arrowUp3x=root+"arrowUp3x.png";
+  static const notify_img=root+"notify_img.png";
   static const edit_medium_icon=root+"edit_medium.png";
   static const edit_medium_grey=root+"edit_medium_grey.png";
   static const pin_icon=root+"pin2x.png";

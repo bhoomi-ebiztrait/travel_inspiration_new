@@ -447,7 +447,7 @@ class MyTextFieldHint extends StatelessWidget {
         this.validator,
         this.obscureText,
         this.txtfontsize,this.maxlimit,
-        this.readonly,this.leftPadding = 35.0,this.rightPadding = 35,this.myFont});
+        this.readonly,this.leftPadding = 5.0,this.rightPadding = 5,this.myFont});
 
 
   @override
@@ -455,7 +455,7 @@ class MyTextFieldHint extends StatelessWidget {
     return Padding(
       padding:  EdgeInsets.only(left: leftPadding, top: 0, right: rightPadding),
       child: TextFormField(
-        textAlignVertical: TextAlignVertical.center,
+        // textAlignVertical: TextAlignVertical.center,
         // textAlign: TextAlign.center,
         onTap: onTap,
         readOnly: readonly,
@@ -469,35 +469,29 @@ class MyTextFieldHint extends StatelessWidget {
         decoration: InputDecoration(
           errorMaxLines: 2,
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: MyColors.lineColor),
+            borderSide: BorderSide(color: MyColors.buttonBgColor),
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: MyColors.lineColor),
+            borderSide: BorderSide(color: MyColors.buttonBgColor),
           ),
           border: new UnderlineInputBorder(
               borderSide: new BorderSide(
-                  color: MyColors.lineColor
+                  color: MyColors.buttonBgColor
               )
           ),
-          fillColor: MyColors.whiteColor,
+       //   fillColor: MyColors.whiteColor,
           isDense: true,
 
           alignLabelWithHint: true,
           hintText: addHint,
           hintStyle: TextStyle(color: MyColors.textColor.withOpacity(0.35)),
-          counterText: "",
-          filled: true,
-          prefixIcon: imageUrl != null ?new Container(
-            // padding: const EdgeInsets.only(left: 40,),
-            child: Image.asset(
-              imageUrl,
-              height: Get.height * 0.02,
-            ),
-          ):null,
+          counterText: "",contentPadding: EdgeInsets.only(bottom: 15,left: 5),
+         // filled: true,
+
 
 
         ),
-        // validator: validator,
+        validator: validator,
       ),
     );
   }

@@ -101,7 +101,7 @@ class MyValidatorController extends GetxController{
     }
   }
   String validatePhoneNo(String value) {
-    if (value == null || value.isEmpty) {
+    if (value != null && !value.isEmpty && value.length < 10) {
       return "validPhoneNo".tr;
     }
     else {

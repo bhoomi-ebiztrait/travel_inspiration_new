@@ -28,6 +28,7 @@ class CommonMethod{
   static const String reflective_mode = "reflective_mode";
   static const String inspired_mode = "inspired_mode";
   static const String vacation = "vacation";
+  static const String shareProject = "shareProject";
 
  static void getAppMode(){
     TIPrint(tag:"App Mode:",

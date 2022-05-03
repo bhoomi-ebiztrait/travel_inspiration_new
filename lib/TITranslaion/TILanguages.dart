@@ -335,6 +335,12 @@ class TILanguages extends Translations{
         "change_my_number":"Modifier mon numéro",
         "notify_title":"Hey Haudos2021, regardes où tes pas t’ont mené jusqu’à présent.",
         "notify_subtitle":"Retrouves tes destinations dans ton carnet de voyage pour explorer les hôtels, restaurants et activités. Découvres également les disponibilités aériennes et ferroviaires.",
+        "change_phone_no":"Modifier mon numéro de téléphone:",
+        "new_number":"Nouveau numéro",
+        "go_on_way":"Continuer mon chemin",
+        "you_hv_done":"Tu as fais",
+        "km":"kilomètres !",
+        "choose_dest_title":"Choisi.e une destination pour créer un projet de vacances.",
 
     },
     'en_US': {
@@ -668,6 +674,12 @@ class TILanguages extends Translations{
         "change_my_number":"Modify my number",
         "notify_title":"Hey Haudos2021, look where your steps have taken you so far.",
         "notify_subtitle":"Find your destinations in your travel diary to explore hotels, restaurants and activities. Also discover air and rail availability.",
+        "change_phone_no":"Change my phone number:",
+        "new_number":"New number",
+        "go_on_way":"go on my way",
+        "you_hv_done":"You have done",
+        "km":"kilometers!",
+        "choose_dest_title":"Choose a destination to create a vacation plan."
     },
 
   };

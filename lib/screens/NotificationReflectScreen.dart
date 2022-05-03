@@ -23,14 +23,14 @@ import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
 import 'TravelBook/TITravelougeScreen.dart';
 
-class NotificationScreen extends StatefulWidget {
+class NotificationReflectScreen extends StatefulWidget {
   Map<String, dynamic> data;
-  NotificationScreen({this.data});
+  NotificationReflectScreen({this.data});
   @override
-  State<NotificationScreen> createState() => NotificationScreenState();
+  State<NotificationReflectScreen> createState() => NotificationReflectScreenState();
 }
 
-class NotificationScreenState extends State<NotificationScreen> {
+class NotificationReflectScreenState extends State<NotificationReflectScreen> {
   MyController myController = MyController();
   bool isStopped = false;
   bool isVisible = false;
@@ -117,7 +117,7 @@ class NotificationScreenState extends State<NotificationScreen> {
                 height: Get.height * 0.01,
               ),
               MyTextStart(
-                text_name: "go_on_way".tr,
+                text_name: "go_on_way".tr.toUpperCase(),
                 txtcolor: MyColors.buttonBgColor,
                 txtfontsize: MyFontSize.size13,
                 myFont: MyStrings.courier_prime_bold,
@@ -136,12 +136,12 @@ class NotificationScreenState extends State<NotificationScreen> {
                           isNewSelected = true;
                           isContinueSel = false;
                         });
-                        ScreenTransition.navigateToScreenLeft(
-                            screenName: (widget.data["mode"]) == "0"
+                        /*ScreenTransition.navigateToScreenLeft(
+                            screenName: (widget.data["mode"]) == 0
                                 ? TICreateNewProjectInInspireModeScreen()
-                                : ReflectModeCreateProjectScreen());
+                                : ReflectModeCreateProjectScreen());*/
                       },
-                      btnText: "Repartiede".tr,
+                      btnText: "txtArretermonparcours".tr,
                       fontSize: MyFontSize.size9,
                       textColor: isNewSelected == true ? MyColors.whiteColor:MyColors.buttonBgColor,
                       myFont: MyFont.Courier_Prime_Bold,
@@ -155,12 +155,12 @@ class NotificationScreenState extends State<NotificationScreen> {
                           isContinueSel = true;
                           isNewSelected = false;
                         });
-                        ScreenTransition.navigateToScreenLeft(
-                            screenName: (widget.data["mode"]) == "0"
+                        /*ScreenTransition.navigateToScreenLeft(
+                            screenName: (widget.data["mode"]) == 0
                                 ? TICreateNewProjectInInspireModeScreen()
-                                : ReflectModeCreateProjectScreen());
+                                : ReflectModeCreateProjectScreen());*/
                       },
-                      btnText: "Comulermes".tr,
+                      btnText: "go_on_way".tr,
                       fontSize: MyFontSize.size9,
                       textColor: isContinueSel == true ? MyColors.whiteColor:MyColors.buttonBgColor,
                       myFont: MyFont.Courier_Prime_Bold,
@@ -237,8 +237,8 @@ class NotificationScreenState extends State<NotificationScreen> {
     },
 
     child: MyText(
-    // text_name: "${"you_hv_done".tr} 305 ${"km".tr} ",
-    text_name: "${"you_hv_done".tr} ${widget.data["km"]} ${"km".tr} ",
+    text_name: "${"you_hv_done".tr} 305 ${"km".tr} ",
+    // text_name: "${"you_hv_done".tr} ${widget.data["km"]} ${"km".tr} ",
     myFont: MyFont.Cagliostro_reguler,
     txtfontsize: MyFontSize.size23,
     txtcolor: MyColors.whiteColor ,

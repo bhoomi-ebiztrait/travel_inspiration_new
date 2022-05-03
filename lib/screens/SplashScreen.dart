@@ -6,6 +6,7 @@ import 'package:travel_inspiration/screens/Gallery/GalleryScreen.dart';
 import 'package:travel_inspiration/screens/HomeScreen.dart';
 import 'package:travel_inspiration/screens/LoginScreen.dart';
 import 'package:travel_inspiration/screens/MyProfileScreen.dart';
+import 'package:travel_inspiration/screens/NotificationReflectScreen.dart';
 import 'package:travel_inspiration/screens/NotificationScreen.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeScreen.dart';
 import 'package:travel_inspiration/screens/SettingsMenu/DeleteAcConfirmScreen.dart';
@@ -102,7 +103,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           // screenName: NotificationScreen())
             screenName: ReflectModeScreen())
             : ScreenTransition.navigateOffAll(
-            // screenName: DeleteAcConfirmScreen());
+            // screenName: NotificationReflectScreen());
             screenName: InspredModeScreen());
         MyPreference.setPrefIntValue(
             key: MyPreference.APPMODE, value: mode);

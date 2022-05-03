@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
 import 'package:travel_inspiration/MyWidget/MyFlyMenu.dart';
 import 'package:travel_inspiration/MyWidget/MyFlyMenus.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
@@ -18,6 +19,7 @@ import 'package:travel_inspiration/utils/MyColors.dart';
 import 'package:travel_inspiration/utils/MyFont.dart';
 import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
+import 'package:travel_inspiration/utils/MyPreference.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 import 'package:travel_inspiration/utils/TITag.dart';
@@ -186,7 +188,7 @@ class _TIMyFavoriteCitiesScreenState extends State<TIMyFavoriteCitiesScreen> {
                         height: Get.height * .025,
                       ),
                       MyText(
-                        text_name: "MODE INSPIRE",
+                        text_name: MyPreference.getPrefIntValue(key: MyPreference.APPMODE) == ApiParameter.REFLECT_MODE ?"reflect_mode".tr:"inspire_mode".tr,
                         myFont: MyFont.Courier_Prime_Bold,
                         txtfontsize: MyFontSize.size18,
                         txtcolor: MyColors.textColor,
@@ -194,7 +196,7 @@ class _TIMyFavoriteCitiesScreenState extends State<TIMyFavoriteCitiesScreen> {
                         height: 0.8,
                       ),
                       MyText(
-                        text_name: "532 KM",
+                        text_name: "${myController.selectedPlace.value.km != null ?myController.selectedPlace.value.km.toStringAsFixed(2): "0"} KM",
                         myFont: MyFont.Courier_Prime_Bold,
                         txtfontsize: MyFontSize.size18,
                         txtcolor: MyColors.textColor,
