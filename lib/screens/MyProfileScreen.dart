@@ -147,64 +147,66 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
 
             children: [
-              Container(
-                width: Get.width * 0.60,
-                height: Get.height * 0.23,
-                child: SfCircularChart(margin: EdgeInsets.all(0), palette: [
-                  MyColors.lineColor,
-                  MyColors.lightGreenColor,
-                ], annotations: <CircularChartAnnotation>[
-                  CircularChartAnnotation(
-                    height: "80%",
-                    width: "80%",
-                    widget: Container(
-                      child: MyText(
-                        text_name: profileController.userInfo.value != null
-                            ? getProjectRatio()
-                            : "",
-                        txtcolor: ((MyPreference.getPrefIntValue(
-                            key: MyPreference.APPMODE)) ==
-                            ApiParameter.REFLECT_MODE)
-                            ? MyColors.lightGreenColor
-                            : MyColors.lineColor,
-                        txtfontsize: MyFontSize.size16,
-                        myFont: MyStrings.courier_prime_bold,
+              Obx((){
+                return Container(
+                  width: Get.width * 0.60,
+                  height: Get.height * 0.23,
+                  child: SfCircularChart(margin: EdgeInsets.all(0), palette: [
+                    MyColors.lineColor,
+                    MyColors.lightGreenColor,
+                  ], annotations: <CircularChartAnnotation>[
+                    CircularChartAnnotation(
+                      height: "80%",
+                      width: "80%",
+                      widget: Container(
+                        child: MyText(
+                          text_name: profileController.userInfo.value != null
+                              ? getProjectRatio()
+                              : "",
+                          txtcolor: ((MyPreference.getPrefIntValue(
+                              key: MyPreference.APPMODE)) ==
+                              ApiParameter.REFLECT_MODE)
+                              ? MyColors.lightGreenColor
+                              : MyColors.lineColor,
+                          txtfontsize: MyFontSize.size16,
+                          myFont: MyStrings.courier_prime_bold,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-                    /*  legend: Legend(isVisible: true,orientation: LegendItemOrientation.horizontal,position: LegendPosition.bottom,
+                  ],
+                      /*  legend: Legend(isVisible: true,orientation: LegendItemOrientation.horizontal,position: LegendPosition.bottom,
                       alignment: ChartAlignment.center,
                       textStyle: TextStyle(fontSize: MyFontSize.size10)),*/
-                    series: <DoughnutSeries<_PieData, String>>[
-                      DoughnutSeries<_PieData, String>(
+                      series: <DoughnutSeries<_PieData, String>>[
+                        DoughnutSeries<_PieData, String>(
 
 // innerRadius: "30" ,
-                        // strokeWidth: 40,
-                          animationDuration: 0,
+                          // strokeWidth: 40,
+                            animationDuration: 0,
 // strokeWidth: 35,
-                          explode: false,
-                          dataSource: <_PieData>[
-                            _PieData(
-                                "inspire".tr,
-                                profileController.userInfo.value != null
-                                    ? profileController.userInfo.value.noOfCreateProjInsp
-                                    : 0,
-                                ""),
-                            _PieData(
-                                "reflect".tr,
-                                profileController.userInfo.value != null
-                                    ? profileController.userInfo.value.noOfCreatedProjReflect
-                                    : 0,
-                                ""),
-                          ],
-                          xValueMapper: (_PieData data, _) => data.xData,
-                          yValueMapper: (_PieData data, _) => data.yData,
-                          dataLabelMapper: (_PieData data, _) => data.text,
-                          dataLabelSettings:
-                          DataLabelSettings(isVisible: true)),
-                    ]),
-              ),
+                            explode: false,
+                            dataSource: <_PieData>[
+                              _PieData(
+                                  "inspire".tr,
+                                  profileController.userInfo.value != null
+                                      ? profileController.userInfo.value.noOfCreateProjInsp
+                                      : 0,
+                                  ""),
+                              _PieData(
+                                  "reflect".tr,
+                                  profileController.userInfo.value != null
+                                      ? profileController.userInfo.value.noOfCreatedProjReflect
+                                      : 0,
+                                  ""),
+                            ],
+                            xValueMapper: (_PieData data, _) => data.xData,
+                            yValueMapper: (_PieData data, _) => data.yData,
+                            dataLabelMapper: (_PieData data, _) => data.text,
+                            dataLabelSettings:
+                            DataLabelSettings(isVisible: true)),
+                      ]),
+                );
+              }),
 
             ],
           ),
@@ -688,6 +690,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   getProjectRatio() {
     int appMode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
+
+    if (profileController.userInfo.value.noOfCreatedProjReflect != null &&
+        profileController.userInfo.value.noOfCreateProjInsp == null) {
+      return "100%";
+    }
+    if (profileController.userInfo.value.noOfCreatedProjReflect == null &&
+        profileController.userInfo.value.noOfCreateProjInsp != null) {
+      return "100%";
+    }
+
 
     if (profileController.userInfo.value.noOfCreatedProjReflect != null &&
         profileController.userInfo.value.noOfCreateProjInsp != null) {

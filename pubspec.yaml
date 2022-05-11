@@ -17,7 +17,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   get: ^4.1.4
-  flutter_screenutil: ^5.0.0
+  flutter_screenutil: ^5.5.2
 #  google_sign_in: ^5.0.4
   video_player: ^2.1.6
   image_picker: ^0.8.1+3

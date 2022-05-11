@@ -40,7 +40,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
   AnimationController rotateArrow360;
   bool goToDetail = false;
 
-  AllProjectModel selectedProj;
+  //AllProjectModel selectedProj;
 
   @override
   initState() {
@@ -229,8 +229,9 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
                           isVisible = false;
                         });
                       },
-                      child: Image.asset(MyImageURL.arrow_dropdown_up,color: MyColors.buttonBgColor)),
-                 /* InkWell(
+                      child: Image.asset(MyImageURL.arrow_dropdown_up,
+                          color: MyColors.buttonBgColor)),
+                  /* InkWell(
                       onTap: () {
                         setState(() {
                           isVisible = false;
@@ -259,7 +260,11 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
                           }*/
                           getEndLatLong(false);
                         },
-                        child: Image.asset(MyImageURL.gaia,height: 60,width: 60,)),
+                        child: Image.asset(
+                          MyImageURL.gaia,
+                          height: 60,
+                          width: 60,
+                        )),
                     SizedBox(
                       height: Get.height * 0.01,
                     ),
@@ -318,7 +323,13 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
           SizedBox(
             height: Get.height * 0.06,
           ),
-          Obx(() {
+         /* MyText(
+            text_name: getSelectedProj(),
+            myFont: MyStrings.courier_prime_italic,
+            txtfontsize: MyFontSize.size16,
+            txtcolor: MyColors.whiteColor,
+          ),*/
+           Obx(() {
             return MyText(
               text_name: getSelectedProj(),
               myFont: MyStrings.courier_prime_italic,
@@ -330,7 +341,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
           GestureDetector(
             onTap: () {
               getEndLatLong(true);
-             /* if (myController.selectedProject != null &&
+              /* if (myController.selectedProject != null &&
                   myController.selectedProject.value != "" &&
                   myController.selectedProject.value.projectMode == "1") {
                 getEndLatLong(true);
@@ -377,6 +388,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
     if (myController.selectedProject != null &&
         myController.selectedProject.value != "" &&
         myController.selectedProject.value.projectMode == "1") {
+      print("sele ${myController.selectedProject.value.title}");
       return myController.selectedProject.value.title;
     }
 
@@ -385,12 +397,12 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
       int appMode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
       for (int i = 0; i < myController.allProjectList.value.length; i++) {
         if ("1" == myController.allProjectList.value[i].projectMode) {
-          // myController.selectedProject.value =
-          // myController.allProjectList.value[i];
+          // myController.selectedProject.value = myController.allProjectList.value[i];
           myController.allProjectList.value[i].isSelected = true;
           myController.getSelectedProj();
+          print("sel:: ${myController.allProjectList.value[i].title}");
           return myController.allProjectList.value[i].title;
-        }else{
+        } else {
           myController.allProjectList.value[i].isSelected = false;
         }
       }
@@ -405,7 +417,9 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
 
     Map<String, dynamic> param = {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
-      "projectId": myController.selectedProject!= null ?myController.selectedProject.value.id:0,
+      "projectId": myController.selectedProject != null
+          ? myController.selectedProject.value.id
+          : 0,
       "projectMode": "1",
       "updatedKm": updatedKm,
     };
@@ -418,7 +432,8 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
             Get.to(() => TITravelougeScreen(
                 double.parse((distance).toStringAsFixed(2))));
           } else {
-            final result = await Get.to(ReflectJourneyDetailsScreen(double.parse((distance).toStringAsFixed(2))));
+            final result = await Get.to(ReflectJourneyDetailsScreen(
+                double.parse((distance).toStringAsFixed(2))));
             if (result == true) setState(() {});
           }
         });

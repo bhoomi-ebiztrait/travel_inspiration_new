@@ -52,6 +52,12 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
 
     if(myController.selectedPlace.value != null){
 
+      if(myController.selectedPlace.value.name == ""){
+        myController.selectedPlace.value.name = "";
+        myController.selectedPlace.value.lat = widget.currentPosition.latitude;
+        myController.selectedPlace.value.lng = widget.currentPosition.longitude;
+      }
+
       _markers.add(Marker(
 // This marker id can be anything that uniquely identifies each marker.
           markerId: MarkerId(myController.selectedPlace.value.place_id),
@@ -111,6 +117,13 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
     // TODO: implement initState
     super.initState();
     getCurrentAddress();
+    if(myController.selectedPlace.value != null) {
+      if (myController.selectedPlace.value.name == "") {
+        myController.selectedPlace.value.name = "";
+        myController.selectedPlace.value.lat = widget.currentPosition.latitude;
+        myController.selectedPlace.value.lng = widget.currentPosition.longitude;
+      }
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       myController.getDistanceAPI(widget.currentPosition.latitude,widget.currentPosition.longitude);
     });
@@ -227,7 +240,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
                           currAddress: address.streetAddress,currPos: widget.currentPosition));
                   }
                 },
-                child: Image.asset(MyImageURL.fleche)),
+                child: Image.asset(MyImageURL.fleche,height: 80,width: 80,)),
           ],
         ),
       );

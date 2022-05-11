@@ -1112,9 +1112,12 @@ if(mLang == null){
 
   Future<List<TIArticalListModel>> articleListApiCall() async {
     List<TIArticalListModel> articleList = [];
+    if(MyPreference.getPrefStringValue(key: MyPreference.language_code) == null){
+      MyPreference.setPrefStringValue(key: MyPreference.language_code, value: "en");
+    }
     if (await isConnected()) {
       MyResponse response =
-          await ApiCall().CallGetAPI(url: ApiParameter.GETARTICALLIST);
+          await ApiCall().CallGetAPI(url: "${ApiParameter.GETARTICALLIST}?language=${MyPreference.getPrefStringValue(key: MyPreference.language_code)}");
 
       if (response.isSuccess()) {
         List result = response.getDATAJSONArray1()[ApiParameter.data];
@@ -1137,9 +1140,12 @@ if(mLang == null){
   var gaiaInfo = "".obs;
 
   Future<MyResponse> getGaiaInfo() async {
+    if(MyPreference.getPrefStringValue(key: MyPreference.language_code) == null){
+      MyPreference.setPrefStringValue(key: MyPreference.language_code, value: "en");
+    }
     if (await isConnected()) {
       MyResponse response =
-          await ApiCall().CallGetAPI(url: ApiParameter.GAIAINFO);
+          await ApiCall().CallGetAPI(url: "${ApiParameter.GAIAINFO}?language=${MyPreference.getPrefStringValue(key: MyPreference.language_code)}");
 
       return response;
     } else {

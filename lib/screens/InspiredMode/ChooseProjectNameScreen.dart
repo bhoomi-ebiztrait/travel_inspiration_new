@@ -114,7 +114,7 @@ alignment: Alignment.center,
     return Container(
       alignment: Alignment.bottomCenter,
       // height: Get.height * 0.10,
-      height: 80,
+      height: 100,
       width: Get.width,
 
       child: Padding(
@@ -151,7 +151,7 @@ alignment: Alignment.center,
                   },
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Image.asset(MyImageURL.fleche),
+                      child: Image.asset(MyImageURL.fleche,height: 90,width: 90,),
                     )),
               ],
             ),

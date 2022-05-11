@@ -77,7 +77,7 @@ class _MyRouteListScreenState extends State<MyRouteListScreen> {
               buildListview(),
             ],
           ),
-          Positioned(
+          /*Positioned(
             right: 0,
             bottom: 20,
             child: Padding(
@@ -89,7 +89,7 @@ class _MyRouteListScreenState extends State<MyRouteListScreen> {
                   },
                   child: Image.asset(MyImageURL.info_big,height: 40,width: 40,)),
             ),
-          ),
+          ),*/
         ],
       ),
     );

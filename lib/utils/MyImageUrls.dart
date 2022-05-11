@@ -20,6 +20,7 @@ class MyImageURL {
   static const add_btn_white = root + "add_btn_white.png";
   static const share_btn = root + "share_btn.png";
   static const fleche = root + "fleche.png";
+  static const gaia_bg_bottom = root + "gaia_bg_bottom.png";
   static const check_circle = root + "check_circle.png";
   static const check_pinned = root + "check_pinned.png";
   static const email_icon = root + "email_icon.png";
@@ -103,7 +104,7 @@ class MyImageURL {
   static const metro_steps = root + "metro_steps.png";
   static const project_name_bottom = root + "project_name_bottom.png";
   static const project_name_top = root + "project_name_top.png";
-  static const inspiremode_bg=root+"bg_inspiremode@3x.png";
+  static const inspiremode_bg=root+"inspiremode_bg.png";
   static const curve_whiteshape=root+"curve_shape@3x.png";
   static const home_icon3x=root+"home_icon@3x.png";
   static const home_edit3x=root+"home_edit@3x.png";

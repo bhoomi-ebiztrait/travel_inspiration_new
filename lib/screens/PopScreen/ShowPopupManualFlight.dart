@@ -82,7 +82,7 @@ MyController myController = Get.put(MyController());
                       height: Get.height * .06,
                     ),
                     MyText(
-                      text_name: "ou",
+                      text_name: "or".tr,
                       myFont: MyFont.Courier_Prime_Bold,
                       txtfontsize: MyFontSize.size18,
                       txtcolor: MyColors.textColor,

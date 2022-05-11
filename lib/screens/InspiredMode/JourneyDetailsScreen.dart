@@ -144,7 +144,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
                         myController.secondProject.value.projectMode));
                 myController
                     .setSelectedProj(myController.secondProject.value);
-                //Get.back(result: true);
+                // Get.back();
                 CommonMethod.getAppMode();
                 // }
               },

@@ -9,8 +9,10 @@ import 'package:travel_inspiration/MyWidget/TIMyCustomRoundedCornerButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/TIModel/TIDestinationInProgressModel.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeCreateProjectScreen.dart';
+import 'package:travel_inspiration/screens/StopRouteScreen.dart';
 import 'package:travel_inspiration/screens/TICreateNewProjectInInspireModeScreen.dart';
 import 'package:travel_inspiration/screens/TIPinDestinationToProjectScreen.dart';
+import 'package:travel_inspiration/screens/TravelBook/MyRouteScreen.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
 import 'package:travel_inspiration/utils/Loading.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
@@ -31,7 +33,7 @@ class NotificationReflectScreen extends StatefulWidget {
 }
 
 class NotificationReflectScreenState extends State<NotificationReflectScreen> {
-  MyController myController = MyController();
+  MyController myController = Get.put(MyController());
   bool isStopped = false;
   bool isVisible = false;
 
@@ -117,7 +119,7 @@ class NotificationReflectScreenState extends State<NotificationReflectScreen> {
                 height: Get.height * 0.01,
               ),
               MyTextStart(
-                text_name: "go_on_way".tr.toUpperCase(),
+                text_name: "choose_to".tr,
                 txtcolor: MyColors.buttonBgColor,
                 txtfontsize: MyFontSize.size13,
                 myFont: MyStrings.courier_prime_bold,
@@ -135,7 +137,14 @@ class NotificationReflectScreenState extends State<NotificationReflectScreen> {
                         setState(() {
                           isNewSelected = true;
                           isContinueSel = false;
+                          // _stopJourney();
                         });
+
+                        // myController.selectedPlace.value.place_id = widget.data["project_id"];
+                        // myController.selectedPlace.value.name = widget.data["pin_destination"];
+                        // myController.selectedPlace.value.lat = widget.data["end_lat"];
+                        // myController.selectedPlace.value.lng = widget.data["end_long"];
+                        ScreenTransition.navigateToScreenLeft(screenName: StopRouteScreen(widget.data["project_id"],widget.data["km"]));
                         /*ScreenTransition.navigateToScreenLeft(
                             screenName: (widget.data["mode"]) == 0
                                 ? TICreateNewProjectInInspireModeScreen()
@@ -150,11 +159,19 @@ class NotificationReflectScreenState extends State<NotificationReflectScreen> {
                       buttonHeight: Get.height * .040,
                     ),
                     TIMyCustomRoundedCornerButton(
-                      onClickCallback: () {
+                      onClickCallback: () async {
                         setState(() {
                           isContinueSel = true;
                           isNewSelected = false;
                         });
+
+                        myController.selectedPlace.value.place_id = widget.data["project_id"];
+                        myController.selectedPlace.value.name = widget.data["pin_destination"];
+                        myController.selectedPlace.value.lat = widget.data["end_lat"]!= ""?double.parse(widget.data["end_lat"]):0.00;
+                        myController.selectedPlace.value.lng = widget.data["end_long"]!= "" ? double.parse(widget.data["end_long"]):0.00;
+                        Position _getCurrentPosition = await determineCurrentPosition();
+                        ScreenTransition.navigateToScreenLeft(
+                            screenName: MyRouteScreen(_getCurrentPosition));
                         /*ScreenTransition.navigateToScreenLeft(
                             screenName: (widget.data["mode"]) == 0
                                 ? TICreateNewProjectInInspireModeScreen()
@@ -237,8 +254,8 @@ class NotificationReflectScreenState extends State<NotificationReflectScreen> {
     },
 
     child: MyText(
-    text_name: "${"you_hv_done".tr} 305 ${"km".tr} ",
-    // text_name: "${"you_hv_done".tr} ${widget.data["km"]} ${"km".tr} ",
+    // text_name: "${"you_hv_done".tr} 305 ${"km".tr} ",
+    text_name: "${"you_hv_done".tr} ${widget.data["km"]} ${"km".tr} ",
     myFont: MyFont.Cagliostro_reguler,
     txtfontsize: MyFontSize.size23,
     txtcolor: MyColors.whiteColor ,
@@ -266,9 +283,9 @@ class NotificationReflectScreenState extends State<NotificationReflectScreen> {
   }
 
   _buildColumn() {
-    String btn_text = isStopped == true
+    /*String btn_text = isStopped == true
         ? "stop_journey".tr
-        : "txtArretermonparcours".tr;
+        : "txtArretermonparcours".tr;*/
     return Column(
       children: [
         SizedBox(
@@ -311,14 +328,13 @@ class NotificationReflectScreenState extends State<NotificationReflectScreen> {
         TIMyCustomRoundedCornerButton(
           onClickCallback: () {
             setState(() {
-              isStopped = true;
-              if (btn_text == "stop_journey".tr) {
-                Get.to(() => TITravelougeScreen(
-                    double.parse(myController.selectedProject.value.totalKm)));
-              }
+              // isStopped = true;
+              Get.to(() => TITravelougeScreen(
+                  double.parse(widget.data["km"])));
+
             });
           },
-          btnText: btn_text,
+          btnText: "txtCARNETDEVOYAGE".tr,
           fontSize: MyFontSize.size9,
           textColor: MyColors.txtWhiteColor,
           myFont: MyFont.Courier_Prime_Bold,
@@ -513,6 +529,8 @@ class NotificationReflectScreenState extends State<NotificationReflectScreen> {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
       "project_id": myController.selectedProject.value.id,
       "pin_destination": myController.selectedPlace.value.name,
+      "end_lat":myController.selectedPlace.value.lat,
+      "end_long":myController.selectedPlace.value.lng,
     };
 
     await apiManager.pinDestinationAPI(param).then((value) {
@@ -522,5 +540,20 @@ class NotificationReflectScreenState extends State<NotificationReflectScreen> {
         ));
       }
     });
+  }
+
+   _stopJourney() {
+    print("inside stop");
+    return Container(
+      margin: EdgeInsets.only(
+       // top: Get.height * 0.30,
+      ),
+      decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(Get.width * 0.12),
+              topRight: Radius.circular(Get.width * 0.12))),
+      child: _buildColumn(),
+    );
   }
 }

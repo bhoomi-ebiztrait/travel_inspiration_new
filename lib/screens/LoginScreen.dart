@@ -280,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       //     : Container()),
 
                       child: isActiveBio
-                          ? Image.asset(MyImageURL.fingerprint,height: 80,)
+                          ? isBioOn ? Image.asset(MyImageURL.fingerprint,height: 80,):Container()
                           : Container()),
                 ),
               ],
@@ -293,7 +293,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SizedBox(
           height: Get.height * 0.03,
         ),
-        Padding(
+       isBioOn? Container(): Padding(
           padding: EdgeInsets.symmetric(horizontal: Get.width * 0.15),
           child: MyButton(
             btn_name: "se_connecter".tr,

@@ -131,10 +131,19 @@ class _TIPinDestinationToProjectScreenState
   }
 
   _destinationList() {
+    String subProj="";
     return Obx((){
       return ListView.builder(
           itemCount: myController.allProjectList.length,
           itemBuilder: (context, index) {
+            if(myController.allProjectList[index].pinDestination != ""){
+              for(int i=0;i<myController.allProjectList[index].subProjectDetail.length;i++){
+                subProj = "$subProj - ${myController.allProjectList[index].subProjectDetail[i].name.toUpperCase()}";
+              }
+            }else{
+              subProj = "";
+            }
+            print("subbbb $subProj");
             return Slidable(
               key: ValueKey(myController.allProjectList[index]),
               endActionPane: ActionPane(
@@ -154,7 +163,7 @@ class _TIPinDestinationToProjectScreenState
                             onTap:(){
                               ScreenTransition.navigateToScreenLeft(screenName: ShareProjectScreen(myController.allProjectList[index].id,index));
                             },
-                            child: Image.asset(MyImageURL.share_btn,)),
+                            child: Image.asset(MyImageURL.share_btn,color: MyColors.buttonBgColor,)),
                         GestureDetector(
                             onTap: (){
                               callDeleteProj(myController.allProjectList[index].id,index);
@@ -209,15 +218,35 @@ class _TIPinDestinationToProjectScreenState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                      myController.allProjectList[index].pinDestination != "" ? "${myController.allProjectList[index].title.toUpperCase()} - ${myController.allProjectList[index].pinDestination.toUpperCase()}":
+                          Container(
+                            width: Get.width*0.7,
+                            child: Text(
+                      subProj!= "" ? "${myController.allProjectList[index].title.toUpperCase()} $subProj":
                       "${myController.allProjectList[index].title.toUpperCase()}",
+
+                              style: TextStyle(
+                                  fontFamily: MyFont.Courier_Prime_Bold,
+                                  color: MyColors.textColor,
+                                  fontSize: MyFontSize.size13),
+
+                            ),
+                          ),
+
+
+/*
+                          Text(
+                            myController.allProjectList[index].pinDestination != "" ? "${myController.allProjectList[index].title.toUpperCase()} - ${myController.allProjectList[index].pinDestination.toUpperCase()}":
+                            "${myController.allProjectList[index].title.toUpperCase()}",
                             style: TextStyle(
                                 fontFamily: MyFont.Courier_Prime_Bold,
                                 color: MyColors.textColor,
                                 fontSize: MyFontSize.size13),
 
-                          ),
+                          ),*/
+
+
+
+
                           GestureDetector(
                             onTap: (){
 

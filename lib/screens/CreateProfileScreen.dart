@@ -145,10 +145,10 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                 imageUrl: MyImageURL.user_img,
                 addlabel: "add_nickname".tr,
                 readonly: false,
-                labelColor: MyColors.lightGreenColor,
+                labelColor: MyColors.textColor,
                 edinputType: TextInputType.name,
                 obscureText: false,
-                validator: myController.validateEmail,
+                validator: myController.validateName,
               ),
               SizedBox(
                 height: Get.height * 0.04,
@@ -717,11 +717,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
           msgContent: "dateofBirthreq".tr,
           myFont: MyStrings.courier_prime_bold);
     }
-    if (croppedImg == null) {
+    /*if (croppedImg == null) {
       return MyCommonMethods.showInfoCenterDialog(
           msgContent: "validAvtar".tr,
           myFont: MyStrings.courier_prime_bold);
-    }
+    }*/
 
     if (nameController.text == null || nameController.text.isEmpty) {
       return MyCommonMethods.showInfoCenterDialog(

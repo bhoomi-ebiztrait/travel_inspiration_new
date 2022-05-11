@@ -1,73 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
-import 'package:travel_inspiration/MyWidget/MyCustomListWithStar.dart';
 import 'package:travel_inspiration/MyWidget/MyCustomRowViewWIthImage.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/TIMyCustomRoundedCornerButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
-import 'package:travel_inspiration/TIModel/TIDestinationInProgressModel.dart';
 import 'package:travel_inspiration/screens/TIPinDestinationToProjectScreen.dart';
-import 'package:travel_inspiration/utils/CommonMethod.dart';
-import 'package:travel_inspiration/utils/Loading.dart';
+import 'package:travel_inspiration/screens/TravelBook/TITravelougeScreen.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
 import 'package:travel_inspiration/utils/MyFont.dart';
 import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyPreference.dart';
-import 'package:travel_inspiration/utils/MyStrings.dart';
 
-import 'TravelBook/TITravelougeScreen.dart';
-
-class TIDestinationInProgressScreen extends StatefulWidget {
+class StopRouteScreen extends StatefulWidget {
+String projId,km;
+StopRouteScreen(this.projId,this.km);
   @override
-  State<TIDestinationInProgressScreen> createState() =>
-      _TIDestinationInProgressScreenState();
+  _StopRouteScreenState createState() => _StopRouteScreenState();
 }
 
-class _TIDestinationInProgressScreenState
-    extends State<TIDestinationInProgressScreen> {
+class _StopRouteScreenState extends State<StopRouteScreen> {
   MyController myController = Get.put(MyController());
-  bool isStopped = false;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    double radious = 0.0;
-    if(myController.selectedProject != null && myController.selectedProject.value != null && myController.selectedProject.value.totalKm != null) {
-       radious=
-          (double.parse(myController.selectedProject.value.totalKm)) * 1000;
-    }
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      myController.getCities(radious);
-      // myController.getCities(radious);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return _buildBodyContent();
-  }
-
-  _buildBodyContent() {
     return Container(
       margin:
-          EdgeInsets.only(top: Get.height * 0.02, bottom: Get.height * 0.02),
+      EdgeInsets.only(top: Get.height * 0.02, bottom: Get.height * 0.02),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.12))),
       child: _buildColumn(),
     );
   }
-
   _buildColumn() {
-    String btn_text = isStopped == true
+    /*String btn_text = isStopped == true
         ? "stop_journey".tr
-        : "txtArretermonparcours".tr;
+        : "txtArretermonparcours".tr;*/
     return Column(
       children: [
+        SizedBox(
+          height: Get.height * .040,
+        ),
         Align(
           alignment: Alignment.topRight,
           child: Padding(
@@ -75,7 +49,7 @@ class _TIDestinationInProgressScreenState
                 top: Get.height * .020, right: Get.height * .020),
             child: GestureDetector(
               onTap: () {
-                myController.showDestinationInProgressPopup.value = false;
+                Get.back();
               },
               child: Image.asset(
                 // MyImageURL.cross_gray3x,
@@ -88,11 +62,12 @@ class _TIDestinationInProgressScreenState
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 30),
           child: MyText(
-            text_name: isStopped == true
-                ? "choose_destination_complete_vacation_plan".tr
-                : "current_destination".tr,
+            text_name: "choose_destination_complete_vacation_plan".tr,
+            // text_name: isStopped == true
+            //     ? "notify_title".tr
+            //     : "current_destination".tr,
             myFont: MyFont.Courier_Prime_Bold,
             txtfontsize: MyFontSize.size13,
             txtcolor: MyColors.textColor,
@@ -100,20 +75,17 @@ class _TIDestinationInProgressScreenState
             //height: 1,
           ),
         ),
-        SizedBox(
-          height: Get.height * .030,
-        ),
+
         TIMyCustomRoundedCornerButton(
           onClickCallback: () {
             setState(() {
-              isStopped = true;
-              if (btn_text == "stop_journey".tr) {
-                Get.to(() => TITravelougeScreen(
-                    double.parse(myController.selectedProject.value.totalKm)));
-              }
+              // isStopped = true;
+              Get.to(() => TITravelougeScreen(
+                  double.parse(widget.km)));
+
             });
           },
-          btnText: btn_text,
+          btnText: "txtCARNETDEVOYAGE".tr,
           fontSize: MyFontSize.size9,
           textColor: MyColors.txtWhiteColor,
           myFont: MyFont.Courier_Prime_Bold,
@@ -122,13 +94,12 @@ class _TIDestinationInProgressScreenState
           buttonHeight: Get.height * .040,
         ),
         SizedBox(
-          height: Get.height * 0.05,
+          height: Get.height * 0.02,
         ),
         Expanded(child: _desinationInProgressList()),
       ],
     );
   }
-
   _desinationInProgressList() {
     return Obx(() {
       return ListView.builder(
@@ -136,21 +107,12 @@ class _TIDestinationInProgressScreenState
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                if (isStopped == true) {
-                  myController.selectedPlace.value = myController.mList[index];
-                  // call pin destination api
-                  callPinDestinationAPI();
-                }
+              //  openModelCitydetail(myController.mList[index]);
+                myController.selectedPlace.value = myController.mList[index];
+                // call pin destination api
+                callPinDestinationAPI();
               },
-             /* child: MyCustomRowViewWithImage(
-                heading: myController.mList[index].name,
-                title: myController.mList[index].description,
-                subTitle: myController.mList[index].content,
-                imageUrl: myController.mList[index].photo_ref != null ?getPhotoImage(myController.mList[index].photo_ref) : myController.mList[index].imgUrl,
-              ),*/
-              child: MyCustomRowViewWithImage(
-                  myController.mList[index]
-              ),
+              child: MyCustomRowViewWithImage(myController.mList[index]),
             );
           });
     });
@@ -160,12 +122,11 @@ class _TIDestinationInProgressScreenState
       return Container();
     }*/
   }
-
   callPinDestinationAPI() async {
     ApiManager apiManager = ApiManager();
     Map<String, dynamic> param = {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
-      "project_id": myController.selectedProject.value.id,
+      "project_id": widget.projId,
       "pin_destination": myController.selectedPlace.value.name,
       "end_lat":myController.selectedPlace.value.lat,
       "end_long":myController.selectedPlace.value.lng,

@@ -33,7 +33,7 @@ class _ModifyPhoneNumberScreenState extends State<ModifyPhoneNumberScreen> {
 
   MyValidatorController myController = Get.put(MyValidatorController());
 
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController phoneController = TextEditingController(text: MyPreference.getPrefStringValue(key: MyPreference.phoneNumber)!= "null" ? MyPreference.getPrefStringValue(key: MyPreference.phoneNumber) : "");
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

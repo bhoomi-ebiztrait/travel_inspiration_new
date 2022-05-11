@@ -196,7 +196,7 @@ class _TIMyFavoriteCitiesScreenState extends State<TIMyFavoriteCitiesScreen> {
                         height: 0.8,
                       ),
                       MyText(
-                        text_name: "${myController.selectedPlace.value.km != null ?myController.selectedPlace.value.km.toStringAsFixed(2): "0"} KM",
+                        text_name: "${myController.selectedFavPlace.value.km != null ?myController.selectedFavPlace.value.km.toStringAsFixed(2): "0"} KM",
                         myFont: MyFont.Courier_Prime_Bold,
                         txtfontsize: MyFontSize.size18,
                         txtcolor: MyColors.textColor,

@@ -39,6 +39,14 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
   MyValidatorController myValidatorController = Get.put(MyValidatorController());
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dateController.selectedDate.value = "";
+    dateController.selectedDestinationDate.value = "";
+    dateController.selectedNotifyDate.value = "";
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
@@ -131,9 +139,14 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                       height: Get.height * 0.03,
                     ),
                     MyDestinationPicker(maxDate: ApiParameter.END_DATE,msg: "dateofVacationStart".tr,),
+
+
+                    buildNotificationDate(),
+
                     SizedBox(
                       height: Get.height * 0.08,
                     ),
+
                     MyText(text_name: "number_of_person".tr,
                       txtfontsize: MyFontSize.size15,
                       txtcolor: MyColors.whiteColor,
@@ -173,6 +186,30 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                   ],
                 );
   }
+
+    buildNotificationDate() {
+    if(dateController.selectedDate.value != "" && dateController.selectedDestinationDate.value != "") {
+      return Column(
+        children: [
+          SizedBox(
+            height: Get.height * 0.06,
+          ),
+          MyText(
+            text_name: "my_notification_date".tr,
+            txtfontsize: MyFontSize.size15,
+            txtcolor: MyColors.whiteColor,
+            myFont: MyStrings.courier_prime_bold,
+          ),
+          SizedBox(
+            height: Get.height * 0.04,
+          ),
+          MyNotifyDatePicker(),
+        ],
+      );
+    }else{
+      return Container();
+    }
+   }
 
   buildBottomImage() {
     return Container(
@@ -223,7 +260,7 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                     }
                   }
                 },
-                child: Image.asset(MyImageURL.fleche)),
+                child: Image.asset(MyImageURL.fleche,height: 80,width: 90,)),
           ],
         ),
         Padding(
@@ -248,6 +285,7 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
       "projectName": projNameController.text,
       "vacationDate": (dateController.selectedDate.value),
       "destinationDate": (dateController.selectedDestinationDate.value),
+      "notificationDate": (dateController.selectedNotifyDate.value),
       "numberOfPerson": personCounter.toString(),
       "fromContinueKM":MyPreference.getPrefIntValue(key: MyPreference.pageVal),
       // "projectMode": "1",

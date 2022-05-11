@@ -137,7 +137,7 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
           height: Get.height * .020,
         ),
         MyText(
-          text_name: popupItemList[index].title,
+          text_name: popupItemList[index].title.toUpperCase(),
           myFont: MyFont.Courier_Prime_Bold,
           txtfontsize: MyFontSize.size11,
           txtcolor: selectedIndex == index ?MyColors.buttonBgColor:MyColors.textColor,

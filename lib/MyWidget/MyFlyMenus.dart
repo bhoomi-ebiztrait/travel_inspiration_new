@@ -119,7 +119,6 @@ class _MyFlyMenusState extends State<MyFlyMenus> {
                        Container(
                          height: 190,
                          width: 190,
-
                          child: Image.asset(
                            MyImageURL.favor_grey,
                            fit: BoxFit.contain,),
@@ -197,6 +196,8 @@ class _MyFlyMenusState extends State<MyFlyMenus> {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
       "project_id": myController.selectedProject.value.id,
       "pin_destination": myController.selectedPlace.value.name,
+      "end_lat":myController.selectedPlace.value.lat,
+      "end_long":myController.selectedPlace.value.lng,
     };
 
     await apiManager.pinDestinationAPI(param).then((value) {

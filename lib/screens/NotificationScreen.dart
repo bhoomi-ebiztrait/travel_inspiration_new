@@ -9,6 +9,7 @@ import 'package:travel_inspiration/MyWidget/TIMyCustomRoundedCornerButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/TIModel/TIDestinationInProgressModel.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeCreateProjectScreen.dart';
+import 'package:travel_inspiration/screens/StopRouteScreen.dart';
 import 'package:travel_inspiration/screens/TICreateNewProjectInInspireModeScreen.dart';
 import 'package:travel_inspiration/screens/TIPinDestinationToProjectScreen.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
@@ -311,14 +312,15 @@ class NotificationScreenState extends State<NotificationScreen> {
         TIMyCustomRoundedCornerButton(
           onClickCallback: () {
             setState(() {
-              isStopped = true;
-              if (btn_text == "stop_journey".tr) {
+              // isStopped = true;
+              ScreenTransition.navigateToScreenLeft(screenName: StopRouteScreen(widget.data["project_id"],widget.data["km"]));
+              /*if (btn_text == "stop_journey".tr) {
                 Get.to(() => TITravelougeScreen(
                     double.parse(myController.selectedProject.value.totalKm)));
-              }
+              }*/
             });
           },
-          btnText: btn_text,
+          btnText: "txtArretermonparcours".tr,
           fontSize: MyFontSize.size9,
           textColor: MyColors.txtWhiteColor,
           myFont: MyFont.Courier_Prime_Bold,
@@ -468,59 +470,8 @@ class NotificationScreenState extends State<NotificationScreen> {
           );
         });
 
-    Get.dialog(
-        AlertDialog(
-            /*  shape: RoundedRectangleBorder(borderRadius:
-            BorderRadius.all(Radius.circular(30))),*/
-            content: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0),
-          child: Container(
-            height: Get.width,
-            width: Get.width,
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Image.asset(MyImageURL.cross)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: MyText(
-                    text_name: "msgContent",
-                    txtcolor: MyColors.textColor,
-                    txtfontsize: MyFontSize.size13,
-                  ),
-                ),
-                SizedBox(
-                  height: Get.height * 0.03,
-                ),
-              ],
-            ),
-          ),
-        )),
-        barrierDismissible: true);
+
   }
 
-  callPinDestinationAPI() async {
-    ApiManager apiManager = ApiManager();
-    Map<String, dynamic> param = {
-      "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
-      "project_id": myController.selectedProject.value.id,
-      "pin_destination": myController.selectedPlace.value.name,
-    };
 
-    await apiManager.pinDestinationAPI(param).then((value) {
-      if (value) {
-        Get.to(TIPinDestinationToProjectScreen(
-          travelLougeTitle: "txtPinDestination".tr,
-        ));
-      }
-    });
-  }
 }

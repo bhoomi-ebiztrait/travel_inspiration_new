@@ -266,7 +266,8 @@ class _TIMyHaudosDestinationScreenState extends State<TIMyHaudosDestinationScree
                             child: Container(
                               height: Get.height * .90,
                               decoration: BoxDecoration(
-                                 color: MyColors.buttonBgColor.withOpacity(0.46)),
+                              //   color: MyColors.buttonBgColor.withOpacity(0.46)
+                              ),
                             ),
                           ),
                           Container(

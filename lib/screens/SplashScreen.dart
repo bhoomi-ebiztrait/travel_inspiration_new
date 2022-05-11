@@ -100,7 +100,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         int mode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
         mode == 1
             ? ScreenTransition.navigateOffAll(
-          // screenName: NotificationScreen())
+          // screenName: TIInspireModeScreen())
             screenName: ReflectModeScreen())
             : ScreenTransition.navigateOffAll(
             // screenName: NotificationReflectScreen());

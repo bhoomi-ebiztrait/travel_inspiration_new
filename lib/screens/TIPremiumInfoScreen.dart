@@ -104,13 +104,13 @@ class _TIPremiumInfoScreenState extends State<TIPremiumInfoScreen> {
                       fontSize: MyFontSize.size13,
                       fontFamily: MyFont.Courier_Prime),
                 ),
-                /*Text(
+                Text(
                   "txtFonctiona".tr,
                   style: TextStyle(
                       color: MyColors.textColor,
                       fontSize: MyFontSize.size13,
                       fontFamily: MyFont.Courier_Prime),
-                ),*/
+                ),
                 SizedBox(
                   height: Get.height * .06,
                 ),

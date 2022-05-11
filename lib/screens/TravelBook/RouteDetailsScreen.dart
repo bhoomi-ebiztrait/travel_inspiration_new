@@ -110,19 +110,19 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                buildInfo("ruleOne".tr),
+               // buildInfo("ruleOne".tr),
                 SizedBox(
                   height: 2,
                 ),
-                buildInfo("ruleTwo".tr),
+             //   buildInfo("ruleTwo".tr),
                 SizedBox(
                   height: 2,
                 ),
-                buildInfo("ruleThree".tr),
+              //  buildInfo("ruleThree".tr),
                 SizedBox(
                   height: 2,
                 ),
-                buildInfo("ruleFour".tr),
+             //   buildInfo("ruleFour".tr),
                 SizedBox(
                   height: 2,
                 ),

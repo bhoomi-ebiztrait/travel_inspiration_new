@@ -83,6 +83,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
   var selectedStartDate = "".obs;
   var selectedEndDate = "".obs;
   var selectedDestinationDate = "".obs;
+  var selectedNotifyDate = "".obs;
   var nextPage_token = "".obs;
   String passenger = "";
   Future<String> wayPoints ;
@@ -474,7 +475,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
       tempProjList.addAll(allProjectList.value);
       for (int i = 0; i < allProjectList.value.length; i++) {
         if (allProjectList.value[i].isSelected) {
-          selectedProject = AllProjectModel().obs;
+         selectedProject = AllProjectModel().obs;
           selectedProject.value = allProjectList.value[i];
           if(tempProjList != null && tempProjList.length > 0 ) {
             for(int j=0;j<tempProjList.length;j++) {

@@ -110,7 +110,7 @@ class _TIHotelListScreenState extends State<TIHotelListScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  height: Get.height*0.42,
+                  height: Get.height*0.45,
                   width: Get.width,
                   color: MyColors.buttonBgColorHome.withOpacity(0.7),
                   child: Column(

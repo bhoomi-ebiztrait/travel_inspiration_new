@@ -1,12 +1,15 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
 import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
+import 'package:travel_inspiration/MyWidget/MyButton.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyQuotedText.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTextButton.dart';
 import 'package:travel_inspiration/MyWidget/TICommonPopup.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/screens/InspiredMode/InspredModeScreen.dart';
@@ -21,6 +24,7 @@ import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyPreference.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../MyWidget/MyGradientBottomMenu.dart';
 import '../MyWidget/MyTitlebar.dart';
@@ -69,7 +73,7 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
           MyImageURL.world_selected,
           MyImageURL.setting_icon
         ],
-        bgImg: MyImageURL.botom_bg,
+        bgImg: MyImageURL.gaia_bg_bottom,
       ),
 
       body: SafeArea(child: _buildBodyContent()),
@@ -155,6 +159,19 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: MyButton(btn_name: "txtEnvoie".tr,
+                        bgColor: MyColors.buttonBgColor,
+                        opacity: 1,
+                        myFont: MyStrings.courier_prime_bold,
+                        //txtfont: MyFontSize.size10,
+                        txtcolor: MyColors.whiteColor,
+                        onClick: (){
+                          openEmail();
+                        },
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -304,5 +321,31 @@ class _TIGiaListScreenState extends State<TIGiaListScreen> {
         ),
       ),
     );
+  }
+
+  openEmail() async {
+    var androidUrl = "mailto:mausam.ebiztrait@gmail.com?subject=";
+    var iosURL = "mailto:?subject=";
+    // var iosURL = "mailto:?subject=" "&body=${Uri.parse(getSharedMsg())}";
+    launchURL(androidUrl, iosURL);
+  }
+  void launchURL(String androidUrl, String iosURL) async {
+    if (Platform.isIOS) {
+      // for iOS phone only
+      if (await canLaunch(iosURL)) {
+        await launch(iosURL, forceSafariVC: false);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("App not installed")));
+      }
+    } else {
+      // android , web
+      if (await canLaunch(androidUrl)) {
+        await launch(androidUrl);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("App not installed")));
+      }
+    }
   }
 }

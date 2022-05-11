@@ -44,43 +44,33 @@ class TIInspireModeScreen extends StatelessWidget {
         image: DecorationImage(
             image: AssetImage(MyImageURL.inspiremode_bg), fit: BoxFit.fill),
       ),
-      child: Center(
-        child: GestureDetector(
-          onTap: () {
-            ScreenTransition.navigateOffAll(screenName: InspredModeScreen());
-          },
-          child: Container(
-            width: Get.width,
-            height: Get.height * .18,
-            margin: EdgeInsets.only(bottom: Get.height * .082),
-            padding: EdgeInsets.only(top: Get.height * .020),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(MyImageURL.curve_whiteshape),
-                  fit: BoxFit.fill),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "txtInspireModeCommencerle".tr,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: MyColors.expantionTileBgColor,
-                      fontSize: MyFontSize.size23,
-                      fontFamily: MyFont.Cagliostro_reguler),
-                ),
-                SizedBox(
-                  height: Get.height * .010,
-                ),
-                Image.asset(
-                  MyImageURL.arrow3x,
-                  fit: BoxFit.contain,
-                ),
-              ],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: Get.height * .15,
+          ),
+          Text(
+            "txtInspireModeCommencerle".tr.toUpperCase(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: MyColors.whiteColor,
+                fontSize: MyFontSize.size50,
+                fontFamily: MyStrings.bodoni72_Bold),
+          ),
+          SizedBox(
+            height: Get.height * .22,
+          ),
+          GestureDetector(
+            onTap: (){
+              ScreenTransition.navigateOffAll(screenName: InspredModeScreen());
+            },
+            child: Image.asset(
+              MyImageURL.fleche,
+              fit: BoxFit.contain,height: 130,width: 130,
             ),
           ),
-        ),
+        ],
       ),
     );
   }

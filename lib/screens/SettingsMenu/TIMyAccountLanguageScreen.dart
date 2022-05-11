@@ -93,6 +93,9 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
 
   @override
   Widget build(BuildContext context) {
+    listLanguage.clear();
+    listLanguage.add(TIMyAccountLanguageModel(isSelected:  MyPreference.getPrefStringValue(key: MyPreference.language_code)=="fr"?true:false,language_name: "txtlangFranlang".tr,local: Locale('fr', 'FR')));
+    listLanguage.add(TIMyAccountLanguageModel(isSelected:  MyPreference.getPrefStringValue(key: MyPreference.language_code)=="en"?true:false,language_name: "txtLangAnglais".tr,local: Locale('en','US')));
     return Scaffold(
       backgroundColor: MyColors.settingBgColor,
       bottomNavigationBar:  MyGradientBottomMenu(selString:MyStrings.settings,iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.change_pw_bottom,bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),),
@@ -177,6 +180,7 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
                 listLanguage[index].isSelected = true;
 
                 Get.updateLocale(listLanguage[index].local);
+                _updateLanguageApiCall(listLanguage[index].local.languageCode == "en" ? "1" : "0");
 
                 MyPreference.setPrefStringValue(key: MyPreference.language_code, value: listLanguage[index].local.languageCode);
                 MyPreference.setPrefStringValue(key: MyPreference.country_code, value: listLanguage[index].local.countryCode);
@@ -196,7 +200,7 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
     );
   }
 
-  _langaugeList() {
+  /*_langaugeList() {
     return Obx(() => Column(
           children: [
             ListTile(
@@ -298,7 +302,7 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
 
     });
 
-  }
+  }*/
 
   _getParam(String langId){
     Map param={
@@ -308,10 +312,10 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
     return param;
   }
 
-  _updateLanguageApiCall({int index,String langId})async{
+  _updateLanguageApiCall(String langId)async{
        apiManager.updateLanguageApiCall(_getParam(langId)).then((response){
 
-         if(response.isSuccess()){
+         /*if(response.isSuccess()){
            myController.rotateArrow.value = false;
            myController.isExapanded.value = false;
            apiManager.languageList.value[index].isSelected=false;
@@ -325,7 +329,7 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
            myController.isExapanded.value = false;
            apiManager.languageList.value[index].isSelected=false;
              MyUtility.showErrorMsg(response.getMessage());
-           }
+           }*/
        });
   }
 }

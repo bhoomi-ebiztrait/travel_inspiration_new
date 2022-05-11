@@ -57,11 +57,20 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     getDeviceToken();
-
+messageHandler();
    firebaseCloudMessaging_Listeners();
   }
 
-  Future<void> firebaseCloudMessaging_Listeners() async {
+  Future<void> messageHandler() async {
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+  }
+
+    Future<void> firebaseCloudMessaging_Listeners() async {
     //  var android = new AndroidInitializationSettings('app_icon'); //app_icon
     //  final IOSInitializationSettings initializationSettingsIOS =
     //  IOSInitializationSettings();
@@ -128,6 +137,7 @@ print("hellooooo");
           if (result[ApiParameter.type] == CommonMethod.reflective_mode) {
             Get.to(NotificationReflectScreen(data: message.data));
           }
+
           else {
             Get.to(NotificationReflectScreen(data: message.data));
           }
@@ -215,7 +225,8 @@ print("hellooooo");
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder:()=>GetMaterialApp(
+      // designSize: Size(1080, 2160),
+      builder:(_)=>GetMaterialApp(
         /*localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
         ],
