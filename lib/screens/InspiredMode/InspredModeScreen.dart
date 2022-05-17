@@ -324,7 +324,7 @@ class _InspredModeScreenState extends State<InspredModeScreen>
             height: Get.height * 0.04,
           ),
 
-          /*Obx((){
+          Obx((){
             return MyQuotedText(
               myText: getSelectedProj(),
               txtFontSize: MyFontSize.size16,
@@ -332,15 +332,15 @@ class _InspredModeScreenState extends State<InspredModeScreen>
               quoteColor: MyColors.whiteColor,
               myFont: MyStrings.courier_prime_italic,
                     );
-          }),*/
+          }),
 
-          MyQuotedText(
+        /*  MyQuotedText(
             myText: getSelectedProj(),
             txtFontSize: MyFontSize.size16,
             txtColor: MyColors.whiteColor,
             quoteColor: MyColors.whiteColor,
             myFont: MyStrings.courier_prime_italic,
-          ),
+          ),*/
           // SizedBox(
           //   height: Get.height * 0.02,
           // ),
@@ -437,16 +437,22 @@ class _InspredModeScreenState extends State<InspredModeScreen>
 
     await apiManager.updateKmAPI(param).then((value) {
       if (value == true) {
-        setState(() {
+        setState(() async{
           goToDetail = mGoToDetails;
           if (goToDetail == false) {
             ScreenTransition.navigateToScreenLeft(
                 screenName: TITravelougeScreen(
                     (double.parse((distance).toStringAsFixed(2)))));
           } else {
-            ScreenTransition.navigateToScreenLeft(
+
+            final result = await Get.to(JourneyDetailsScreen(
+                double.parse((distance).toStringAsFixed(2))));
+            if (result == true) setState(() {});
+
+
+            /*ScreenTransition.navigateToScreenLeft(
                 screenName: JourneyDetailsScreen(
-                    (double.parse((distance).toStringAsFixed(2)))));
+                    (double.parse((distance).toStringAsFixed(2)))));*/
           }
         });
       }

@@ -232,7 +232,7 @@ class _TIActivityListScreenState extends State<TIActivityListScreen> {
                 child: MyListRowWithStar(
                   heading:mData.name,
                   title: mData.description,
-                  subTitle:"Lire la suite",
+                  subTitle:"lire_la_suite".tr,
                   imageUrl:mData.photo_ref != null ?getPhotoImage(mData.photo_ref) : mData.imgUrl,
                   starNumber:5,
                   myRate: mData.rating,

@@ -263,6 +263,22 @@ print("${dateController.selectedDate.value}");
                        setState(() {
                       dateController.selectedDestinationDate.value=CommonMethod.convertDateToString(args.value);
                       // mController.text = DateFormat('dd-MM-yyyy').format(args.value);
+
+                      if(dateController.selectedDate.value != ""){
+                        print("val${dateController.selectedDate.value}");
+                        DateTime minDate = CommonMethod.convertStringToDate(dateController.selectedDate.value);
+                        DateTime maxDate = CommonMethod.convertStringToDate(dateController.selectedDestinationDate.value);
+                        final diff = maxDate.difference(minDate).inDays;
+
+                        final num = (diff/2).round() ;
+                        final midDay = minDate.add(Duration(days: num));
+                        print("mydiff :: $diff $num mid $midDay");
+
+                        dateController.selectedNotifyDate.value = CommonMethod.convertDateToString(midDay);
+                        // getDateDialog(context,minDate,maxDate);
+                      }
+
+
                       Get.back();
                     });
                     });
@@ -305,12 +321,22 @@ class _MyNotifyDatePickerState extends State<MyNotifyDatePicker> {
 
     return GestureDetector(
       onTap: () {
-        if(dateController.selectedDate.value != ""){
-          print("${dateController.selectedDate.value}");
+        DateTime minDate = CommonMethod.convertStringToDate(dateController.selectedDate.value);
+        DateTime maxDate = CommonMethod.convertStringToDate(dateController.selectedDestinationDate.value);
+        getDateDialog(context,minDate,maxDate);
+        /*if(dateController.selectedDate.value != ""){
+          print("val${dateController.selectedDate.value}");
           DateTime minDate = CommonMethod.convertStringToDate(dateController.selectedDate.value);
           DateTime maxDate = CommonMethod.convertStringToDate(dateController.selectedDestinationDate.value);
-          getDateDialog(context,minDate,maxDate);
-        }
+         final diff = maxDate.difference(minDate).inDays;
+
+         final num = (diff/2).round() ;
+         final midDay = minDate.add(Duration(days: num));
+         print("mydiff :: $diff $num mid $midDay");
+
+         dateController.selectedNotifyDate.value = CommonMethod.convertDateToString(midDay);
+        // getDateDialog(context,minDate,maxDate);
+        }*/
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 48.0),
@@ -357,6 +383,7 @@ class _MyNotifyDatePickerState extends State<MyNotifyDatePicker> {
   }
 
   getDateDialog(context,myMinDate,myMaxDate){
+    DateTime mSeleDate = CommonMethod.convertStringToDate(dateController.selectedNotifyDate.value);
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -384,7 +411,7 @@ class _MyNotifyDatePickerState extends State<MyNotifyDatePicker> {
                 view: DateRangePickerView.decade,
                 minDate: myMinDate,
                 maxDate: myMaxDate,
-                initialSelectedDate: DateTime.now(),
+                initialSelectedDate:mSeleDate ,
                 selectionColor: MyColors.lightGreenColor,
                 selectionTextStyle: TextStyle(color: MyColors.textColor,fontWeight: FontWeight.bold),
                 selectionRadius: 22,

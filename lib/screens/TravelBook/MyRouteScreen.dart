@@ -332,11 +332,12 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
   }
 
   void getCurrentAddress() async{
-    GeoCode geoCode = GeoCode();
+    GeoCode geoCode = GeoCode(apiKey: ApiParameter.GOOGLE_API_KEY);
 
     try {
+      print("aaaaaaaa");
       address = await geoCode.reverseGeocoding(latitude: widget.currentPosition.latitude,longitude: widget.currentPosition.longitude);
-
+print("bbbbbbb");
       print("Latitude: ${address.city}");
       print("Longitude: ${address.streetAddress}");
     } catch (e) {

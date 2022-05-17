@@ -40,8 +40,12 @@ class MyBottomMenu extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-          height: Get.height * .17,
-          width: Get.height * .11,
+        // color: Colors.green,
+          margin: EdgeInsets.only(bottom: 20),
+          width: Get.width * 0.85,
+          height: Get.height * 0.11,
+        /*  height: Get.height * .16,
+          width: Get.height * .11,*/
           // decoration: BoxDecoration(
           //   borderRadius: BorderRadius.all(Radius.circular(60)),
           //   // borderRadius: BorderRadius.only(topLeft: Radius.circular(60),topRight: Radius.circular(60)),

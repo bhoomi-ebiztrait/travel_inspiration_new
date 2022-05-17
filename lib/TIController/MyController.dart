@@ -266,6 +266,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
       if (nextPage_token.value == null) {
         nextPage_token.value = "";
       }
+
       searchNearByHotels(selectedPlace.value.lat, selectedPlace.value.lng, type,
               keyword, radious, nextPage_token.value)
           .then((data) {

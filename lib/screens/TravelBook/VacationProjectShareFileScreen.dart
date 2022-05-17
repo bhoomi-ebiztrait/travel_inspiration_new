@@ -80,12 +80,10 @@ class _VacationProjectShareFileScreenState extends State<VacationProjectShareFil
     super.initState();
 
     personCounter = (widget.data != null && widget.data["person"] != null) ? int.parse(widget.data["person"]):0;
-    myController.selectedDate.value = widget.data["vacation_date"];
   }
   @override
   Widget build(BuildContext context) {
     personCounter = (widget.data != null && widget.data["person"] != null) ? int.parse(widget.data["person"]):0;
-    myController.selectedDate.value = widget.data["vacation_date"];
     return WillPopScope(
       onWillPop: () async{
         await _updateInfoDialog();
@@ -154,10 +152,11 @@ class _VacationProjectShareFileScreenState extends State<VacationProjectShareFil
                 SizedBox(
                   height: Get.height * 0.02,
                 ),
-                MyDOBPicker(
+                MyDateView(),
+               /* MyDOBPicker(
                   minDate: DateTime.now(),
                   maxDate: ApiParameter.END_DATE,
-                ),
+                ),*/
                 SizedBox(
                   height: Get.height * 0.03,
                 ),
@@ -212,11 +211,11 @@ class _VacationProjectShareFileScreenState extends State<VacationProjectShareFil
       children: [
         InkWell(
             onTap: () {
-              setState(() {
+              /*setState(() {
                 if (personCounter > 0) {
                   personCounter--;
                 }
-              });
+              });*/
             },
             child: Image.asset(MyImageURL.minus_blue,height: 50,width: 50,)),
         SizedBox(
@@ -230,9 +229,9 @@ class _VacationProjectShareFileScreenState extends State<VacationProjectShareFil
         ),
         InkWell(
             onTap: () {
-              setState(() {
+              /*setState(() {
                 personCounter++;
-              });
+              });*/
             },
             child: Image.asset(MyImageURL.plus_blue,height: 50,width: 50,),),
       ],
@@ -410,6 +409,36 @@ class _VacationProjectShareFileScreenState extends State<VacationProjectShareFil
         ScreenTransition.navigateOff(screenName: TIPinDestinationToProjectScreen());
       },),barrierDismissible: false);*/
 
+  }
+
+  MyDateView() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 48.0),
+      child: Container(
+        width: Get.width,
+        height: 55,
+        // width: Get.width*0.2,
+
+        decoration: BoxDecoration(
+            color: MyColors.whiteColor.withOpacity(1),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+            boxShadow: [
+              BoxShadow(
+                color: MyColors.dialog_shadowColor,
+                blurRadius: 2,
+                offset: Offset(1, 1),
+              )
+            ]),
+        child: MyText(
+          text_name: widget.data != null && widget.data["vacation_date"] != null && widget.data["vacation_date"] != ""
+              ? widget.data["vacation_date"]
+              : "Date".tr,
+          txtcolor: MyColors.textColor.withOpacity(1.0),
+          txtfontsize: MyFontSize.size13,
+        ),
+      ),
+    );
   }
 
 

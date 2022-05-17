@@ -51,6 +51,7 @@ class _TIPinDestinationToProjectScreenState
         duration: const Duration(seconds: 2), vsync: this);
     super.initState();
 
+    myController.allProjectList.value.clear();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       myController.getAllProject();
     });
@@ -137,10 +138,13 @@ class _TIPinDestinationToProjectScreenState
           itemCount: myController.allProjectList.length,
           itemBuilder: (context, index) {
             if(myController.allProjectList[index].pinDestination != ""){
+              subProj = "$subProj - ${myController.allProjectList[index].pinDestination.toUpperCase()}";
+            }
+            if(myController.allProjectList[index].subProjectDetail != null && myController.allProjectList[index].subProjectDetail != ""  && myController.allProjectList[index].subProjectDetail.length>0){
               for(int i=0;i<myController.allProjectList[index].subProjectDetail.length;i++){
                 subProj = "$subProj - ${myController.allProjectList[index].subProjectDetail[i].name.toUpperCase()}";
               }
-            }else{
+            } else{
               subProj = "";
             }
             print("subbbb $subProj");
@@ -293,13 +297,18 @@ class _TIPinDestinationToProjectScreenState
    callDeleteProj(int projId, int index) async{
     ApiManager apiManager = ApiManager();
 
-    apiManager.deleteProjAPI(projId).then((value){
+    await apiManager.deleteProjAPI(projId).then((value){
       if(value == true){
         if(myController.selectedProject != null && projId == myController.selectedProject.value.id){
           //myController.selectedProject.value = "";
           myController.selectedProject = null;
+       //   myController.allProjectList.removeAt(index);
         }
-        myController.allProjectList.removeAt(index);
+         myController.allProjectList.value.removeAt(index);
+        setState(() {
+
+        });
+
       }
     });
   }

@@ -140,7 +140,18 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                     ),
                     MyDestinationPicker(maxDate: ApiParameter.END_DATE,msg: "dateofVacationStart".tr,),
 
-
+                    SizedBox(
+                      height: Get.height * 0.06,
+                    ),
+                    MyText(
+                      text_name: "my_notification_date".tr,
+                      txtfontsize: MyFontSize.size15,
+                      txtcolor: MyColors.whiteColor,
+                      myFont: MyStrings.courier_prime_bold,
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.04,
+                    ),
                     buildNotificationDate(),
 
                     SizedBox(
@@ -188,27 +199,57 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
   }
 
     buildNotificationDate() {
-    if(dateController.selectedDate.value != "" && dateController.selectedDestinationDate.value != "") {
-      return Column(
-        children: [
-          SizedBox(
-            height: Get.height * 0.06,
-          ),
-          MyText(
-            text_name: "my_notification_date".tr,
-            txtfontsize: MyFontSize.size15,
-            txtcolor: MyColors.whiteColor,
-            myFont: MyStrings.courier_prime_bold,
-          ),
-          SizedBox(
-            height: Get.height * 0.04,
-          ),
-          MyNotifyDatePicker(),
-        ],
-      );
-    }else{
-      return Container();
-    }
+      return Obx((){
+        if(dateController.selectedDate.value != "" && dateController.selectedDestinationDate.value != "") {
+          return Column(
+            children: [
+
+              MyNotifyDatePicker(),
+            ],
+          );
+        }else{
+          return GestureDetector(
+            onTap: (){
+              if(dateController.selectedDestinationDate.value == ""){
+                return MyCommonMethods.showInfoCenterDialog(
+                    msgContent: "dateofVacationEnd".tr,
+                    myFont: MyStrings.courier_prime_bold);
+              }
+            },
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 48.0),
+                child: Container(
+                  width: Get.width,
+                  height: 55,
+                  // width: Get.width*0.2,
+
+                  decoration: BoxDecoration(
+                      color: MyColors.whiteColor.withOpacity(1),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: MyColors.dialog_shadowColor,
+                          blurRadius: 2,
+                          offset: Offset(1, 1),
+                        )
+                      ]),
+                  child: MyText(
+                    text_name: dateController.selectedNotifyDate.value != ""
+                        ? dateController.selectedNotifyDate.value
+                        : "Date".tr,
+                    txtcolor: MyColors.textColor.withOpacity(1.0),
+                    txtfontsize: MyFontSize.size15,
+                    myFont: MyStrings.courier_prime,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+      });
+
    }
 
   buildBottomImage() {

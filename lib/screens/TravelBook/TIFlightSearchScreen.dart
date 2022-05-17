@@ -137,8 +137,9 @@ class TIFlightSearchScreenState extends State<TIFlightSearchScreen> {
                return  Flexible(
                  child: Container(
                    width: Get.width*.85,
-                   height: double.tryParse(
-                       (controller.airportlist.length * (Get.height * 0.07)).toString()),
+                   height: Get.height*0.32,
+                   // height: double.tryParse(
+                   //     (controller.airportlist.length * (Get.height * 0.05)).toString()),
                    child: ListView.builder(
                      controller: _scrollController,
                      itemCount: controller.airportlist.length,

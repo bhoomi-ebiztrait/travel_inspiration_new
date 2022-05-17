@@ -391,6 +391,7 @@ class TILanguages extends Translations {
               "Choisi.e une destination pour créer un projet de vacances.",
           "choose_to": "Je choisi.e de:",
           "or":"ou",
+          "lire_la_suite":"Lire la suite",
         },
         'en_US': {
           "emailreq": "The e-mail address is required!", //English Language
@@ -774,6 +775,7 @@ class TILanguages extends Translations {
               "Choose a destination to create a vacation plan.",
           "choose_to": "I choose to:",
           "or":"OR",
+          "lire_la_suite":"Read more",
         },
       };
 }

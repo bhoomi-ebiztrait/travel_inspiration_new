@@ -153,6 +153,11 @@ searchNearByHotels(latitude,longitude,types,keyword,radious, next_page_token) as
   // var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
   //     "location=22.9999068,72.5947069&radius=50000&types=city&sensor=true&key=AIzaSyBRNil_iYmWUTUysdN_CU7KgDmv-ramMcM";
   // radious in meters
+  if(latitude == null){
+    Position _getCurrentPosition = await determineCurrentPosition();
+    latitude = _getCurrentPosition.latitude;
+    longitude = _getCurrentPosition.longitude;
+  }
   String url =
       '${ApiParameter.GooglePlaceURL}?key=${ApiParameter.GOOGLE_API_KEY}&location=$latitude,$longitude&radius=$radious&types=$types&keyword=$keyword&sensor=true&pagetoken=$next_page_token';
   print(url);

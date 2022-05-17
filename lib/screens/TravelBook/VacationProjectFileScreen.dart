@@ -79,6 +79,7 @@ class _VacationProjectFileScreenState extends State<VacationProjectFileScreen> {
     super.initState();
 
     personCounter = myController.allProjectList[widget.projIndex].projectNoPerson != null ? int.parse(myController.allProjectList[widget.projIndex].projectNoPerson):0;
+    myController.selectedDate.value = myController.allProjectList[widget.projIndex].projectVacationDate;
   }
   @override
   Widget build(BuildContext context) {

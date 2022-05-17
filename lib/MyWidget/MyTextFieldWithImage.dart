@@ -69,6 +69,7 @@ class MyTextFieldWithImage extends StatelessWidget {
             controller: mycontroller,
             maxLength: maxlimit,
             decoration: InputDecoration(
+              errorMaxLines: 2,
               counterText: "",
               prefixIcon: imageUrl != null
                   ? Padding(
