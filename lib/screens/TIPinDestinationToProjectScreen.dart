@@ -132,11 +132,12 @@ class _TIPinDestinationToProjectScreenState
   }
 
   _destinationList() {
-    String subProj="";
+
     return Obx((){
       return ListView.builder(
           itemCount: myController.allProjectList.length,
           itemBuilder: (context, index) {
+            String subProj="";
             if(myController.allProjectList[index].pinDestination != ""){
               subProj = "$subProj - ${myController.allProjectList[index].pinDestination.toUpperCase()}";
             }

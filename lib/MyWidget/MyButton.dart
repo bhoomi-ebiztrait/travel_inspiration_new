@@ -223,7 +223,7 @@ class MyButtonSmall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: Get.width*btnWidth,
+      width: Get.width*0.5,
       height: Get.height*0.05,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(13)),
@@ -236,7 +236,6 @@ class MyButtonSmall extends StatelessWidget {
       ),
       //margin: EdgeInsets.all(20),
       child: MaterialButton(onPressed: onClick,
-        // minWidth: Get.width*0.4,
         child: MyText(text_name: btn_name,
             txtcolor: txtcolor,txtfontsize:txtfont),
         /*shape: RoundedRectangleBorder(

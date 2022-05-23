@@ -289,9 +289,10 @@ class _VacationProjectShareFileScreenState extends State<VacationProjectShareFil
               height: Get.height * .020,
             ),
             MyText(
-              text_name: popupItemList[index].title,
+              text_name: popupItemList[index].title.toUpperCase(),
               myFont: MyFont.Courier_Prime_Bold,
               txtfontsize: MyFontSize.size11,
+              txtcolor: MyColors.textColor,
               //txtcolor: selectedIndex == index ?  MyColors.lineColor:MyColors.textColor,
               txtAlign: TextAlign.center,
               height: 1,

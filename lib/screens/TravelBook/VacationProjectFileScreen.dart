@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
 import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
 import 'package:travel_inspiration/MyWidget/MyAlertDialog.dart';
+import 'package:travel_inspiration/MyWidget/MyButton.dart';
 import 'package:travel_inspiration/MyWidget/MyDOBPicker.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
@@ -57,6 +58,7 @@ class _VacationProjectFileScreenState extends State<VacationProjectFileScreen> {
   File croppedImg;
   int selectedIndex = -1;
   int selectedTransportIndex = -1;
+
 
   var popupItemList = [
     TIPopupGridViewModel(
@@ -170,6 +172,19 @@ class _VacationProjectFileScreenState extends State<VacationProjectFileScreen> {
                   height: Get.height * 0.02,
                 ),
                 buildTransport(),
+
+               /* Flexible(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children:list.map((String data) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 10.0,top: 10),
+                        child: MyButtonSmall(btn_name: data,txtcolor: MyColors.textColor,),
+                      );
+                    }).toList(),
+                  ),
+                ),
+*/
                 SizedBox(
                   height: Get.height*0.12,
                 ),
@@ -286,9 +301,10 @@ class _VacationProjectFileScreenState extends State<VacationProjectFileScreen> {
               height: Get.height * .020,
             ),
             MyText(
-              text_name: popupItemList[index].title,
+              text_name: popupItemList[index].title.toUpperCase(),
               myFont: MyFont.Courier_Prime_Bold,
               txtfontsize: MyFontSize.size11,
+              txtcolor: MyColors.textColor,
               //txtcolor: selectedIndex == index ?  MyColors.lineColor:MyColors.textColor,
               txtAlign: TextAlign.center,
               height: 1,

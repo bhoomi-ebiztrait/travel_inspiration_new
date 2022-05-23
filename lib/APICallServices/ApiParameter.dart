@@ -1,5 +1,6 @@
 class ApiParameter {
-  static const BASE_URL = "https://solutiontrackers.com/TravelApp/api/";
+  // static const BASE_URL = "https://solutiontrackers.com/TravelApp/api/";
+  static const BASE_URL = "https://travel.solutiontrackers.com/api/";
   // static const GOOGLE_API_KEY = "AIzaSyBRNil_iYmWUTUysdN_CU7KgDmv-ramMcM";
   static const GOOGLE_API_KEY = "AIzaSyChyfRRNXGlEzpZ3TjywKJKppBtJdU5180";
 

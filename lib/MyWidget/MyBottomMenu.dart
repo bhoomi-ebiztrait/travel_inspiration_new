@@ -42,7 +42,7 @@ class MyBottomMenu extends StatelessWidget {
       child: Container(
         // color: Colors.green,
           margin: EdgeInsets.only(bottom: 20),
-          width: Get.width * 0.85,
+          width: Get.width * 0.15,
           height: Get.height * 0.11,
         /*  height: Get.height * .16,
           width: Get.height * .11,*/

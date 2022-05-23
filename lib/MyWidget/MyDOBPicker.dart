@@ -35,7 +35,7 @@ class _MyDOBPickerState extends State<MyDOBPicker> {
     // TODO: implement initState
     super.initState();
 
-    if(dateController.selectedDate.value!= "" && dateController.selectedDate.value!= "null") {
+    if(dateController.selectedDate.value!= null &&dateController.selectedDate.value!= "" && dateController.selectedDate.value!= "null") {
       myselectedDate =
           CommonMethod.convertStringToDate((dateController.selectedDate.value));
       _controller.displayDate =
@@ -70,7 +70,7 @@ class _MyDOBPickerState extends State<MyDOBPicker> {
                 )
               ]),
           child: MyText(
-            text_name: dateController.selectedDate.value != ""
+            text_name: dateController.selectedDate.value != null &&dateController.selectedDate.value != ""
                 ? dateController.selectedDate.value
                 : "Date".tr,
             txtcolor: MyColors.textColor.withOpacity(1.0),
