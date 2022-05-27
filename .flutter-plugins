@@ -10,6 +10,7 @@ firebase_messaging=/Users/pct43/.pub-cache/hosted/pub.dartlang.org/firebase_mess
 firebase_messaging_web=/Users/pct43/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_web-2.3.0/
 flutter_plugin_android_lifecycle=/Users/pct43/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.6/
 fluttertoast=/Users/pct43/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.9/
+geocoding=/Users/pct43/.pub-cache/hosted/pub.dartlang.org/geocoding-2.0.4/
 geolocator=/Users/pct43/.pub-cache/hosted/pub.dartlang.org/geolocator-7.7.1/
 geolocator_android=/Users/pct43/.pub-cache/hosted/pub.dartlang.org/geolocator_android-2.1.0/
 geolocator_apple=/Users/pct43/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/

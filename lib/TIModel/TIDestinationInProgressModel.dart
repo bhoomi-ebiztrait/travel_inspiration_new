@@ -1,5 +1,7 @@
+import 'package:get/get.dart';
+
 class TIDestinationInProgressModel{
-  String name,description,content = "Voir sur la carte",place_id,imgUrl,photo_ref;
+  String name,description,content = "see_map".tr,place_id,imgUrl,photo_ref;
   double lat,lng,km,rating;
   int id;
 

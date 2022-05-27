@@ -215,19 +215,20 @@ class MyButtonSmall extends StatelessWidget {
   String btn_name;
   double txtfont=MyFontSize.size13;
   Color txtcolor;
+  Color bgcolor;
   FontWeight fontWeight;
   double btnWidth = 0.5;
 
-  MyButtonSmall({this.onClick,@required this.btn_name,this.txtcolor,this.txtfont,this.fontWeight,this.btnWidth});
+  MyButtonSmall({this.onClick,@required this.btn_name,this.txtcolor,this.bgcolor,this.txtfont,this.fontWeight,this.btnWidth});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width*0.5,
-      height: Get.height*0.05,
+      // width: Get.width*0.2,
+      // height: Get.height*0.01,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(13)),
-        color: MyColors.whiteColor,
+        color: bgcolor,
           boxShadow: [
             BoxShadow(
             color: MyColors.dialog_shadowColor,

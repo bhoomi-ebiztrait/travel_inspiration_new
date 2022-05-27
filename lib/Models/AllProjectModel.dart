@@ -15,6 +15,8 @@ class AllProjectModel {
   bool isSelected = false;
   int id;
   String pinDestination = "";
+  String pin_destination_lat = "";
+  String pin_destination_long = "";
 
   String projectNoPerson;
   String projectVacationDate;
@@ -38,6 +40,8 @@ class AllProjectModel {
       this.projectNoPerson,
       this.projectVacationDate,
       this.projectDestinationDate,
+        this.pin_destination_lat,
+        this.pin_destination_long,
       // this.subprojectName,
       // this.subStartVacationDate,
       // this.subProjectNoPerson,
@@ -63,6 +67,8 @@ class AllProjectModel {
     city = json['city'];
     project_image = json['project_image'];
     pinDestination = json['pin_destination'];
+    pin_destination_lat = json['pin_destination_lat'];
+    pin_destination_long = json['pin_destination_long'];
     msg = json['msg'];
     if (json['type_pin'] != null) {
       typePin = new List<TypePin>();
@@ -161,6 +167,8 @@ class SubProjectDetail {
   String name;
   String startVacationDate;
   int noPerson;
+  String latitude;
+  String longitude;
   String city;
   String createdAt;
   String updatedAt;
@@ -172,6 +180,8 @@ class SubProjectDetail {
         this.name,
         this.startVacationDate,
         this.noPerson,
+        this.latitude,
+        this.longitude,
         this.city,
         this.createdAt,
         this.updatedAt});
@@ -183,6 +193,8 @@ class SubProjectDetail {
     name = json['name'];
     startVacationDate = json['start_vacation_date'];
     noPerson = json['no_person'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
     city = json['city'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -196,6 +208,8 @@ class SubProjectDetail {
     data['name'] = this.name;
     data['start_vacation_date'] = this.startVacationDate;
     data['no_person'] = this.noPerson;
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
     data['city'] = this.city;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;

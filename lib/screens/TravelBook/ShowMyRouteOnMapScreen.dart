@@ -3,7 +3,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geocode/geocode.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -39,7 +39,7 @@ class _ShowMyRouteOnMapScreenState extends State<ShowMyRouteOnMapScreen> {
 
   bool isClickedDetails = false;
 
-  var address;
+  Placemark address;
 
 
 
@@ -208,11 +208,11 @@ class _ShowMyRouteOnMapScreenState extends State<ShowMyRouteOnMapScreen> {
                    getCurrentAddress();
                   }else {
                     ScreenTransition.navigateToScreenLeft(
-                        screenName: RouteDetailsScreen(currCity: address.city,
-                          currAddress: address.streetAddress,currPos: originPosi));
+                        screenName: RouteDetailsScreen(currCity: address.name,
+                          currAddress:"${address.name},${address.subLocality},${address.locality}",currPos: originPosi));
                   }
                 },
-                child: Image.asset(MyImageURL.fleche)),
+                child: Image.asset(MyImageURL.fleche,height: 80,width: 80,)),
           ],
         ),
       );
@@ -304,7 +304,11 @@ class _ShowMyRouteOnMapScreenState extends State<ShowMyRouteOnMapScreen> {
   }
 
   void getCurrentAddress() async{
-    GeoCode geoCode = GeoCode();
+
+    List<Placemark> newAddress = await placemarkFromCoordinates(double.parse(myController.selectedRoute.value.originLat), double.parse(myController.selectedRoute.value.originLng));
+    address = newAddress.last;
+
+    /*GeoCode geoCode = GeoCode();
 
     try {
       address = await geoCode.reverseGeocoding(latitude: double.parse(myController.selectedRoute.value.originLat),longitude: double.parse(myController.selectedRoute.value.originLng));
@@ -313,7 +317,7 @@ class _ShowMyRouteOnMapScreenState extends State<ShowMyRouteOnMapScreen> {
       print("Longitude: ${address.streetAddress}");
     } catch (e) {
       print(e);
-    }
+    }*/
   }
 
   void goToGoogleDir() async{

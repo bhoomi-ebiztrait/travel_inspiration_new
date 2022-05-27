@@ -80,19 +80,19 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
                 case 0:
                   ScreenTransition.navigateToScreenLeft(
                       screenName: TIHotelListScreen(
-                        travelLougeListTitle: widget.popupTitle.toUpperCase(),
+                        travelLougeListTitle: widget.popupTitle!= null ? widget.popupTitle.toUpperCase():"",
                       ));
                   break;
                 case 1:
                   ScreenTransition.navigateToScreenLeft(
                       screenName: TIRestaurantListScreen(
-                        travelLougeListTitle: widget.popupTitle.toUpperCase(),
+                        travelLougeListTitle: widget.popupTitle!= null ? widget.popupTitle.toUpperCase():"",
                       ));
                   break;
                 case 2:
                   ScreenTransition.navigateToScreenLeft(
                       screenName: TIActivityListScreen(
-                        travelLougeListTitle: widget.popupTitle.toUpperCase(),
+                        travelLougeListTitle: widget.popupTitle!= null ? widget.popupTitle.toUpperCase():"",
                       ));
                   break;
                 case 3:

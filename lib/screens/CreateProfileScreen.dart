@@ -265,9 +265,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       callCreateProfileLaterAPI();
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 40.0),
+                      padding: const EdgeInsets.only(top: 35.0),
                       child: Image.asset(
                         MyImageURL.fleche,
+                        height: 90,
+                        width: 90,
                       ),
                     ),
                   ))

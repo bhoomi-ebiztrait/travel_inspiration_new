@@ -203,13 +203,15 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
       name = myController.selectedPlace.value.name;
       desc = myController.selectedPlace.value.description;
     } else {
-      if (widget.currAddress.contains(",")) {
+     /* if (widget.currAddress.contains(",")) {
         int endIndex = widget.currAddress.indexOf(",");
         name = "${widget.currAddress.substring(0, endIndex)}";
       } else {
         name = widget.currAddress;
-      }
-      startAddress = name;
+      }*/
+      // startAddress = name;
+      name = widget.currCity;
+      startAddress = widget.currCity;
       desc = widget.currAddress;
     }
     return Padding(

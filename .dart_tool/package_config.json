@@ -254,8 +254,14 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "geocode",
-      "rootUri": "file:///Users/pct43/.pub-cache/hosted/pub.dartlang.org/geocode-1.0.1",
+      "name": "geocoding",
+      "rootUri": "file:///Users/pct43/.pub-cache/hosted/pub.dartlang.org/geocoding-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "geocoding_platform_interface",
+      "rootUri": "file:///Users/pct43/.pub-cache/hosted/pub.dartlang.org/geocoding_platform_interface-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -866,7 +872,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2022-05-23T11:14:45.998922Z",
+  "generated": "2022-05-27T13:03:16.481252Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

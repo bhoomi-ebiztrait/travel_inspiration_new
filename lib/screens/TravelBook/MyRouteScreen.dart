@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geocode/geocode.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -39,7 +39,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
 
   bool isClickedDetails = false;
 
-  var address;
+  Placemark address;
 
 
 
@@ -234,10 +234,10 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
                   if(address == null){
                    getCurrentAddress();
                   }else {
-                    print("myAdd:: ${address.streetAddress}");
+                    print("myAdd:: ${address.street}");
                     ScreenTransition.navigateToScreenLeft(
-                        screenName: RouteDetailsScreen(currCity: address.city,
-                          currAddress: address.streetAddress,currPos: widget.currentPosition));
+                        screenName: RouteDetailsScreen(currCity: address.name,
+                          currAddress: "${address.name},${address.subLocality},${address.locality}",currPos: widget.currentPosition));
                   }
                 },
                 child: Image.asset(MyImageURL.fleche,height: 80,width: 80,)),
@@ -332,17 +332,22 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
   }
 
   void getCurrentAddress() async{
-    GeoCode geoCode = GeoCode(apiKey: ApiParameter.GOOGLE_API_KEY);
+
+    List<Placemark> newAddress = await placemarkFromCoordinates(widget.currentPosition.latitude, widget.currentPosition.longitude);
+    address = newAddress.last;
+
+   /* GeoCode geoCode = GeoCode();
 
     try {
       print("aaaaaaaa");
       address = await geoCode.reverseGeocoding(latitude: widget.currentPosition.latitude,longitude: widget.currentPosition.longitude);
+      // address = await geoCode.reverseGeocoding(longitude: widget.currentPosition.longitude,latitude: widget.currentPosition.latitude);
 print("bbbbbbb");
       print("Latitude: ${address.city}");
       print("Longitude: ${address.streetAddress}");
     } catch (e) {
       print(e);
-    }
+    }*/
   }
 
   void goToGoogleDir() async{

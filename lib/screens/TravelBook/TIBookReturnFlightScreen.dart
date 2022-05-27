@@ -256,9 +256,12 @@ class _TIBookReturnFlightScreenState extends State<TIBookReturnFlightScreen> {
       padding: EdgeInsets.only(bottom: 20,top:20,left: 80,right: 80),
       child: TIMyCustomRoundedCornerButton(
         onClickCallback:(){
-          ScreenTransition.navigateToScreenLeft(
-              screenName: TIOneWayReturnFlightCompleteScreen(widget.travelogueTitle)
-          );
+          if(myController.returnSelectedFlight.length!= 0) {
+            ScreenTransition.navigateToScreenLeft(
+                screenName: TIOneWayReturnFlightCompleteScreen(
+                    widget.travelogueTitle)
+            );
+          }
         },
         buttonWidth: Get.width*.48,
         buttonHeight: Get.height*.052,

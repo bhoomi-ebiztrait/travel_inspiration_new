@@ -22,6 +22,7 @@ class MyFontSize{
   static double size33= ScreenUtil().setSp(33);
   static double size35= ScreenUtil().setSp(35);
   static double size38= ScreenUtil().setSp(38);
+  static double size48= ScreenUtil().setSp(48);
   static double size50= ScreenUtil().setSp(50);
   static double size58= ScreenUtil().setSp(58);
 }

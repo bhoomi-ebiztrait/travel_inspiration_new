@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/TIBioMatric/TILocalAuthApi.dart';
+import 'package:travel_inspiration/screens/ForgotPasswordScreen.dart';
 import 'package:travel_inspiration/screens/Gallery/GalleryScreen.dart';
 import 'package:travel_inspiration/screens/HomeScreen.dart';
 import 'package:travel_inspiration/screens/LoginScreen.dart';
@@ -101,9 +102,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         mode == 1
             ? ScreenTransition.navigateOffAll(
           // screenName: VacationProjectFileScreen(projIndex: 0,))
+          // screenName: CreateProfileScreen())
             screenName: ReflectModeScreen())
             : ScreenTransition.navigateOffAll(
-            // screenName: NotificationReflectScreen());
+            // screenName: ForgotPasswordScreen());
             screenName: InspredModeScreen());
         MyPreference.setPrefIntValue(
             key: MyPreference.APPMODE, value: mode);

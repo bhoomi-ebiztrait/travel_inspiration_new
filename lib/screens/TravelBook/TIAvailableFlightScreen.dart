@@ -169,10 +169,15 @@ myController.totalFare = ((myController.fareList.value[index])/(ApiParameter.ONE
       padding: EdgeInsets.only(bottom: 20,top:20,left: 80,right: 80),
       child: TIMyCustomRoundedCornerButton(
         onClickCallback:(){
-          ScreenTransition.navigateToScreenLeft(
-            // screenName: TIOneWayReturnFlightCompleteScreen(index
-              screenName: (myController.toGoReturnSwitch.value) ? TIOneWayReturnFlightCompleteScreen(widget.travelogueTitle) :TIBookReturnFlightScreen(widget.travelogueTitle)
-          );
+          print("length::${myController.onwardSelectedFlight.length}");
+          if(myController.onwardSelectedFlight.length != 0) {
+            ScreenTransition.navigateToScreenLeft(
+              // screenName: TIOneWayReturnFlightCompleteScreen(index
+                screenName: (myController.toGoReturnSwitch.value)
+                    ? TIOneWayReturnFlightCompleteScreen(widget.travelogueTitle)
+                    : TIBookReturnFlightScreen(widget.travelogueTitle)
+            );
+          }
         },
         buttonWidth: Get.width*.48,
         buttonHeight: Get.height*.052,

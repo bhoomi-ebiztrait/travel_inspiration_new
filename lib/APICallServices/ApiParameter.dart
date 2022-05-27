@@ -23,6 +23,9 @@ class ApiParameter {
 
 
   // google places url
+  // flight urls
+  static const availableFlightsURL="/api/availableFlights";
+  static const searchFlights="/api/searchFlights";
 
   // static const GoogleDirectionURL  = "https://maps.googleapis.com/maps/api/directions/json";
   static const GoogleDistanceURL  = "https://maps.googleapis.com/maps/api/distancematrix/json";
@@ -89,8 +92,7 @@ class ApiParameter {
   static const deleteProjectURL=BASE_URL+"deleteProject";
   static const general_setting=BASE_URL+"general_setting";
   static const verify_user=BASE_URL+"verify/user";
-  static const availableFlightsURL="/TravelApp/api/availableFlights";
-  static const searchFlights="/TravelApp/api/searchFlights";
+
 
 
   //sign up req param

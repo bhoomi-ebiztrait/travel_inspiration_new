@@ -406,6 +406,7 @@ class _InspredModeScreenState extends State<InspredModeScreen>
     if (myController.allProjectList.value != null &&
         myController.allProjectList.value.length > 0) {
       int appMode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
+      myController.getSelectedProj();
       for (int i = 0; i < myController.allProjectList.value.length; i++) {
         if ("0" == myController.allProjectList.value[i].projectMode) {
           // myController.selectedProject.value =

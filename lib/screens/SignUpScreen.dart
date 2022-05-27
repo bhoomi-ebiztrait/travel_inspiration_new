@@ -317,7 +317,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
            key: MyPreference.userId,value:result[ApiParameter.userId].toString());*/
        String userId = result[ApiParameter.userId].toString();
        // String token = response.getDATAJSONArray1()[ApiParameter.access_token];
-       ScreenTransition.navigateOffAll(screenName:SignupConfirmScreen(userId));
+       ScreenTransition.navigateOffAll(screenName:SignupConfirmScreen(userId,email.text));
      }else{
        MyUtility.showErrorMsg(response.getMessage());
      }

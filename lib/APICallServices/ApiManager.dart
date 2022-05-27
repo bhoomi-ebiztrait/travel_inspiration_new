@@ -99,6 +99,9 @@ class ApiManager extends GetxController {
                 key: MyPreference.address,
                 value: loginModel.userInfo.address.toString());
             MyPreference.setPrefStringValue(
+                key: MyPreference.phoneNumber,
+                value: loginModel.userInfo.phoneNo.toString());
+            MyPreference.setPrefStringValue(
                 key: MyPreference.city,
                 value: loginModel.userInfo.city.toString());
             MyPreference.setPrefStringValue(
@@ -143,6 +146,9 @@ class ApiManager extends GetxController {
             MyPreference.setPrefStringValue(
                 key: MyPreference.userId,
                 value: loginModel.userInfo.userId.toString());
+            MyPreference.setPrefStringValue(
+                key: MyPreference.phoneNumber,
+                value: loginModel.userInfo.phoneNo.toString());
             MyPreference.setPrefStringValue(
                 key: MyPreference.accessToken, value: loginModel.accessToken);
             String mode = loginModel.mode;
@@ -257,7 +263,7 @@ if(mLang == null){
         var data = response.getDATAJSONArray1();
         var result = getResponsecode(data);
 
-        if (result != null) {
+        if (result["data"] != null) {
 
           var listData = result["data"] as List;
           print(listData);
@@ -406,7 +412,7 @@ if(mLang == null){
     if (await isConnected()) {
       try {
         final response =
-        await ApiCall().CallGetWithParamAPI(authority : "solutiontrackers.com",url: tofilter?ApiParameter.searchFlights:ApiParameter.availableFlightsURL,param: param);
+        await ApiCall().CallGetWithParamAPI(authority : "travel.solutiontrackers.com",url: tofilter?ApiParameter.searchFlights:ApiParameter.availableFlightsURL,param: param);
         print("mres :: ${response.toString()}");
         var data = response.getDATAJSONArray1();
         var result = getResponsecode(data);
@@ -507,7 +513,7 @@ if(mLang == null){
         var response = getResponsecode(data);
         if (response != null) {
           String mode = response["data"]["mode"];
-// TIPrint(tag: "Selected Mode",value: mode);
+TIPrint(tag: "Selected Mode",value: mode);
           MyPreference.setPrefIntValue(
               key: MyPreference.APPMODE, value: int.parse(mode));
           return true;
@@ -819,12 +825,12 @@ if(mLang == null){
   }
 
   /*=================  confirm user api ==============================*/
-  confirmUserAPI(userId) async {
+  confirmUserAPI(userId,email) async {
     Get.dialog(Loading());
     //String userId = MyPreference.getPrefStringValue(key:MyPreference.userId);
     if (await isConnected()) {
       try {
-        final response = await ApiCall().CallGetAPI(url: "${ApiParameter.verify_user}?userId=$userId");
+        final response = await ApiCall().CallGetAPI(url: "${ApiParameter.verify_user}?userId=$userId&email=$email");
        // var result = response.getDATAJSONArray1();
         if(response != null) {
           if (response.isSuccess()) {

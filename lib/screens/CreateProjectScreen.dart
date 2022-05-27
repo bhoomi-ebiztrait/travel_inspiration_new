@@ -40,6 +40,13 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
   MyController myController = Get.put(MyController());
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    myController.selectedDate.value = "";
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       // bottomNavigationBar: buildBottomImage(),
@@ -246,11 +253,13 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
     ApiManager apiManager = ApiManager();
     Map<String, dynamic> param = {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
-      "project_id": myController.selectedProject.value.id.toString() != null ? myController.selectedProject.value.id.toString(): "-1",
+      "project_id": myController.selectedProject.value.id.toString() != "null" ? myController.selectedProject.value.id.toString(): "-1",
       "name": projNameController.text,
       "start_vacation_date": start_date,
       "no_person": personCounter.toString(),
       "city": myController.selectedPlace.value.name,
+      "latitude":myController.selectedPlace.value.lat,
+      "longitude":myController.selectedPlace.value.lng,
       // "userId": "43",
     };
     TIPrint(tag: "param", value: param.toString());

@@ -173,7 +173,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           MyText(
-                            text_name: myController.secondProject.value != ""
+                            text_name: myController.secondProject.value != null && myController.secondProject.value != "" && myController.secondProject.value.title != null
                                 ? myController.secondProject.value.title
                                 : "",
                             txtcolor:
@@ -241,7 +241,7 @@ class _JourneyDetailsScreenState extends State<JourneyDetailsScreen> {
                               children: [
                                 MyText(
                                   text_name: myController.thirddProject.value !=
-                                          ""
+                                          "" && myController.thirddProject.value.title != null
                                       ? myController.thirddProject.value.title
                                       : "",
                                   txtcolor: myController.thirddProject.value

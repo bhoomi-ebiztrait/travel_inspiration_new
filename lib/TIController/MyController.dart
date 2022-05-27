@@ -137,7 +137,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
           model.place_id = data['results'][i]['place_id'];
           model.imgUrl = data['results'][i]['icon'];
           model.description = data['results'][i]['vicinity'];
-          model.content = "Voir sur la carte";
+          model.content = "see_map".tr;
           model.lat = data['results'][i]['geometry']['location']['lat'];
           model.lng = data['results'][i]['geometry']['location']['lng'];
           if (data['results'][i]['photos'] != null) {
@@ -186,7 +186,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
           model.imgUrl = data['results'][i]['icon'];
           model.description = data['results'][i]['vicinity'];
           model.rating = data['results'][i]['rating'].toDouble();
-          model.content = "Voir sur la carte";
+          model.content = "see_map".tr;
           model.lat = data['results'][i]['geometry']['location']['lat'];
           model.lng = data['results'][i]['geometry']['location']['lng'];
           if (data['results'][i]['photos'] != null) {
@@ -233,7 +233,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
           model.imgUrl = data['results'][i]['icon'];
           model.description = data['results'][i]['vicinity'];
           model.rating = data['results'][i]['rating'].toDouble();
-          model.content = "Voir sur la carte";
+          model.content = "see_map".tr;
           model.lat = data['results'][i]['geometry']['location']['lat'];
           model.lng = data['results'][i]['geometry']['location']['lng'];
           if (data['results'][i]['photos'] != null) {
@@ -281,7 +281,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
           model.imgUrl = data['results'][i]['icon'];
           model.description = data['results'][i]['vicinity'];
           model.rating = data['results'][i]['rating'].toDouble();
-          model.content = "Voir sur la carte";
+          model.content = "see_map".tr;
           model.lat = data['results'][i]['geometry']['location']['lat'];
           model.lng = data['results'][i]['geometry']['location']['lng'];
           if (data['results'][i]['photos'] != null) {

@@ -16,8 +16,8 @@ import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
 class SignupConfirmScreen extends StatelessWidget {
 
-  String userId;
-  SignupConfirmScreen(this.userId);
+  String userId,email;
+  SignupConfirmScreen(this.userId,this.email);
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class SignupConfirmScreen extends StatelessWidget {
                                 screenName:CreateProfileScreen());                          */
 
                           },
-                            child: Image.asset(MyImageURL.fleche)),
+                            child: Image.asset(MyImageURL.fleche,height: 90,width: 90,)),
                         SizedBox(height: Get.height*0.01,),
                       ],
                     ),
@@ -94,7 +94,7 @@ class SignupConfirmScreen extends StatelessWidget {
    callConfirmUserAPI() async{
     ApiManager apiManager = ApiManager();
     Get.dialog(Loading());
-    await apiManager.confirmUserAPI(userId).then((response){
+    await apiManager.confirmUserAPI(userId,email).then((response){
       Get.back();
       if(response == null)
         MyUtility.showErrorMsg("Email not varified");

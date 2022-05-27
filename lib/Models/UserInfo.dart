@@ -6,6 +6,7 @@ class UserInfo {
   String country;
   String address;
   String city;
+  String phoneNo;
   String pincode;
   bool isPremium;
   int age;
@@ -22,6 +23,7 @@ class UserInfo {
         this.email,
         this.country,
         this.address,
+        this.phoneNo,
         this.city,
         this.pincode,
         this.isPremium,
@@ -41,6 +43,7 @@ class UserInfo {
     address = json['address'];
     city = json['city'];
     pincode = json['pincode'];
+    phoneNo = json['phoneNo'];
     isPremium = json['isPremium'];
     age = json['age'];
     totalKm = json['totalKm'];
@@ -60,6 +63,7 @@ class UserInfo {
     data['address'] = this.address;
     data['city'] = this.city;
     data['pincode'] = this.pincode;
+    data['phoneNo'] = this.phoneNo;
     data['isPremium'] = this.isPremium;
     data['age'] = this.age;
     data['totalKm'] = this.totalKm;

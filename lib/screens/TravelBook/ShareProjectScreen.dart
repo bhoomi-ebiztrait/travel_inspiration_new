@@ -325,6 +325,7 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
       "sendTo": myController.haudosUserList[index].userId,
       "projectId": widget.id.toString(),
+
     };
 // print("param : ${params.toString()}");
     await apiManager.sendNotificationToUser(params);

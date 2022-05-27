@@ -172,7 +172,7 @@ class _ReflectJourneyDetailsScreenState
             padding: const EdgeInsets.all(30.0),
             child: MyText(
               text_name:
-                  "${myController.selectedProject != null ? myController.selectedProject.value.msg : ""}",
+                  "${myController.selectedProject != null && myController.selectedProject.value.msg != null? myController.selectedProject.value.msg : ""}",
               txtcolor: MyColors.whiteColor,
               myFont: MyStrings.courier_prime_bold,
               txtfontsize: MyFontSize.size18,

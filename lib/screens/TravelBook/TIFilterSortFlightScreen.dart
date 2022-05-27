@@ -127,7 +127,7 @@ class _TIFilterSortFlightScreenState extends State<TIFilterSortFlightScreen> {
              "stop":_myController.isStopover_FS.value.toString()*/
                   };
 
-                  _myController.getFlightSearch(param,true,"");
+                  _myController.getFlightSearch(param,true,widget.travelogueTitle);
                 },
                 buttonWidth: Get.width*.6,
                 buttonHeight: Get.height*.055,

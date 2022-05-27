@@ -392,6 +392,7 @@ class TILanguages extends Translations {
           "choose_to": "Je choisi.e de:",
           "or":"ou",
           "lire_la_suite":"Lire la suite",
+          "see_map":"Voir sur la carte",
         },
         'en_US': {
           "emailreq": "The e-mail address is required!", //English Language
@@ -776,6 +777,7 @@ class TILanguages extends Translations {
           "choose_to": "I choose to:",
           "or":"OR",
           "lire_la_suite":"Read more",
+          "see_map":"See on the map",
         },
       };
 }

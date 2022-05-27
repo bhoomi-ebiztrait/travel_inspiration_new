@@ -108,8 +108,11 @@ class _TIDestinationInProgressScreenState
             setState(() {
               isStopped = true;
               if (btn_text == "stop_journey".tr) {
-                Get.to(() => TITravelougeScreen(
-                    double.parse(myController.selectedProject.value.totalKm)));
+                double updatedKm=0.0;
+                if(myController.selectedProject.value.totalKm != null){
+                  updatedKm = double.parse(myController.selectedProject.value.totalKm);
+                }
+                Get.to(() => TITravelougeScreen(updatedKm));
               }
             });
           },

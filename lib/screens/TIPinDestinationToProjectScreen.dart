@@ -146,7 +146,9 @@ class _TIPinDestinationToProjectScreenState
                 subProj = "$subProj - ${myController.allProjectList[index].subProjectDetail[i].name.toUpperCase()}";
               }
             } else{
-              subProj = "";
+              if(myController.allProjectList[index].pinDestination == "") {
+                subProj = "";
+              }
             }
             print("subbbb $subProj");
             return Slidable(

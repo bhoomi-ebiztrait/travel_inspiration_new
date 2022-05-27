@@ -55,7 +55,7 @@ class TIInspireModeScreen extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: MyColors.whiteColor,
-                fontSize: MyFontSize.size50,
+                fontSize: MyFontSize.size48,
                 fontFamily: MyStrings.bodoni72_Bold),
           ),
           SizedBox(
@@ -67,7 +67,7 @@ class TIInspireModeScreen extends StatelessWidget {
             },
             child: Image.asset(
               MyImageURL.fleche,
-              fit: BoxFit.contain,height: 130,width: 130,
+              fit: BoxFit.contain,height: 120,width: 120,
             ),
           ),
         ],

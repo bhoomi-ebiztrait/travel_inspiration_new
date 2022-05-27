@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
 import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
 import 'package:travel_inspiration/MyWidget/MyButton.dart';
+import 'package:travel_inspiration/MyWidget/MyCommonMethods.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextFieldWithImage.dart';
@@ -19,15 +20,33 @@ import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
 
 
-class ForgotPasswordScreen extends StatelessWidget {
+class ForgotPasswordScreen extends StatefulWidget {
 
+
+
+  @override
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   ApiManager apiManager=ApiManager.getInstance();
+
   MyValidatorController myController = Get.put(MyValidatorController());
+
   TextEditingController email=TextEditingController();
+
   GlobalKey<FormState> _formKey=GlobalKey<FormState>();
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    apiManager.isVisibleMsg.value=false;
+  }
   @override
   Widget build(BuildContext context) {
-    apiManager.isVisibleMsg.value=false;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -224,6 +243,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return param;
 
   }
+
   _validate(){
 
     _formKey.currentState.save();
@@ -233,6 +253,8 @@ class ForgotPasswordScreen extends StatelessWidget {
       then((response){
         Get.back();
         apiManager.isVisibleMsg.value = true;
+        FocusScope.of(context).requestFocus(FocusNode());
+
       });
 
     }else{
