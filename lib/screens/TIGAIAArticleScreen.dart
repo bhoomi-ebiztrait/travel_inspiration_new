@@ -11,6 +11,8 @@ import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 
+import '../MyWidget/MyTitlebar.dart';
+
 class TIGAIAArticleScreen extends StatelessWidget {
   TIArticalListModel articalListModel;
   TIGAIAArticleScreen({this.articalListModel});
@@ -26,14 +28,29 @@ class TIGAIAArticleScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          MyTopHeader(
-            headerImgUrl: MyImageURL.gia_topBg,
-            headerName: "txtGaia".tr,
-            logoImgUrl: MyImageURL.logo_icon,
-            logoCallback: () {
-              CommonMethod.getAppMode();
-            },
+      Container(
+      height: Get.height * 0.30,
+        width: Get.width,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              MyImageURL.gaia_bg,
+            ),
+            fit: BoxFit.fill,
           ),
+        ),
+        child: Column(
+          children: [
+            MyTopHeader(),
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: MyTitlebar(
+                title: "txtGaia".tr.toUpperCase(),
+              ),
+            ),
+          ],
+        ),
+      ),
           _buildBodyText(),
         ],
       ),

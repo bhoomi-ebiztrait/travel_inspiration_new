@@ -10,6 +10,7 @@ import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextButton.dart';
 import 'package:travel_inspiration/MyWidget/MyTextFieldWithImage.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/TIController/MyValidatorController.dart';
 import 'package:travel_inspiration/screens/CreateProfileScreen.dart';
 import 'package:travel_inspiration/screens/DashboardScreen.dart';
@@ -51,6 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isActiveBio = false;
 
+  bool isBioOn = false;
+
   @override
   void initState() {
     super.initState();
@@ -91,12 +94,13 @@ class _LoginScreenState extends State<LoginScreen> {
         key: _formKey,
         // autovalidateMode: AutovalidateMode.onUserInteraction,
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              width: Get.width,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+          child: Container(
+            width: Get.width,
+            height: Get.height,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -121,28 +125,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: Get.height * 0.06
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 60),
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          bottomLeft: Radius.circular(40)),
-                      color: MyColors.buttonBgColor,
-                    ),
-                    //margin: EdgeInsets.all(20),
-                    child: MyText(
-                      text_name: "je_suis_haudosseen".tr,
-                      txtcolor: MyColors.whiteColor,
-                      txtfontsize:MyFontSize.size25,
-                      myFont: MyStrings.bodoni72_Bold,
-                    ),
-                  ),
+                  MyTitlebar(title: "${"je_suis_haudosseen_multiline".tr}".toUpperCase(),),
+
                   SizedBox(
                     height: Get.height * 0.06,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 50,bottom: 10),
+                    padding: const EdgeInsets.only(left: 70,bottom: 10),
                     child: MyTextStart(
                       text_name: "email".tr,
                       txtcolor: MyColors.whiteColor,
@@ -164,21 +153,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: Get.height * 0.04,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 50,bottom: 10),
+                    padding: const EdgeInsets.only(left: 70),
                     child: Row(
                       children: [
-                        MyTextStart(
-                          text_name: "password".tr,
-                          txtcolor: MyColors.whiteColor,
-                          txtfontsize:MyFontSize.size15,
-                          myFont: MyStrings.courier_prime,
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4.0),
+                          child: MyTextStart(
+                            text_name: "mot_de_passe".tr,
+                            txtcolor: MyColors.whiteColor,
+                            txtfontsize:MyFontSize.size15,
+                            myFont: MyStrings.courier_prime,
+                          ),
                         ),
                         SizedBox(width: 5,),
                         GestureDetector(
                             onTap: (){
                               // passwordInfo();
                               Get.to(() => AlertDialogSignIn(title: "password_rules",myContent: "",));
-                            },child: Icon(Icons.info_outline,size: 22,color: MyColors.whiteColor,))
+                            },child: Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                              child: Icon(Icons.info_outline,size: 22,color: MyColors.whiteColor,),
+                            ))
                       ],
                     ),
                   ),
@@ -244,9 +239,17 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0,bottom: 15),
-                  child: Image.asset(
-                    MyImageURL.toggle_on,
-                    width: 50,
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        isBioOn = !isBioOn;
+                      });
+
+                    },
+                    child: Image.asset(
+                      isBioOn ? MyImageURL.toggle_on:MyImageURL.toggle_off,
+                      width: 50,
+                    ),
                   ),
                 ),
                 Center(
@@ -277,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       //     : Container()),
 
                       child: isActiveBio
-                          ? Image.asset(MyImageURL.fingerprint,height: 80,)
+                          ? isBioOn ? Image.asset(MyImageURL.fingerprint,height: 80,):Container()
                           : Container()),
                 ),
               ],
@@ -290,7 +293,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SizedBox(
           height: Get.height * 0.03,
         ),
-        Padding(
+       isBioOn? Container(): Padding(
           padding: EdgeInsets.symmetric(horizontal: Get.width * 0.15),
           child: MyButton(
             btn_name: "se_connecter".tr,

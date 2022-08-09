@@ -83,10 +83,12 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
   var selectedStartDate = "".obs;
   var selectedEndDate = "".obs;
   var selectedDestinationDate = "".obs;
+  var selectedNotifyDate = "".obs;
   var nextPage_token = "".obs;
   String passenger = "";
   Future<String> wayPoints ;
   Timer timer;
+  bool isDialog = false;
 
   //===========Gaia list=============//
   var showPopup = false.obs;
@@ -135,7 +137,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
           model.place_id = data['results'][i]['place_id'];
           model.imgUrl = data['results'][i]['icon'];
           model.description = data['results'][i]['vicinity'];
-          model.content = "Voir sur la carte";
+          model.content = "see_map".tr;
           model.lat = data['results'][i]['geometry']['location']['lat'];
           model.lng = data['results'][i]['geometry']['location']['lng'];
           if (data['results'][i]['photos'] != null) {
@@ -184,7 +186,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
           model.imgUrl = data['results'][i]['icon'];
           model.description = data['results'][i]['vicinity'];
           model.rating = data['results'][i]['rating'].toDouble();
-          model.content = "Voir sur la carte";
+          model.content = "see_map".tr;
           model.lat = data['results'][i]['geometry']['location']['lat'];
           model.lng = data['results'][i]['geometry']['location']['lng'];
           if (data['results'][i]['photos'] != null) {
@@ -231,7 +233,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
           model.imgUrl = data['results'][i]['icon'];
           model.description = data['results'][i]['vicinity'];
           model.rating = data['results'][i]['rating'].toDouble();
-          model.content = "Voir sur la carte";
+          model.content = "see_map".tr;
           model.lat = data['results'][i]['geometry']['location']['lat'];
           model.lng = data['results'][i]['geometry']['location']['lng'];
           if (data['results'][i]['photos'] != null) {
@@ -264,6 +266,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
       if (nextPage_token.value == null) {
         nextPage_token.value = "";
       }
+
       searchNearByHotels(selectedPlace.value.lat, selectedPlace.value.lng, type,
               keyword, radious, nextPage_token.value)
           .then((data) {
@@ -278,7 +281,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
           model.imgUrl = data['results'][i]['icon'];
           model.description = data['results'][i]['vicinity'];
           model.rating = data['results'][i]['rating'].toDouble();
-          model.content = "Voir sur la carte";
+          model.content = "see_map".tr;
           model.lat = data['results'][i]['geometry']['location']['lat'];
           model.lng = data['results'][i]['geometry']['location']['lng'];
           if (data['results'][i]['photos'] != null) {
@@ -360,7 +363,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
   }
   /*============ getAvailable flight*/
 
-  void getFlightSearch(param,tofilter) async {
+  void getFlightSearch(param,tofilter,  travelLougeListTitle) async {
     try {
       Get.dialog(Loading());
       myIntOnwordsList1.value.clear();
@@ -387,7 +390,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
         }
         Get.back();
         ScreenTransition.navigateToScreenLeft(
-            screenName: TIAvailableFlightScreen());
+            screenName: TIAvailableFlightScreen(travelLougeListTitle));
 
       }else{
         Get.back();
@@ -473,9 +476,15 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
       tempProjList.addAll(allProjectList.value);
       for (int i = 0; i < allProjectList.value.length; i++) {
         if (allProjectList.value[i].isSelected) {
-          selectedProject = AllProjectModel().obs;
+         selectedProject = AllProjectModel().obs;
           selectedProject.value = allProjectList.value[i];
-          tempProjList.removeAt(i);
+          if(tempProjList != null && tempProjList.length > 0 ) {
+            for(int j=0;j<tempProjList.length;j++) {
+              if(allProjectList.value[i].id == tempProjList[j].id) {
+                tempProjList.removeAt(j);
+              }
+            }
+          }
         }
       }
       if (tempProjList.length > 0)
@@ -719,7 +728,7 @@ class MyController extends GetxController with SingleGetTickerProviderMixin {
         isAddFlightMenual_FT_ManualAddS.value = false;
         selectedDate.value = "";
         selectedDestinationDate.value = "";
-
+        Get.back();
       }
     } else {
       MyCommonMethods.showInfoCenterDialog(

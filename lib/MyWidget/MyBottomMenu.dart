@@ -17,8 +17,9 @@ import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 class MyBottomMenu extends StatelessWidget {
   VoidCallback homeMenuCallback;
   MyController myController = Get.put(MyController());
+  String bgImg;
 
-  MyBottomMenu({Key key, this.homeMenuCallback}) : super(key: key);
+  MyBottomMenu({Key key, this.homeMenuCallback,this.bgImg}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +40,12 @@ class MyBottomMenu extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-          height: Get.height * .17,
-          width: Get.height * .11,
+        // color: Colors.green,
+          margin: EdgeInsets.only(bottom: 20),
+          width: Get.width * 0.15,
+          height: Get.height * 0.11,
+        /*  height: Get.height * .16,
+          width: Get.height * .11,*/
           // decoration: BoxDecoration(
           //   borderRadius: BorderRadius.all(Radius.circular(60)),
           //   // borderRadius: BorderRadius.only(topLeft: Radius.circular(60),topRight: Radius.circular(60)),
@@ -67,7 +72,10 @@ class MyBottomMenu extends StatelessWidget {
       bottom: 20,
       child: Container(
         decoration: BoxDecoration(
-            color: MyColors.textColor.withOpacity(0.32),
+          image: DecorationImage(
+            image: AssetImage(this.bgImg),
+          )
+            /*color: MyColors.whiteColor.withOpacity(0.32),
             border: Border.all(color: MyColors.textColor.withOpacity(0.32)),
             borderRadius: BorderRadius.circular(50),
             boxShadow: [
@@ -75,9 +83,10 @@ class MyBottomMenu extends StatelessWidget {
                 color: MyColors.textColor.withOpacity(0.32),
                 blurRadius: 1.0,
               ),
-            ]),
+            ]*/
+        ),
         width: Get.width * 0.85,
-        height: Get.height * 0.12,
+        height: Get.height * 0.11,
         padding: EdgeInsets.symmetric(horizontal: 25),
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -102,11 +111,15 @@ class MyBottomMenu extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
             buildGaia(),
             SizedBox(
-              width: Get.width * 0.07,
+              width: Get.width * 0.04,
             ),
             buildSettings(),
+
           ],
         ),
       ],
@@ -124,9 +137,12 @@ class MyBottomMenu extends StatelessWidget {
           children: [
             buildProfile(),
             SizedBox(
-              width: Get.width * 0.07,
+              width: Get.width * 0.05,
             ),
             buildGallery(),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
           ],
         ),
       ],

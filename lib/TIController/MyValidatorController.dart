@@ -101,12 +101,12 @@ class MyValidatorController extends GetxController{
     }
   }
   String validatePhoneNo(String value) {
-    // if (value == null || value.isEmpty) {
-    //   return "validPhoneNo".tr;
-    // }
-    // else {
+    if (value != null && !value.isEmpty && value.length < 10) {
+      return "validPhoneNo".tr;
+    }
+    else {
       return null;
-    // }
+    }
   }
   String validateProjName(String value) {
     if (value == null || value.isEmpty) {

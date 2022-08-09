@@ -40,7 +40,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
   AnimationController rotateArrow360;
   bool goToDetail = false;
 
-  AllProjectModel selectedProj;
+  //AllProjectModel selectedProj;
 
   @override
   initState() {
@@ -97,6 +97,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
                   buildMenu(),
                   openMenu(),
                   MyBottomMenu(
+                    bgImg: MyImageURL.bottom_bg,
                     homeMenuCallback: () {
                       myController.showHomeIcon.value = false;
                       myController.isFloatingMenuVisible.value = true;
@@ -209,7 +210,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
         child: Container(
           width: Get.width,
           height: Get.height * 0.4,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(MyImageURL.top_wave), fit: BoxFit.fill),
@@ -228,8 +229,9 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
                           isVisible = false;
                         });
                       },
-                      child: Image.asset(MyImageURL.arrow_dropdown_up)),
-                 /* InkWell(
+                      child: Image.asset(MyImageURL.arrow_dropdown_up,
+                          color: MyColors.buttonBgColor)),
+                  /* InkWell(
                       onTap: () {
                         setState(() {
                           isVisible = false;
@@ -258,7 +260,11 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
                           }*/
                           getEndLatLong(false);
                         },
-                        child: Image.asset(MyImageURL.gaia)),
+                        child: Image.asset(
+                          MyImageURL.gaia,
+                          height: 60,
+                          width: 60,
+                        )),
                     SizedBox(
                       height: Get.height * 0.01,
                     ),
@@ -286,7 +292,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
         mainAxisSize: MainAxisSize.max,
         children: [
           MyText(
-            text_name: "reflect_mode".tr,
+            text_name: "reflect_mode".tr.toUpperCase(),
             myFont: MyStrings.courier_prime_bold,
             txtfontsize: MyFontSize.size20,
             txtcolor: MyColors.whiteColor,
@@ -317,7 +323,13 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
           SizedBox(
             height: Get.height * 0.06,
           ),
-          Obx(() {
+         /* MyText(
+            text_name: getSelectedProj(),
+            myFont: MyStrings.courier_prime_italic,
+            txtfontsize: MyFontSize.size16,
+            txtcolor: MyColors.whiteColor,
+          ),*/
+           Obx(() {
             return MyText(
               text_name: getSelectedProj(),
               myFont: MyStrings.courier_prime_italic,
@@ -329,7 +341,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
           GestureDetector(
             onTap: () {
               getEndLatLong(true);
-             /* if (myController.selectedProject != null &&
+              /* if (myController.selectedProject != null &&
                   myController.selectedProject.value != "" &&
                   myController.selectedProject.value.projectMode == "1") {
                 getEndLatLong(true);
@@ -340,7 +352,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
               }*/
             },
             child: MyText(
-              text_name: "see_my_journey".tr,
+              text_name: "see_my_journey".tr.toUpperCase(),
               myFont: MyStrings.cagliostro,
               txtfontsize: MyFontSize.size25,
               txtcolor: MyColors.whiteColor,
@@ -367,7 +379,7 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
       if (value == true) {
         //change reflective mode  to inspire mode
         // MyPreference.setPrefIntValue(key: MyPreference.APPMODE, value: 0);
-        ScreenTransition.navigateToScreenLeft(screenName: InspredModeScreen());
+        ScreenTransition.navigateOffAll(screenName: InspredModeScreen());
       }
     });
   }
@@ -376,20 +388,22 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
     if (myController.selectedProject != null &&
         myController.selectedProject.value != "" &&
         myController.selectedProject.value.projectMode == "1") {
+      print("sele ${myController.selectedProject.value.title}");
       return myController.selectedProject.value.title;
     }
 
     if (myController.allProjectList.value != null &&
         myController.allProjectList.value.length > 0) {
       int appMode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
+      myController.getSelectedProj();
       for (int i = 0; i < myController.allProjectList.value.length; i++) {
         if ("1" == myController.allProjectList.value[i].projectMode) {
-          // myController.selectedProject.value =
-          // myController.allProjectList.value[i];
+          // myController.selectedProject.value = myController.allProjectList.value[i];
           myController.allProjectList.value[i].isSelected = true;
           myController.getSelectedProj();
+          print("sel:: ${myController.allProjectList.value[i].title}");
           return myController.allProjectList.value[i].title;
-        }else{
+        } else {
           myController.allProjectList.value[i].isSelected = false;
         }
       }
@@ -404,7 +418,9 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
 
     Map<String, dynamic> param = {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
-      "projectId": myController.selectedProject!= null ?myController.selectedProject.value.id:0,
+      "projectId": myController.selectedProject != null
+          ? myController.selectedProject.value.id
+          : 0,
       "projectMode": "1",
       "updatedKm": updatedKm,
     };
@@ -417,7 +433,8 @@ class _ReflectModeScreenState extends State<ReflectModeScreen>
             Get.to(() => TITravelougeScreen(
                 double.parse((distance).toStringAsFixed(2))));
           } else {
-            final result = await Get.to(ReflectJourneyDetailsScreen(double.parse((distance).toStringAsFixed(2))));
+            final result = await Get.to(ReflectJourneyDetailsScreen(
+                double.parse((distance).toStringAsFixed(2))));
             if (result == true) setState(() {});
           }
         });

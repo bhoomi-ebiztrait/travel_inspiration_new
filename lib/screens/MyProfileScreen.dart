@@ -7,8 +7,10 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
 import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
 import 'package:travel_inspiration/Models/UserInfo.dart';
+import 'package:travel_inspiration/MyWidget/MyBottomMenu.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextButton.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/screens/TIPinDestinationToProjectScreen.dart';
 import 'package:travel_inspiration/screens/TIPremiumInfoScreen.dart';
@@ -21,6 +23,7 @@ import 'package:travel_inspiration/utils/MyPreference.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:travel_inspiration/utils/TIPrint.dart';
 
+import '../MyWidget/MyGradientBottomMenu.dart';
 import 'PhotoPreviewScreen.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -34,10 +37,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   File croppedImg;
   MyController profileController = Get.put(MyController());
 
-  UserInfo userInfo;
+  //UserInfo userInfo;
 
   @override
   void initState() {
+    //userInfo = profileController.userInfo.value;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       profileController.getProfile();
     });
@@ -49,109 +53,103 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
-          //maintainBottomViewPadding: true,
-          child: buildProfileHeader(),
+          maintainBottomViewPadding: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              buildProfileHeader(),
+              SizedBox(height: Get.height*0.02,),
+              buildProfileSubTitle(),
+              SizedBox(height: Get.height*0.001,),
+              buildProjInfo(),
+              SizedBox(height: Get.height*0.02,),
+              buildBottomLayout(),
+              // MyGradientBottomMenu(),
+              SizedBox(height: Get.height*0.02,),
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: buildBottomLayout(),
+     bottomNavigationBar:  MyGradientBottomMenu(selString :MyStrings.profile,iconList: [MyImageURL.profile_selected,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_icon],bgImg: MyImageURL.button_bg_img,),
     );
   }
 
   buildProfileHeader() {
-    return Obx(() {
-      userInfo = profileController.userInfo.value;
-      return Stack(
+    return Container(
+      height: Get.height * 0.30,
+      width: Get.width,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(MyImageURL.profile_bg,), fit: BoxFit.fill,),
+      ),
+      child:
+      Stack(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                MyImageURL.profile_top,
-                fit: BoxFit.fill,
-              ),
-              SizedBox(
-                height: Get.height * 0.10,
-              ),
-              buildBodyContent(),
-            ],
-          ),
-          Positioned(
+          Center(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Image.asset(MyImageURL.back,
-                      width: 25,),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                      onTap: () {
-                        CommonMethod.getAppMode();
-                      },
-                      child: Image.asset(MyImageURL.logo_icon)),
-                ),
+                //buildProfileImage(),
+                Container(
+                    width: Get.width,
+                    child: MyTitlebar(title: "       ${"profile".tr}",)),
               ],
             ),
           ),
           buildProfileImage(),
-          buildHeaderText(),
-        ],
-      );
-    });
-  }
 
-  buildBodyContent() {
-    print("profile ${profileController.userInfo.value.userName}");
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
+
+        ],
+      ),
+      //buildProfileSubTitle(),
+
+    );
+    // if(profileController.userInfo.value != null && profileController.userInfo.value.userId != null) {
+      /*return Obx(() {
+        userInfo = profileController.userInfo.value;
+
+
+
+      });*/
+
+  }
+  buildProjInfo(){
+    return Stack(
       children: [
-        buildProfileSubTitle(),
-        buildPremiumAccount(),
-        SizedBox(
-          height: Get.height * 0.04,
+        Container(
+          margin: EdgeInsets.only(left: 30,right: 30,top: 70),
+          width: Get.width,
+          height: Get.height*0.3,
+          decoration: BoxDecoration(
+            color: MyColors.buttonBgColor,
+            borderRadius: BorderRadius.all(Radius.circular(37))
+          ),
+          child: buildProjectCounter(),
         ),
-        buildProjectCounter(),
-        SizedBox(
-          height: Get.height * 0.05,
-        ),
-        // buildBottomLayout(),
+    buildPremiumAccount(),
+
+
       ],
     );
   }
 
+
   buildBottomLayout() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Container(
-          width: Get.width,
-          height: Get.height * 0.27,
-          alignment: Alignment.bottomCenter,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(MyImageURL.profile_bottom),
-              fit: BoxFit.fill,
-            ),
-          ),
-          child: Obx(() {
-            userInfo = profileController.userInfo.value;
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: Get.width,
+
+    return Container(
+      height: Get.height * 0.23,
+      margin: EdgeInsets.only(right: 35),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+
+            children: [
+              Obx((){
+                return Container(
+                  width: Get.width * 0.60,
                   height: Get.height * 0.23,
                   child: SfCircularChart(margin: EdgeInsets.all(0), palette: [
                     MyColors.lineColor,
@@ -162,10 +160,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       width: "80%",
                       widget: Container(
                         child: MyText(
-                          text_name: userInfo != null ? getProjectRatio() : "",
+                          text_name: profileController.userInfo.value != null
+                              ? getProjectRatio()
+                              : "",
                           txtcolor: ((MyPreference.getPrefIntValue(
-                                      key: MyPreference.APPMODE)) ==
-                                  ApiParameter.REFLECT_MODE)
+                              key: MyPreference.APPMODE)) ==
+                              ApiParameter.REFLECT_MODE)
                               ? MyColors.lightGreenColor
                               : MyColors.lineColor,
                           txtfontsize: MyFontSize.size16,
@@ -181,21 +181,21 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         DoughnutSeries<_PieData, String>(
 
 // innerRadius: "30" ,
-                            // strokeWidth: 40,
+                          // strokeWidth: 40,
                             animationDuration: 0,
 // strokeWidth: 35,
                             explode: false,
                             dataSource: <_PieData>[
                               _PieData(
                                   "inspire".tr,
-                                  userInfo != null
-                                      ? userInfo.noOfCreateProjInsp
+                                  profileController.userInfo.value != null
+                                      ? profileController.userInfo.value.noOfCreateProjInsp
                                       : 0,
                                   ""),
                               _PieData(
                                   "reflect".tr,
-                                  userInfo != null
-                                      ? userInfo.noOfCreatedProjReflect
+                                  profileController.userInfo.value != null
+                                      ? profileController.userInfo.value.noOfCreatedProjReflect
                                       : 0,
                                   ""),
                             ],
@@ -203,22 +203,116 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             yValueMapper: (_PieData data, _) => data.yData,
                             dataLabelMapper: (_PieData data, _) => data.text,
                             dataLabelSettings:
-                                DataLabelSettings(isVisible: true)),
+                            DataLabelSettings(isVisible: true)),
                       ]),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    showLegendRow(MyColors.lineColor, "inspire".tr),
-                    showLegendRow(MyColors.lightGreenColor, "reflect".tr),
-                  ],
-                ),
-              ],
-            );
-          }),
-        ),
-      ],
+                );
+              }),
+
+            ],
+          ),
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              showLegendRow(MyColors.lineColor, "inspire".tr),
+              showLegendRow(MyColors.lightGreenColor, "reflect".tr),
+            ],
+          ),
+        ],
+      ),
     );
+   // if(profileController.userInfo.value != null && profileController.userInfo.value.userId != null) {
+      /*return Obx(() {
+        //userInfo = profileController.userInfo.value;
+        //rint("userrrrr11 : ${userInfo.userId}");
+        return Container(
+          height: Get.height * 0.23,
+          margin: EdgeInsets.only(right: 35),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+
+                children: [
+                  Container(
+                    width: Get.width * 0.60,
+                    height: Get.height * 0.23,
+                    child: SfCircularChart(margin: EdgeInsets.all(0), palette: [
+                      MyColors.lineColor,
+                      MyColors.lightGreenColor,
+                    ], annotations: <CircularChartAnnotation>[
+                      CircularChartAnnotation(
+                        height: "80%",
+                        width: "80%",
+                        widget: Container(
+                          child: MyText(
+                            text_name: userInfo != null
+                                ? getProjectRatio()
+                                : "",
+                            txtcolor: ((MyPreference.getPrefIntValue(
+                                key: MyPreference.APPMODE)) ==
+                                ApiParameter.REFLECT_MODE)
+                                ? MyColors.lightGreenColor
+                                : MyColors.lineColor,
+                            txtfontsize: MyFontSize.size16,
+                            myFont: MyStrings.courier_prime_bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                        *//*  legend: Legend(isVisible: true,orientation: LegendItemOrientation.horizontal,position: LegendPosition.bottom,
+                      alignment: ChartAlignment.center,
+                      textStyle: TextStyle(fontSize: MyFontSize.size10)),*//*
+                        series: <DoughnutSeries<_PieData, String>>[
+                          DoughnutSeries<_PieData, String>(
+
+// innerRadius: "30" ,
+                            // strokeWidth: 40,
+                              animationDuration: 0,
+// strokeWidth: 35,
+                              explode: false,
+                              dataSource: <_PieData>[
+                                _PieData(
+                                    "inspire".tr,
+                                    userInfo != null
+                                        ? userInfo.noOfCreateProjInsp
+                                        : 0,
+                                    ""),
+                                _PieData(
+                                    "reflect".tr,
+                                    userInfo != null
+                                        ? userInfo.noOfCreatedProjReflect
+                                        : 0,
+                                    ""),
+                              ],
+                              xValueMapper: (_PieData data, _) => data.xData,
+                              yValueMapper: (_PieData data, _) => data.yData,
+                              dataLabelMapper: (_PieData data, _) => data.text,
+                              dataLabelSettings:
+                              DataLabelSettings(isVisible: true)),
+                        ]),
+                  ),
+
+                ],
+              ),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  showLegendRow(MyColors.lineColor, "inspire".tr),
+                  showLegendRow(MyColors.lightGreenColor, "reflect".tr),
+                ],
+              ),
+            ],
+          ),
+        );
+      });*/
+   /* }else {
+      return Container();
+    }*/
   }
 
   showLegendRow(mColor, title) {
@@ -292,113 +386,166 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   */
   buildProjectCounter() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        GestureDetector(
-          onTap: () {
-            Get.to(() => TIPinDestinationToProjectScreen(
-                  travelLougeTitle: "txtMesprojets".tr,
-                ));
-          },
-          child: Column(
-            children: [
-              MyText(
-                text_name: userInfo.totalNoOfCreatedProject != null
-                    ? userInfo.totalNoOfCreatedProject.toString()
-                    : "",
-                txtfontsize: MyFontSize.size28,
-                txtcolor: MyColors.buttonBgColor,
-                myFont: MyStrings.courier_prime_bold,
-              ),
-              SizedBox(
-                height: Get.height * 0.01,
-              ),
-              MyText(
-                text_name: "projects".tr,
-                txtfontsize: MyFontSize.size10,
-                txtcolor: MyColors.buttonBgColor,
-                myFont: MyStrings.courier_prime_bold,
-              ),
-            ],
+    return Obx((){
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: (profileController.userInfo.value.isPremium != null && profileController.userInfo.value.isPremium) ?Get.height *0.03 :0.0,
           ),
-        ),
-        Column(
-          children: [
-            MyText(
-              text_name:
-                  userInfo.totalKm != null ? "${userInfo.totalKm}KM" : "",
-              txtfontsize: MyFontSize.size23,
-              txtcolor: MyColors.buttonBgColor,
-              myFont: MyStrings.courier_prime_bold,
+          Padding(
+            padding: const EdgeInsets.only(top:12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => TIPinDestinationToProjectScreen(
+                      travelLougeTitle: "txtMesprojets".tr,
+                    ));
+                  },
+                  child: Column(
+                    children: [
+                      MyText(
+                        text_name: profileController.userInfo.value.totalNoOfCreatedProject != null
+                            ? profileController.userInfo.value.totalNoOfCreatedProject.toString()
+                            : "0",
+                        txtfontsize: MyFontSize.size28,
+                        txtcolor: MyColors.whiteColor,
+                        myFont: MyStrings.courier_prime_bold,
+                      ),
+                      SizedBox(
+                        height: Get.height * 0.01,
+                      ),
+                      MyText(
+                        text_name: "projects".tr,
+                        txtfontsize: MyFontSize.size10,
+                        txtcolor: MyColors.whiteColor,
+                        myFont: MyStrings.courier_prime_bold,
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  children: [
+                    MyText(
+                      text_name:
+                      profileController.userInfo.value.totalKm != null ? "${profileController.userInfo.value.totalKm}KM" : "0.02",
+                      txtfontsize: MyFontSize.size23,
+                      txtcolor: MyColors.whiteColor,
+                      myFont: MyStrings.courier_prime_bold,
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.01,
+                    ),
+                    MyText(
+                      text_name: "total_km".tr,
+                      txtfontsize: MyFontSize.size10,
+                      txtcolor: MyColors.whiteColor,
+                      myFont: MyStrings.courier_prime_bold,
+                    ),
+                  ],
+                ),
+              ],
             ),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
-            MyText(
-              text_name: "total_km".tr,
-              txtfontsize: MyFontSize.size10,
-              txtcolor: MyColors.buttonBgColor,
-              myFont: MyStrings.courier_prime_bold,
-            ),
-          ],
-        ),
-      ],
-    );
+          ),
+          // SizedBox(height: Get.height*0.07,),
+        ],
+      );
+    });
   }
 
   buildPremiumAccount() {
-    if (userInfo.isPremium != null && userInfo.isPremium) {
-      return GestureDetector(
-        onTap: () {
-          Get.to(TIPremiumInfoScreen());
-        },
+    return  GestureDetector(
+      onTap: () {
+        Get.to(TIPremiumInfoScreen());
+      },
+      child: Container(
+        width: Get.width,
+        height: Get.height * 0.3,
+        // color: Colors.red,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
+            /*SizedBox(
               height: Get.height * 0.02,
-            ),
-            Image.asset(MyImageURL.diamant),
-            SizedBox(
-              height: Get.height * 0.02,
-            ),
+            ),*/
+            Image.asset(MyImageURL.premium, height: 120, width: 120,),
+            /*SizedBox(
+              height: Get.height * 0.01,
+            ),*/
             MyText(
               text_name: "premium_account".tr,
               txtfontsize: MyFontSize.size13,
-              txtcolor: MyColors.textColor,
+              txtcolor: MyColors.whiteColor,
               myFont: MyStrings.courier_prime_bold,
             ),
           ],
         ),
-      );
-    } else {
-      return Container();
+      ),
+    );
+     /*if (profileController.userInfo.value.isPremium != null && profileController.userInfo.value.isPremium) {
+      return  GestureDetector(
+       onTap: () {
+         Get.to(TIPremiumInfoScreen());
+       },
+       child: Container(
+         width: Get.width,
+         height: Get.height * 0.3,
+         // color: Colors.red,
+         child: Column(
+           mainAxisAlignment: MainAxisAlignment.start,
+           children: [
+             *//*SizedBox(
+              height: Get.height * 0.02,
+            ),*//*
+             Image.asset(MyImageURL.premium, height: 120, width: 120,),
+             *//*SizedBox(
+              height: Get.height * 0.01,
+            ),*//*
+             MyText(
+               text_name: "premium_account".tr,
+               txtfontsize: MyFontSize.size13,
+               txtcolor: MyColors.whiteColor,
+               myFont: MyStrings.courier_prime_bold,
+             ),
+           ],
+         ),
+       ),
+     );
     }
+    else {
+      return Container();
+    }*/
+
   }
 
   buildProfileSubTitle() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        MyText(
-          text_name: userInfo.country != null ? userInfo.country : "",
-          txtfontsize: MyFontSize.size13,
-          txtcolor: MyColors.textColor,
-        ),
-        buildVerticalLine(),
-        MyText(
-          text_name: userInfo.userName != null ? userInfo.userName : "",
-          txtfontsize: MyFontSize.size13,
-          txtcolor: MyColors.textColor,
-        ),
-        buildVerticalLine(),
-        MyText(
-          text_name: userInfo.age != null ? "${userInfo.age} ans" : "",
-          txtfontsize: MyFontSize.size13,
-          txtcolor: MyColors.textColor,
-        ),
-      ],
-    );
+    return Obx((){
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          MyText(
+            text_name: "United Kingdom",
+            // text_name: profileController.userInfo.value.country != null ? profileController.userInfo.value.country : "",
+            txtfontsize: MyFontSize.size13,
+            txtcolor: MyColors.textColor,
+          ),
+          buildVerticalLine(),
+          MyText(
+            text_name: profileController.userInfo.value.userName != null ? profileController.userInfo.value.userName : "",
+            txtfontsize: MyFontSize.size13,
+            txtcolor: MyColors.textColor,
+          ),
+          buildVerticalLine(),
+          MyText(
+            text_name: profileController.userInfo.value.age != null ? "${profileController.userInfo.value.age} ans" : "",
+            txtfontsize: MyFontSize.size13,
+            txtcolor: MyColors.textColor,
+          ),
+        ],
+      );
+    });
   }
 
   buildVerticalLine() {
@@ -409,7 +556,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 
-  buildHeaderText() {
+ /* buildHeaderText() {
     return Positioned(
         top: Get.height * 0.12,
         right: Get.width * 0.1,
@@ -419,41 +566,50 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           txtfontsize: MyFontSize.size23,
           txtcolor: MyColors.whiteColor,
         ));
-  }
+  }*/
 
   buildProfileImage() {
-    print("avtar: ${userInfo.avatar}");
-    print("avtar: ${croppedImg}");
-    return Positioned(
-      top: Get.height * 0.14,
-      left: Get.width * 0.05,
-      child: GestureDetector(
-        onTap: () {
-          showImageOptionDialog();
-        },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(300.0),
-          child: Container(
-            height: 160,
-            width: 160,
-            child: croppedImg == null
-                ? userInfo.avatar != ""
+   // print("avtar: ${userInfo.avatar}");
+    //print("avtar: ${croppedImg}");
+
+    return Obx((){
+      // userInfo = profileController.userInfo.value;
+      if(profileController.userInfo.value != null) {
+        return Positioned(
+          top: Get.height * 0.07,
+          left: Get.width * 0.05,
+          child: GestureDetector(
+            onTap: () {
+              showImageOptionDialog();
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(300.0),
+              child: Container(
+                height: 130,
+                width: 130,
+                child: croppedImg == null
+                    ? (profileController.userInfo.value != null && profileController.userInfo.value.avatar != null &&
+                    profileController.userInfo.value.avatar != "")
                     ? Image.network(
-                        userInfo.avatar,
-                        fit: BoxFit.fill,
-                      )
+                  profileController.userInfo.value.avatar,
+                  fit: BoxFit.fill,
+                )
                     : Image.asset(
-                        MyImageURL.profile_avtar,
-                        fit: BoxFit.fill,
-                      )
-                : Image.file(
-                    croppedImg,
-                    fit: BoxFit.fill,
-                  ),
+                  MyImageURL.profile_avtar,
+                  fit: BoxFit.fill,
+                )
+                    : Image.file(
+                  croppedImg,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        );
+      }else{
+        return Container();
+      }
+    });
   }
 
   showImageOptionDialog() {
@@ -535,18 +691,28 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   getProjectRatio() {
     int appMode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
 
-    if (userInfo.noOfCreatedProjReflect != null &&
-        userInfo.noOfCreateProjInsp != null) {
+    if (profileController.userInfo.value.noOfCreatedProjReflect != null &&
+        profileController.userInfo.value.noOfCreateProjInsp == null) {
+      return "100%";
+    }
+    if (profileController.userInfo.value.noOfCreatedProjReflect == null &&
+        profileController.userInfo.value.noOfCreateProjInsp != null) {
+      return "100%";
+    }
+
+
+    if (profileController.userInfo.value.noOfCreatedProjReflect != null &&
+        profileController.userInfo.value.noOfCreateProjInsp != null) {
       if (appMode == ApiParameter.REFLECT_MODE) {
-        var ratio = (((userInfo.noOfCreatedProjReflect) +
-                (userInfo.noOfCreateProjInsp)) /
-            (userInfo.noOfCreatedProjReflect));
+        var ratio = (((profileController.userInfo.value.noOfCreatedProjReflect) +
+                (profileController.userInfo.value.noOfCreateProjInsp)) /
+            (profileController.userInfo.value.noOfCreatedProjReflect));
         print("mRat: $ratio");
         return "${ratio.toStringAsFixed(2)}%";
       } else {
-        var ratio = (((userInfo.noOfCreateProjInsp) +
-                (userInfo.noOfCreatedProjReflect)) /
-            (userInfo.noOfCreateProjInsp));
+        var ratio = (((profileController.userInfo.value.noOfCreateProjInsp) +
+                (profileController.userInfo.value.noOfCreatedProjReflect)) /
+            (profileController.userInfo.value.noOfCreateProjInsp));
         print("mRat: $ratio");
         return "${ratio.toStringAsFixed(2)}%";
       }

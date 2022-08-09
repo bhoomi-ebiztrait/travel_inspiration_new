@@ -6,6 +6,7 @@ import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
 import 'package:travel_inspiration/MyWidget/MyCustomListWithStar.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
 import 'package:travel_inspiration/MyWidget/TINoRecordFound.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
@@ -19,6 +20,7 @@ import 'package:travel_inspiration/utils/MyPreference.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
+import '../../MyWidget/TICirculerBox.dart';
 import 'HotelDetailsScreen.dart';
 
 class PinListScreen extends StatefulWidget {
@@ -57,12 +59,11 @@ class _PinListScreenState extends State<PinListScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: MyColors.settingBgColor,
         extendBody: true,
         resizeToAvoidBottomInset: false,
         body:_buildBodyContent(),
-        bottomSheet: MyBottomLayout(
-          imgUrl: MyImageURL.travel_book_bottom,
-        ),
+
       ),
     );
   }
@@ -73,28 +74,42 @@ class _PinListScreenState extends State<PinListScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            MyTopHeader(
-              headerName:widget.travelLougeListTitle,
-              headerImgUrl: MyImageURL.travel_book_top,
-              logoImgUrl: MyImageURL.haudos_logo,
-              logoCallback: (){
-                CommonMethod.getAppMode();
-              },
+            Container(
+              height: Get.height*0.40,
+              width: Get.width,
+              color: MyColors.buttonBgColorHome.withOpacity(0.7),
+              child: Column(
+                children: [
+                  MyTopHeader(
+                    logoImgUrl: MyImageURL.haudos_logo,
+                    logoCallback: (){
+                      CommonMethod.getAppMode();
+                    },
+                  ),
+                  MyTitlebar(title: widget.travelLougeListTitle,),
+                  SizedBox(
+                    height: Get.height * .040,
+                  ),
+                  TICirculerBox(
+                    imageIcon: widget.imgIcon,
+                    // title: "txtHOTELSEPINGLES".tr,
+                    title: widget.title,
+
+                  ),
+                  SizedBox(
+                    height: Get.height * .010,
+                  ),
+                ],
+              ),
             ),
-            SizedBox(
-              height: Get.height * .020,
+
+            Container(
+              padding: const EdgeInsets.only(bottom: 40,top:40),
+              height: Get.height,
+              color: MyColors.buttonBgColorHome.withOpacity(0.30),
+              child: _pinList(),
             ),
-            buildTitle(),
-            SizedBox(
-              height: Get.height * .020,
-            ),
-            //_hotelList(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 40,),
-              child: Container(
-                  height: Get.height,
-                  child:_pinList()),
-            ),
+
             SizedBox(
               height: Get.height * .30,
             ),
@@ -144,7 +159,7 @@ class _PinListScreenState extends State<PinListScreen> {
                             padding: EdgeInsets.only(top: 8),
                             alignment: Alignment.topCenter,
                             height: Get.height,
-                            color: MyColors.whiteColor,
+                            color: Colors.transparent,
                             child: Image.asset(
                               MyImageURL.cross_gray3x, fit: BoxFit.fill,)),
                       ),

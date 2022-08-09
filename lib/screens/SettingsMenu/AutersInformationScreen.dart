@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
+import 'package:travel_inspiration/MyWidget/MySettingTop.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/screens/SettingsMenu/DeleteAcSecondScreen.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
@@ -9,6 +10,8 @@ import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:travel_inspiration/utils/TIScreenTransition.dart';
+
+import '../../MyWidget/MyGradientBottomMenu.dart';
 
 class AutersInformationScreen extends StatelessWidget {
   String title;
@@ -20,14 +23,25 @@ class AutersInformationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: MyColors.settingBgColor,
+        bottomNavigationBar: MyGradientBottomMenu(
+          selString:MyStrings.settings,
+          iconList: [
+            MyImageURL.profile_icon,
+            MyImageURL.galerie,
+            MyImageURL.home_menu,
+            MyImageURL.world_icon,
+            MyImageURL.setting_selected
+          ],
+          bgImg: MyImageURL.change_pw_bottom,
+          bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),
+        ),
         body:SingleChildScrollView(
           child:Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyTopHeader(headerName: "auters_info".tr,
-                headerImgUrl: MyImageURL.setting_top,
-                logoImgUrl: MyImageURL.haudos_logo,
-              ),
+              MySettingTop(title: "auters_info".tr,),
+
               SizedBox(
                 height: Get.height * 0.04,
               ),
@@ -37,7 +51,7 @@ class AutersInformationScreen extends StatelessWidget {
                   txtfontsize: MyFontSize.size14,txtcolor: MyColors.textColor,myFont: MyStrings.courier_prime_bold,),
               ),
               Padding(
-                padding: const EdgeInsets.all(30.0),
+                padding: const EdgeInsets.only(left: 30.0,right: 30,top: 20,bottom: 40),
                 child:Html(data: desc,),
                 // MyTextStart(text_name: desc,
                 //     txtfontsize: MyFontSize.size12,txtcolor: MyColors.textColor),
@@ -46,7 +60,7 @@ class AutersInformationScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: buildBottomImage(),
+
       ),
     );
   }

@@ -39,21 +39,30 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
   MyValidatorController myValidatorController = Get.put(MyValidatorController());
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dateController.selectedDate.value = "";
+    dateController.selectedDestinationDate.value = "";
+    dateController.selectedNotifyDate.value = "";
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Container(
-              width: Get.width,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+      body: Form(
+        key: _formKey,
+        child: SafeArea(
+          child: Container(
+            width: Get.width,
+            height: Get.height,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -67,9 +76,12 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: Get.height * 0.04,
+                  ),
                   Container(
                     margin: EdgeInsets.only(left: 60),
-                    height: 80,
+                    height: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(40),
@@ -90,8 +102,8 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
               ),
             ),
           ),
-
         ),
+
       ),
       // bottomNavigationBar: buildBottomImage(),
     );
@@ -127,9 +139,25 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                       height: Get.height * 0.03,
                     ),
                     MyDestinationPicker(maxDate: ApiParameter.END_DATE,msg: "dateofVacationStart".tr,),
+
+                    SizedBox(
+                      height: Get.height * 0.06,
+                    ),
+                    MyText(
+                      text_name: "my_notification_date".tr,
+                      txtfontsize: MyFontSize.size15,
+                      txtcolor: MyColors.whiteColor,
+                      myFont: MyStrings.courier_prime_bold,
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.04,
+                    ),
+                    buildNotificationDate(),
+
                     SizedBox(
                       height: Get.height * 0.08,
                     ),
+
                     MyText(text_name: "number_of_person".tr,
                       txtfontsize: MyFontSize.size15,
                       txtcolor: MyColors.whiteColor,
@@ -169,6 +197,60 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                   ],
                 );
   }
+
+    buildNotificationDate() {
+      return Obx((){
+        if(dateController.selectedDate.value != "" && dateController.selectedDestinationDate.value != "") {
+          return Column(
+            children: [
+
+              MyNotifyDatePicker(),
+            ],
+          );
+        }else{
+          return GestureDetector(
+            onTap: (){
+              if(dateController.selectedDestinationDate.value == ""){
+                return MyCommonMethods.showInfoCenterDialog(
+                    msgContent: "dateofVacationEnd".tr,
+                    myFont: MyStrings.courier_prime_bold);
+              }
+            },
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 48.0),
+                child: Container(
+                  width: Get.width,
+                  height: 55,
+                  // width: Get.width*0.2,
+
+                  decoration: BoxDecoration(
+                      color: MyColors.whiteColor.withOpacity(1),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: MyColors.dialog_shadowColor,
+                          blurRadius: 2,
+                          offset: Offset(1, 1),
+                        )
+                      ]),
+                  child: MyText(
+                    text_name: dateController.selectedNotifyDate.value != ""
+                        ? dateController.selectedNotifyDate.value
+                        : "Date".tr,
+                    txtcolor: MyColors.textColor.withOpacity(1.0),
+                    txtfontsize: MyFontSize.size15,
+                    myFont: MyStrings.courier_prime,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+      });
+
+   }
 
   buildBottomImage() {
     return Container(
@@ -219,7 +301,7 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
                     }
                   }
                 },
-                child: Image.asset(MyImageURL.fleche)),
+                child: Image.asset(MyImageURL.fleche,height: 80,width: 90,)),
           ],
         ),
         Padding(
@@ -244,6 +326,7 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
       "projectName": projNameController.text,
       "vacationDate": (dateController.selectedDate.value),
       "destinationDate": (dateController.selectedDestinationDate.value),
+      "notificationDate": (dateController.selectedNotifyDate.value),
       "numberOfPerson": personCounter.toString(),
       "fromContinueKM":MyPreference.getPrefIntValue(key: MyPreference.pageVal),
       // "projectMode": "1",
@@ -262,10 +345,10 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
 
   MyHeaderText(){
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 60,vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
       child: TextFormField(
         onTap: (){},
-        textAlign: TextAlign.center,
+        // textAlign: TextAlign.center,
         controller: projNameController,
         style: TextStyle(color: MyColors.whiteColor, fontSize: MyFontSize.size23,fontFamily: MyStrings.bodoni72_Bold,decoration: TextDecoration.none,
         ),
@@ -284,8 +367,9 @@ class _ReflectModeCreateProjectScreenState extends State<ReflectModeCreateProjec
               )
           ),
           fillColor: Colors.transparent,
-          contentPadding: const EdgeInsets.only(left: 10, right:10),
+          contentPadding: const EdgeInsets.only(left: 0, right:0),
           hintText: "name_of_project".tr,
+          // hintText: "NOM DU PROJET",
           hintStyle: TextStyle(color: MyColors.whiteColor),
           counterText: "",
           filled: true,

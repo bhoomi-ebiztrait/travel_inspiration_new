@@ -34,13 +34,14 @@ class MyFlightTypeDropdownState extends State<MyFlightTypeDropdown> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 18.0),
       child: Container(
+        // color: MyColors.settingBgColor.withOpacity(0.40),
         child: DropdownButtonFormField<FlightType>(
           decoration: dropdowndecoration(),
           items: MyStrings.flightType.map((mFlight) {
             return DropdownMenuItem(
               child: new MyText(
                 text_name: mFlight.type,
-                txtcolor:  MyColors.expantionTileBgColor.withOpacity(1.0),
+               txtcolor:  MyColors.textColor.withOpacity(1.0),
                 txtfontsize: MyFontSize.size12,
                 myFont: MyFont.Courier_Prime,
               ),
@@ -71,14 +72,14 @@ class MyFlightTypeDropdownState extends State<MyFlightTypeDropdown> {
   dropdowndecoration()
   {
     return InputDecoration(
-      fillColor: MyColors.whiteColor,
-      filled: true,
+     // fillColor: MyColors.whiteColor,
+     // filled: true,
       labelText: "Flight type",
-      labelStyle: TextStyle(color:MyColors.expantionTileBgColor.withOpacity(1.0),fontFamily: MyFont.Courier_Prime,fontSize: MyFontSize.size15),
+      labelStyle: TextStyle(color:MyColors.textColor.withOpacity(0.3),fontFamily: MyFont.Courier_Prime,fontSize: MyFontSize.size15),
       contentPadding: const EdgeInsets.only(left: 5,right: 10),
       // enabledBorder: InputBorder.none,
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: MyColors.lineColor,width: 2)),
+            borderSide: BorderSide(color: MyColors.buttonBgColorHome.withOpacity(0.75),width: 1)),
 
     );
   }

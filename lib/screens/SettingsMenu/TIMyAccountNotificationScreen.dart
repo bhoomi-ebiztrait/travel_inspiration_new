@@ -12,7 +12,11 @@ import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyPreference.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 
-class TIMyAccountNotificationScreen extends StatefulWidget {
+import '../../MyWidget/MyGradientBottomMenu.dart';
+import '../../MyWidget/MySettingTop.dart';
+
+class
+TIMyAccountNotificationScreen extends StatefulWidget {
   @override
   _TIMyAccountNotificationScreenState createState() =>
       _TIMyAccountNotificationScreenState();
@@ -48,14 +52,14 @@ class _TIMyAccountNotificationScreenState
   final modeReflechiList = [
     TIMyAccountNotificationModel(
 
-      title: MyStrings.txtDatelimite,
-      subTitle: MyStrings.txtRecevoir2,
+      title: "txtDatelimite".tr,
+      subTitle: "txtDatelimiteInfo".tr,
       imageUrl: MyImageURL.switch_off,
       isSwitched: 0,
     ),
     TIMyAccountNotificationModel(
-      title: MyStrings.txtKilometres,
-      subTitle: MyStrings.txtNotificationdu2,
+      title: "txtKilometres".tr,
+      subTitle: "txtNotificationdu".tr,
       imageUrl: MyImageURL.switch_off,
       isSwitched: 0,
     ),
@@ -112,57 +116,64 @@ class _TIMyAccountNotificationScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: _buildBodyContent()),
-      bottomSheet: MyBottomLayout(
-        imgUrl: MyImageURL.setting_bottom,
-      ),
+      backgroundColor: MyColors.settingBgColor,
+      bottomSheet:  MyGradientBottomMenu(selString:MyStrings.settings,
+        iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.change_pw_bottom,bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),),
     );
   }
 
   _buildBodyContent() {
-    return Container(
-      height: Get.height,
-      child: Column(
-        children: [
-          MyTopHeader(
-            headerImgUrl: MyImageURL.setting_top,
-            headerName: "txtmyCompte".tr,
-            logoImgUrl: MyImageURL.haudos_logo,
-          ),
-          SizedBox(
-            height: Get.height * .015,
-          ),
-          _buildNotificationList(),
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        MySettingTop(title: "txtmyCompte".tr,),
+
+        SizedBox(
+          height: Get.height * .015,
+        ),
+        _buildNotificationList(),
+      ],
     );
   }
 
   _buildNotificationList() {
     return Container(
         width: Get.width,
+        //height: Get.height,
         margin:
             EdgeInsets.only(left: Get.width * .050, right: Get.width * .050),
-        child: _columnData());
+       child: _columnData()
+    );
   }
 
   _columnData() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+     mainAxisSize: MainAxisSize.max,
       children: [
+        SizedBox(
+          height: Get.height * 0.04,
+        ),
         Text(
           "txtNotifications".tr,
           style: TextStyle(
             fontFamily: MyFont.Courier_Prime_Bold,
             fontSize: MyFontSize.size13,
+            color: MyColors.textColor
           ),
         ),
         SizedBox(
           height: Get.height * .015,
         ),
-        Container(height: Get.height * .20, child: _notificationList()),
-        Text(
-
-          MyStrings.txtModeReflechi2,
+        //_notificationList(),
+        Container(
+            height: Get.height * .20,
+            child:
+        _notificationList()),
+        SizedBox(
+          height: Get.height * .015,
+        ),
+        Text("txtModeReflechi".tr,
           style: TextStyle(
               fontFamily: MyFont.Courier_Prime_Bold,
               fontSize: MyFontSize.size13,
@@ -171,7 +182,7 @@ class _TIMyAccountNotificationScreenState
         SizedBox(
           height: Get.height * .015,
         ),
-        Container(height: Get.height * .25, child: _modeReflechiList()),
+       Container(height: Get.height * .25, child: _modeReflechiList()),
       ],
     );
   }
@@ -197,10 +208,12 @@ class _TIMyAccountNotificationScreenState
       width: Get.width * .70,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisSize: MainAxisSize.max,
         children: [
           Text(
             notificationList[index].title,
             style: TextStyle(
+              color: MyColors.textColor,
                 fontFamily: MyFont.Courier_Prime_Bold,
                 fontSize: MyFontSize.size13),
           ),
@@ -210,6 +223,7 @@ class _TIMyAccountNotificationScreenState
           Text(
             notificationList[index].subTitle,
             style: TextStyle(
+                color: MyColors.textColor,
                 fontFamily: MyFont.Courier_Prime_Bold,
                 fontSize: MyFontSize.size8),
           ),
@@ -269,6 +283,7 @@ class _TIMyAccountNotificationScreenState
           Text(
             modeReflechiList[index].title,
             style: TextStyle(
+                color: MyColors.textColor,
                 fontFamily: MyFont.Courier_Prime_Bold,
                 fontSize: MyFontSize.size13),
           ),
@@ -278,6 +293,7 @@ class _TIMyAccountNotificationScreenState
           Text(
             modeReflechiList[index].subTitle,
             style: TextStyle(
+                color: MyColors.textColor,
                 fontFamily: MyFont.Courier_Prime_Bold,
                 fontSize: MyFontSize.size8),
           ),

@@ -65,7 +65,7 @@ class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
     }
   }
   Future<Null> _cropImage() async {
-    File croppedFile = await ImageCropper.cropImage(
+    File croppedFile = await ImageCropper().cropImage(
         sourcePath: imageFile.path,
         cropStyle: CropStyle.circle,
         aspectRatioPresets: Platform.isAndroid

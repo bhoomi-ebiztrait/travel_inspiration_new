@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-List<AllProjectModel> AllProjectModelFromJson(str) =>
+/*List<AllProjectModel> AllProjectModelFromJson(str) =>
     List<AllProjectModel>.from(
         json.decode(str).map((x) => AllProjectModel.fromJson(x)));
 
 String AllProjectModelToJson(List<AllProjectModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x)));
+    json.encode(List<dynamic>.from(data.map((x) => x)));*/
 
 class AllProjectModel {
   String title;
@@ -15,17 +15,20 @@ class AllProjectModel {
   bool isSelected = false;
   int id;
   String pinDestination = "";
+  String pin_destination_lat = "";
+  String pin_destination_long = "";
 
   String projectNoPerson;
   String projectVacationDate;
   String projectDestinationDate;
-  String subprojectName;
-  String subStartVacationDate;
-  String subProjectNoPerson;
+  // String subprojectName;
+  // String subStartVacationDate;
+  // String subProjectNoPerson;
   String city;
   String project_image;
   String msg;
   List<TypePin> typePin;
+  List<SubProjectDetail> subProjectDetail;
 
   AllProjectModel(
       {this.id,
@@ -37,13 +40,16 @@ class AllProjectModel {
       this.projectNoPerson,
       this.projectVacationDate,
       this.projectDestinationDate,
-      this.subprojectName,
-      this.subStartVacationDate,
-      this.subProjectNoPerson,
+        this.pin_destination_lat,
+        this.pin_destination_long,
+      // this.subprojectName,
+      // this.subStartVacationDate,
+      // this.subProjectNoPerson,
       this.city,
       this.project_image,
       this.msg,
       this.pinDestination = "",
+        this.subProjectDetail,
       this.typePin});
 
   AllProjectModel.fromJson(Map<String, dynamic> json) {
@@ -55,17 +61,25 @@ class AllProjectModel {
     projectNoPerson = json['project_no_person'];
     projectVacationDate = json['project_vacation_date'];
     projectDestinationDate = json['project_destination_date'];
-    subprojectName = json['subprojectName'];
-    subStartVacationDate = json['sub_start_vacation_date'];
-    subProjectNoPerson = json['sub_project_no_person'];
+    // subprojectName = json['subprojectName'];
+    // subStartVacationDate = json['sub_start_vacation_date'];
+    // subProjectNoPerson = json['sub_project_no_person'];
     city = json['city'];
     project_image = json['project_image'];
     pinDestination = json['pin_destination'];
+    pin_destination_lat = json['pin_destination_lat'];
+    pin_destination_long = json['pin_destination_long'];
     msg = json['msg'];
     if (json['type_pin'] != null) {
       typePin = new List<TypePin>();
       json['type_pin'].forEach((v) {
         typePin.add(new TypePin.fromJson(v));
+      });
+    }
+    if (json['subProjectDetail'] != null) {
+      subProjectDetail = <SubProjectDetail>[];
+      json['subProjectDetail'].forEach((v) {
+        subProjectDetail.add(new SubProjectDetail.fromJson(v));
       });
     }
   }
@@ -80,15 +94,19 @@ class AllProjectModel {
     data['project_no_person'] = this.projectNoPerson;
     data['project_vacation_date'] = this.projectVacationDate;
     data['project_destination_date'] = this.projectDestinationDate;
-    data['subprojectName'] = this.subprojectName;
-    data['sub_start_vacation_date'] = this.subStartVacationDate;
-    data['sub_project_no_person'] = this.subProjectNoPerson;
+    // data['subprojectName'] = this.subprojectName;
+    // data['sub_start_vacation_date'] = this.subStartVacationDate;
+    // data['sub_project_no_person'] = this.subProjectNoPerson;
     data['city'] = this.city;
     data['project_image'] = this.project_image;
     data['pin_destination'] = this.pinDestination;
     data['msg'] = this.msg;
     if (this.typePin != null) {
       data['type_pin'] = this.typePin.map((v) => v.toJson()).toList();
+    }
+    if (this.subProjectDetail != null) {
+      data['subProjectDetail'] =
+          this.subProjectDetail.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -139,6 +157,62 @@ class TypePin {
     data['description'] = this.description;
     data['image'] = this.image;
     data['rating'] = this.rating;
+    return data;
+  }
+}
+class SubProjectDetail {
+  int id;
+  int userId;
+  int projectId;
+  String name;
+  String startVacationDate;
+  int noPerson;
+  String latitude;
+  String longitude;
+  String city;
+  String createdAt;
+  String updatedAt;
+
+  SubProjectDetail(
+      {this.id,
+        this.userId,
+        this.projectId,
+        this.name,
+        this.startVacationDate,
+        this.noPerson,
+        this.latitude,
+        this.longitude,
+        this.city,
+        this.createdAt,
+        this.updatedAt});
+
+  SubProjectDetail.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    projectId = json['project_id'];
+    name = json['name'];
+    startVacationDate = json['start_vacation_date'];
+    noPerson = json['no_person'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+    city = json['city'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['project_id'] = this.projectId;
+    data['name'] = this.name;
+    data['start_vacation_date'] = this.startVacationDate;
+    data['no_person'] = this.noPerson;
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
+    data['city'] = this.city;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

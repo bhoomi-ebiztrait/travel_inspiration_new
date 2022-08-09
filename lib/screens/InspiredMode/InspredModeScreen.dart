@@ -26,36 +26,36 @@ import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
 import '../TICreateNewProjectInInspireModeScreen.dart';
 
-
 //  0 for inspire mode
 //  1 for reflective mode
-class
-InspredModeScreen extends StatefulWidget {
+class InspredModeScreen extends StatefulWidget {
   const InspredModeScreen({Key key}) : super(key: key);
 
   @override
   _InspredModeScreenState createState() => _InspredModeScreenState();
 }
 
-class _InspredModeScreenState extends State<InspredModeScreen> with SingleTickerProviderStateMixin{
+class _InspredModeScreenState extends State<InspredModeScreen>
+    with SingleTickerProviderStateMixin {
   bool isVisible = false;
 
-  MyController myController=Get.put(MyController());
+  MyController myController = Get.put(MyController());
   AnimationController rotateArrow360;
 
   bool goToDetail = false;
- @override
+
+  @override
   void initState() {
     // TODO: implement initState
-   rotateArrow360= AnimationController(
-     vsync: this,
-     duration: Duration(seconds:2),
-   );
+    rotateArrow360 = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
     super.initState();
-   getStartLatLong();
-   WidgetsBinding.instance.addPostFrameCallback((_) {
-     myController.getAllProject();
-   });
+    getStartLatLong();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      myController.getAllProject();
+    });
   }
 
   getStartLatLong() async {
@@ -71,123 +71,130 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
     Position endPosition = await determineCurrentPosition();
     print("curr : ${endPosition.latitude}, ${endPosition.longitude}");
     double startLat =
-    MyPreference.getPrefDoubleValue(key: MyPreference.startLat);
+        MyPreference.getPrefDoubleValue(key: MyPreference.startLat);
     double startLng =
-    MyPreference.getPrefDoubleValue(key: MyPreference.startLng);
-    double distance =calculateDistance(endPosition.latitude, endPosition.longitude);;
+        MyPreference.getPrefDoubleValue(key: MyPreference.startLng);
+    double distance =
+        calculateDistance(endPosition.latitude, endPosition.longitude);
+    ;
     // calculateDistance(23.007950, 72.553757);
     // calculateDistance(23.007950, 72.553757);
     print("distance km : $distance");
     callUpdateKm(distance, mGoToDetail);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(()=>
-        SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  MyImageURL.inspred_bg,
-                ),
-                fit: BoxFit.fill),
-          ),
-          child: Stack(
-            children: [
-              buildContent(),
-              buildQuestion(),
-              buildMenu(),
-              openMenu(),
-              MyBottomMenu(
-                homeMenuCallback:(){
-                  myController.showHomeIcon.value=false;
-                  myController.isFloatingMenuVisible.value = true;
-                },
+      body: Obx(() => SafeArea(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      MyImageURL.inspred_bg,
+                    ),
+                    fit: BoxFit.fill),
               ),
-              Visibility(
-                visible:myController.isFloatingMenuVisible.value,
-                child: Center(
-                  child: BackdropFilter(
-                    filter: myController.isFloatingMenuVisible.value
-                        ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
-                        : ImageFilter.blur(sigmaX: 0, sigmaY: 0),
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: Get.height * .020),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          myController.isSwitchClicked.value
-                              ? Padding(
-                                  padding:
-                                      EdgeInsets.only(bottom: Get.height * .10),
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: RotationTransition(
-                                      turns: Tween(begin: 0.0,end: 1.0).animate(rotateArrow360),
-                                      child: Image.asset(
-                                        MyImageURL.arrow3x,
-                                        fit: BoxFit.contain,
-                                        height: Get.height * .08,
-                                        width: Get.height * .08,
+              child: Stack(
+                children: [
+                  buildContent(),
+                  buildQuestion(),
+                  buildMenu(),
+                  openMenu(),
+                  MyBottomMenu(
+                    bgImg: MyImageURL.button_bg_img,
+                    homeMenuCallback: () {
+                      myController.showHomeIcon.value = false;
+                      myController.isFloatingMenuVisible.value = true;
+                    },
+                  ),
+                  Visibility(
+                    visible: myController.isFloatingMenuVisible.value,
+                    child: Center(
+                      child: BackdropFilter(
+                        filter: myController.isFloatingMenuVisible.value
+                            ? ImageFilter.blur(sigmaX: 0, sigmaY: 0)
+                            : ImageFilter.blur(sigmaX: 0, sigmaY: 0),
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: Get.height * .020),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              myController.isSwitchClicked.value
+                                  ? Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: Get.height * .10),
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: RotationTransition(
+                                          turns: Tween(begin: 0.0, end: 1.0)
+                                              .animate(rotateArrow360),
+                                          child: Image.asset(
+                                            MyImageURL.arrow3x,
+                                            fit: BoxFit.contain,
+                                            height: Get.height * .08,
+                                            width: Get.height * .08,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                )
-                              : Container(),
-                          MyFlyMenu(
-                              homeButtonClick: (){
-                                myController.isFloatingMenuVisible.value=false;
-                                myController.showHomeIcon.value=true;
-                                myController.isSwitchClicked.value=false;
-                                myController.isEditClicked.value=false;
-                              },
-                            editCallback: (){
-                              myController.isSwitchClicked.value=false;
-                              myController.isEditClicked.value=true;
-                              Get.to(()=>TIStartNewAdventureScreen());
-                              // Get.to(()=>TICreateNewProjectInInspireModeScreen());
-                            },
-                            switchCallback: (){
-                              myController.isSwitchClicked.value=true;
-                              myController.isEditClicked.value=false;
-                              rotateArrow360.forward();
-                              Future.delayed(Duration(seconds: 2),(){
-                                myController.isFloatingMenuVisible.value=false;
-                                myController.isSwitchClicked.value=false;
-                                myController.showHomeIcon.value=true;
-                                // myController.selectedProject = null;
-                                myController.resetProj();
+                                    )
+                                  : Container(),
+                              MyFlyMenu(
+                                homeButtonClick: () {
+                                  myController.isFloatingMenuVisible.value =
+                                      false;
+                                  myController.showHomeIcon.value = true;
+                                  myController.isSwitchClicked.value = false;
+                                  myController.isEditClicked.value = false;
+                                },
+                                editCallback: () {
+                                  myController.isSwitchClicked.value = false;
+                                  myController.isEditClicked.value = true;
+                                  Get.to(() => TIStartNewAdventureScreen());
+                                  // Get.to(()=>TICreateNewProjectInInspireModeScreen());
+                                },
+                                switchCallback: () {
+                                  myController.isSwitchClicked.value = true;
+                                  myController.isEditClicked.value = false;
+                                  rotateArrow360.forward();
+                                  Future.delayed(Duration(seconds: 2), () {
+                                    myController.isFloatingMenuVisible.value =
+                                        false;
+                                    myController.isSwitchClicked.value = false;
+                                    myController.showHomeIcon.value = true;
+                                    // myController.selectedProject = null;
+                                    myController.resetProj();
 
-                                callSelectModeAPI();
-
-
-                              });
-                            },
-                          )
-                        ],
+                                    callSelectModeAPI();
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        ),
-      )),
+            ),
+          )),
     );
   }
 
   buildQuestion() {
     return Positioned(
-        top: 10, right: 15, child: InkWell(
-        onTap: (){
-          ScreenTransition.navigateToScreenLeft(screenName: TIFaqListScreen());
-        },
-        child: Image.asset(MyImageURL.metro_question,
-        fit: BoxFit.contain,)));
+        top: 10,
+        right: 15,
+        child: InkWell(
+            onTap: () {
+              ScreenTransition.navigateToScreenLeft(
+                  screenName: TIFaqListScreen());
+            },
+            child: Image.asset(
+              MyImageURL.metro_question,
+              fit: BoxFit.contain,
+            )));
   }
 
   buildMenu() {
@@ -200,7 +207,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
                 isVisible = true;
               });
             },
-            child:Image.asset(MyImageURL.arrow_down_white)));
+            child: Image.asset(MyImageURL.arrow_down_white)));
   }
 
   openMenu() {
@@ -211,7 +218,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
         child: Container(
           width: Get.width,
           height: Get.height * 0.4,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(MyImageURL.top_wave), fit: BoxFit.fill),
@@ -225,12 +232,15 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    onTap: (){
-                      setState(() {
-                        isVisible = false;
-                      });
-                    },
-                      child: Image.asset(MyImageURL.arrow_dropdown_up)),
+                      onTap: () {
+                        setState(() {
+                          isVisible = false;
+                        });
+                      },
+                      child: Image.asset(
+                        MyImageURL.arrow_dropdown_up,
+                        color: MyColors.buttonBgColor,
+                      )),
                   /*InkWell(
                       onTap: () {
                         setState(() {
@@ -251,16 +261,19 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     GestureDetector(
-                        onTap:(){
+                        onTap: () {
                           getEndLatLong(false);
-             /* if (myController.selectedProject != null && myController.selectedProject.value != "" &&
+                          /* if (myController.selectedProject != null && myController.selectedProject.value != "" &&
               myController.selectedProject.value.projectMode == "0") {
                 getEndLatLong(false);
               }*/
                           // ScreenTransition.navigateToScreenLeft(screenName: TITravelougeScreen());
-
                         },
-                        child: Image.asset(MyImageURL.gaia)),
+                        child: Image.asset(
+                          MyImageURL.gaia,
+                          height: 60,
+                          width: 60,
+                        )),
                     SizedBox(
                       height: Get.height * 0.01,
                     ),
@@ -288,7 +301,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
         mainAxisSize: MainAxisSize.max,
         children: [
           MyText(
-            text_name: "inspire_mode".tr,
+            text_name: "inspire_mode".tr.toUpperCase(),
             myFont: MyStrings.courier_prime_bold,
             txtfontsize: MyFontSize.size20,
             txtcolor: MyColors.whiteColor,
@@ -316,9 +329,18 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
               myText: getSelectedProj(),
               txtFontSize: MyFontSize.size16,
               txtColor: MyColors.whiteColor,
+              quoteColor: MyColors.whiteColor,
               myFont: MyStrings.courier_prime_italic,
                     );
           }),
+
+        /*  MyQuotedText(
+            myText: getSelectedProj(),
+            txtFontSize: MyFontSize.size16,
+            txtColor: MyColors.whiteColor,
+            quoteColor: MyColors.whiteColor,
+            myFont: MyStrings.courier_prime_italic,
+          ),*/
           // SizedBox(
           //   height: Get.height * 0.02,
           // ),
@@ -339,9 +361,9 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
                 ScreenTransition.navigateToScreenLeft(
                     screenName: JourneyDetailsScreen());
               }*/
-              },
+            },
             child: MyText(
-              text_name: "see_my_journey".tr,
+              text_name: "see_my_journey".tr.toUpperCase(),
               myFont: MyStrings.cagliostro,
               txtfontsize: MyFontSize.size25,
               txtcolor: MyColors.whiteColor,
@@ -354,33 +376,37 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
       ),
     );
   }
+
   callSelectModeAPI() async {
-   ApiManager apiManager = ApiManager();
+    ApiManager apiManager = ApiManager();
     Map param = {
-      "userId" : MyPreference.getPrefStringValue(key: MyPreference.userId),
+      "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
       // "userId" : "43",
       "mode": ApiParameter.REFLECT_MODE.toString()
     };
 
-    TIPrint(tag: "param",value: param.toString());
+    TIPrint(tag: "param", value: param.toString());
     await apiManager.selectModeAPI(param).then((value) {
       if (value == true) {
         //change inspire mode to reflective mode
         // MyPreference.setPrefIntValue(key:MyPreference.APPMODE, value:ApiParameter.REFLECT_MODE);
-        ScreenTransition.navigateToScreenLeft(
-            screenName:ReflectModeScreen());
+        ScreenTransition.navigateOffAll(screenName: ReflectModeScreen());
       }
     });
   }
+
   getSelectedProj() {
-    if (myController.selectedProject != null && myController.selectedProject.value != "" &&
+    if (myController.selectedProject != null &&
+        myController.selectedProject.value != "" &&
         myController.selectedProject.value.projectMode == "0") {
+      print("titleee::: ${myController.selectedProject.value.title}");
       return myController.selectedProject.value.title;
     }
 
     if (myController.allProjectList.value != null &&
         myController.allProjectList.value.length > 0) {
       int appMode = MyPreference.getPrefIntValue(key: MyPreference.APPMODE);
+      myController.getSelectedProj();
       for (int i = 0; i < myController.allProjectList.value.length; i++) {
         if ("0" == myController.allProjectList.value[i].projectMode) {
           // myController.selectedProject.value =
@@ -388,7 +414,7 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
           myController.allProjectList.value[i].isSelected = true;
           myController.getSelectedProj();
           return myController.allProjectList.value[i].title;
-        }else{
+        } else {
           myController.allProjectList.value[i].isSelected = false;
         }
       }
@@ -403,21 +429,32 @@ class _InspredModeScreenState extends State<InspredModeScreen> with SingleTicker
 
     Map<String, dynamic> param = {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
-      "projectId": myController.selectedProject!= null ?myController.selectedProject.value.id:0,
+      "projectId": myController.selectedProject != null
+          ? myController.selectedProject.value.id
+          : 0,
       "projectMode": "0",
       "updatedKm": updatedKm,
     };
 
     await apiManager.updateKmAPI(param).then((value) {
       if (value == true) {
-        setState(()  {
+        setState(() async{
           goToDetail = mGoToDetails;
           if (goToDetail == false) {
-
-            ScreenTransition.navigateToScreenLeft(screenName: TITravelougeScreen((double.parse((distance).toStringAsFixed(2)))));
-          } else {
             ScreenTransition.navigateToScreenLeft(
-                screenName: JourneyDetailsScreen((double.parse((distance).toStringAsFixed(2)))));          }
+                screenName: TITravelougeScreen(
+                    (double.parse((distance).toStringAsFixed(2)))));
+          } else {
+
+            final result = await Get.to(JourneyDetailsScreen(
+                double.parse((distance).toStringAsFixed(2))));
+            if (result == true) setState(() {});
+
+
+            /*ScreenTransition.navigateToScreenLeft(
+                screenName: JourneyDetailsScreen(
+                    (double.parse((distance).toStringAsFixed(2)))));*/
+          }
         });
       }
     });

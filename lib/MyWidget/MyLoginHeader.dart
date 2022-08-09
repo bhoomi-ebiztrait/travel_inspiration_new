@@ -5,6 +5,7 @@ import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 
+import '../utils/CommonMethod.dart';
 import 'MyText.dart';
 
 class MyTopHeader extends StatelessWidget {
@@ -18,7 +19,31 @@ class MyTopHeader extends StatelessWidget {
    this.imgHeight,this.logoCallback});
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GestureDetector(
+          onTap: () {
+            Get.back(result: true);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(17.0),
+            child: Image.asset(MyImageURL.back,
+              width: 25,),
+          ),
+        ),
+        logoImgUrl != null ? Padding(
+          padding: const EdgeInsets.only(top: 8.0,right: 15,bottom: 15),
+          child: GestureDetector(
+              onTap: (){
+                CommonMethod.getAppMode();
+              },
+              child: Image.asset(MyImageURL.home_icon,width: 50,)),
+        ):Container(),
+      ],
+    );
+    /*return Container(
       height:imgHeight==null?Get.height * 0.34:imgHeight,
       width: Get.width,
       decoration: BoxDecoration(
@@ -63,6 +88,6 @@ class MyTopHeader extends StatelessWidget {
 
         ],
       ),
-    );
+    );*/
   }
 }

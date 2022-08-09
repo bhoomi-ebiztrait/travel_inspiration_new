@@ -17,8 +17,10 @@ class MyImageURL {
   static const google = root + "google.png";
   static const info = root + "info.png";
   static const info_big = root + "info_big.png";
+  static const add_btn_white = root + "add_btn_white.png";
   static const share_btn = root + "share_btn.png";
   static const fleche = root + "fleche.png";
+  static const gaia_bg_bottom = root + "gaia_bg_bottom.png";
   static const check_circle = root + "check_circle.png";
   static const check_pinned = root + "check_pinned.png";
   static const email_icon = root + "email_icon.png";
@@ -48,19 +50,29 @@ class MyImageURL {
   static const choose_your_leftquote=root+"quotation_mark_left@3x.png";
   static const choose_your_rightquote=root+"quotation_mark_right@3x.png";
   static const cross3x=root+"cross@3x.png";
+  static const bottom_bg=root+"bottom_bg.png";
   static const arrow3x=root+"arrow3x.png";
   static const premiuminfoBg=root+"completePremiumBg.png";
   static const triangle_premium=root+"triangle_premium.png";
   static const gia_topBg=root+"gia_curveImage.png";
-  static const gia_moicircle=root+"gia_moi_circle.png";
-  static const gia_mecircle=root+"gia_me_circle.png";
+  static const gia_moicircle=root+"gia_moicircle.png";
+  static const gia_mecircle=root+"gia_mecircle.png";
   static const faq_top=root+"faq_top.png";
   static const arrow_route=root+"arrow_route.png";
   static const arrow_route_down=root+"arrow_route_down.png";
   static const arrow_route_up=root+"arrow_route_up.png";
   static const circle3x=root+"circle@3x.png";
+  static const premium=root+"premium.png";
+  static const profile_selected=root+"profile_selected.png";
+  static const button_bg_img=root+"button_bg_img.png";
+  static const profile_bg=root+"profile_bg.png";
+  static const home_menu=root+"home_menu.png";
+  static const confirm_bg=root+"confirm_bg.png";
+  static const gallery_selected=root+"gallery_selected.png";
 
   static const minus = root + "minus.png";
+  static const minus_blue = root + "minus_blue.png";
+  static const plus_blue = root + "plus_blue.png";
   static const plus = root + "plus.png";
   static const rm_bottom = root + "rm_bottom.png";
   static const rm_top = root + "rm_top.png";
@@ -69,10 +81,12 @@ class MyImageURL {
   static const home_icon = root + "home_icon.png";
   static const profile_icon = root + "profile_icon.png";
   static const setting_icon = root + "setting_icon.png";
+  static const setting_selected = root + "setting_selected.png";
   static const world_icon = root + "world_icon.png";
   static const gaia = root + "gaia.png";
   static const inspred_bg = root + "inspred_bg.png";
   static const metro_question = root + "metro_question.png";
+  static const add_blue = root + "add_blue.png";
   static const switch_icon = root + "switch.png";
   static const switch_one = root + "switch_one.png";
   static const arrow_down_white = root + "arrow_down_white.png";
@@ -80,12 +94,17 @@ class MyImageURL {
   static const arrow_dropdown_down = root + "arrow_dropdown_down.png";
   static const arrow_right = root + "arrow_right.png";
   static const bg = root + "bg.png";
+  static const botom_bg = root + "botom_bg.png";
+  static const gaia_bg = root + "gaia_bg.png";
+  static const world_selected = root + "world_selected.png";
+  static const setting_button_bg = root + "setting_button_bg.png";
+  static const green_check = root + "green_check.png";
 
   static const top_wave = root + "top_wave.png";
   static const metro_steps = root + "metro_steps.png";
   static const project_name_bottom = root + "project_name_bottom.png";
   static const project_name_top = root + "project_name_top.png";
-  static const inspiremode_bg=root+"bg_inspiremode@3x.png";
+  static const inspiremode_bg=root+"inspiremode_bg.png";
   static const curve_whiteshape=root+"curve_shape@3x.png";
   static const home_icon3x=root+"home_icon@3x.png";
   static const home_edit3x=root+"home_edit@3x.png";
@@ -109,6 +128,9 @@ class MyImageURL {
   static const valise=root+"valise.png";
   static const carte=root+"carte.png";
   static const diamant_big=root+"diamant@3x.png";
+  static const change_pw_bottom=root+"change_pw_bottom.png";
+  static const giai_blue_fr=root+"giai_blue_fr.png";
+  static const giai_blue_en=root+"giai_blue_en.png";
 
   static const diamant_popup=root+"diamant_popup.png";
   static const document_popup=root+"document_popup.png";
@@ -116,7 +138,7 @@ class MyImageURL {
   static const valise_popup=root+"valise_popup.png";
   static const carte_popup=root+"carte_popup.png";
   static const facebook=root+"facebook.png";
-  static const info_blue=root+"Info_blue.png";
+  static const info_blue=root+"info_blue.png";
   static const instagram=root+"instagram.png";
   static const price_tag=root+"price_tag.png";
   static const sign=root+"sign.png";
@@ -148,6 +170,8 @@ class MyImageURL {
   static const red_heart=root+"red_heart.png";
   static const glob_icoc=root+"glob_icon.png";
   static const projet_icon=root+"projet_icon.png";
+  static const faq_topbg=root+"faq_topbg.png";
+  static const faq_bottombg=root+"faq_bottombg.png";
   static const bg_cannens=root+"bg_cannes.png";
   static const bg_monaco=root+"bg_monaco.png";
   static const bg_montpellier=root+"bg_montpellier.png";
@@ -156,6 +180,7 @@ class MyImageURL {
   static const plane_icon=root+"plane2x.png";
   static const train2x_icon=root+"train2x.png";
   static const arrowUp3x=root+"arrowUp3x.png";
+  static const notify_img=root+"notify_img.png";
   static const edit_medium_icon=root+"edit_medium.png";
   static const edit_medium_grey=root+"edit_medium_grey.png";
   static const pin_icon=root+"pin2x.png";
@@ -163,7 +188,8 @@ class MyImageURL {
   static const pin_brown=root+"pin_brown.png";
   static const favor2x_icon=root+"favor2x.png";
   static const fav_red=root+"fav_red.png";
-  static const favor_grey_icon=root+"favor_grey.png";
+  static const favor_grey=root+"favor_grey.png";
+  static const favor_white=root+"favor_white.png";
   static const cross2x_icon=root+"supprimer2x.png";
   static const cross_grey_icon=root+"supprimer_grey.png";
   static const activites3x_icon=root+"activites3x.png";

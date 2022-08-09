@@ -9,7 +9,9 @@ import 'package:travel_inspiration/Models/PlaceDetails.dart';
 import 'package:travel_inspiration/MyWidget/MyButton.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyRatingBar.dart';
+import 'package:travel_inspiration/MyWidget/MySettingTop.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
@@ -45,7 +47,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
   void _onAddMarkerButtonPressed() {
     setState(() {
 
-      if(myController.mPlaceDetails.value != null){
+      if(myController.mPlaceDetails.value != null &&  myController.mPlaceDetails.value.result != null){
 
         _markers.add(Marker(
 // This marker id can be anything that uniquely identifies each marker.
@@ -79,86 +81,108 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.settingBgColor,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Obx(() {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                MyTopHeader(
-                  headerName: widget.name,
-                  headerImgUrl: MyImageURL.travel_book_top,
-                  logoImgUrl: MyImageURL.logo_icon,
-                  logoCallback: (){
-                    CommonMethod.getAppMode();
-                  },
-                ),
-                SizedBox(
-                  height: Get.height * 0.02,
-                ),
-                MyText(
-                  text_name: myController.mPlaceDetails.value != null
-                      ? myController.mPlaceDetails.value.result.name
-                      : "",
-                  myFont: MyStrings.courier_prime_bold,
-                  txtfontsize: MyFontSize.size13,
-                ),
-                MyRatingBar(
-                  iconSize: 20,
-                  itemCount: 5,
-                  onRateUpdate: null,
-                  initialRating: myController.mPlaceDetails.value != null
-                      ? myController.mPlaceDetails.value.result.rating
-                      : 0.0,
-                ),
-                SizedBox(
-                  height: Get.height * 0.01,
-                ),
-                /*getTitle(MyStrings.description),
+        child: Obx(() {
+          return Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            // mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: Get.height*0.30,
+                width: Get.width,
+                color: MyColors.buttonBgColorHome.withOpacity(0.7),
+                child: Column(children: [
+                  MyTopHeader(
+                    logoImgUrl: MyImageURL.logo_icon,
+                    logoCallback: (){
+                      CommonMethod.getAppMode();
+                    },
+                  ),
+                  MyTitlebar(title:widget.name),
+                ],),
+              ),
+
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 40,horizontal:10),
+                  height: Get.height,
+                  color: MyColors.buttonBgColorHome.withOpacity(0.30),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        MyText(
+                          text_name: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null)
+                              ? myController.mPlaceDetails.value.result.name
+                              : "",
+                          myFont: MyStrings.courier_prime_bold,
+                          txtfontsize: MyFontSize.size13,
+                        ),
+                        MyRatingBar(
+                          iconSize: 20,
+                          itemCount: 5,
+                          onRateUpdate: null,
+                          initialRating: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null)
+                              ? myController.mPlaceDetails.value.result.rating != null ? myController.mPlaceDetails.value.result.rating :0.0
+                              : 0.0,
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.01,
+                        ),
+                        /*getTitle(MyStrings.description),
                 buildContent(
-                    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut"),
+                      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut"),
                 getTitle(MyStrings.commodites),
                 getCommodites(),
                 getTitle(MyStrings.room_types),
                 getRooms(),*/
-                getTitle("hours".tr),
-                SizedBox(
-                  height: Get.height * 0.005,
-                ),
-                getHours(),
-                getTitle("address".tr),
-                buildContent(myController.mPlaceDetails.value != null
-                    ? myController.mPlaceDetails.value.result.formattedAddress
-                    : ""),
-                SizedBox(
-                  height: Get.height * 0.005,
-                ),
-                buildMap(),
-                getTitle("picture_gallery".tr),
-                getPictures(),
-                getContactInfo(),
-                getReviews(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 80.0, vertical: 20),
-                  child: MyButton(
-                    btn_name: "to_book".tr,
-                    bgColor: MyColors.buttonBgColor,
-                    opacity: 1,
-                    txtcolor: MyColors.whiteColor,
-                    fontWeight: FontWeight.bold,
-                    txtfont: MyFontSize.size18,
-                    onClick: (){
-                      goToBrowser();
-                    },
+                        getTitle("hours".tr),
+                        SizedBox(
+                          height: Get.height * 0.005,
+                        ),
+                        getHours(),
+                        getTitle("address".tr),
+                        buildContent((myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null)
+                            ? myController.mPlaceDetails.value.result.formattedAddress
+                            : ""),
+                        SizedBox(
+                          height: Get.height * 0.005,
+                        ),
+                        buildMap(),
+                        getTitle("picture_gallery".tr),
+                        getPictures(),
+                        getContactInfo(),
+                        getReviews(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 80.0, vertical: 20),
+                          child: MyButton(
+                            btn_name: "to_book".tr,
+                            bgColor: MyColors.buttonBgColorHome,
+                            opacity: 1,
+                            myFont: MyStrings.courier_prime_bold,
+                            txtcolor: MyColors.whiteColor,
+                            // fontWeight: FontWeight.bold,
+                            txtfont: MyFontSize.size18,
+                            onClick: (){
+                              goToBrowser();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ],
-            );
-          }),
-        ),
+              ),
+
+
+            ],
+          );
+        }),
       ),
     );
   }
@@ -176,7 +200,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
 
   getHours() {
     var openHourWidgets = List<Widget>();
-    if (myController.mPlaceDetails.value != null) {
+    if ((myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null)) {
       List<String> mWeekDay =
           myController.mPlaceDetails.value.result.openingHours!= null ? myController.mPlaceDetails.value.result.openingHours.weekdayText:null;
       if(mWeekDay != null) {
@@ -214,7 +238,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
               _makePhoneCall(myController.mPlaceDetails.value.result.formattedPhoneNumber);
             },
             child: MyText(
-              text_name: myController.mPlaceDetails.value != null
+              text_name: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null)
                   ? myController.mPlaceDetails.value.result.formattedPhoneNumber!= null ? myController.mPlaceDetails.value.result.formattedPhoneNumber:""
                   : "",
               myFont: MyStrings.courier_prime_bold,
@@ -231,7 +255,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
               text: TextSpan(
                 children: [
                   TextSpan(
-                      text: myController.mPlaceDetails.value != null
+                      text: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null)
                           ? myController.mPlaceDetails.value.result.website
                           : "",
                       style: new TextStyle(color: Colors.blue),
@@ -266,7 +290,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          itemCount: myController.mPlaceDetails.value != null ? myController.mPlaceDetails.value.result.photos.length : 0,
+          itemCount: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null) ? myController.mPlaceDetails.value.result.photos.length : 0,
           itemBuilder: (context, index) {
             return getListItem(myController.mPlaceDetails.value.result.photos[index].photoReference);
           }),
@@ -279,7 +303,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
       padding: EdgeInsets.only(left: 5, top: 20, bottom: 10),
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: myController.mPlaceDetails.value != null ? (myController.mPlaceDetails.value.result.reviews.length > 2 ?2 : myController.mPlaceDetails.value.result.reviews.length):0,
+          itemCount: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null && myController.mPlaceDetails.value.result.reviews != null) ? (myController.mPlaceDetails.value.result.reviews.length > 2 ?2 : myController.mPlaceDetails.value.result.reviews.length):0,
           itemBuilder: (context, index) {
             return getReviewItem(myController.mPlaceDetails.value.result.reviews[index]);
           }),
@@ -417,7 +441,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
         ),
         MyRatingBar(
           itemCount: 5,
-          initialRating: myController.mPlaceDetails.value != null
+          initialRating: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null && myController.mPlaceDetails.value.result.rating != null)
               ? myController.mPlaceDetails.value.result.rating
               : 0.0,
           onRateUpdate: null,
@@ -467,7 +491,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
       return Container(
         width: Get.width,
         height: Get.height*0.30,
-        child: myController.mPlaceDetails.value!= null ?GoogleMap(
+        child: (myController.mPlaceDetails.value != null && myController.mPlaceDetails.value.result != null) ?GoogleMap(
           markers: _markers,
           //onCameraMove: _onCameraMove,
           onMapCreated: _onMapCreated,

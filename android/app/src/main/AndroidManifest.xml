@@ -33,7 +33,7 @@
        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
        <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyBRNil_iYmWUTUysdN_CU7KgDmv-ramMcM" />
+           android:value="AIzaSyChyfRRNXGlEzpZ3TjywKJKppBtJdU5180" />
 <!--           android:value="ApiParameter.GOOGLE_API_KEY" />-->
        <activity
            android:name="com.yalantis.ucrop.UCropActivity"

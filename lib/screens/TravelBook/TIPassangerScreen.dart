@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:travel_inspiration/MyWidget/MyCommonMethods.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
 import 'package:travel_inspiration/MyWidget/TIMyCustomRoundedCornerButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
@@ -37,9 +39,8 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
     return SafeArea(
         child: Scaffold(
       body:_buildBodyContent(),
-      bottomSheet: MyBottomLayout(
-        imgUrl: MyImageURL.travel_book_bottom,
-      ),
+          
+
     ));
   }
 
@@ -47,57 +48,81 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
     return  Obx(() => SingleChildScrollView(
       child: Column(
         children: [
-          MyTopHeader(
-            headerName: " travelLougeListTitle",
-            headerImgUrl: MyImageURL.travel_book_top,
-            logoImgUrl: MyImageURL.haudos_logo,
+          Container(
+            height: Get.height*0.30,
+            width: Get.width,
+            color: MyColors.buttonBgColorHome.withOpacity(0.7),
+            child: Column(
+              children: [
+                MyTopHeader(
+                  headerImgUrl: MyImageURL.travel_book_top,
+                  logoImgUrl: MyImageURL.haudos_logo,
+
+                ),
+                MyTitlebar(title: widget.travelLougeListTitle,)
+              ],
+            ),
           ),
-          SizedBox(
-            height: Get.height * .020,
+          Container(
+           height: Get.height,
+            width: Get.width,
+            color: MyColors.buttonBgColorHome.withOpacity(0.30),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: Get.height * .030,
+                ),
+                MyText(
+                  text_name: "txtPassagers".tr,
+                  myFont: MyFont.Courier_Prime_Bold,
+                  txtfontsize: MyFontSize.size15,
+                  txtcolor: MyColors.textColor,
+                  txtAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: Get.height * .030,
+                ),
+                _adultPassangerView(),
+                _childrenPassangerView(),
+                _babePassangerView(),
+               // Spacer(),
+                SizedBox(
+                  height: Get.height * .1,
+                ),
+                TIMyCustomRoundedCornerButton(
+                  onClickCallback: () {
+                    String adults;
+                    if (myController.noOfAdults.value != 0) {
+                      adults = myController.noOfAdults.value.toString() +" "+ "txtAdults".tr;
+                      passengetList.add(adults);
+                    }
+                    if (myController.noOfChildrens.value != 0) {
+                      adults = myController.noOfChildrens.value.toString() +" "+ "txtChildren".tr;
+                      // adults = ["txtAdults".tr, myController.noOfChildrens.value];
+                      passengetList.add(adults);
+                    }
+                    if (myController.noOfBabes.value != 0) {
+                      adults = myController.noOfBabes.value.toString() +" "+ "txtBabe".tr;
+                      // adults = ["txtBabe".tr, myController.noOfBabes.value];
+                      passengetList.add(adults);
+                    }
+                    Navigator.of(context).pop(passengetList);
+                  },
+                  buttonWidth: Get.width * .48,
+                  buttonHeight: Get.height * .050,
+                  btnBgColor: MyColors.buttonBgColor,
+                  textColor: Colors.white,
+                  btnText: "txtValider".tr,
+                  fontSize: MyFontSize.size18,
+                  myFont: MyFont.Courier_Prime_Bold,
+                ),
+                SizedBox(
+                  height: Get.height * .020,
+                ),
+              ],
+            ),
           ),
-          MyText(
-            text_name: "txtPassagers".tr,
-            myFont: MyFont.Courier_Prime_Bold,
-            txtfontsize: MyFontSize.size13,
-            txtcolor: MyColors.textColor,
-            txtAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: Get.height * .020,
-          ),
-          _adultPassangerView(),
-          _childrenPassangerView(),
-          _babePassangerView(),
-          SizedBox(
-            height: Get.height * .05,
-          ),
-          TIMyCustomRoundedCornerButton(
-            onClickCallback: () {
-              String adults;
-              if (myController.noOfAdults.value != 0) {
-                 adults = myController.noOfAdults.value.toString() +" "+ "txtAdults".tr;
-                passengetList.add(adults);
-              }
-              if (myController.noOfChildrens.value != 0) {
-                adults = myController.noOfChildrens.value.toString() +" "+ "txtChildren".tr;
-                // adults = ["txtAdults".tr, myController.noOfChildrens.value];
-                passengetList.add(adults);
-              }
-              if (myController.noOfBabes.value != 0) {
-                adults = myController.noOfBabes.value.toString() +" "+ "txtBabe".tr;
-                // adults = ["txtBabe".tr, myController.noOfBabes.value];
-                passengetList.add(adults);
-              }
-              Navigator.of(context).pop(passengetList);
-            },
-            buttonWidth: Get.width * .48,
-            buttonHeight: Get.height * .050,
-            btnBgColor: MyColors.expantionTileBgColor,
-            textColor: Colors.white,
-            btnText: "txtValider".tr,
-            fontSize: MyFontSize.size18,
-            myFont: MyFont.Courier_Prime_Bold,
-          )
+
         ],
       ),
     ));
@@ -119,7 +144,7 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                   children: [
                     MyTextStart(
                       text_name: "txtAdults".tr,
-                      txtcolor: MyColors.expantionTileBgColor,
+                      txtcolor: MyColors.textColor,
                       myFont: MyFont.Courier_Prime,
                       txtfontsize: MyFontSize.size13,
                     ),
@@ -128,9 +153,9 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                     ),
                     MyTextStart(
                       text_name: "txtAdultSubTitle".tr,
-                      txtcolor: MyColors.expantionTileBgColor.withOpacity(0.3),
+                      txtcolor: MyColors.textColor.withOpacity(0.3),
                       myFont: MyFont.Courier_Prime,
-                      txtfontsize: MyFontSize.size8,
+                      txtfontsize: MyFontSize.size10,
                     ),
                   ],
                 ),
@@ -146,7 +171,7 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                             myController.noOfAdults.value--;
                           }
                         },
-                        child: Image.asset(MyImageURL.minus)),
+                        child: Image.asset(MyImageURL.minus_blue,height: 45,width: 45,)),
                     MyText(
                       text_name: myController.noOfAdults.value.toString(),
                       myFont: MyFont.Courier_Prime_Bold,
@@ -158,18 +183,13 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                         onTap: () {
                           myController.noOfAdults.value++;
                         },
-                        child: Image.asset(MyImageURL.plus)),
+                        child: Image.asset(MyImageURL.add_blue,height: 45,width: 45,)),
                   ],
                 ),
               ),
             ],
           ),
-          Divider(
-            height: 1,
-            thickness: 2,
-            color: MyColors.lineColor,
-          ),
-        ],
+          MyCommonMethods.myDivider(),      ],
       ),
     );
   }
@@ -190,7 +210,7 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                   children: [
                     MyTextStart(
                       text_name: "txtChildren".tr,
-                      txtcolor: MyColors.expantionTileBgColor,
+                      txtcolor: MyColors.textColor,
                       myFont: MyFont.Courier_Prime,
                       txtfontsize: MyFontSize.size13,
                     ),
@@ -199,9 +219,9 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                     ),
                     MyTextStart(
                       text_name: "txtChildrenSubTitle".tr,
-                      txtcolor: MyColors.expantionTileBgColor.withOpacity(0.3),
+                      txtcolor: MyColors.textColor.withOpacity(0.3),
                       myFont: MyFont.Courier_Prime,
-                      txtfontsize: MyFontSize.size8,
+                      txtfontsize: MyFontSize.size10,
                     ),
                   ],
                 ),
@@ -217,7 +237,7 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                             myController.noOfChildrens.value--;
                           }
                         },
-                        child: Image.asset(MyImageURL.minus)),
+                        child: Image.asset(MyImageURL.minus_blue,height: 45,width: 45,)),
                     MyText(
                       text_name: myController.noOfChildrens.value.toString(),
                       myFont: MyFont.Courier_Prime_Bold,
@@ -229,17 +249,13 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                         onTap: () {
                           myController.noOfChildrens.value++;
                         },
-                        child: Image.asset(MyImageURL.plus)),
+                        child: Image.asset(MyImageURL.add_blue,height: 45,width: 45,)),
                   ],
                 ),
               ),
             ],
           ),
-          Divider(
-            height: 1,
-            thickness: 2,
-            color: MyColors.lineColor,
-          ),
+          MyCommonMethods.myDivider(),
         ],
       ),
     );
@@ -261,7 +277,7 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                   children: [
                     MyTextStart(
                       text_name: "txtBabe".tr,
-                      txtcolor: MyColors.expantionTileBgColor,
+                      txtcolor: MyColors.textColor,
                       myFont: MyFont.Courier_Prime,
                       txtfontsize: MyFontSize.size13,
                     ),
@@ -270,9 +286,9 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                     ),
                     MyTextStart(
                       text_name: "txtBabeSubTitle".tr,
-                      txtcolor: MyColors.expantionTileBgColor.withOpacity(0.3),
+                      txtcolor: MyColors.textColor.withOpacity(0.3),
                       myFont: MyFont.Courier_Prime,
-                      txtfontsize: MyFontSize.size8,
+                      txtfontsize: MyFontSize.size10,
                     ),
                   ],
                 ),
@@ -288,7 +304,7 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                             myController.noOfBabes.value--;
                           }
                         },
-                        child:Image.asset(MyImageURL.minus)),
+                        child:Image.asset(MyImageURL.minus_blue,height: 45,width: 45,)),
                     MyText(
                       text_name: myController.noOfBabes.value.toString(),
                       myFont: MyFont.Courier_Prime_Bold,
@@ -300,17 +316,13 @@ class TIPassangerScreenState extends State<TIPassangerScreen> {
                         onTap: (){
                           myController.noOfBabes.value++;
                         },
-                        child: Image.asset(MyImageURL.plus)),
+                        child: Image.asset(MyImageURL.add_blue,height: 45,width: 45,)),
                   ],
                 ),
               ),
             ],
           ),
-          Divider(
-            height: 1,
-            thickness: 2,
-            color: MyColors.lineColor,
-          ),
+         MyCommonMethods.myDivider(),
         ],
       ),
     );

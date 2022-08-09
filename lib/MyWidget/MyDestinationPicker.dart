@@ -53,16 +53,16 @@ class _MyPickPickerState extends State<MyPickPicker> {
         getDateDialog(context,widget.minDate,widget.maxDate);
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 65.0),
+        padding: const EdgeInsets.symmetric(horizontal: 48.0),
         child: Container(
           width: Get.width,
-          height: 45,
+          height: 55,
           // width: Get.width*0.2,
 
           decoration: BoxDecoration(
               color: MyColors.whiteColor.withOpacity(1),
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+              borderRadius: BorderRadius.all(Radius.circular(25)),
               boxShadow: [
                 BoxShadow(
                   color: MyColors.dialog_shadowColor,
@@ -178,16 +178,16 @@ print("${dateController.selectedDate.value}");
 
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 65.0),
+        padding: const EdgeInsets.symmetric(horizontal: 48.0),
         child: Container(
           width: Get.width,
-          height: 45,
+          height: 55,
           // width: Get.width*0.2,
 
           decoration: BoxDecoration(
               color: MyColors.whiteColor.withOpacity(1),
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+              borderRadius: BorderRadius.all(Radius.circular(25)),
               boxShadow: [
                 BoxShadow(
                   color: MyColors.dialog_shadowColor,
@@ -263,8 +263,170 @@ print("${dateController.selectedDate.value}");
                        setState(() {
                       dateController.selectedDestinationDate.value=CommonMethod.convertDateToString(args.value);
                       // mController.text = DateFormat('dd-MM-yyyy').format(args.value);
+
+                      if(dateController.selectedDate.value != ""){
+                        print("val${dateController.selectedDate.value}");
+                        DateTime minDate = CommonMethod.convertStringToDate(dateController.selectedDate.value);
+                        DateTime maxDate = CommonMethod.convertStringToDate(dateController.selectedDestinationDate.value);
+                        final diff = maxDate.difference(minDate).inDays;
+
+                        final num = (diff/2).round() ;
+                        final midDay = minDate.add(Duration(days: num));
+                        print("mydiff :: $diff $num mid $midDay");
+
+                        dateController.selectedNotifyDate.value = CommonMethod.convertDateToString(midDay);
+                        // getDateDialog(context,minDate,maxDate);
+                      }
+
+
                       Get.back();
                     });
+                    });
+                  }
+                  // mController.text = args.value;
+
+                },
+              ),
+            ),
+          );
+        });
+  }
+
+
+
+
+}
+
+
+
+class MyNotifyDatePicker extends StatefulWidget {
+
+  DateTime minDate;
+  DateTime maxDate;
+  // String msg;
+
+  //MyNotifyDatePicker({this.minDate,this.maxDate});
+
+  @override
+  _MyNotifyDatePickerState createState() => _MyNotifyDatePickerState();
+}
+
+class _MyNotifyDatePickerState extends State<MyNotifyDatePicker> {
+
+  final DateRangePickerController _controller = DateRangePickerController();
+  MyController dateController = Get.put(MyController());
+
+  @override
+  Widget build(BuildContext context) {
+
+    return GestureDetector(
+      onTap: () {
+        DateTime minDate = CommonMethod.convertStringToDate(dateController.selectedDate.value);
+        DateTime maxDate = CommonMethod.convertStringToDate(dateController.selectedDestinationDate.value);
+        getDateDialog(context,minDate,maxDate);
+        /*if(dateController.selectedDate.value != ""){
+          print("val${dateController.selectedDate.value}");
+          DateTime minDate = CommonMethod.convertStringToDate(dateController.selectedDate.value);
+          DateTime maxDate = CommonMethod.convertStringToDate(dateController.selectedDestinationDate.value);
+         final diff = maxDate.difference(minDate).inDays;
+
+         final num = (diff/2).round() ;
+         final midDay = minDate.add(Duration(days: num));
+         print("mydiff :: $diff $num mid $midDay");
+
+         dateController.selectedNotifyDate.value = CommonMethod.convertDateToString(midDay);
+        // getDateDialog(context,minDate,maxDate);
+        }*/
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 48.0),
+        child: Container(
+          width: Get.width,
+          height: 55,
+          // width: Get.width*0.2,
+
+          decoration: BoxDecoration(
+              color: MyColors.whiteColor.withOpacity(1),
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.all(Radius.circular(25)),
+              boxShadow: [
+                BoxShadow(
+                  color: MyColors.dialog_shadowColor,
+                  blurRadius: 2,
+                  offset: Offset(1, 1),
+                )
+              ]),
+          child: MyText(
+            text_name: dateController.selectedNotifyDate.value != ""
+                ? dateController.selectedNotifyDate.value
+                : "Date".tr,
+            txtcolor: MyColors.textColor.withOpacity(1.0),
+            txtfontsize: MyFontSize.size15,
+            myFont: MyStrings.courier_prime,
+          ),
+        ),
+      ),
+    );
+    /*return MyTextFieldWithImage(
+      // imageUrl: MyImageURL.user_img,
+      onTap: (){
+        getDateDialog(context);
+      },
+      addlabel: MyStrings.date_of_birth,
+      readonly: true,
+      labelColor: MyColors.textColor,
+      edinputType: TextInputType.name,
+      obscureText: false,
+      mycontroller: mController,
+
+    );*/
+  }
+
+  getDateDialog(context,myMinDate,myMaxDate){
+    DateTime mSeleDate = CommonMethod.convertStringToDate(dateController.selectedNotifyDate.value);
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30)),side: BorderSide.none),
+            elevation: 0,
+            child: Container(
+              height: 255,
+              width: 255,
+              // width: Get.width*0.7,
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: MyColors.whiteColor.withOpacity(1),
+                  border: Border.all(color: MyColors.dateColor,width: 2),
+                  borderRadius: BorderRadius.circular(26),
+                  boxShadow: [
+                    BoxShadow(color: MyColors.dialog_shadowColor,
+                        blurRadius: 2
+                    ),
+                  ]
+              ),
+              child: SfDateRangePicker(
+                controller: _controller,
+                view: DateRangePickerView.decade,
+                minDate: myMinDate,
+                maxDate: myMaxDate,
+                initialSelectedDate:mSeleDate ,
+                selectionColor: MyColors.lightGreenColor,
+                selectionTextStyle: TextStyle(color: MyColors.textColor,fontWeight: FontWeight.bold),
+                selectionRadius: 22,
+                onSelectionChanged: (args){
+                  // selectedDate = args.value;
+                  print("valueSele::: ${args.value.toString()}");
+                  print("value::: ${args.value}");
+
+                  if(SchedulerBinding.instance != null){
+                    SchedulerBinding.instance.addPostFrameCallback((duration) {
+                      setState(() {
+                        dateController.selectedNotifyDate.value=CommonMethod.convertDateToString(args.value);
+                        // mController.text = DateFormat('dd-MM-yyyy').format(args.value);
+                        Get.back();
+                      });
                     });
                   }
                   // mController.text = args.value;

@@ -106,7 +106,8 @@ class Result {
     plusCode = json['plus_code'] != null
         ? new PlusCode.fromJson(json['plus_code'])
         : null;
-    rating = (json['rating']).toDouble();
+    // rating = (json['rating']).toDouble();
+    rating = json['rating'] != null ?(json['rating']).toDouble() :null;
     reference = json['reference'];
     if (json['reviews'] != null) {
       reviews = new List<Reviews>();
@@ -150,7 +151,10 @@ class Result {
     if (this.plusCode != null) {
       data['plus_code'] = this.plusCode.toJson();
     }
-    data['rating'] = this.rating;
+    if (this.rating != null) {
+      data['rating'] = this.rating;
+    }
+    // data['rating'] = this.rating;
     data['reference'] = this.reference;
     if (this.reviews != null) {
       data['reviews'] = this.reviews.map((v) => v.toJson()).toList();

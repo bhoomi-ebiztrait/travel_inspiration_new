@@ -20,41 +20,102 @@ class _ChangePwConfirmScreenState extends State<ChangePwConfirmScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: MyColors.buttonBgColor,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child:
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(height: Get.height*0.15,),
-                  Image.asset(MyImageURL.check_circle,),
-                  SizedBox(height: Get.height*0.09,),
-                  MyText(text_name: "new_password_validated".tr,txtcolor: MyColors.whiteColor,myFont: MyStrings.courier_prime_bold,txtfontsize: MyFontSize.size19,),
-                  SizedBox(height: Get.height*0.05,),
-                  MyText(text_name: "confirmation_msg".tr,txtcolor: MyColors.whiteColor,txtfontsize: MyFontSize.size18,),
-                ],
-              ),
+    return SafeArea(
+      child: Scaffold(
+        // backgroundColor: MyColors.buttonBgColor,
+        body: Container(
+          width: Get.width,
+          height: Get.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(MyImageURL.confirm_bg), fit: BoxFit.fill)),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  height: Get.height * 0.05,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: MyColors.whiteColor.withOpacity(0.86),
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25.0, vertical: 25),
+                      child: Column(
+                        children: [
+                          MyText(
+                            text_name: "new_password_validated".tr,
+                            txtcolor: MyColors.confirmTextColor,
+                            myFont: MyStrings.courier_prime_bold,
+                            txtfontsize: MyFontSize.size19,
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.02,
+                          ),
+                          MyText(
+                            text_name: "confirmation_msg".tr,
+                            txtcolor: MyColors.confirmTextColor,
+                            txtfontsize: MyFontSize.size18,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      height: Get.height * 0.08,
+                    ),
+                    backToSetting(),
+                    SizedBox(
+                      height: Get.height * 0.05,
+                    ),
+                    buildBackToMenu(),
+                    SizedBox(
+                      height: Get.height * 0.05,
+                    ),
+                  ],
+                ),
+              ],
             ),
-            SizedBox(height: Get.height*0.08,),
-            backToSetting(),
-            SizedBox(height: Get.height*0.08,),
-
-            buildBackToMenu(),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Row backToSetting() {
-    return Row(
+  backToSetting() {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Get.width*0.14),
+        child: MyButton(
+          btn_name: "back_to_settings".tr,
+          txtcolor: isSettingSelected == true ? MyColors.whiteColor:MyColors.buttonBgColor,
+          myFont: MyStrings.courier_prime_bold,
+          txtfont: MyFontSize.size13,
+            bgColor: isSettingSelected == true ?MyColors.buttonBgColor:MyColors.whiteColor,
+          opacity: 1,
+          onClick: (){
+            setState(() {
+              isSettingSelected = true;
+            });
+            Get.back();
+          },
+        ),
+      ),
+    );
+    /*return Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               MyButtonWithOnesideRadious(
@@ -71,28 +132,50 @@ class _ChangePwConfirmScreenState extends State<ChangePwConfirmScreen> {
                 },
               ),
             ],
-          );
+          );*/
   }
 
-  Row buildBackToMenu() {
-    return Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              MyButtonWithoutIcon(
-                btn_name: "back_to_menu".tr,
-                txtcolor: isMenuSelected ?MyColors.lightGreenColor:MyColors.textColor,
-                bgcolor: MyColors.whiteColor,
-                txtfont: MyFontSize.size13,
-                myFont: MyStrings.courier_prime_bold,
-                onClick: (){
-                  setState(() {
-                    isMenuSelected = true;
-                  });
-                  
-                  CommonMethod.getAppMode();
-                },
-              ),
-            ],
-          );
+   buildBackToMenu() {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Get.width*0.14),
+        child: MyButton(
+          btn_name: "back_to_menu".tr,
+          txtcolor: isMenuSelected == true ? MyColors.whiteColor:MyColors.buttonBgColor,
+          myFont: MyStrings.courier_prime_bold,
+          txtfont: MyFontSize.size13,
+          bgColor: isMenuSelected == true ? MyColors.buttonBgColor:MyColors.whiteColor,
+          opacity: 1,
+          onClick: (){
+            setState(() {
+              isMenuSelected = true;
+            });
+
+           CommonMethod.getAppMode();
+          },
+        ),
+      ),
+    );
+
+    /*return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        MyButtonWithoutIcon(
+          btn_name: "back_to_menu".tr,
+          txtcolor:
+              isMenuSelected ? MyColors.lightGreenColor : MyColors.textColor,
+          bgcolor: MyColors.whiteColor,
+          txtfont: MyFontSize.size13,
+          myFont: MyStrings.courier_prime_bold,
+          onClick: () {
+            setState(() {
+              isMenuSelected = true;
+            });
+
+            CommonMethod.getAppMode();
+          },
+        ),
+      ],
+    );*/
   }
 }

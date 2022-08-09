@@ -17,7 +17,7 @@ class TICirculerBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: Get.height*.050,
-      width: Get.width*.55,
+      width: Get.width*.50,
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -28,7 +28,7 @@ class TICirculerBox extends StatelessWidget {
             )
           ],
           border: Border.all(
-            color: MyColors.expantionTileBgColor,
+            color: MyColors.whiteColor,
           ),
           borderRadius:BorderRadius.all(Radius.circular(Get.width*.060))
       ),
@@ -42,6 +42,7 @@ class TICirculerBox extends StatelessWidget {
               height: Get.height*.025,
               width: Get.height*.025,
               fit: BoxFit.contain,
+              color: MyColors.buttonBgColor,
             ),
             SizedBox(width: Get.width*.030,),
             MyText(

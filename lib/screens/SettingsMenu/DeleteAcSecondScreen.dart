@@ -10,6 +10,8 @@ import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
+import '../../MyWidget/MyGradientBottomMenu.dart';
+import '../../MyWidget/MySettingTop.dart';
 import 'SettingScreen.dart';
 
 class DeleteAcSecondScreen extends StatelessWidget {
@@ -18,6 +20,18 @@ class DeleteAcSecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.settingBgColor,
+      bottomNavigationBar: MyGradientBottomMenu(selString:MyStrings.settings,
+        iconList: [
+          MyImageURL.profile_icon,
+          MyImageURL.galerie,
+          MyImageURL.home_menu,
+          MyImageURL.world_icon,
+          MyImageURL.setting_selected
+        ],
+        bgImg: MyImageURL.change_pw_bottom,
+        bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),
+      ),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -25,16 +39,12 @@ class DeleteAcSecondScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  MyTopHeader(
-                    headerName: "auters_info".tr,
-                    headerImgUrl: MyImageURL.setting_top,
-                    logoImgUrl: MyImageURL.haudos_logo,
-                  ),
+                  MySettingTop(title: "auters_info".tr,),
                   SizedBox(
                     height: Get.height * 0.10,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 50.0),
                     child: MyText(
                         text_name: "delete_warn_msg".tr,
                         txtfontsize: MyFontSize.size12,
@@ -47,12 +57,12 @@ class DeleteAcSecondScreen extends StatelessWidget {
                   SizedBox(
                     height: Get.height * 0.05,
                   ),
-                  buildChangeMyMindButton(),
+                  buildChngMindButton(),
                 ],
               ),
             ),
           ),
-          buildBottomImage(),
+
         ],
       ),
     );
@@ -72,7 +82,7 @@ class DeleteAcSecondScreen extends StatelessWidget {
 
   buildChangeMyMindButton() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+     // mainAxisAlignment: MainAxisAlignment.start,
       children: [
         MyButtonWithoutIcon(
           btn_name: "changed_my_mind".tr,
@@ -87,20 +97,66 @@ class DeleteAcSecondScreen extends StatelessWidget {
       ],
     );
   }
-
-  buildDeleteAcButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+  buildChngMindButton() {
+    return Column(
+      // mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30), bottomLeft: Radius.circular(30)),
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+
               color: MyColors.whiteColor,
-              border: Border.all(color: MyColors.buttonBgColor),
+
               boxShadow: [
                 BoxShadow(
-                  color: MyColors.buttonBgColor,
+                  color: MyColors.dialog_shadowColor,
+                  blurRadius: 1.0,
+                ),
+              ]),
+          //margin: EdgeInsets.all(20),
+          child: MaterialButton(
+            onPressed: () {
+              ScreenTransition.navigateOff(screenName:SettingScreen());
+            },
+            minWidth: Get.width * 0.70,
+            child: Container(
+              width: Get.width * 0.55,
+              child: MyText(
+                  text_name: "changed_my_mind".tr,
+                  myFont: MyStrings.courier_prime_bold,
+                  txtfontsize: MyFontSize.size13,
+                  txtcolor: MyColors.buttonBgColor),
+
+              /*child: Row(
+                // mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+
+                  Container(
+                      width: Get.width * 0.04,
+                      alignment: Alignment.topRight,
+                      child: Image.asset(MyImageURL.delete_ac)),
+
+                ],
+              ),*/
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+  buildDeleteAcButton() {
+    return Column(
+      // mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+
+              color: MyColors.whiteColor,
+
+              boxShadow: [
+                BoxShadow(
+                  color: MyColors.dialog_shadowColor,
                   blurRadius: 1.0,
                 ),
               ]),

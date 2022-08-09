@@ -1,6 +1,8 @@
 class ApiParameter {
-  static const BASE_URL = "https://solutiontrackers.com/TravelApp/api/";
-  static const GOOGLE_API_KEY = "AIzaSyBRNil_iYmWUTUysdN_CU7KgDmv-ramMcM";
+  // static const BASE_URL = "https://solutiontrackers.com/TravelApp/api/";
+  static const BASE_URL = "https://travel.solutiontrackers.com/api/";
+  // static const GOOGLE_API_KEY = "AIzaSyBRNil_iYmWUTUysdN_CU7KgDmv-ramMcM";
+  static const GOOGLE_API_KEY = "AIzaSyChyfRRNXGlEzpZ3TjywKJKppBtJdU5180";
 
   static DateTime DOB_START = DateTime(1953, 01, 01);
   static DateTime DOB_END = DateTime(2003, 12, 31);
@@ -21,6 +23,9 @@ class ApiParameter {
 
 
   // google places url
+  // flight urls
+  static const availableFlightsURL="/api/availableFlights";
+  static const searchFlights="/api/searchFlights";
 
   // static const GoogleDirectionURL  = "https://maps.googleapis.com/maps/api/directions/json";
   static const GoogleDistanceURL  = "https://maps.googleapis.com/maps/api/distancematrix/json";
@@ -59,6 +64,7 @@ class ApiParameter {
   static const createReflectProjectURL = BASE_URL + "createReflectProject";
   static const createInspireProjectURL = BASE_URL + "createInspireProject";
   static const CHANGEPASSWORD=BASE_URL+"changePassword";
+  static const CHANGEPHONENUMBER=BASE_URL+"modifyNumber";
   static const GETFAQTITLELIST=BASE_URL+"getFaqTitleList";
   static const GETFAQLIST=BASE_URL+"getFaqList";
   static const GETARTICALLIST=BASE_URL+"getArticalList";
@@ -86,8 +92,7 @@ class ApiParameter {
   static const deleteProjectURL=BASE_URL+"deleteProject";
   static const general_setting=BASE_URL+"general_setting";
   static const verify_user=BASE_URL+"verify/user";
-  static const availableFlightsURL="/TravelApp/api/availableFlights";
-  static const searchFlights="/TravelApp/api/searchFlights";
+
 
 
   //sign up req param

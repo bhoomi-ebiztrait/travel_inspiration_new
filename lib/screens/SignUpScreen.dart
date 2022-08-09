@@ -7,6 +7,7 @@ import 'package:travel_inspiration/MyWidget/MyCommonMethods.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextFieldWithImage.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/TIController/MyValidatorController.dart';
 import 'package:travel_inspiration/screens/PopScreen/ShowAlertSignIn.dart';
 import 'package:travel_inspiration/screens/SingupConfirmScreen.dart';
@@ -56,12 +57,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   buildSignupLayout() {
-    return SingleChildScrollView(
-      child: Container(
-        width: Get.width,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+    return Container(
+      width: Get.width,
+      height: Get.height,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -86,28 +88,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(
                 height: Get.height * 0.06
             ),
-            Container(
-              margin: EdgeInsets.only(left: 60),
-              height: 80,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    bottomLeft: Radius.circular(40)),
-                color: MyColors.buttonBgColor,
-              ),
-              //margin: EdgeInsets.all(20),
-              child: MyText(
-                text_name: "devenir_haudosseen_multiLine".tr,
-                txtcolor: MyColors.whiteColor,
-                txtfontsize:MyFontSize.size25,
-                myFont: MyStrings.bodoni72_Bold,
-              ),
-            ),
+            MyTitlebar(title: "${"devenir_haudosseen_multiLine".tr}".toUpperCase(),),
+
             SizedBox(
               height: Get.height * 0.06,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 50,bottom: 10),
+            Container(
+              margin: const EdgeInsets.only(left: 70,bottom: 10),
               child: MyTextStart(
                 text_name: "email".tr,
                 txtcolor: MyColors.whiteColor,
@@ -129,21 +116,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: Get.height * 0.04,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 50,bottom: 10),
+              padding: const EdgeInsets.only(left: 70),
               child: Row(
                 children: [
-                  MyTextStart(
-                    text_name: "password".tr,
-                    txtcolor: MyColors.whiteColor,
-                    txtfontsize:MyFontSize.size15,
-                    myFont: MyStrings.courier_prime,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 4.0),
+                    child: MyTextStart(
+                      text_name: "mot_de_passe".tr,
+                      txtcolor: MyColors.whiteColor,
+                      txtfontsize:MyFontSize.size15,
+                      myFont: MyStrings.courier_prime,
+                    ),
                   ),
                   SizedBox(width: 5,),
                   GestureDetector(
                     onTap: (){
                       Get.to(() => AlertDialogSignIn(title: "password_rules",myContent: "",));
                     },
-                      child: Icon(Icons.info_outline,size: 22,color: MyColors.whiteColor,))
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Icon(Icons.info_outline,size: 22,color: MyColors.whiteColor,),
+                      ))
                 ],
               ),
             ),
@@ -171,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: buildAcceptCGV(),
             ),
             SizedBox(
-              height: Get.height * 0.02,
+              height: Get.height * 0.05,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: Get.width * 0.15),
@@ -205,58 +198,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ],
         ),
       ),
-     /* child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          MyTopHeader(
-            headerName: "devenir_haudosseen_multiLine".tr.toUpperCase(),
-            headerImgUrl: MyImageURL.signout_top,
-          ),
-          SizedBox(
-            height: Get.height * 0.04,
-          ),
-          MyTextFieldWithImage(
-            imageUrl: MyImageURL.email,
-            addlabel: "email".tr,
-            readonly: false,
-            labelColor: MyColors.lightGreenColor,
-            edinputType: TextInputType.emailAddress,
-            obscureText: false,
-            validator: myController.validateEmail,
-            mycontroller:email,
-          ),
-          SizedBox(
-            height: Get.height * 0.04,
-          ),
-          MyTextFieldHintWithImageInfo(
-            labelColor: MyColors.lightGreenColor,
-            imageUrl: MyImageURL.password,
-            suffixImageUrl:
-                widget.isVisible ? MyImageURL.eye : MyImageURL.eye_off,
-            suffixOnTap: () {
-              setState(() {
-                widget.isVisible = !widget.isVisible;
-                // MyCommonMethods.showAlertDialog(
-                //     MyStrings.password_rules, MyStrings.courier_prime_bold);
-              });
-            },
-            addlabel: "mot_de_passe".tr,
-            readonly: false,
-            edinputType: TextInputType.visiblePassword,
-            obscureText: widget.isVisible,
-            validator: myController.validatePassword,
-            mycontroller:password,
-          ),
-          buildAcceptCGV(),
-          SizedBox(height: Get.height * 0.04),
-          buildSignUpButton(),
-          SizedBox(height: Get.height * 0.07),
-         // buildSignUpWithGoogle(),
-          //SizedBox(height: Get.height * 0.04),
-        ],
-      ),*/
     );
   }
 
@@ -307,7 +248,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           MyText(
             text_name: "accept_cgv".tr,
-            txtcolor: MyColors.textColor,
+            txtcolor: MyColors.whiteColor,
             txtfontsize: MyFontSize.size15,
             myFont: MyStrings.courier_prime,
           ),
@@ -318,8 +259,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 //    msgContent:  MyStrings.cvg_rules, myFont: MyStrings.courier_prime);
               },
               child: MyText(
-                text_name: "cgv".tr,
-                txtcolor: MyColors.textColor,
+                text_name: " ${"cgv".tr}",
+                txtcolor: MyColors.whiteColor,
                 txtfontsize: MyFontSize.size15,
                 myFont: MyStrings.courier_prime_bold,
               )),
@@ -368,21 +309,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
      Get.back();
      print(response.isSuccess());
      if(response.isSuccess()){
-       MyPreference.setPrefStringValue(
-           key: MyPreference.accessToken,value:response.getDATAJSONArray1()[ApiParameter.access_token]);
-       var result = response.getDATAJSONArray1()[ApiParameter.userInfo];
-       MyPreference.setPrefStringValue(
-           key: MyPreference.userId,value:result[ApiParameter.userId].toString());
-       /*var result = response.getDATAJSONArray1()[ApiParameter.userInfo];
-       //saved user id and email in pref
-       MyPreference.setPrefStringValue(
-           key: MyPreference.userId,value:result[ApiParameter.userId].toString());
-       MyPreference.setPrefStringValue(
-           key: MyPreference.emailId,value:result[ApiParameter.EMAIL]);
-       MyPreference.setPrefStringValue(
-           key: MyPreference.accessToken,value:response.getDATAJSONArray1()[ApiParameter.access_token]);*/
 
-       ScreenTransition.navigateOffAll(screenName:SignupConfirmScreen());
+       /*MyPreference.setPrefStringValue(
+           key: MyPreference.accessToken,value:response.getDATAJSONArray1()[ApiParameter.access_token]);*/
+       var result = response.getDATAJSONArray1()[ApiParameter.userInfo];
+       /*MyPreference.setPrefStringValue(
+           key: MyPreference.userId,value:result[ApiParameter.userId].toString());*/
+       String userId = result[ApiParameter.userId].toString();
+       // String token = response.getDATAJSONArray1()[ApiParameter.access_token];
+       ScreenTransition.navigateOffAll(screenName:SignupConfirmScreen(userId,email.text));
      }else{
        MyUtility.showErrorMsg(response.getMessage());
      }

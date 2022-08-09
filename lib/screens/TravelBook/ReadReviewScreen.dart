@@ -4,6 +4,7 @@ import 'package:travel_inspiration/Models/PlaceDetails.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyRatingBar.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
@@ -26,54 +27,76 @@ class _ReadReviewScreenState extends State<ReadReviewScreen> {
     return SafeArea(
         child: Scaffold(
           body:_buildBodyContent(),
-
+          backgroundColor: MyColors.settingBgColor,
         ));
   }
 
   _buildBodyContent() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        MyTopHeader(
-          headerName:"review".tr.toUpperCase(),
-          headerImgUrl: MyImageURL.travel_book_top,
-          logoImgUrl: MyImageURL.haudos_logo,
-          logoCallback: (){
-            CommonMethod.getAppMode();
-          },
+        Container(
+          height: Get.height*0.30,
+          width: Get.width,
+          color: MyColors.buttonBgColorHome.withOpacity(0.7),
+          child: Column(children: [
+            MyTopHeader(
+              logoImgUrl: MyImageURL.haudos_logo,
+              logoCallback: (){
+                CommonMethod.getAppMode();
+              },
+            ),
+            MyTitlebar(title: "review".tr.toUpperCase(),),
+          ],),
         ),
-        SizedBox(
-          height: Get.height * .020,
-        ),
-        MyText(
-          text_name:myController.mPlaceDetails.value.result.name.toUpperCase(),
-          myFont: MyFont.Courier_Prime_Bold,
-          txtfontsize: MyFontSize.size15,
-          txtcolor: MyColors.textColor,
-          txtAlign: TextAlign.center,
-        ),
-        MyRatingBar(
-          iconSize: 20,
-          itemCount: 5,
-          onRateUpdate: null,
-          initialRating: myController.mPlaceDetails.value.result.rating,
-        ),
-        SizedBox(
-          height: Get.height * .020,
-        ),
-        Padding(
-          padding:  EdgeInsets.symmetric(horizontal: Get.width*.060),
-          child: MyTextStart(
-            text_name: "review".tr,
-            txtcolor: MyColors.textColor,
-            txtfontsize: MyFontSize.size12,
-            myFont: MyStrings.courier_prime_bold,
+
+        Flexible(
+          child: Container(
+            padding: const EdgeInsets.only(top:40),
+            height: Get.height,
+            color: MyColors.buttonBgColorHome.withOpacity(0.30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+
+                MyText(
+                  text_name:myController.mPlaceDetails.value.result.name.toUpperCase(),
+                  myFont: MyFont.Courier_Prime_Bold,
+                  txtfontsize: MyFontSize.size15,
+                  txtcolor: MyColors.textColor,
+                  txtAlign: TextAlign.center,
+                ),
+                MyRatingBar(
+                  iconSize: 20,
+                  itemCount: 5,
+                  onRateUpdate: null,
+                  initialRating: myController.mPlaceDetails.value.result.rating,
+                ),
+                SizedBox(
+                  height: Get.height * .020,
+                ),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: Get.width*.060),
+                  child: MyTextStart(
+                    text_name: "review".tr,
+                    txtcolor: MyColors.textColor,
+                    txtfontsize: MyFontSize.size12,
+                    myFont: MyStrings.courier_prime_bold,
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * .020,
+                ),
+                _reviewList(),
+              ],
+            ),
           ),
         ),
-        SizedBox(
-          height: Get.height * .020,
-        ),
-        Expanded(child: _reviewList()),
+
        /* Padding(
           padding: const EdgeInsets.only(bottom: 40,),
           child: Container(
@@ -88,17 +111,20 @@ class _ReadReviewScreenState extends State<ReadReviewScreen> {
 
   _reviewList() {
 
-    return Obx((){
-      return Padding(
-        padding:  EdgeInsets.symmetric(horizontal: Get.width*.060,vertical: 20),
-        child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: myController.mPlaceDetails.value.result.reviews.length,
-            itemBuilder: (context, index) {
-              return getReviewItem(myController.mPlaceDetails.value.result.reviews[index]);
-            }),
-      );
-    });
+    return Flexible(
+      child: Obx((){
+        return Padding(
+          padding:  EdgeInsets.symmetric(horizontal: Get.width*.060,vertical: 20),
+          child: ListView.builder(
+              shrinkWrap: true,
+              physics: AlwaysScrollableScrollPhysics(),
+              itemCount: myController.mPlaceDetails.value.result.reviews.length,
+              itemBuilder: (context, index) {
+                return getReviewItem(myController.mPlaceDetails.value.result.reviews[index]);
+              }),
+        );
+      }),
+    );
 
   }
 

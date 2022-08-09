@@ -35,7 +35,7 @@ class _MyFlyMenusState extends State<MyFlyMenus> {
   int selectedIndex=-1;
   var flyMenusSelectedList = [
     // MyImageURL.cross_grey_icon,
-    MyImageURL.favor_grey_icon,
+    MyImageURL.favor_grey,
     MyImageURL.pin_grey_icon,
     MyImageURL.edit_medium_grey,
     MyImageURL.arrowUp3x,
@@ -90,7 +90,7 @@ class _MyFlyMenusState extends State<MyFlyMenus> {
                           height:widget.itemHeight,
                           padding:EdgeInsets.all(0.0),
                           child: Image.asset(
-                            selectedIndex == index ? flyMenusSelectedList[index] : ((widget.fromWhere == MyStrings.fromFavCity) && index == 0) ?MyImageURL.fav_red :widget.flyMenusList[index],
+                            selectedIndex == index ? flyMenusSelectedList[index] : ((widget.fromWhere == MyStrings.fromFavCity) && index == 0) ?MyImageURL.favor_white :widget.flyMenusList[index],
                             // selectedIndex == index ? MyImageURL.cross_gray2x: widget.flyMenusList[index],
                             // color: selectedIndex == index ? MyColors.buttonBgColor : MyColors.lineColor,
                             fit: BoxFit.contain,)),
@@ -100,7 +100,7 @@ class _MyFlyMenusState extends State<MyFlyMenus> {
                 );
 
               }),
-          getFavContainer(),
+         getFavContainer(),
         ],
       );
     });
@@ -109,43 +109,31 @@ class _MyFlyMenusState extends State<MyFlyMenus> {
    getFavContainer() {
      return Visibility(
        visible: myController.isFavMenu.value,
-       child: BackdropFilter(
-         filter: ImageFilter.blur(sigmaY: 5, sigmaX: 5),
-         child: Stack(
-           children: [
-   /*          Container(
-                          height: Get.height * .90,
-                          decoration: BoxDecoration(
-                             color: MyColors.buttonBgColor.withOpacity(0.46)),
-                        ),
-   */          Align(
-               alignment: Alignment.topCenter,
-               child: Padding(
-                 padding: const EdgeInsets.all(8.0),
-                 child: Column(
-                   children: [
-                     Container(
-                       height: 180,
-                       width: 180,
+       // visible: true,
+       child: Align(
+                 alignment: Alignment.topCenter,
+                 child: Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Column(
+                     children: [
+                       Container(
+                         height: 190,
+                         width: 190,
+                         child: Image.asset(
+                           MyImageURL.favor_grey,
+                           fit: BoxFit.contain,),
+                       ),
+                       MyText(
+                         text_name: "txtfav".tr,
+                         txtfontsize: MyFontSize.size25,
+                         txtcolor: MyColors.whiteColor,
+                         myFont: MyStrings.bodoni72_Bold,
+                       ),
 
-                       child: Image.asset(
-                         MyImageURL.favor_grey_icon,
-                         fit: BoxFit.contain,),
-                     ),
-                     MyText(
-                       text_name: "txtfav".tr,
-                       txtfontsize: MyFontSize.size19,
-                       txtcolor: MyColors.whiteColor,
-                       myFont: MyStrings.courier_prime_bold,
-                     ),
-
-                   ],
+                     ],
+                   ),
                  ),
                ),
-             ),
-           ],
-         ),
-       ),
      );
    }
   void callFavApi() async {
@@ -208,6 +196,8 @@ class _MyFlyMenusState extends State<MyFlyMenus> {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
       "project_id": myController.selectedProject.value.id,
       "pin_destination": myController.selectedPlace.value.name,
+      "end_lat":myController.selectedPlace.value.lat,
+      "end_long":myController.selectedPlace.value.lng,
     };
 
     await apiManager.pinDestinationAPI(param).then((value) {

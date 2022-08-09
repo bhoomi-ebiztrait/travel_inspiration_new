@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/screens/Gallery/GalleryScreen.dart';
@@ -39,35 +40,50 @@ class _TITravelougeScreenState extends State<TITravelougeScreen> {
     return SafeArea(
       child: Scaffold(
         body: _buildBodyContent(widget.updatedKm),
-        bottomSheet: MyBottomLayout(
-          imgUrl: MyImageURL.travel_book_bottom,
-        ),
+
       ),
     );
   }
 }
 
 _buildBodyContent(double updatedKm) {
-  return Column(
-    children: [
-      MyTopHeader(
-        headerName: "txtCARNETDEVOYAGE".tr,
-        headerImgUrl: MyImageURL.travel_book_top,
-        logoImgUrl: MyImageURL.haudos_logo,
-      ),
-      SizedBox(
-        height: Get.height * .06,
-      ),
-      _buildMyDestination(updatedKm),
-      SizedBox(
-        height: Get.height * .08,
-      ),
-      _buildMyCities(),
-      SizedBox(
-        height: Get.height * .08,
-      ),
-      _buildMyProject()
-    ],
+  return Container(
+    height: Get.height,
+    width: Get.width,
+    decoration: BoxDecoration(
+      image: DecorationImage(image: AssetImage(MyImageURL.login),fit: BoxFit.fill),
+    ),
+    child: Column(
+      children: [
+        MyTopHeader(
+        ),
+        MyTitlebar(title: "txtCARNETDEVOYAGE".tr,),
+        SizedBox(
+          height: Get.height * .08,
+        ),
+
+        Container(
+          color: Colors.white.withOpacity(0.75),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 60.0),
+            child: Column(
+              children: [
+                _buildMyDestination(updatedKm),
+                SizedBox(
+                  height: Get.height * .08,
+                ),
+                _buildMyCities(),
+                SizedBox(
+                  height: Get.height * .08,
+                ),
+                _buildMyProject()
+              ],
+            ),
+          ),
+        ),
+
+      ],
+    ),
   );
 }
 
@@ -82,9 +98,9 @@ _buildMyDestination(double updatedKm){
       ));
     },
     child: Container(
-      margin: EdgeInsets.only(left: Get.width * .10),
+      margin: EdgeInsets.only(left: Get.width * .07),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Image.asset(MyImageURL.glob_icoc),
+        Image.asset(MyImageURL.glob_icoc,color: MyColors.buttonBgColor,),
         SizedBox(
           width: Get.width * .040,
         ),
@@ -109,9 +125,9 @@ _buildMyCities() {
       ));
     },
     child: Container(
-      margin: EdgeInsets.only(left: Get.width * .10),
+      margin: EdgeInsets.only(left: Get.width * .07),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Image.asset(MyImageURL.red_heart),
+        Image.asset(MyImageURL.red_heart,height: 35,width: 35,),
         SizedBox(
           width: Get.width * .040,
         ),
@@ -136,9 +152,9 @@ _buildMyProject() {
       ));
     },
     child: Container(
-      margin: EdgeInsets.only(left: Get.width * .10),
+      margin: EdgeInsets.only(left: Get.width * .07),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Image.asset(MyImageURL.projet_icon),
+        Image.asset(MyImageURL.projet_icon,height: 35,width: 35),
         SizedBox(
           width: Get.width * .040,
         ),

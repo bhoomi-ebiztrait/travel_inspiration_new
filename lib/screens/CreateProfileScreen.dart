@@ -58,12 +58,15 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
             child: Container(
+              height: Get.height,
+              width: Get.width,
               decoration: BoxDecoration(
-                image: DecorationImage(
+                color: MyColors.buttonBgColorHome.withOpacity(0.69)
+               /* image: DecorationImage(
                     image: AssetImage(
                       MyImageURL.bg,
                     ),
-                    fit: BoxFit.fill),
+                    fit: BoxFit.fill),*/
               ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +90,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                   Container(
                     margin: EdgeInsets.only(left: 60),
                     width: MediaQuery.of(context).size.width * 90 /100,
-                    height: 90,
+                    height: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(40),
@@ -95,11 +98,14 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       color: MyColors.buttonBgColor,
                     ),
                     //margin: EdgeInsets.all(20),
-                    child: MyText(
-                      text_name: "create_profile".tr,
-                      txtcolor: MyColors.whiteColor,
-                      txtfontsize: MyFontSize.size25,
-                      myFont: MyStrings.bodoni72_Bold,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top:5,left: 48.0),
+                      child: MyText(
+                        text_name: "${"create_profile".tr.toUpperCase()}",
+                        txtcolor: MyColors.whiteColor,
+                        txtfontsize: MyFontSize.size25,
+                        myFont: MyStrings.bodoni72_Bold,
+                      ),
                     ),
                   ),
                   Align(
@@ -113,8 +119,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(300.0),
                           child: Container(
-                            height: 120,
-                            width: 120,
+                            height: 130,
+                            width: 130,
                             child: croppedImg == null
                                 ? Image.asset(
                                     MyImageURL.profile_avtar,
@@ -137,12 +143,12 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
               MyTextFieldWithImage(
                 mycontroller: nameController,
                 imageUrl: MyImageURL.user_img,
-                //addlabel: "email".tr,
+                addlabel: "add_nickname".tr,
                 readonly: false,
-                labelColor: MyColors.lightGreenColor,
-                edinputType: TextInputType.emailAddress,
+                labelColor: MyColors.textColor,
+                edinputType: TextInputType.name,
                 obscureText: false,
-                validator: myController.validateEmail,
+                validator: myController.validateName,
               ),
               SizedBox(
                 height: Get.height * 0.04,
@@ -151,10 +157,10 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                 text_name: "date_of_birth".tr,
                 txtcolor: MyColors.whiteColor,
                 txtfontsize: MyFontSize.size15,
-                myFont: MyFont.Courier_Prime,
+                myFont: MyFont.Courier_Prime_Bold,
               ),
               SizedBox(
-                height: Get.height * 0.03,
+                height: Get.height * 0.02,
               ),
               MyDOBPicker(
                 minDate: ApiParameter.DOB_START,
@@ -183,7 +189,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             borderSide: BorderSide(color: MyColors.whiteColor)),
                         hintText: "phone_number".tr,
                         hintStyle: TextStyle(
-                          color: MyColors.textColor.withOpacity(0.40),
+                          color: MyColors.whiteColor,
                         ),
                         suffixIcon: GestureDetector(
                             onTap: () {
@@ -201,24 +207,22 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             )),
                       ),
                       validator: myController.validatePhoneNo,
-                      style: TextStyle(),
+                      style: TextStyle(color: MyColors.whiteColor),
                     ),),
               ),
               SizedBox(
                 height: Get.height * 0.04,
               ),
               Center(
-                child: Container(
-                    width: Get.width * 0.40,
-                    child: GestureDetector(
-                      onTap: () {
-                        goToNextScreen();
-                      },
-                      child: Image.asset(
-                        MyImageURL.check_circle,
-                        height: 70,
-                      ),
-                    )),
+                child: GestureDetector(
+                  onTap: () {
+                    goToNextScreen();
+                  },
+                  child: Image.asset(
+                    MyImageURL.check_circle,
+                    height: 60,width: 60,
+                  ),
+                ),
               ),
               SizedBox(
                 height: Get.height * 0.04,
@@ -230,8 +234,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                     height: 80,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(40),
-                          bottomRight: Radius.circular(40)),
+                          topRight: Radius.circular(50),
+                          bottomRight: Radius.circular(50)),
                       color: MyColors.buttonBgColor,
                     ),
                     //margin: EdgeInsets.all(20),
@@ -245,7 +249,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             text_name: "create_later".tr,
                             txtcolor: MyColors.whiteColor,
                             txtfontsize: MyFontSize.size15,
-                            myFont: MyStrings.courier_prime,
+                            myFont: MyStrings.bodoni72_Book,
                           ),
                         ),
                       ],
@@ -261,9 +265,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       callCreateProfileLaterAPI();
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 40.0),
+                      padding: const EdgeInsets.only(top: 35.0),
                       child: Image.asset(
                         MyImageURL.fleche,
+                        height: 90,
+                        width: 90,
                       ),
                     ),
                   ))
@@ -419,12 +425,12 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
               height: Get.height * 0.03,
             ),
             // MyDatePickerWidget(title: MyStrings.date_of_birth,),
-            buildAddressRow(),
+           // buildAddressRow(),
             buildCityPhoneNo(),
             SizedBox(
               height: Get.height * 0.04,
             ),
-            buildCountry(),
+         //   buildCountry(),
             SizedBox(
               height: 95,
             ),
@@ -475,7 +481,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
             child: croppedImg == null
                 ? Image.asset(
                     MyImageURL.profile_avtar,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   )
                 : Image.file(
                     croppedImg,
@@ -589,7 +595,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
               child: MyTextFieldHintWithImage(
                 addHint: "phone_number".tr,
                 mycontroller: phoneNoController,
-                labelColor: MyColors.textColor,
+                labelColor: MyColors.whiteColor,
+                hintColor: MyColors.whiteColor,
                 validator: myController.validatePhoneNo,
                 suffixImageUrl: MyImageURL.info,
                 suffixOnTap: () {
@@ -707,24 +714,47 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   }
 
   void goToNextScreen() {
-    if (_formKey.currentState.validate()) {
+    if (dataController.selectedDate.value == "") {
+      return MyCommonMethods.showInfoCenterDialog(
+          msgContent: "dateofBirthreq".tr,
+          myFont: MyStrings.courier_prime_bold);
+    }
+    /*if (croppedImg == null) {
+      return MyCommonMethods.showInfoCenterDialog(
+          msgContent: "validAvtar".tr,
+          myFont: MyStrings.courier_prime_bold);
+    }*/
+
+    if (nameController.text == null || nameController.text.isEmpty) {
+      return MyCommonMethods.showInfoCenterDialog(
+          msgContent: "validName".tr,
+          myFont: MyStrings.courier_prime_bold);
+    }
+
+    if (phoneNoController.text == null || phoneNoController.text.isEmpty) {
+      return MyCommonMethods.showInfoCenterDialog(
+          msgContent: "validPhoneNo".tr,
+          myFont: MyStrings.courier_prime_bold);
+    }
+    callCreateProfileAPI();
+    /*if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       MyUtility().focusOut(context);
       if (dataController.selectedDate.value == "") {
-        // return MyCommonMethods.showInfoCenterDialog(
-        //     msgContent: "dateofBirthreq".tr,
-        //     myFont: MyStrings.courier_prime_bold);
+        return MyCommonMethods.showInfoCenterDialog(
+            msgContent: "dateofBirthreq".tr,
+            myFont: MyStrings.courier_prime_bold);
       }
       if (croppedImg == null) {
-        // return MyCommonMethods.showInfoCenterDialog(
-        //     msgContent: "validAvtar".tr,
-        //     myFont: MyStrings.courier_prime_bold);
+        return MyCommonMethods.showInfoCenterDialog(
+            msgContent: "validAvtar".tr,
+            myFont: MyStrings.courier_prime_bold);
       }
       callCreateProfileAPI();
       // ScreenTransition.navigateToScreenLeft(
       //     screenName: TIChoseRouteModeScreen());
 
-    }
+    }*/
   }
 
   callCreateProfileAPI() async {
@@ -786,19 +816,22 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   }
 
   void setPrefs() {
-    String country = dataController.selectedValue.value.countryname != null &&
+    /*String country = dataController.selectedValue.value.countryname != null &&
             dataController.selectedValue.value.countryname != ""
         ? dataController.selectedValue.value.countryname.toString()
-        : dataController.countryList.value[0].countryname;
+        : dataController.countryList.value[0].countryname;*/
     MyPreference.setPrefStringValue(
         key: MyPreference.dob,
         value: dataController.selectedDate.value.toString());
     MyPreference.setPrefStringValue(
+        key: MyPreference.phoneNumber,
+        value: phoneNoController.text);
+    /*MyPreference.setPrefStringValue(
         key: MyPreference.address, value: addressController.text);
     MyPreference.setPrefStringValue(
         key: MyPreference.city, value: cityController.text);
     MyPreference.setPrefStringValue(
         key: MyPreference.pinCode, value: postalCodeController.text);
-    MyPreference.setPrefStringValue(key: MyPreference.country, value: country);
+    MyPreference.setPrefStringValue(key: MyPreference.country, value: country);*/
   }
 }

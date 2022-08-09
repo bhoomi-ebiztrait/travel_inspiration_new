@@ -29,18 +29,18 @@ class ReflectJourneyDetailsScreen extends StatefulWidget {
 }
 
 class _ReflectJourneyDetailsScreenState
-    extends State<ReflectJourneyDetailsScreen>{
+    extends State<ReflectJourneyDetailsScreen> {
   MyController myController = Get.put(MyController());
-
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    myController.timer = Timer.periodic(Duration(seconds: 20), (timer) {getEndLatLong(); });
+    myController.timer = Timer.periodic(Duration(seconds: 20), (timer) {
+      getEndLatLong();
+    });
   }
-
 
   getEndLatLong() async {
     Position _endPosition = await determineCurrentPosition();
@@ -48,11 +48,12 @@ class _ReflectJourneyDetailsScreenState
     print("curr : ${_endPosition.latitude}, ${_endPosition.longitude}");
 
     double distance =
-    calculateDistance(_endPosition.latitude, _endPosition.longitude);
+        calculateDistance(_endPosition.latitude, _endPosition.longitude);
     // calculateDistance(23.007950, 72.553757);
     print("distance km : $distance");
     callUpdateKm(distance);
   }
+
   callUpdateKm(double distance) async {
     ApiManager apiManager = ApiManager();
     String updatedKm = (double.parse((distance).toStringAsFixed(2))).toString();
@@ -60,7 +61,9 @@ class _ReflectJourneyDetailsScreenState
 
     Map<String, dynamic> param = {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
-      "projectId": myController.selectedProject!= null ?myController.selectedProject.value.id:0,
+      "projectId": myController.selectedProject != null
+          ? myController.selectedProject.value.id
+          : 0,
       "projectMode": "1",
       "updatedKm": updatedKm,
     };
@@ -68,15 +71,15 @@ class _ReflectJourneyDetailsScreenState
     await apiManager.updateKmAPI(param).then((value) {
       if (value == true) {
         setState(() async {
-        //  widget.updatedKm = double.parse((distance).toStringAsFixed(2));
+          //  widget.updatedKm = double.parse((distance).toStringAsFixed(2));
 
           if (myController.selectedProject != null &&
               myController.selectedProject.value.totalKm != null) {
-            myController.selectedProject.value.totalKm=((distance).toStringAsFixed(2));
-          }else{
+            myController.selectedProject.value.totalKm =
+                ((distance).toStringAsFixed(2));
+          } else {
             widget.updatedKm = double.parse((distance).toStringAsFixed(2));
           }
-
         });
       }
     });
@@ -151,7 +154,8 @@ class _ReflectJourneyDetailsScreenState
             height: Get.height * 0.15,
           ),
           MyText(
-            text_name: "${(myController.selectedProject != null &&myController.selectedProject.value.totalKm != null )?myController.selectedProject.value.totalKm : widget.updatedKm} KM",
+            text_name:
+                "${(myController.selectedProject != null && myController.selectedProject.value.totalKm != null) ? myController.selectedProject.value.totalKm : widget.updatedKm} KM",
             txtcolor: MyColors.whiteColor,
             myFont: MyStrings.cagliostro,
             txtfontsize: MyFontSize.size58,
@@ -159,16 +163,16 @@ class _ReflectJourneyDetailsScreenState
           SizedBox(
             height: Get.height * 0.02,
           ),
-          Image.asset(
+          /*  Image.asset(
             MyImageURL.metro_steps,
             height: 60,
             width: 70,
-          ),
+          ),*/
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: MyText(
               text_name:
-              "${myController.selectedProject != null ? myController.selectedProject.value.msg:""}",
+                  "${myController.selectedProject != null && myController.selectedProject.value.msg != null? myController.selectedProject.value.msg : ""}",
               txtcolor: MyColors.whiteColor,
               myFont: MyStrings.courier_prime_bold,
               txtfontsize: MyFontSize.size18,
@@ -190,14 +194,12 @@ class _ReflectJourneyDetailsScreenState
     return myController.allProjectList.value.length > 1
         ? Align(
             alignment: Alignment.bottomCenter,
-            child: Row(
+            child: Column(
               children: [
                 Container(
-                  width: Get.width * 0.50,
+                  width: Get.width * 0.60,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(30),
-                        bottomRight: Radius.circular(30)),
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
                     color: MyColors.whiteColor,
                   ),
                   //margin: EdgeInsets.all(20),
@@ -205,12 +207,22 @@ class _ReflectJourneyDetailsScreenState
                     onPressed: () {
                       myController.stopTracking();
                       // if (myController.secondProject.value.projectMode == "1") {
-                      MyPreference.setPrefIntValue(key: MyPreference.APPMODE, value:int.parse(myController.secondProject.value.projectMode));
-                        myController
-                            .setSelectedProj(myController.secondProject.value);
-                      CommonMethod.getAppMode();
-                        // Get.back(result: true);
+                      String myMode =
+                          myController.secondProject.value.projectMode;
+                      MyPreference.setPrefIntValue(
+                          key: MyPreference.APPMODE,
+                          value: int.parse(
+                              myController.secondProject.value.projectMode));
+                      myController
+                          .setSelectedProj(myController.secondProject.value);
+                      // CommonMethod.getAppMode();
+                      // Get.back(result: true);
                       // }
+                      if (myMode == "1") {
+                        Get.back(result: true);
+                      } else {
+                        CommonMethod.getAppMode();
+                      }
                     },
                     minWidth: Get.width * 0.50,
                     child: Row(
@@ -244,27 +256,38 @@ class _ReflectJourneyDetailsScreenState
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: Get.height * 0.03,
+                ),
                 myController.allProjectList.value.length > 2
                     ? Container(
-                        width: Get.width * 0.50,
+                        width: Get.width * 0.60,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              bottomLeft: Radius.circular(30)),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
                           color: MyColors.whiteColor,
                         ),
                         //margin: EdgeInsets.all(20),
                         child: MaterialButton(
                           onPressed: () {
-                           // if (myController.thirddProject.value.projectMode ==
-                             //   "1") {
+                            // if (myController.thirddProject.value.projectMode ==
+                            //   "1") {
                             myController.stopTracking();
-                            MyPreference.setPrefIntValue(key: MyPreference.APPMODE, value:int.parse(myController.thirddProject.value.projectMode));
-                              myController.setSelectedProj(
-                                  myController.thirddProject.value);
-                            //  Get.back(result: true);
+                            String myMode =
+                                myController.thirddProject.value.projectMode;
+                            MyPreference.setPrefIntValue(
+                                key: MyPreference.APPMODE,
+                                value: int.parse(myController
+                                    .thirddProject.value.projectMode));
+                            myController.setSelectedProj(
+                                myController.thirddProject.value);
+                            // Get.back(result: true);
+                            //  CommonMethod.getAppMode();
+                            // }
+                            if (myMode == "1") {
+                              Get.back(result: true);
+                            } else {
                               CommonMethod.getAppMode();
-                           // }
+                            }
                           },
                           minWidth: Get.width * 0.50,
                           child: Row(
@@ -318,7 +341,8 @@ class _ReflectJourneyDetailsScreenState
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Image.asset(
-              MyImageURL.cross,width: 30,
+              MyImageURL.cross,
+              width: 40,
               color: MyColors.whiteColor,
             ),
           ],
@@ -326,6 +350,7 @@ class _ReflectJourneyDetailsScreenState
       ),
     );
   }
+
   @override
   void dispose() {
     myController.stopTracking();

@@ -11,12 +11,15 @@ import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
 import 'package:travel_inspiration/TITranslaion/TILanguages.dart';
 import 'package:travel_inspiration/screens/CreateProfileScreen.dart';
 import 'package:travel_inspiration/screens/LoginScreen.dart';
+import 'package:travel_inspiration/screens/NotificationReflectScreen.dart';
 import 'package:travel_inspiration/screens/NotificationScreen.dart';
 import 'package:travel_inspiration/screens/ReflectMode/ReflectModeCreateProjectScreen.dart';
 import 'package:travel_inspiration/screens/SplashScreen.dart';
 import 'package:travel_inspiration/screens/TIChoseRouteModeScreen.dart';
 import 'package:travel_inspiration/screens/TIPinDestinationToProjectScreen.dart';
 import 'package:travel_inspiration/screens/TravelBook/TIAvailableFlightScreen.dart';
+import 'package:travel_inspiration/screens/TravelBook/VacationProjectFileScreen.dart';
+import 'package:travel_inspiration/screens/TravelBook/VacationProjectShareFileScreen.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
 import 'package:travel_inspiration/utils/MyPreference.dart';
@@ -54,11 +57,20 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     getDeviceToken();
-
+messageHandler();
    firebaseCloudMessaging_Listeners();
   }
 
-  Future<void> firebaseCloudMessaging_Listeners() async {
+  Future<void> messageHandler() async {
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+  }
+
+    Future<void> firebaseCloudMessaging_Listeners() async {
     //  var android = new AndroidInitializationSettings('app_icon'); //app_icon
     //  final IOSInitializationSettings initializationSettingsIOS =
     //  IOSInitializationSettings();
@@ -81,28 +93,60 @@ class _MyAppState extends State<MyApp> {
      //  fcmMessageHandler(res['msg']);
      //  Get.to(()=>TIPinDestinationToProjectScreen());
       // showNotification(notification);
+
+      Map result = message.data;
+      print("hellooooo");
+      if(result[ApiParameter.type] ==  CommonMethod.shareProject){
+        Get.to(VacationProjectShareFileScreen(data:message.data));
+      }else if(result[ApiParameter.type] ==  CommonMethod.vacation){
+        Get.to(VacationProjectShareFileScreen(data:message.data));
+      }
+      else {
+        // Reflective == 1, Inspired == 0
+        if (result[ApiParameter.mode] == "1") {
+          if (result[ApiParameter.type] == CommonMethod.reflective_mode) {
+            Get.to(NotificationReflectScreen(data: message.data));
+          }
+          else {
+            Get.to(NotificationReflectScreen(data: message.data));
+          }
+        } else {
+          if (result[ApiParameter.type] == CommonMethod.inspired_mode) {
+            Get.to(NotificationScreen(data: message.data));
+          } else {
+            Get.to(NotificationScreen(data: message.data));
+          }
+        }
+      }
+
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification;
       print("onMessageOpenedApp: onMessageOpenedApp ${notification.title}");
       Map result = message.data;
-      // Reflective == 1, Inspired == 0
-      if(result[ApiParameter.mode] == "1"){
-        if(result[ApiParameter.type] == CommonMethod.reflective_mode){
-          Get.to(NotificationScreen(data:message.data));
-        }else if(result[ApiParameter.type] == CommonMethod.vacation){
-          Get.to(NotificationScreen(data:message.data));
-        }else{
-          Get.to(NotificationScreen(data:message.data));
-        }
-      }else{
-        if(result[ApiParameter.type] == CommonMethod.inspired_mode){
-          Get.to(NotificationScreen(data:message.data));
-        }else if(result[ApiParameter.type] == CommonMethod.vacation){
-          Get.to(NotificationScreen(data:message.data));
-        }else{
-          Get.to(NotificationScreen(data:message.data));
+print("hellooooo");
+      if(result[ApiParameter.type] ==  CommonMethod.shareProject){
+        Get.to(VacationProjectShareFileScreen(data:message.data));
+      }else if(result[ApiParameter.type] ==  CommonMethod.vacation){
+        Get.to(VacationProjectShareFileScreen(data:message.data));
+      }
+      else {
+        // Reflective == 1, Inspired == 0
+        if (result[ApiParameter.mode] == "1") {
+          if (result[ApiParameter.type] == CommonMethod.reflective_mode) {
+            Get.to(NotificationReflectScreen(data: message.data));
+          }
+
+          else {
+            Get.to(NotificationReflectScreen(data: message.data));
+          }
+        } else {
+          if (result[ApiParameter.type] == CommonMethod.inspired_mode) {
+            Get.to(NotificationScreen(data: message.data));
+          } else {
+            Get.to(NotificationScreen(data: message.data));
+          }
         }
       }
 
@@ -181,7 +225,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder:()=>GetMaterialApp(
+      // designSize: Size(1080, 2160),
+      builder:(_)=>GetMaterialApp(
         /*localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
         ],

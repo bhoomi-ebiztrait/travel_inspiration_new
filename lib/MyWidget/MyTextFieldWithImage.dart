@@ -49,125 +49,129 @@ class MyTextFieldWithImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:  EdgeInsets.only(left: leftPadding, top: 0, right: rightPadding),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.transparent,
-              blurRadius: 3,
-              offset: const Offset(0, 1),
-            ),
-          ],
-          borderRadius: BorderRadius.circular((30)),
-        ),
-        child: TextFormField(
-          readOnly: readonly,
-          controller: mycontroller,
-          maxLength: maxlimit,
-          decoration: InputDecoration(
-            counterText: "",
-            prefixIcon: imageUrl != null
-                ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: (18)),
-              child:Image.asset(
-                imageUrl,
-                width: 22,
+    return Container(
+      margin: const EdgeInsets.only(left: 20,right: 10),
+      child: Padding(
+        padding:  EdgeInsets.only(left: leftPadding, top: 0, right: rightPadding),
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.transparent,
+                blurRadius: 3,
+                offset: const Offset(0, 1),
               ),
-            )
-                : null,
-            suffixIcon: suffixImageUrl != null
-                ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: (18)),
-              child: GestureDetector(
-                onTap: suffixOnTap,
-                child: Image.asset(
-                  suffixImageUrl,
-                  width: 25,
-                ),
-            ))
-                : null,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular((25)),
-              borderSide: const BorderSide(width: 0, style: BorderStyle.none),
-            ),
-            filled: true,
-            fillColor: MyColors.whiteColor,
-            contentPadding: EdgeInsets.all((20)),
-            hintText: addlabel,
-            hintStyle:
-            const TextStyle(color: Colors.black38, fontWeight: FontWeight.w300),
-            // labelText: labelText,
+            ],
+            borderRadius: BorderRadius.circular((30)),
           ),
-           style: TextStyle(color: MyColors.textColor, fontSize: MyFontSize.size13,fontFamily: myFont,),
-          obscureText: obscureText,
-          validator: validator,
-          keyboardType: edinputType,
+          child: TextFormField(
+            readOnly: readonly,
+            controller: mycontroller,
+            maxLength: maxlimit,
+            decoration: InputDecoration(
+              errorMaxLines: 2,
+              counterText: "",
+              prefixIcon: imageUrl != null
+                  ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: (18)),
+                child:Image.asset(
+                  imageUrl,
+                  width: 22,
+                ),
+              )
+                  : null,
+              suffixIcon: suffixImageUrl != null
+                  ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: (18)),
+                child: GestureDetector(
+                  onTap: suffixOnTap,
+                  child: Image.asset(
+                    suffixImageUrl,
+                    width: 25,
+                  ),
+              ))
+                  : null,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular((25)),
+                borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+              ),
+              filled: true,
+              fillColor: MyColors.whiteColor,
+              contentPadding: EdgeInsets.all((20)),
+              hintText: addlabel,
+              hintStyle:
+              const TextStyle(color: Colors.black38, fontWeight: FontWeight.w300),
+              // labelText: labelText,
+            ),
+             style: TextStyle(color: MyColors.textColor, fontSize: MyFontSize.size13,fontFamily: myFont,),
+            obscureText: obscureText,
+            validator: validator,
+            keyboardType: edinputType,
+            minLines: 1,
+            maxLines: obscureText == true ? 1 :  5,
+            cursorColor: Colors.black45,
+          ),
+        )
+       /* child: TextFormField(
+          onTap: onTap,
+          textAlignVertical: TextAlignVertical.center,
           minLines: 1,
           maxLines: obscureText == true ? 1 :  5,
+          readOnly: readonly,
+          obscureText: obscureText,
+          controller: mycontroller,
+          maxLength: maxlimit,
+          style: TextStyle(color: MyColors.textColor, fontSize: MyFontSize.size13,fontFamily: myFont,
+          ),
           cursorColor: Colors.black45,
-        ),
-      )
-     /* child: TextFormField(
-        onTap: onTap,
-        textAlignVertical: TextAlignVertical.center,
-        minLines: 1,
-        maxLines: obscureText == true ? 1 :  5,
-        readOnly: readonly,
-        obscureText: obscureText,
-        controller: mycontroller,
-        maxLength: maxlimit,
-        style: TextStyle(color: MyColors.textColor, fontSize: MyFontSize.size13,fontFamily: myFont,
-        ),
-        cursorColor: Colors.black45,
-        keyboardType: edinputType,
-        decoration: InputDecoration(
-          errorMaxLines: 2,
-          enabledBorder:UnderlineInputBorder(
-            borderSide:BorderSide(color: MyColors.lineColor),
-          ),
-          focusedBorder:UnderlineInputBorder(
-            borderSide: BorderSide(color: MyColors.lineColor),
-          ),
-          border:UnderlineInputBorder(
-              borderSide:BorderSide(
-                  color: MyColors.lineColor
-              )
-          ),
-          fillColor: MyColors.whiteColor,
-            isDense: true,
-          // contentPadding: const EdgeInsets.only(left: 10, right:10),
-          labelText: addlabel,
-          labelStyle: TextStyle(color: labelColor),
-          alignLabelWithHint: true,
-          // hintText: addlabel,
-          // hintStyle: TextStyle(color: MyColors.lightGreenColor),
-          counterText: "",
-          filled: true,
-          prefixIcon: imageUrl != null ?new Container(
-            padding: const EdgeInsets.only(top: 16,bottom: 12),
-            child: Image.asset(
-              imageUrl,
-              height: Get.height * 0.02,
+          keyboardType: edinputType,
+          decoration: InputDecoration(
+            errorMaxLines: 2,
+            enabledBorder:UnderlineInputBorder(
+              borderSide:BorderSide(color: MyColors.lineColor),
             ),
-          ):null,
-          suffixIcon:
-          suffixImageUrl != null ?GestureDetector(
-            onTap: suffixOnTap,
-            child: new Container(
-
+            focusedBorder:UnderlineInputBorder(
+              borderSide: BorderSide(color: MyColors.lineColor),
+            ),
+            border:UnderlineInputBorder(
+                borderSide:BorderSide(
+                    color: MyColors.lineColor
+                )
+            ),
+            fillColor: MyColors.whiteColor,
+              isDense: true,
+            // contentPadding: const EdgeInsets.only(left: 10, right:10),
+            labelText: addlabel,
+            labelStyle: TextStyle(color: labelColor),
+            alignLabelWithHint: true,
+            // hintText: addlabel,
+            // hintStyle: TextStyle(color: MyColors.lightGreenColor),
+            counterText: "",
+            filled: true,
+            prefixIcon: imageUrl != null ?new Container(
               padding: const EdgeInsets.only(top: 16,bottom: 12),
               child: Image.asset(
-                suffixImageUrl,
+                imageUrl,
                 height: Get.height * 0.02,
               ),
-            ),
-          ):null,
+            ):null,
+            suffixIcon:
+            suffixImageUrl != null ?GestureDetector(
+              onTap: suffixOnTap,
+              child: new Container(
 
-        ),
-        validator: validator,
-      ),*/
+                padding: const EdgeInsets.only(top: 16,bottom: 12),
+                child: Image.asset(
+                  suffixImageUrl,
+                  height: Get.height * 0.02,
+                ),
+              ),
+            ):null,
+
+          ),
+          validator: validator,
+        ),*/
+      ),
     );
   }
 }
@@ -305,7 +309,8 @@ class MyTextFieldHintWithImage extends StatelessWidget {
   String addHint;
   String edError;
   Color color;
-  Color labelColor = MyColors.lightGreenColor;
+  Color labelColor = MyColors.textColor;
+  Color hintColor = MyColors.textColor.withOpacity(0.35);
   String imageUrl;
   String suffixImageUrl;
   TextInputType edinputType;
@@ -329,7 +334,8 @@ class MyTextFieldHintWithImage extends StatelessWidget {
         this.imageUrl,
         this.suffixImageUrl,
         this.color,
-        this.labelColor,
+        this.labelColor ,
+        this.hintColor ,
         this.edinputType,
         this.addHint,
         this.edError,
@@ -353,7 +359,7 @@ class MyTextFieldHintWithImage extends StatelessWidget {
         obscureText: obscureText,
         controller: mycontroller,
         maxLength: maxlimit,
-        style: TextStyle(color: MyColors.textColor, fontSize: MyFontSize.size13,fontFamily: myFont,
+        style: TextStyle(color: labelColor, fontSize: MyFontSize.size13,fontFamily: myFont,
         ),
         cursorColor: Colors.black45,
         keyboardType: edinputType,
@@ -375,7 +381,7 @@ class MyTextFieldHintWithImage extends StatelessWidget {
 
           alignLabelWithHint: true,
           hintText: addHint,
-          hintStyle: TextStyle(color: MyColors.textColor.withOpacity(0.35)),
+          hintStyle: TextStyle(color: hintColor),
           counterText: "",
           filled: true,
           prefixIcon: imageUrl != null ?new Container(
@@ -442,7 +448,7 @@ class MyTextFieldHint extends StatelessWidget {
         this.validator,
         this.obscureText,
         this.txtfontsize,this.maxlimit,
-        this.readonly,this.leftPadding = 35.0,this.rightPadding = 35,this.myFont});
+        this.readonly,this.leftPadding = 5.0,this.rightPadding = 5,this.myFont});
 
 
   @override
@@ -450,7 +456,7 @@ class MyTextFieldHint extends StatelessWidget {
     return Padding(
       padding:  EdgeInsets.only(left: leftPadding, top: 0, right: rightPadding),
       child: TextFormField(
-        textAlignVertical: TextAlignVertical.center,
+        // textAlignVertical: TextAlignVertical.center,
         // textAlign: TextAlign.center,
         onTap: onTap,
         readOnly: readonly,
@@ -464,35 +470,29 @@ class MyTextFieldHint extends StatelessWidget {
         decoration: InputDecoration(
           errorMaxLines: 2,
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: MyColors.lineColor),
+            borderSide: BorderSide(color: MyColors.buttonBgColor),
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: MyColors.lineColor),
+            borderSide: BorderSide(color: MyColors.buttonBgColor),
           ),
           border: new UnderlineInputBorder(
               borderSide: new BorderSide(
-                  color: MyColors.lineColor
+                  color: MyColors.buttonBgColor
               )
           ),
-          fillColor: MyColors.whiteColor,
+       //   fillColor: MyColors.whiteColor,
           isDense: true,
 
           alignLabelWithHint: true,
           hintText: addHint,
           hintStyle: TextStyle(color: MyColors.textColor.withOpacity(0.35)),
-          counterText: "",
-          filled: true,
-          prefixIcon: imageUrl != null ?new Container(
-            // padding: const EdgeInsets.only(left: 40,),
-            child: Image.asset(
-              imageUrl,
-              height: Get.height * 0.02,
-            ),
-          ):null,
+          counterText: "",contentPadding: EdgeInsets.only(bottom: 15,left: 5),
+         // filled: true,
+
 
 
         ),
-        // validator: validator,
+        validator: validator,
       ),
     );
   }

@@ -9,10 +9,11 @@ import 'package:travel_inspiration/utils/MyStrings.dart';
 class MyQuotedText extends StatelessWidget {
 
   Color txtColor;
+  Color quoteColor;
   double txtFontSize;
   String myText,myFont;
 
-  MyQuotedText({this.txtColor,this.txtFontSize,this.myText,this.myFont});
+  MyQuotedText({this.txtColor,this.quoteColor,this.txtFontSize,this.myText,this.myFont});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class MyQuotedText extends StatelessWidget {
           WidgetSpan(
               child: Padding(
                 padding: EdgeInsets.only(right: Get.width * .030),
-                child: Image.asset(MyImageURL.choose_your_leftquote,color: txtColor,),
+                child: Image.asset(MyImageURL.choose_your_leftquote,color: quoteColor,),
               )),
           TextSpan(
             text: myText,
@@ -36,7 +37,7 @@ class MyQuotedText extends StatelessWidget {
           WidgetSpan(
               child: Padding(
                 padding: EdgeInsets.only(left: Get.width * .030),
-                child: Image.asset(MyImageURL.choose_your_rightquote,color: txtColor,),
+                child: Image.asset(MyImageURL.choose_your_rightquote,color: quoteColor,),
               )),
         ]),
         textAlign: TextAlign.center,

@@ -66,6 +66,7 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
         // itemCount: ((widget.endIndex) - (widget.startIndex)),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
+          mainAxisSpacing: 10
         ),
         itemBuilder: (context, index) {
           if(index < widget.startIndex || index > widget.endIndex)
@@ -79,19 +80,19 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
                 case 0:
                   ScreenTransition.navigateToScreenLeft(
                       screenName: TIHotelListScreen(
-                        travelLougeListTitle: widget.popupTitle.toUpperCase(),
+                        travelLougeListTitle: widget.popupTitle!= null ? widget.popupTitle.toUpperCase():"",
                       ));
                   break;
                 case 1:
                   ScreenTransition.navigateToScreenLeft(
                       screenName: TIRestaurantListScreen(
-                        travelLougeListTitle: widget.popupTitle.toUpperCase(),
+                        travelLougeListTitle: widget.popupTitle!= null ? widget.popupTitle.toUpperCase():"",
                       ));
                   break;
                 case 2:
                   ScreenTransition.navigateToScreenLeft(
                       screenName: TIActivityListScreen(
-                        travelLougeListTitle: widget.popupTitle.toUpperCase(),
+                        travelLougeListTitle: widget.popupTitle!= null ? widget.popupTitle.toUpperCase():"",
                       ));
                   break;
                 case 3:
@@ -130,16 +131,16 @@ class _TIPopupGridviewMenuState extends State<TIPopupGridviewMenu> {
           height: Get.height * .05,
           width: Get.height * .05,
           fit: BoxFit.contain,
-          color: selectedIndex == index ? MyColors.lineColor:MyColors.buttonBgColor,
+         color: selectedIndex == index ? MyColors.buttonBgColor:MyColors.buttonBgColorHome ,
         ),
         SizedBox(
           height: Get.height * .020,
         ),
         MyText(
-          text_name: popupItemList[index].title,
+          text_name: popupItemList[index].title.toUpperCase(),
           myFont: MyFont.Courier_Prime_Bold,
           txtfontsize: MyFontSize.size11,
-          txtcolor: selectedIndex == index ?MyColors.lineColor:MyColors.textColor,
+          txtcolor: selectedIndex == index ?MyColors.buttonBgColor:MyColors.textColor,
           txtAlign: TextAlign.center,
           height: 1,
         ),

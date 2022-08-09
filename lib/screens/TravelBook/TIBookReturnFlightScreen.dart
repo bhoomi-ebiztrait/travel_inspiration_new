@@ -16,7 +16,12 @@ import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
+import '../../MyWidget/MyTitlebar.dart';
+import '../../MyWidget/TIMyCustomRoundedCornerButton.dart';
+
 class TIBookReturnFlightScreen extends StatefulWidget {
+  String travelogueTitle;
+  TIBookReturnFlightScreen(this.travelogueTitle);
   //TIAvailableFlightModel toGoFlightSelectedModel;
 
  // TIBookReturnFlightScreen({this.toGoFlightSelectedModel});
@@ -77,55 +82,73 @@ class _TIBookReturnFlightScreenState extends State<TIBookReturnFlightScreen> {
     return SafeArea(
         child: Scaffold(
       body: _buildBodyContent(),
-      bottomSheet: MyBottomLayout(
-        imgUrl: MyImageURL.travel_book_bottom,
-      ),
+          bottomNavigationBar: _bottomButton(),
+
     ));
   }
 
   _buildBodyContent() {
-    print(".............${myController.myIntReturnList1.value[0][0].intArrivalAirportName}");
-    return Column(
-      children: [
-        MyTopHeader(
-          headerName: "",
-          headerImgUrl: MyImageURL.travel_book_top,
-          logoImgUrl: MyImageURL.haudos_logo,
-          imgHeight: Get.height * .12,
-        ),
-        SizedBox(
-          height: Get.height * .03,
-        ),
-        Stack(
-          alignment:Alignment.centerRight,
-          children: [
-            MyText(
-              text_name: "${myController.myIntReturnList1.value[0][0].intDepartureAirportName} - ${myController.myIntReturnList1.value[0][myController.myIntReturnList1.value[0].length-1].intArrivalAirportName}",
-              myFont: MyFont.Courier_Prime_Bold,
-              txtfontsize: MyFontSize.size13,
-              txtcolor: MyColors.textColor,
-              txtAlign: TextAlign.center,
+   // print(".............${myController.myIntReturnList1.value[0][0].intArrivalAirportName}");
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: Get.height*0.30,
+            width: Get.width,
+            color: MyColors.buttonBgColorHome.withOpacity(0.7),
+            child: Column(
+              children: [
+                MyTopHeader(
+                  logoImgUrl: MyImageURL.haudos_logo,
+                ),
+                MyTitlebar(title: widget.travelogueTitle,),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.only(right: Get.width * .06),
-              child:GestureDetector(
-                onTap: (){
-                  Get.to(TIFilterSortFlightScreen());
-                },
-                child: Image.asset(MyImageURL.filter3x),
-              ),
+          ),
+          Container(
+            height: Get.height,
+            width: Get.width,
+            color: MyColors.buttonBgColorHome.withOpacity(0.3),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: Get.height * .03,
+                ),
+                Stack(
+                  alignment:Alignment.centerRight,
+                  children: [
+                    MyText(
+                      text_name: "${myController.myIntReturnList1.value[0][0].intDepartureAirportName} - ${myController.myIntReturnList1.value[0][myController.myIntReturnList1.value[0].length-1].intArrivalAirportName}",
+                      myFont: MyFont.Courier_Prime_Bold,
+                      txtfontsize: MyFontSize.size13,
+                      txtcolor: MyColors.textColor,
+                      txtAlign: TextAlign.center,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: Get.width * .06),
+                      child:GestureDetector(
+                        onTap: (){
+                          Get.to(TIFilterSortFlightScreen(widget.travelogueTitle));
+                        },
+                        child: Image.asset(MyImageURL.filter3x,height: 60,width: 60,),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: Get.height * .02,
+                ),
+                _selectedFlightRow(),
+                SizedBox(
+                  height: Get.height * .020,
+                ),
+                Expanded(child: _bookReturnFlightWidget()),
+              ],
             ),
-          ],
-        ),
-        SizedBox(
-          height: Get.height * .02,
-        ),
-        _selectedFlightRow(),
-        SizedBox(
-          height: Get.height * .020,
-        ),
-        Expanded(child: _bookReturnFlightWidget())
-      ],
+          ),
+
+        ],
+      ),
     );
   }
 
@@ -188,9 +211,9 @@ class _TIBookReturnFlightScreenState extends State<TIBookReturnFlightScreen> {
                       });
 
                      // myController.returnSelectedFlight.value = myController.myIntReturnList1.value[index];
-                      ScreenTransition.navigateToScreenLeft(
+                      /*ScreenTransition.navigateToScreenLeft(
                         screenName: TIOneWayReturnFlightCompleteScreen()
-                      );
+                      );*/
                       //for single item selection in list
                       /*for (i = 0; i < availableFlightList.length; i++) {
                         if (i == index) {
@@ -225,5 +248,29 @@ class _TIBookReturnFlightScreenState extends State<TIBookReturnFlightScreen> {
                 );
               });
         });
+  }
+  _bottomButton() {
+    return Container(
+      width: Get.width,
+      color: MyColors.buttonBgColorHome.withOpacity(0.3),
+      padding: EdgeInsets.only(bottom: 20,top:20,left: 80,right: 80),
+      child: TIMyCustomRoundedCornerButton(
+        onClickCallback:(){
+          if(myController.returnSelectedFlight.length!= 0) {
+            ScreenTransition.navigateToScreenLeft(
+                screenName: TIOneWayReturnFlightCompleteScreen(
+                    widget.travelogueTitle)
+            );
+          }
+        },
+        buttonWidth: Get.width*.48,
+        buttonHeight: Get.height*.052,
+        btnBgColor: MyColors.buttonBgColor,
+        textColor:Colors.white,
+        btnText:"txtValider".tr,
+        fontSize: MyFontSize.size18,
+        myFont: MyFont.Courier_Prime_Bold,
+      ),
+    );
   }
 }

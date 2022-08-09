@@ -5,6 +5,7 @@ import 'package:travel_inspiration/APICallServices/ApiManager.dart';
 import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
 import 'package:travel_inspiration/MyWidget/MyDropDownButton.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
+import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/TIModel/TIMyAccountLanguageModel.dart';
@@ -17,6 +18,9 @@ import 'package:travel_inspiration/utils/MyPreference.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 import 'package:travel_inspiration/utils/MyUtility.dart';
 import 'package:travel_inspiration/utils/TIStrings.dart';
+
+import '../../MyWidget/MyGradientBottomMenu.dart';
+import '../../MyWidget/MySettingTop.dart';
 
 class TIMyAccountLanguageScreen extends StatefulWidget {
   @override
@@ -41,8 +45,9 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
     animationController = AnimationController(duration: const Duration(seconds: 2), vsync: this);
     super.initState();
 
-    listLanguage.add(TIMyAccountLanguageModel(isSelected:  MyPreference.getPrefStringValue(key: MyPreference.language_code)=="en"?true:false,language_name: "txtLangAnglais".tr,local: Locale('en','US')));
     listLanguage.add(TIMyAccountLanguageModel(isSelected:  MyPreference.getPrefStringValue(key: MyPreference.language_code)=="fr"?true:false,language_name: "txtlangFranlang".tr,local: Locale('fr', 'FR')));
+    listLanguage.add(TIMyAccountLanguageModel(isSelected:  MyPreference.getPrefStringValue(key: MyPreference.language_code)=="en"?true:false,language_name: "txtLangAnglais".tr,local: Locale('en','US')));
+
     /*WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _callGetLanguageApiCall();
     });*/
@@ -88,29 +93,29 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
 
   @override
   Widget build(BuildContext context) {
+    listLanguage.clear();
+    listLanguage.add(TIMyAccountLanguageModel(isSelected:  MyPreference.getPrefStringValue(key: MyPreference.language_code)=="fr"?true:false,language_name: "txtlangFranlang".tr,local: Locale('fr', 'FR')));
+    listLanguage.add(TIMyAccountLanguageModel(isSelected:  MyPreference.getPrefStringValue(key: MyPreference.language_code)=="en"?true:false,language_name: "txtLangAnglais".tr,local: Locale('en','US')));
     return Scaffold(
+      backgroundColor: MyColors.settingBgColor,
+      bottomNavigationBar:  MyGradientBottomMenu(selString:MyStrings.settings,iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.change_pw_bottom,bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),),
         body:_buildBodyContent(),
-        bottomSheet: MyBottomLayout(
-          imgUrl: MyImageURL.setting_bottom,
-        ));
+);
   }
 
   _buildBodyContent(){
     return  SafeArea(
       child: Column(
-        //crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
         children: [
-          MyTopHeader(
-            headerImgUrl: MyImageURL.setting_top,
-            headerName: "txtmyCompte".tr,
-            logoImgUrl: MyImageURL.haudos_logo,
-          ),
+          MySettingTop(title: "txtmyCompte".tr,),
+
           SizedBox(
             height: Get.height * .040,
           ),
-          Container(
-            width: Get.width,
-            margin: EdgeInsets.only(left: Get.height * .040),
+          Padding(
+            padding: EdgeInsets.only(left: Get.height * .030),
             child: Row(
               children: [
                 Text(
@@ -118,7 +123,7 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
                   style: TextStyle(
                       color: MyColors.textColor,
                       fontFamily: MyFont.Courier_Prime_Bold,
-                      fontSize: MyFontSize.size13),
+                      fontSize: MyFontSize.size15),
                 ),
                 _buildRotateArrowWidget(),
 
@@ -128,7 +133,8 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
           SizedBox(
             height: Get.height * .030,
           ),
-          _languages()
+          _languages(),
+
           /*Expanded(child: loader?
           Container():_langaugeList()),*/
         ],
@@ -162,6 +168,8 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
         itemBuilder: (context, index) {
           return RadioListTile(
             value: listLanguage[index].isSelected,
+            activeColor: MyColors.textColor.withOpacity(0.55),
+
             groupValue: true,
             onChanged: (ind) {
 
@@ -172,13 +180,19 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
                 listLanguage[index].isSelected = true;
 
                 Get.updateLocale(listLanguage[index].local);
+                _updateLanguageApiCall(listLanguage[index].local.languageCode == "en" ? "1" : "0");
 
                 MyPreference.setPrefStringValue(key: MyPreference.language_code, value: listLanguage[index].local.languageCode);
                 MyPreference.setPrefStringValue(key: MyPreference.country_code, value: listLanguage[index].local.countryCode);
               });
 
             },
-            title: Text(listLanguage[index].language_name),
+            title: MyTextStart(text_name: listLanguage[index].language_name,
+              myFont: MyStrings.courier_prime,
+              txtfontsize: MyFontSize.size15,
+              txtcolor: MyColors.textColor,
+            ),
+            // Text(listLanguage[index].language_name),
           );
         },
         itemCount: listLanguage.length,
@@ -186,7 +200,7 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
     );
   }
 
-  _langaugeList() {
+  /*_langaugeList() {
     return Obx(() => Column(
           children: [
             ListTile(
@@ -288,7 +302,7 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
 
     });
 
-  }
+  }*/
 
   _getParam(String langId){
     Map param={
@@ -298,10 +312,10 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
     return param;
   }
 
-  _updateLanguageApiCall({int index,String langId})async{
+  _updateLanguageApiCall(String langId)async{
        apiManager.updateLanguageApiCall(_getParam(langId)).then((response){
 
-         if(response.isSuccess()){
+         /*if(response.isSuccess()){
            myController.rotateArrow.value = false;
            myController.isExapanded.value = false;
            apiManager.languageList.value[index].isSelected=false;
@@ -315,7 +329,7 @@ class _TIMyAccountLanguageScreenState extends State<TIMyAccountLanguageScreen>
            myController.isExapanded.value = false;
            apiManager.languageList.value[index].isSelected=false;
              MyUtility.showErrorMsg(response.getMessage());
-           }
+           }*/
        });
   }
 }

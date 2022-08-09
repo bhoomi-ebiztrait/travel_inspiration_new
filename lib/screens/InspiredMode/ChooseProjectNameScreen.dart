@@ -28,38 +28,59 @@ class ChooseProjectNameScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              MyTopHeader(headerName: "",headerImgUrl: MyImageURL.project_name_top,),
-              SizedBox(
-                height: Get.height * 0.04,
+          child: Container(
+            width: Get.width,
+            height: Get.height,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(MyImageURL.login), fit: BoxFit.fill)),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30.0,bottom: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  MyTopHeader(headerName: "",headerImgUrl: MyImageURL.project_name_top,),
+
+                  buildProjectNameBlue(),
+                  buildBottomImage(context),
+
+
+                ],
               ),
-
-              buildProjectName(),
-
-              SizedBox(height: Get.height*0.06,),
-
-            ],
+            ),
           ),
               ),
             ),
-      bottomNavigationBar: buildBottomImage(context),
+      // bottomNavigationBar: buildBottomImage(context),
     );
   }
-
+buildProjectNameBlue(){
+    return Container(
+alignment: Alignment.center,
+      margin: EdgeInsets.only(left: 60),
+      height: 100,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40),
+            bottomLeft: Radius.circular(40)),
+        color: MyColors.buttonBgColor,
+      ),
+      //margin: EdgeInsets.all(20),
+      child:buildProjectName(),
+    );
+}
   buildProjectName(){
     return  Form(
       key: _formKey,
       child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40,vertical: 50),
+          //padding: EdgeInsets.symmetric(horizontal: 40,vertical: 50),
           child: TextFormField(
             onTap: (){},
             textAlign: TextAlign.center,
             controller: projNameController,
-            style: TextStyle(color: MyColors.textColor, fontSize: MyFontSize.size23,fontFamily: MyStrings.cagliostro,decoration: TextDecoration.none,
+            style: TextStyle(color: MyColors.whiteColor, fontSize: MyFontSize.size23,fontFamily: MyStrings.bodoni72_Bold,decoration: TextDecoration.none,
             ),
             cursorColor: Colors.black45,
             // keyboardType: edinputType,
@@ -78,7 +99,7 @@ class ChooseProjectNameScreen extends StatelessWidget {
               fillColor: Colors.transparent,
               contentPadding: const EdgeInsets.only(left: 10, right:10),
               hintText: "name_of_project".tr,
-              hintStyle: TextStyle(color: MyColors.textColor),
+              hintStyle: TextStyle(color: MyColors.whiteColor),
               counterText: "",
               filled: true,
             ),
@@ -93,14 +114,9 @@ class ChooseProjectNameScreen extends StatelessWidget {
     return Container(
       alignment: Alignment.bottomCenter,
       // height: Get.height * 0.10,
-      height: 80,
+      height: 100,
       width: Get.width,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(MyImageURL.project_name_bottom),
-          fit: BoxFit.fill,
-        ),
-      ),
+
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Row(
@@ -120,7 +136,7 @@ class ChooseProjectNameScreen extends StatelessWidget {
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
                 GestureDetector(
@@ -133,12 +149,15 @@ class ChooseProjectNameScreen extends StatelessWidget {
                           : (callCreateInspireProjectAPI());
                     }
                   },
-                    child: Image.asset(MyImageURL.fleche)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: Image.asset(MyImageURL.fleche,height: 90,width: 90,),
+                    )),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.max,
               children: [
                 InkWell(

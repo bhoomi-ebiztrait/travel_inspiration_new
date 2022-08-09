@@ -9,6 +9,7 @@ import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/MyTextButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
+import 'package:travel_inspiration/screens/ModifyPhoneNumberScreen.dart';
 import 'package:travel_inspiration/screens/SettingsMenu/AutersInformationScreen.dart';
 import 'package:travel_inspiration/screens/SettingsMenu/BecomePremiumScreen.dart';
 import 'package:travel_inspiration/screens/SettingsMenu/ChangePasswordScreen.dart';
@@ -31,9 +32,11 @@ import 'package:travel_inspiration/utils/MyUtility.dart';
 import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 import 'package:travel_inspiration/utils/TIStrings.dart';
 
+import '../../MyWidget/MyGradientBottomMenu.dart';
+import '../../MyWidget/MyTitlebar.dart';
 import '../HomeScreen.dart';
 
-enum param{DOB,address,language,become_premium,
+enum param{DOB,address,language,become_premium,phone_no,
   terms_condition,privacy_policy,logOut,
   notification,faq,mode_de_transport}
 class SettingScreen extends StatefulWidget {
@@ -47,6 +50,8 @@ class _SettingScreenState extends State<SettingScreen> {
   MyController dataController = Get.put(MyController());
   ApiManager apiManager=Get.put(ApiManager());
 
+  bool isAuturesClicked = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -57,6 +62,8 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar:  MyGradientBottomMenu(selString:MyStrings.settings,
+        iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.setting_button_bg,),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -64,20 +71,31 @@ class _SettingScreenState extends State<SettingScreen> {
             // mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize:MainAxisSize.min,
             children: [
-              MyTopHeader(
-                headerName: "settings".tr,
-                headerImgUrl: MyImageURL.setting_top,
-                logoImgUrl: MyImageURL.haudos_logo,
-                logoCallback: (){
-                  CommonMethod.getAppMode();
-                },
+              Container(
+                height: Get.height * 0.30,
+                width: Get.width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      MyImageURL.setting_top,
+                    ),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: Center(
+                  child: MyTitlebar(
+                    title: "settings".tr.toUpperCase(),
+                  ),
+                ),
               ),
+
               SizedBox(
                 height: Get.height * 0.04,
               ),
-              buildParameters(),
+              buildTitle(),
+              isAuturesClicked == false ? buildParameters():buildAuturesInfo(),
 
-              buildBottomImage(),
+             // buildBottomImage(),
             ],
           ),
         ),
@@ -87,25 +105,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
    buildParameters() {
     return Padding(
-              padding: const EdgeInsets.only(left: 15.0),
+              padding: const EdgeInsets.only(left: 20.0,top: 25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: MyTextStart(
-                        text_name: "my_account".tr,
-                        myFont: MyStrings.courier_prime_bold,
-                        txtfontsize: MyFontSize.size13,
-                        txtcolor: MyColors.textColor),
-                  ),
 
-                  Padding(
-                    padding: const EdgeInsets.only(top:10,bottom:10,left: 8.0, right: 30),
-                    child: setDivider(MyColors.lightGreenColor, 5),
-                  ),
                   MyTextButtonStart(
                     btn_name: "change_my_password".tr,
                     onClick: () {
@@ -113,56 +119,62 @@ class _SettingScreenState extends State<SettingScreen> {
                       },
                     txtcolor: MyColors.textColor,
                     txtfont: MyFontSize.size13,
-                    myFont: MyStrings.courier_prime_bold,
+                    myFont: MyStrings.courier_prime,
                   ),
                   setDivider(MyColors.dialog_shadowColor, 1),
                   buildDetails("date_of_birth".tr,MyPreference.getPrefStringValue(key: MyPreference.dob) != "null" ? MyPreference.getPrefStringValue(key: MyPreference.dob) : "",param.DOB),
                   setDivider(MyColors.dialog_shadowColor, 1),
-                  buildDetails("address".tr,MyPreference.getPrefStringValue(key: MyPreference.address)!= "null" ? MyPreference.getPrefStringValue(key: MyPreference.address) : "",param.address),
-                  setDivider(MyColors.dialog_shadowColor, 1),
+                 // buildDetails("address".tr,MyPreference.getPrefStringValue(key: MyPreference.address)!= "null" ? MyPreference.getPrefStringValue(key: MyPreference.address) : "",param.address),
+                  //setDivider(MyColors.dialog_shadowColor, 1),
                   buildDetails("mode_of_transport_used".tr,null,param.mode_de_transport),
                   setDivider(MyColors.dialog_shadowColor, 1),
                   buildDetails("language".tr,"",param.language),
                   setDivider(MyColors.dialog_shadowColor, 1),
                   buildDetails("become_premium".tr,null,param.become_premium),
                   setDivider(MyColors.dialog_shadowColor, 1),
+                  buildDetails("change_my_number".tr,MyPreference.getPrefStringValue(key: MyPreference.phoneNumber)!= "null" ? MyPreference.getPrefStringValue(key: MyPreference.phoneNumber) : "",param.phone_no),
+                  setDivider(MyColors.dialog_shadowColor, 1),
+                  // buildDetails("address".tr,null,param.address),
+                  // setDivider(MyColors.dialog_shadowColor, 1),
                   buildDetails("notification".tr,null,param.notification),
                   setDivider(MyColors.dialog_shadowColor, 1),
                   SizedBox(
-                    height: Get.height * 0.05,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: MyTextStart(
-                        text_name: "other_information".tr,
-                        myFont: MyStrings.courier_prime_bold,
-                        txtfontsize: MyFontSize.size13,
-                        txtcolor: MyColors.textColor),
+                    height: Get.height * 0.06,
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.only(top:10,bottom:10,left: 8.0, right: 30),
-                    child: setDivider(MyColors.lightGreenColor, 5),
-                  ),
-                  buildDetails("terms_conditions".tr,null,param.terms_condition),
-                  setDivider(MyColors.dialog_shadowColor, 1),
-                  buildDetails("privacy_policy".tr,null,param.privacy_policy),
-                  setDivider(MyColors.dialog_shadowColor, 1),
-                  buildDetails("faq".tr,null,param.faq),
-                  setDivider(MyColors.dialog_shadowColor, 1),
-                  buildSignOut(),
-
-                  setDivider(MyColors.dialog_shadowColor, 1),
-
-                  buildDeleteAc(),
-                  // buildDetails(MyStrings.delete_my_account,null),
-                  SizedBox(
-                    height: Get.height * 0.01,
-                  ),
 
                 ],
               ),
             );
+  }
+  buildAuturesInfo() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0,top:25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          buildDetails("terms_conditions".tr,null,param.terms_condition),
+          setDivider(MyColors.dialog_shadowColor, 1),
+          buildDetails("privacy_policy".tr,null,param.privacy_policy),
+          setDivider(MyColors.dialog_shadowColor, 1),
+          buildDetails("faq".tr.toUpperCase(),null,param.faq),
+          setDivider(MyColors.dialog_shadowColor, 1),
+          buildSignOut(),
+
+          setDivider(MyColors.dialog_shadowColor, 1),
+
+          buildDeleteAc(),
+          setDivider(MyColors.dialog_shadowColor, 1),
+          // buildDetails(MyStrings.delete_my_account,null),
+          SizedBox(
+            height: Get.height * 0.06,
+          ),
+
+        ],
+      ),
+    );
   }
 
   Container buildBottomImage() {
@@ -256,7 +268,17 @@ class _SettingScreenState extends State<SettingScreen> {
           }
           // ScreenTransition.navigateToScreenLeft(screenName: ChangedAddressScreen());
 
-        }else if(param.language==enumVal){
+        }else if(param.phone_no == enumVal){
+
+          final result =  await Get.to(()=>ModifyPhoneNumberScreen());
+          if(result == true){
+            setState(() {
+            });
+          }
+          // ScreenTransition.navigateToScreenLeft(screenName: ChangedAddressScreen());
+
+        }
+        else if(param.language==enumVal){
          ScreenTransition.navigateToScreenLeft(screenName: TIMyAccountLanguageScreen());
 
         }else if(param.become_premium==enumVal){
@@ -289,7 +311,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         children: [
                           MyTextStart(
                               text_name: title,
-                              myFont: MyStrings.courier_prime_bold,
+                              myFont: MyStrings.courier_prime,
                               txtfontsize: MyFontSize.size13,
                               txtcolor: MyColors.textColor),
                           value != null ?MyTextEnd(
@@ -332,6 +354,7 @@ class _SettingScreenState extends State<SettingScreen> {
          Get.back();
          if(response.isSuccess()){
            MyPreference.clearPref();
+           print("userId::: ${MyPreference.getPrefStringValue(key: MyPreference.userId)}");
            ScreenTransition.navigateOffAll(screenName: HomeScreen());
          }else{
            MyUtility.showErrorMsg(response.getMessage());
@@ -342,5 +365,65 @@ class _SettingScreenState extends State<SettingScreen> {
       Get.back();
     },),barrierDismissible: false);
 
+  }
+
+  buildTitle() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+buildMyAccount(),
+        buildAutures(),
+      ],
+    );
+  }
+
+  buildMyAccount() {
+    return GestureDetector(
+      onTap: (){
+        setState(() {
+          isAuturesClicked = false;
+        });
+      },
+      child: Container(
+        width: Get.width * .40,
+        height: Get.height * .052,
+        decoration: BoxDecoration(
+          color: MyColors.buttonBgColor.withOpacity(isAuturesClicked == false ? 1 :0.32),
+          borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
+        ),
+        child: MyText(
+          text_name: "my_account".tr,
+          myFont: MyFont.Courier_Prime_Bold,
+          txtfontsize: MyFontSize.size13,
+          txtcolor: MyColors.whiteColor,
+          txtAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
+  buildAutures() {
+    return GestureDetector(
+      onTap: (){
+        setState(() {
+          isAuturesClicked = true;
+        });
+      },
+      child: Container(
+        width: Get.width * .40,
+        height: Get.height * .052,
+        decoration: BoxDecoration(
+          color: MyColors.buttonBgColor.withOpacity(isAuturesClicked == false ? 0.32 :1),
+          borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
+        ),
+        child: MyText(
+          text_name: "other_information".tr,
+          myFont: MyFont.Courier_Prime_Bold,
+          txtfontsize: MyFontSize.size13,
+          txtcolor: MyColors.whiteColor,
+          txtAlign: TextAlign.center,
+        ),
+      ),
+    );
   }
 }

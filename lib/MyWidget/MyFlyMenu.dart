@@ -49,8 +49,9 @@ class MyFlyMenu extends StatelessWidget {
               height: Get.height * .015,
             ),
             Container(
-              width: Get.height * .10,
-              height: Get.height * .10,
+              width: Get.height * .12,
+              height: Get.height * .12,
+              // color: Colors.red,
               child: GestureDetector(
                   // onTap: () {
                   //   // setState(() {

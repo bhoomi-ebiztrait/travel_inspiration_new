@@ -8,6 +8,9 @@ import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/MyWidget/TIMyCustomRoundedCornerButton.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/TIModel/TIDestinationInProgressModel.dart';
+import 'package:travel_inspiration/screens/ReflectMode/ReflectModeCreateProjectScreen.dart';
+import 'package:travel_inspiration/screens/StopRouteScreen.dart';
+import 'package:travel_inspiration/screens/TICreateNewProjectInInspireModeScreen.dart';
 import 'package:travel_inspiration/screens/TIPinDestinationToProjectScreen.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
 import 'package:travel_inspiration/utils/Loading.dart';
@@ -17,6 +20,7 @@ import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyPreference.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
+import 'package:travel_inspiration/utils/TIScreenTransition.dart';
 
 import 'TravelBook/TITravelougeScreen.dart';
 
@@ -31,6 +35,10 @@ class NotificationScreenState extends State<NotificationScreen> {
   MyController myController = MyController();
   bool isStopped = false;
   bool isVisible = false;
+
+  bool isContinueSel = false;
+
+  bool isNewSelected = false;
 
   @override
   void initState() {
@@ -54,7 +62,7 @@ class NotificationScreenState extends State<NotificationScreen> {
         padding: EdgeInsets.only(top: Get.height * 0.03),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(MyImageURL.home_bg),
+            image: AssetImage(MyImageURL.notify_img),
             fit: BoxFit.cover,
           ),
         ),
@@ -98,7 +106,7 @@ class NotificationScreenState extends State<NotificationScreen> {
                     },
                     child: Image.asset(
                       MyImageURL.arrow_dropdown_up,
-                      color: MyColors.expantionTileBgColor,
+                      color: MyColors.buttonBgColor,
                       height: Get.height * .035,
                       width: Get.height * .035,
                       fit: BoxFit.contain,
@@ -110,9 +118,9 @@ class NotificationScreenState extends State<NotificationScreen> {
                 height: Get.height * 0.01,
               ),
               MyTextStart(
-                text_name: "my_trvel_book".tr,
+                text_name: "go_on_way".tr,
                 txtcolor: MyColors.buttonBgColor,
-                txtfontsize: MyFontSize.size8,
+                txtfontsize: MyFontSize.size13,
                 myFont: MyStrings.courier_prime_bold,
               ),
               SizedBox(
@@ -121,25 +129,43 @@ class NotificationScreenState extends State<NotificationScreen> {
               Container(
                 padding: EdgeInsets.all(Get.height * 0.02),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TIMyCustomRoundedCornerButton(
-                      onClickCallback: () {},
-                      btnText: "btn_text",
+                      onClickCallback: () {
+                        setState(() {
+                          isNewSelected = true;
+                          isContinueSel = false;
+                        });
+                        ScreenTransition.navigateToScreenLeft(
+                            screenName: (widget.data["mode"]) == "0"
+                                ? TICreateNewProjectInInspireModeScreen()
+                                : ReflectModeCreateProjectScreen());
+                      },
+                      btnText: "Repartiede".tr,
                       fontSize: MyFontSize.size9,
-                      textColor: MyColors.txtWhiteColor,
+                      textColor: isNewSelected == true ? MyColors.whiteColor:MyColors.buttonBgColor,
                       myFont: MyFont.Courier_Prime_Bold,
-                      btnBgColor: MyColors.expantionTileBgColor,
+                      btnBgColor: isNewSelected == true ? MyColors.buttonBgColor:MyColors.whiteColor,
                       buttonWidth: Get.width * .40,
                       buttonHeight: Get.height * .040,
                     ),
                     TIMyCustomRoundedCornerButton(
-                      onClickCallback: () {},
-                      btnText: "btn_text",
+                      onClickCallback: () {
+                        setState(() {
+                          isContinueSel = true;
+                          isNewSelected = false;
+                        });
+                        ScreenTransition.navigateToScreenLeft(
+                            screenName: (widget.data["mode"]) == "0"
+                                ? TICreateNewProjectInInspireModeScreen()
+                                : ReflectModeCreateProjectScreen());
+                      },
+                      btnText: "Comulermes".tr,
                       fontSize: MyFontSize.size9,
-                      textColor: MyColors.txtWhiteColor,
+                      textColor: isContinueSel == true ? MyColors.whiteColor:MyColors.buttonBgColor,
                       myFont: MyFont.Courier_Prime_Bold,
-                      btnBgColor: MyColors.expantionTileBgColor,
+                      btnBgColor: isContinueSel == true ? MyColors.buttonBgColor:MyColors.whiteColor,
                       buttonWidth: Get.width * .40,
                       buttonHeight: Get.height * .040,
                     ),
@@ -204,16 +230,18 @@ class NotificationScreenState extends State<NotificationScreen> {
       ],
     ),
    Container(
-    margin: EdgeInsets.all( Get.height*0.05),
+    margin: EdgeInsets.symmetric( vertical:Get.height*0.05),
+
     child: GestureDetector(
     onTap: () {
     //myController.showDestinationInProgressPopup.value = false;
     },
 
-    child: MyTextStart(
-    text_name: "ddsdgdsfdfhdfgd",
+    child: MyText(
+    // text_name: "${"you_hv_done".tr} 305 ${"km".tr} ",
+    text_name: "${"you_hv_done".tr} ${widget.data["km"]} ${"km".tr} ",
     myFont: MyFont.Cagliostro_reguler,
-    txtfontsize: MyFontSize.size20,
+    txtfontsize: MyFontSize.size23,
     txtcolor: MyColors.whiteColor ,
     //height: 1,
     ),
@@ -244,12 +272,16 @@ class NotificationScreenState extends State<NotificationScreen> {
         : "txtArretermonparcours".tr;
     return Column(
       children: [
+        SizedBox(
+          height: Get.height * .040,
+        ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
           child: MyText(
-            text_name: isStopped == true
-                ? "choose_destination_complete_vacation_plan".tr
-                : "current_destination".tr,
+            text_name: "notify_title".tr,
+            // text_name: isStopped == true
+            //     ? "notify_title".tr
+            //     : "current_destination".tr,
             myFont: MyFont.Courier_Prime_Bold,
             txtfontsize: MyFontSize.size13,
             txtcolor: MyColors.textColor,
@@ -261,13 +293,14 @@ class NotificationScreenState extends State<NotificationScreen> {
           height: Get.height * .030,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
           child: MyText(
-            text_name: isStopped == true
-                ? "choose_destination_complete_vacation_plan".tr
-                : "current_destination".tr,
-            myFont: MyFont.Courier_Prime_Bold,
-            txtfontsize: MyFontSize.size13,
+            text_name: "notify_subtitle".tr,
+            // text_name: isStopped == true
+            //     ? "notify_subtitle".tr
+            //     : "current_destination".tr,
+            myFont: MyFont.Courier_Prime,
+            txtfontsize: MyFontSize.size11,
             txtcolor: MyColors.textColor,
             txtAlign: TextAlign.center,
             //height: 1,
@@ -279,23 +312,24 @@ class NotificationScreenState extends State<NotificationScreen> {
         TIMyCustomRoundedCornerButton(
           onClickCallback: () {
             setState(() {
-              isStopped = true;
-              if (btn_text == "stop_journey".tr) {
+              // isStopped = true;
+              ScreenTransition.navigateToScreenLeft(screenName: StopRouteScreen(widget.data["project_id"],widget.data["km"]));
+              /*if (btn_text == "stop_journey".tr) {
                 Get.to(() => TITravelougeScreen(
                     double.parse(myController.selectedProject.value.totalKm)));
-              }
+              }*/
             });
           },
-          btnText: btn_text,
+          btnText: "txtArretermonparcours".tr,
           fontSize: MyFontSize.size9,
           textColor: MyColors.txtWhiteColor,
           myFont: MyFont.Courier_Prime_Bold,
-          btnBgColor: MyColors.expantionTileBgColor,
+          btnBgColor: MyColors.buttonBgColor,
           buttonWidth: Get.width * .40,
           buttonHeight: Get.height * .040,
         ),
         SizedBox(
-          height: Get.height * 0.05,
+          height: Get.height * 0.02,
         ),
         Expanded(child: _desinationInProgressList()),
       ],
@@ -335,7 +369,7 @@ class NotificationScreenState extends State<NotificationScreen> {
           return Center(
             child: Container(
               margin: EdgeInsets.only(
-                  top: Get.height * 0.04, bottom: Get.height * 0.02),
+                  top: Get.height * 0.07, bottom: Get.height * 0.02),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(30))),
@@ -354,7 +388,7 @@ class NotificationScreenState extends State<NotificationScreen> {
                         },
                         child: Image.asset(
                           MyImageURL.cross_gray3x,
-                          color: MyColors.expantionTileBgColor,
+                          color: MyColors.buttonBgColor,
                           height: Get.height * .035,
                           width: Get.height * .035,
                           fit: BoxFit.contain,
@@ -363,8 +397,8 @@ class NotificationScreenState extends State<NotificationScreen> {
                     ),
                   ),
                   Container(
-                    child: MyTextStart(
-                      text_name: mList.name,
+                    child: MyText(
+                      text_name: "choose_dest_title".tr,
                       txtcolor: MyColors.textColor,
                       txtfontsize: MyFontSize.size14,
                       myFont: MyStrings.courier_prime_bold,
@@ -389,10 +423,11 @@ class NotificationScreenState extends State<NotificationScreen> {
                     height: Get.height * 0.05,
                   ),
                   Container(
+                    width: Get.width,
                     child: MyTextStart(
                       text_name: mList.name,
                       txtcolor: MyColors.textColor,
-                      txtfontsize: MyFontSize.size14,
+                      txtfontsize: MyFontSize.size12,
                       myFont: MyStrings.courier_prime_bold,
                     ),
                   ),
@@ -401,13 +436,14 @@ class NotificationScreenState extends State<NotificationScreen> {
                   ),
                   Container(
                     child: MyTextStart(
-                      text_name: mList.name,
+                      text_name: mList.description,
                       txtcolor: MyColors.textColor,
-                      txtfontsize: MyFontSize.size12,
+                      txtfontsize: MyFontSize.size10,
+                      myFont: MyStrings.courier_prime,
                     ),
                   ),
                   SizedBox(
-                    height: Get.height * .05,
+                    height: Get.height * .08,
                   ),
                   Stack(
                     children: [
@@ -418,10 +454,10 @@ class NotificationScreenState extends State<NotificationScreen> {
                             setState(() {});
                           },
                           btnText: "carnet de voyage",
-                          fontSize: MyFontSize.size9,
+                          fontSize: MyFontSize.size10,
                           textColor: MyColors.txtWhiteColor,
                           myFont: MyFont.Courier_Prime_Bold,
-                          btnBgColor: MyColors.expantionTileBgColor,
+                          btnBgColor: MyColors.buttonBgColor,
                           buttonWidth: Get.width * .40,
                           buttonHeight: Get.height * .040,
                         ),
@@ -434,59 +470,8 @@ class NotificationScreenState extends State<NotificationScreen> {
           );
         });
 
-    Get.dialog(
-        AlertDialog(
-            /*  shape: RoundedRectangleBorder(borderRadius:
-            BorderRadius.all(Radius.circular(30))),*/
-            content: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0),
-          child: Container(
-            height: Get.width,
-            width: Get.width,
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Image.asset(MyImageURL.cross)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: MyText(
-                    text_name: "msgContent",
-                    txtcolor: MyColors.textColor,
-                    txtfontsize: MyFontSize.size13,
-                  ),
-                ),
-                SizedBox(
-                  height: Get.height * 0.03,
-                ),
-              ],
-            ),
-          ),
-        )),
-        barrierDismissible: true);
+
   }
 
-  callPinDestinationAPI() async {
-    ApiManager apiManager = ApiManager();
-    Map<String, dynamic> param = {
-      "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
-      "project_id": myController.selectedProject.value.id,
-      "pin_destination": myController.selectedPlace.value.name,
-    };
 
-    await apiManager.pinDestinationAPI(param).then((value) {
-      if (value) {
-        Get.to(TIPinDestinationToProjectScreen(
-          travelLougeTitle: "txtPinDestination".tr,
-        ));
-      }
-    });
-  }
 }

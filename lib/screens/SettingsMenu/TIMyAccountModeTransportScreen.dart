@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
+import 'package:travel_inspiration/MyWidget/MyText.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/TIModel/TIMyAccountNotificationModel.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
@@ -9,69 +10,73 @@ import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
 import 'package:travel_inspiration/utils/MyStrings.dart';
 
+import '../../MyWidget/MyGradientBottomMenu.dart';
+import '../../MyWidget/MySettingTop.dart';
+
 class TIMYAccountModeTransportScreen extends StatelessWidget {
   MyController myController = Get.put(MyController());
+  double mSize = 60;
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      backgroundColor: MyColors.settingBgColor,
       body: _buildBodyContent(),
-      bottomSheet: Container(
-        height: Get.height * .10,
-        width: Get.width,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(MyImageURL.setting_bottom),
-                fit: BoxFit.fill)),
-      ),
+
+      bottomNavigationBar:  MyGradientBottomMenu(selString:MyStrings.settings,iconList: [MyImageURL.profile_icon,MyImageURL.galerie,MyImageURL.home_menu,MyImageURL.world_icon,MyImageURL.setting_selected],bgImg: MyImageURL.change_pw_bottom,bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),),
     );
   }
 
   _buildBodyContent() {
     return Obx(() => SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MyTopHeader(
-                headerImgUrl: MyImageURL.setting_top,
-                headerName: "txtmyCompte".tr,
-                logoImgUrl: MyImageURL.haudos_logo,
-              ),
-              SizedBox(
-                height: Get.height * .030,
-              ),
-              Container(
-                margin: EdgeInsets.only(left: Get.width * .08),
-                child: Column(
-                  children: [
-                    Text(
-                      "txtmodede".tr,
-                      style: TextStyle(
-                          color: MyColors.textColor,
-                          fontFamily: MyFont.Courier_Prime_Bold,
-                          fontSize: MyFontSize.size13),
-                    ),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MySettingTop(title: "txtmyCompte".tr,),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: Get.height * .040,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40.0,right: 10),
+                        child: MyTextStart(
+                          text_name: "txtmodede".tr,
+                          txtcolor: MyColors.textColor,
+                          myFont: MyFont.Courier_Prime_Bold,
+                          txtfontsize: MyFontSize.size13,
+                        ),
+                      ),
+                      SizedBox(
+                        height: Get.height * .020,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40.0,right: 10),
+                        child: MyTextStart(
+                          text_name: "txtchoisdetes".tr,
+                          txtcolor: MyColors.textColor,
+                          myFont: MyFont.Courier_Prime,
+                          txtfontsize: MyFontSize.size13,
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: Get.height * .04,
+                      ),
+                      _buildTransportSwitchWidget(),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: Get.height * .030,
-              ),
-              Container(
-                margin: EdgeInsets.only(left: Get.width * .08),
-                child: Text(
-                  "txtchoisdetes".tr,
-                  style: TextStyle(
-                      color: MyColors.textColor,
-                      fontFamily: MyFont.Courier_Prime,
-                      fontSize: MyFontSize.size13),
-                ),
-              ),
-              SizedBox(
-                height: Get.height * .02,
-              ),
-              _buildTransportSwitchWidget(),
-            ],
+
+              ],
+            ),
           ),
         ));
   }
@@ -93,8 +98,8 @@ class TIMYAccountModeTransportScreen extends StatelessWidget {
             child: Column(
           children: [
             Container(
-                height:50,
-                width:50,
+                height:mSize,
+                width:mSize,
                 child: Image.asset(MyImageURL.car)),
             SizedBox(
               height: Get.height * .010,
@@ -113,7 +118,10 @@ class TIMYAccountModeTransportScreen extends StatelessWidget {
         TableCell(
             child: Column(
           children: [
-            Image.asset(MyImageURL.bike),
+            Container(
+                height:mSize,
+                width:mSize,
+                child: Image.asset(MyImageURL.bike)),
             SizedBox(
               height: Get.height * .010,
             ),
@@ -131,7 +139,10 @@ class TIMYAccountModeTransportScreen extends StatelessWidget {
         TableCell(
             child: Column(
           children: [
-            Image.asset(MyImageURL.train),
+            Container(
+                height:mSize,
+                width:mSize,
+                child: Image.asset(MyImageURL.train)),
             SizedBox(
               height: Get.height * .010,
             ),
@@ -153,13 +164,13 @@ class TIMYAccountModeTransportScreen extends StatelessWidget {
   _tableRow2() {
     return TableRow(children: [
       SizedBox(
-        height: Get.height * .030,
+        height: Get.height * .040,
       ),
       SizedBox(
-        height: Get.height * .030,
+        height: Get.height * .040,
       ),
       SizedBox(
-        height: Get.height * .030,
+        height: Get.height * .040,
       ),
     ]);
   }
@@ -170,8 +181,8 @@ class TIMYAccountModeTransportScreen extends StatelessWidget {
           child: Column(
         children: [
           Container(
-              height:50,
-              width:50,
+              height:mSize,
+              width:mSize,
               child: Image.asset(MyImageURL.cycle)),
           SizedBox(
             height: Get.height * .010,
@@ -190,7 +201,10 @@ class TIMYAccountModeTransportScreen extends StatelessWidget {
       TableCell(
           child: Column(
         children: [
-          Image.asset(MyImageURL.scooter),
+          Container(
+              height:mSize,
+              width:mSize,
+              child: Image.asset(MyImageURL.scooter)),
           SizedBox(
             height: Get.height * .010,
           ),
@@ -208,7 +222,10 @@ class TIMYAccountModeTransportScreen extends StatelessWidget {
       TableCell(
           child: Column(
         children: [
-          Image.asset(MyImageURL.walkingman),
+          Container(
+              height:mSize,
+              width:mSize,
+              child: Image.asset(MyImageURL.walkingman)),
           SizedBox(
             height: Get.height * .010,
           ),

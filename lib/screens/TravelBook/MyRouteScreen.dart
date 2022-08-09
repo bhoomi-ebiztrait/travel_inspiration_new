@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geocode/geocode.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -39,7 +39,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
 
   bool isClickedDetails = false;
 
-  var address;
+  Placemark address;
 
 
 
@@ -51,6 +51,12 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
   void _onAddMarkerButtonPressed() {
 
     if(myController.selectedPlace.value != null){
+
+      if(myController.selectedPlace.value.name == ""){
+        myController.selectedPlace.value.name = "";
+        myController.selectedPlace.value.lat = widget.currentPosition.latitude;
+        myController.selectedPlace.value.lng = widget.currentPosition.longitude;
+      }
 
       _markers.add(Marker(
 // This marker id can be anything that uniquely identifies each marker.
@@ -111,6 +117,13 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
     // TODO: implement initState
     super.initState();
     getCurrentAddress();
+    if(myController.selectedPlace.value != null) {
+      if (myController.selectedPlace.value.name == "") {
+        myController.selectedPlace.value.name = "";
+        myController.selectedPlace.value.lat = widget.currentPosition.latitude;
+        myController.selectedPlace.value.lng = widget.currentPosition.longitude;
+      }
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       myController.getDistanceAPI(widget.currentPosition.latitude,widget.currentPosition.longitude);
     });
@@ -125,10 +138,18 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
           // mainAxisAlignment: MainAxisAlignment.start,
           // mainAxisSize: MainAxisSize.min,
           children: [
-            buildAddress(),
-            SizedBox(height: 20,),
-            isClickedDetails==true ? buildDistanceUI() :buildButtons(),
-            SizedBox(height: 30,),
+            Container(
+              color: MyColors.buttonBgColorHome.withOpacity(0.7),
+              child: Column(
+                children: [
+                  buildAddress(),
+                  SizedBox(height: 20,),
+                  isClickedDetails==true ? buildDistanceUI() :buildButtons(),
+                  SizedBox(height: 30,),
+                ],
+              ),
+            ),
+
             buildMap(),
             // SizedBox(height: 20,),
 
@@ -162,6 +183,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
               onTap: (){
@@ -177,13 +199,21 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
                 width: 25,)),
           SizedBox(width: 10,),
           Flexible(
-            child: MyTextStart(text_name: "${myController.selectedPlace.value.description}",
-              txtcolor: MyColors.textColor,
-              txtfontsize: MyFontSize.size13,
-              myFont: MyStrings.courier_prime_bold,
-              // maxLine: 5,
+            child: Container(
+              width: Get.width*0.6,
+              child: MyTextStart(text_name: "${myController.selectedPlace.value.description}",
+                txtcolor: MyColors.textColor,
+                txtfontsize: MyFontSize.size13,
+                myFont: MyStrings.courier_prime_bold,
+                // maxLine: 5,
+              ),
             ),
           ),
+          GestureDetector(
+              onTap: (){
+                CommonMethod.getAppMode();
+              },
+              child: Image.asset(MyImageURL.home_icon,width: 50,)),
         ],
       ),
     );
@@ -204,12 +234,13 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
                   if(address == null){
                    getCurrentAddress();
                   }else {
+                    print("myAdd:: ${address.street}");
                     ScreenTransition.navigateToScreenLeft(
-                        screenName: RouteDetailsScreen(currCity: address.city,
-                          currAddress: address.streetAddress,currPos: widget.currentPosition));
+                        screenName: RouteDetailsScreen(currCity: address.name,
+                          currAddress: "${address.name},${address.subLocality},${address.locality}",currPos: widget.currentPosition));
                   }
                 },
-                child: Image.asset(MyImageURL.fleche)),
+                child: Image.asset(MyImageURL.fleche,height: 80,width: 80,)),
           ],
         ),
       );
@@ -225,14 +256,14 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
               text_name: title,
               txtfontsize: MyFontSize.size10,
               myFont: MyStrings.courier_prime_bold,
-              txtcolor: MyColors.buttonBgColor.withOpacity(1),
+              txtcolor: MyColors.whiteColor,
             ),
             SizedBox(height: 4,),
             MyTextStart(
               text_name: value,
               txtfontsize: MyFontSize.size14,
               myFont: MyStrings.courier_prime_bold,
-              txtcolor: MyColors.buttonBgColor.withOpacity(1),
+              txtcolor: MyColors.whiteColor,
             ),
           ],
         );
@@ -263,7 +294,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
         width: Get.width * .38,
         height: Get.height * .050,
         decoration: BoxDecoration(
-          color: MyColors.expantionTileBgColor,
+          color: MyColors.buttonBgColor,
           borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
         ),
         child: MyText(
@@ -286,7 +317,7 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
         width: Get.width * .38,
         height: Get.height * .050,
         decoration: BoxDecoration(
-          color: MyColors.expantionTileBgColor,
+          color: MyColors.buttonBgColor,
           borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
         ),
         child: MyText(
@@ -301,16 +332,22 @@ class _MyRouteScreenState extends State<MyRouteScreen> {
   }
 
   void getCurrentAddress() async{
-    GeoCode geoCode = GeoCode();
+
+    List<Placemark> newAddress = await placemarkFromCoordinates(widget.currentPosition.latitude, widget.currentPosition.longitude);
+    address = newAddress.last;
+
+   /* GeoCode geoCode = GeoCode();
 
     try {
+      print("aaaaaaaa");
       address = await geoCode.reverseGeocoding(latitude: widget.currentPosition.latitude,longitude: widget.currentPosition.longitude);
-
+      // address = await geoCode.reverseGeocoding(longitude: widget.currentPosition.longitude,latitude: widget.currentPosition.latitude);
+print("bbbbbbb");
       print("Latitude: ${address.city}");
       print("Longitude: ${address.streetAddress}");
     } catch (e) {
       print(e);
-    }
+    }*/
   }
 
   void goToGoogleDir() async{

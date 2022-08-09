@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:travel_inspiration/APICallServices/ApiManager.dart';
 import 'package:travel_inspiration/APICallServices/ApiParameter.dart';
+import 'package:travel_inspiration/MyWidget/MyCommonMethods.dart';
+import 'package:travel_inspiration/MyWidget/MyGradientBottomMenu.dart';
 import 'package:travel_inspiration/MyWidget/MyLoginHeader.dart';
 import 'package:travel_inspiration/MyWidget/MyText.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/MyWidget/TIMyBottomLayout.dart';
 import 'package:travel_inspiration/TIController/MyController.dart';
 import 'package:travel_inspiration/utils/CommonMethod.dart';
@@ -48,43 +51,69 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
+        backgroundColor: MyColors.whiteColor.withOpacity(0.75),
+        body: Container(
+          height: Get.height,
+          width: Get.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(MyImageURL.login), fit: BoxFit.fill),
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              MyTopHeader(
-                // headerName:_centerTitle(),
-                headerName:
+              MyTopHeader(),
+              MyTitlebar(
+                title:
                     "${myController.allProjectList[widget.index].title.toUpperCase()}\n${myController.allProjectList[widget.index].pinDestination != null ? myController.allProjectList[widget.index].pinDestination.toUpperCase() : ""}",
-                headerImgUrl: MyImageURL.travel_book_top,
-                logoImgUrl: MyImageURL.haudos_logo,
-                logoCallback: () {
-                  CommonMethod.getAppMode();
-                },
               ),
               SizedBox(
-                height: Get.height * .020,
+                height: Get.height * .08,
               ),
-              MyText(
-                text_name: "toShare".tr,
-                myFont: MyFont.Courier_Prime_Bold,
-                txtfontsize: MyFontSize.size13,
-                txtcolor: MyColors.textColor,
-                txtAlign: TextAlign.center,
+              Expanded(
+                child: Container(
+                  //height: Get.height,
+                  color: Colors.white.withOpacity(0.75),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: Get.height * .030,
+                      ),
+                      MyText(
+                        text_name: "toShare".tr,
+                        myFont: MyFont.Courier_Prime_Bold,
+                        txtfontsize: MyFontSize.size13,
+                        txtcolor: MyColors.textColor,
+                        txtAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: Get.height * .030,
+                      ),
+                      _buildTitle(),
+                      isHaudosContact == true
+                          ? Container(
+                              height: Get.height * .40,
+                              child: _buildContactView(),
+                            )
+                          : _buildOptionView(),
+                    ],
+                  ),
+                ),
               ),
-              SizedBox(
-                height: Get.height * .020,
-              ),
-              _buildTitle(),
-              isHaudosContact == true
-                  ? _buildContactView()
-                  : _buildOptionView(),
             ],
           ),
         ),
-        bottomNavigationBar: MyBottomLayout(
-          imgUrl: MyImageURL.travel_book_bottom,
+        bottomNavigationBar: MyGradientBottomMenu(
+          iconList: [
+            MyImageURL.profile_icon,
+            MyImageURL.galerie,
+            MyImageURL.home_menu,
+            MyImageURL.world_icon,
+            MyImageURL.setting_icon
+          ],
+          bgImg: MyImageURL.change_pw_bottom,
+          bgColor: MyColors.buttonBgColorHome.withOpacity(0.7),
         ),
       ),
     );
@@ -112,8 +141,8 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
         height: Get.height * .050,
         decoration: BoxDecoration(
           color: isHaudosContact == true
-              ? MyColors.expantionTileBgColor
-              : MyColors.whiteColor,
+              ? MyColors.buttonBgColor
+              : Colors.transparent,
           borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
         ),
         child: MyText(
@@ -141,8 +170,8 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
         height: Get.height * .050,
         decoration: BoxDecoration(
           color: isHaudosContact == false
-              ? MyColors.expantionTileBgColor
-              : MyColors.whiteColor,
+              ? MyColors.buttonBgColor
+              : Colors.transparent,
           borderRadius: BorderRadius.all(Radius.circular(Get.width * .050)),
         ),
         child: MyText(
@@ -159,23 +188,29 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
   }
 
   _buildOptionView() {
-    return Column(
-      //  mainAxisAlignment: MainAxisAlignment.center,
-      // crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 30,
+    return Padding(
+      padding: const EdgeInsets.only(top: 40.0),
+      child: Container(
+        color: MyColors.whiteColor.withOpacity(0.32),
+        child: Column(
+          //  mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            _buildOption(MyImageURL.whatsapp_icon, "whatsApp".tr, 0),
+            SizedBox(
+              height: 20,
+            ),
+            _buildOption(MyImageURL.email_icon, "email".tr, 1),
+            SizedBox(
+              height: 20,
+            ),
+            _buildOption(MyImageURL.txt_icon, "txtMsg".tr, 2),
+          ],
         ),
-        _buildOption(MyImageURL.whatsapp_icon, "whatsApp".tr, 0),
-        SizedBox(
-          height: 20,
-        ),
-        _buildOption(MyImageURL.email_icon, "email".tr, 1),
-        SizedBox(
-          height: 20,
-        ),
-        _buildOption(MyImageURL.txt_icon, "txtMsg".tr, 2),
-      ],
+      ),
     );
   }
 
@@ -188,33 +223,46 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
           openEmail();
         else if (index == 2) openSMS();
       },
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        // mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
+      child: Column(
         children: [
-          Expanded(
-              flex: 1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Image.asset(imgUrl),
-                ],
-              )),
-          SizedBox(
-            width: 30,
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              child: MyTextStart(
-                text_name: mText,
-                txtfontsize: MyFontSize.size13,
-                txtcolor: MyColors.textColor,
-                myFont: MyStrings.courier_prime_bold,
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Image.asset(imgUrl),
+                    ],
+                  )),
+              SizedBox(
+                width: 30,
               ),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  child: MyTextStart(
+                    text_name: mText,
+                    txtfontsize: MyFontSize.size13,
+                    txtcolor: MyColors.textColor,
+                    myFont: MyStrings.courier_prime_bold,
+                  ),
+                ),
+              )
+            ],
+          ),
+          // MyCommonMethods.myDivider(),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Divider(
+              height: 0.1,
+              thickness: 1,
+              color: MyColors.buttonBgColorHome.withOpacity(0.32),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -227,32 +275,42 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
         child: ListView.builder(
           itemCount: myController.haudosUserList.length,
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: AlwaysScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
                 callSendNotificationApi(index);
               },
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: MyTextStart(
-                        text_name: myController.haudosUserList[index].userName,
-                        txtcolor: MyColors.textColor,
-                        myFont: MyStrings.courier_prime_bold,
-                        txtfontsize: MyFontSize.size13,
+              child: Container(
+                color: MyColors.whiteColor.withOpacity(0.32),
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: MyTextStart(
+                          text_name:
+                              myController.haudosUserList[index].userName,
+                          txtcolor: MyColors.textColor,
+                          myFont: MyStrings.courier_prime_bold,
+                          txtfontsize: MyFontSize.size13,
+                        ),
                       ),
+                      tileColor: MyColors.buttonBgColorHome.withOpacity(0.75),
                     ),
-                    tileColor: MyColors.expantionTileBgColor.withOpacity(0.32),
-                  ),
-                  Container(
-                    width: Get.width,
-                    height: Get.height * 0.001,
-                    color: MyColors.buttonBgColor.withOpacity(0.50),
-                  ),
-                ],
+                    Divider(
+                      height: 0.1,
+                      thickness: 1,
+                      color: MyColors.buttonBgColorHome.withOpacity(0.32),
+                    ),
+                    //MyCommonMethods.myDivider(),
+                    /* Container(
+                      width: Get.width,
+                      height: Get.height * 0.001,
+                      color: MyColors.buttonBgColor.withOpacity(0.50),
+                    ),*/
+                  ],
+                ),
               ),
             );
           },
@@ -267,8 +325,9 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
       "userId": MyPreference.getPrefStringValue(key: MyPreference.userId),
       "sendTo": myController.haudosUserList[index].userId,
       "projectId": widget.id.toString(),
-    };
 
+    };
+// print("param : ${params.toString()}");
     await apiManager.sendNotificationToUser(params);
   }
 
@@ -306,10 +365,13 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
         }
       }
     }
-
-    DateTime mDate = DateFormat('yyyy-MM-dd')
-        .parse((myController.allProjectList[widget.index].projectVacationDate));
-    String mDateStr = DateFormat('MMMM dd, yyyy').format(mDate);
+    String mDateStr = "";
+    if(myController.allProjectList[widget.index].projectVacationDate != null) {
+      DateTime mDate = DateFormat('yyyy-MM-dd')
+          .parse(
+          (myController.allProjectList[widget.index].projectVacationDate));
+      mDateStr = DateFormat('MMMM dd, yyyy').format(mDate);
+    }
     String msg =
         "${myController.allProjectList[widget.index].title.toUpperCase()} - ${myController.allProjectList[widget.index].pinDestination != null ? myController.allProjectList[widget.index].pinDestination.toUpperCase() : ""}\n Project in ${myController.allProjectList[widget.index].modeName} - ${myController.allProjectList[widget.index].totalKm} km\n${myController.allProjectList[widget.index].projectNoPerson} people - ${mDateStr}\n\nHotel- ${sbHotel.toString()}\nRestaurant- ${sbRestarant.toString()}\nActivity- ${sbActivity.toString()}";
     return msg;
@@ -318,7 +380,7 @@ class _ShareProjectScreenState extends State<ShareProjectScreen> {
   openWatsapp() async {
     // var whatsapp ="+919712821750";
     var androidUrl = "whatsapp://send?text=${getSharedMsg()}";
-    // var whatsappURl_android = "whatsapp://send?phone="+whatsapp+"&text=hello";
+    // var whatsappURl_android = "whatsapp://send?phone="+whatsapp+"&text=hello";mmm        ````      q
     // var whatsappURl_android = "https://wa.me/$phone/?text=${Uri.parse(message)}";
     var iosURL = "https://wa.me?text=${Uri.parse(getSharedMsg())}";
 

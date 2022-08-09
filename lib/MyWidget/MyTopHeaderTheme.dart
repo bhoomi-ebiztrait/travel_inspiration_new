@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:travel_inspiration/MyWidget/MyTitlebar.dart';
 import 'package:travel_inspiration/utils/MyColors.dart';
 import 'package:travel_inspiration/utils/MyFontSize.dart';
 import 'package:travel_inspiration/utils/MyImageUrls.dart';
@@ -32,7 +33,7 @@ class MyTopHeaderTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: imgHeight == null ? Get.height * 0.34 : imgHeight,
+      height: imgHeight == null ? Get.height * 0.30 : imgHeight,
       width: Get.width,
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -49,13 +50,14 @@ class MyTopHeaderTheme extends StatelessWidget {
       child: Stack(
         children: [
           Center(
-            child: MyText(
+            child:MyTitlebar(title: headerName,),
+            /*MyText(
               text_name: headerName,
               txtcolor: MyColors.whiteColor,
               txtfontsize: MyFontSize.size23,
               myFont: MyStrings.cagliostro,
               // txtAlign: TextAlign.right,
-            ),
+            ),*/
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
